@@ -109,9 +109,13 @@ t_SUBDATE = r'subdate'
 t_INTERVAL = r'interval'
 t_YEAR = r'year'
 
-def t_INT_LIT(t):
-    r'\-?\d+'
-    t.value = int(t.value)
+
+def t_DATE_LIT(t):
+    # r'\d{4}\-(0?[1-9]|10|11|12)\-(((0|1|2|3)?[0-9]))' # Year-Month-Day
+    r'\d{4}\-(0?[1-9]|10|11|12)\-(30|31|((0|1|2)?[0-9]))' # Year-Month-Day
+    date_tokens = t.value.split("-")
+    print(date_tokens)
+    t.value = date(int(date_tokens[0]), int(date_tokens[1]), int(date_tokens[2]))
     return t
 
 def t_DOUBLE_LIT(t):
@@ -119,9 +123,10 @@ def t_DOUBLE_LIT(t):
     t.value = float(t.value)
     return t
 
-def t_DATE_LIT(t):
-    r'\d{4}\-(0?[1-9]|10|11|12)\-(0?[1-9]|1[0-9]|2[0-9]|30|31)' # Year-Month-Day
-    t_value = date(2017, 10, 1)
+def t_INT_LIT(t):
+    r'\-?\d+'
+    t.value = int(t.value)
+    return t
 
 def t_NEWLINE(t):
     r'\n+'
