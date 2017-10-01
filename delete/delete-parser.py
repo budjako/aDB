@@ -1,9 +1,11 @@
+# library
 import sys
 sys.path.insert(0, "..")
 
 if sys.version_info[0] >= 3:
     raw_input = input
 
+# initialization
 keywords = ( 
 	'DELETE', 
     'FROM', 
@@ -25,23 +27,14 @@ tokens = keywords + (
     'NEQ',
     'INTEGER',
     'TEXT',
-    # 'DATE',
+    'DATE',
+    'DOUBLE',
+    'LPAREN',
+    'RPAREN',
     'SEMICOLON',
 )
 
-t_PLUS = r'\+'
-t_MINUS = r'-'
-t_TIMES = r'\*'
-t_DIVIDE = r'/'
-t_MODULO = r'%'
-t_ASSIGN = r'='
-t_LTHAN = r'<'
-t_GTHAN = r'>'
-t_LEQ = r'<='
-t_GEQ = r'>='
-t_NEQ = r'!='
-t_SEMICOLON = r';'
-
+# keywords
 def t_DELETE(t):
     r'[Dd][Ee][Ll][Ee][Tt][Ee]'
     if t.value in keywords:
@@ -60,6 +53,22 @@ def t_WHERE(t):
         t.type = t.value.upper()
     return t
 
+# binary operations
+t_PLUS = r'\+'
+t_MINUS = r'-'
+t_TIMES = r'\*'
+t_DIVIDE = r'/'
+t_MODULO = r'%'
+
+# comparison operations
+t_ASSIGN = r'='
+t_LTHAN = r'<'
+t_GTHAN = r'>'
+t_LEQ = r'<='
+t_GEQ = r'>='
+t_NEQ = r'!='
+
+# data types
 t_INTEGER = r'[0-9]+'
 
 def t_TEXT(t):
@@ -68,8 +77,20 @@ def t_TEXT(t):
         t.type = t.value.upper()
     return t
 
-# def t_DATE(t):
-#     r''
+def t_DATE(t):
+    r'\d{4}\-(0?[1-9]|10|11|12)\-(30|31|((0|1|2)?[0-9]))' # Year-Month-Day
+    t.value = t.value
+    return t
+
+def t_DOUBLE(t):
+    r'\-?\d+\.\d+'
+    t.value = float(t.value)
+    return t
+
+# 
+t_LPAREN = r'('
+t_RPAREN = r')'
+t_SEMICOLON = r';'
 
 t_ignore = " \t"
 
@@ -92,8 +113,11 @@ lex.lex()
 
 def p_statement_query(p):
     '''statement : DELETE FROM TEXT whereexp SEMICOLON
-                 | DELETE FROM TEXT SEMICOLON'''
-    print(p[1] + ' ' + p[2] + ' ' + p[3] + ';')
+                 | DELETE FROM TEXT SEMICOLON
+                 | DOUBLE'''
+    # print(p[1] + ' ' + p[2] + ' ' + p[3] + ';')
+
+    print(p[1])
 
 def p_whereexp(p):
     'whereexp : WHERE wherecond'
@@ -105,29 +129,50 @@ def p_wherecond(p):
     print(p[1])
 
 def p_opexp(p):
-    '''opexp : ASSIGN INTEGER
+    '''opexp : ASSIGN datatype
              | ASSIGN binop
              | compop binop'''
     if p[1] == '=':
             print(p[1])
 
 def p_opexp_compop(p):
-    '''compop : LTHAN INTEGER
-              | GTHAN INTEGER
-              | LEQ INTEGER
-              | GEQ INTEGER
-              | NEQ INTEGER'''
+    '''compop : LTHAN leftparen numtype rightparen
+              | GTHAN numtype
+              | LEQ numtype
+              | GEQ numtype
+              | NEQ numtype'''
 
-    print(p[1] + p[2])
+    print(p[1])
 
 def p_opexp_binop(p):
-    '''binop : INTEGER PLUS INTEGER
-             | INTEGER MINUS INTEGER
-             | INTEGER TIMES INTEGER
-             | INTEGER DIVIDE INTEGER
-             | INTEGER MODULO INTEGER'''
+    '''binop : numtype PLUS numtype
+             | numtype MINUS numtype
+             | numtype TIMES numtype
+             | numtype DIVIDE numtype
+             | numtype MODULO numtype'''
     
     print(p[1] + p[2] + p[3])
+
+def p_data_type(p):
+    '''datatype : TEXT
+                | DATE
+                | numtype'''
+
+    print(p[1])
+
+def p_number_type(p):
+    '''numtype : INTEGER
+               | DOUBLE'''
+
+    print(p[1])
+
+def p_left_paren(p):
+    '''leftparen : LPAREN
+                 |'''
+
+def p_right_paren(p):
+    '''rightparen : LPAREN
+                 |'''
 
 def p_error(p):
     if p:
