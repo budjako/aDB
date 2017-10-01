@@ -1,4 +1,5 @@
 import sys
+import re
 sys.path.insert(0, "..")
 
 if sys.version_info[0] >= 3:
@@ -12,29 +13,29 @@ import selectlex
 
 
 tables = {}
+cols = ''
+tabs = ''
 
-def readMetadata():
-    metadata = open("metadata.txt", "r")
+metadata = open("metadata.txt", "r")
 
-    for line in metadata:
-        nonewline = line.rstrip('\n')
-        print(nonewline);
-        tokens = nonewline.split(" ")
-        tokens.reverse()
-        tablename = tokens.pop()
-        tokens.reverse()
-        for i in range(0,len(tokens)):
-            tokens[i] = str.lower(tokens[i])
-        tables[str.lower(tablename)] = tokens
-    print(tables)
-#     updateColumnNames()
-#     updateTableNames()
-#
-# def updateColumnNames():
-#
-#
-# def updateTableNames():
+for line in metadata:
+    nonewline = line.rstrip('\n')
+    # print(nonewline);
+    tokens = nonewline.split(" ")
+    tokens.reverse()
+    tablename = str.lower(tokens.pop())
+    tokens.reverse()
+    for i in range(0,len(tokens)):
+        tokens[i] = str.lower(tokens[i])
+    tables[tablename] = tokens
 
+    if(tabs==''): tabs = tablename
+    else: tabs = tabs + "|" + tablename
+    # if(cols == None): cols = tablename
+    for i in range(0, len(tokens)):
+        if cols=='': cols = tokens[i]
+        else: cols = cols + "|" + tokens[i]
+# print(tables)
 
 keywords = (
     'FROM', 'WHERE', 'SELECT', 'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
@@ -51,13 +52,16 @@ tokens = keywords + date_keywords + (
     'GT', 'GE', 'LT', 'LE', 'NE', 'NOT', 'OPENPAR', 'CLOSEPAR'
 )
 
+t_COLUMN_NAME = r''+cols
+t_TABLE_NAME = r''+tabs
+# print(t_COLUMN_NAME)
+# print(t_TABLE_NAME)
+
 # Tokens
 t_FROM = r'from'
 t_WHERE = r'where'
 t_SELECT = r'select'
 t_LIKE = r'like'
-t_COLUMN_NAME = r'(studno|studentname|birthday|degree|major|unitsearned|description|action|datefiled|dateresolved|cno|ctitle|cdesc|noofunits|haslab|semoffered|semester|acadyear|cno|section|time|maxstud)'
-t_TABLE_NAME = r'(student|studenthistory|course|courseoffering|studcourse)'
 t_FILTER_ROWS = r'(all|distinct|distinctrow)'
 t_STRING_LIT = r'\'.*\''
 t_ASTERISK = r'\*'
@@ -142,9 +146,6 @@ command = {}
 def p_select_statement(p):
     '''statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
             | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
-    # '''statement : SELECT columns FROM TABLE_NAME SEMICOLON
-    #         | SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON'''
-    # print(p);
 
 def p_filter_rows_op(p):
     '''filter_rows_op : FILTER_ROWS
@@ -176,8 +177,8 @@ def p_string_cond(p):
     # print(p)
 
 def p_string_exp(p):
-    '''string_exp : STRING_LIT
-            | COLUMN_NAME''' # string literals include regexpressions
+    'string_exp : STRING_LIT'
+            # | COLUMN_NAME''' # string literals include regexpressions
     # print(p)
 
 def p_num_cond(p):
