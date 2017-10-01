@@ -37,8 +37,8 @@ def t_newline(t):
     t.lexer.lineno += t.value.count("\n")
 
 def t_DATE_LIT(t):
-    r'\d{4}\-(0?[1-9]|10|11|12)\-(0?[1-9]|1[0-9]|2[0-9]|30|31)' # Year-Month-Day
-    t.value = '2017-01-01'
+    r'\d{4}\-(0?\d|10|11|12)\-(3[01]|(0|1|2)?\d)' # Year-Month-Day
+    t.value = t.value
     return t 
     # t_value = date(2017, 10, 1)
 
