@@ -133,20 +133,23 @@ def t_error(t):
 t_ignore = " \t"
 
 lexer = lex.lex()   # lexer
-
+precedence = (
+    ('left', 'ADD', 'SUBTRACT'),
+    ('left', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT')
+)
 command = {}
 
 def p_select_statement(p):
-    # '''statement : SELECT FILTER_ROWS columns FROM TABLE_NAME SEMICOLON
-    #         | SELECT FILTER_ROWS columns FROM TABLE_NAME WHERE condition SEMICOLON
-    '''statement : SELECT columns FROM TABLE_NAME SEMICOLON
-            | SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON'''
+    '''statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
+            | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
+    # '''statement : SELECT columns FROM TABLE_NAME SEMICOLON
+    #         | SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON'''
     # print(p);
 
-# def p_filter_rows_op(p):
-#     '''filter_rows_op : FILTER_ROWS
-#             | empty'''
-#
+def p_filter_rows_op(p):
+    '''filter_rows_op : FILTER_ROWS
+            | empty'''
+
 def p_columns(p):
     '''columns : ASTERISK
             | column_name'''
@@ -167,9 +170,9 @@ def p_condition(p):
 
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp
-            | string_exp EQUAL string_exp
             | string_exp NOT LIKE string_exp
             | STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR'''
+            # | string_exp EQUAL string_exp
     # print(p)
 
 def p_string_exp(p):
@@ -184,13 +187,25 @@ def p_num_cond(p):
             | num_exp IS NULL'''
 
 def p_num_exp(p):
-    '''num_exp : num_val arithmetic_op num_val
+    '''num_exp : num_exp ADD num_factor
+            | num_exp SUBTRACT num_factor
+            | num_factor'''
+
+def p_num_factor(p):
+    '''num_factor : num_factor MULTIPLY num_term
+            | num_factor DIVIDE num_term
+            | num_factor DIVIDE_INT num_term
+            | num_factor MODULO num_term
+            | num_term'''
+
+def p_num_term(p):
+    '''num_term : OPENPAR num_val CLOSEPAR
             | num_val'''
 
 def p_num_val(p):
     '''num_val : INT_LIT
             | DOUBLE_LIT
-            | COLUMN_NAME'''
+            | COLUMN_NAME'''    #also accepts column compared to column
 
 def p_date_cond(p):
     '''date_cond : date_exp comparison_op date_exp
@@ -227,13 +242,13 @@ def p_comparison_op(p):
             | EQUAL
             | EQUAL_NULL'''
 
-def p_arithmetic_op(p):
-    '''arithmetic_op : ADD
-            | SUBTRACT
-            | MULTIPLY
-            | DIVIDE
-            | DIVIDE_INT
-            | MODULO'''
+# def p_arithmetic_op(p):
+#     '''arithmetic_op : ADD
+#             | SUBTRACT
+#             | MULTIPLY
+#             | DIVIDE
+#             | DIVIDE_INT
+#             | MODULO'''
 
 def p_empty(p):
     'empty : '

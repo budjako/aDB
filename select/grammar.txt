@@ -37,3 +37,8 @@ DATE_UNIT -> SECOND | MINUTE | DAY | WEEK | MONTH |
 
 COMPARISON_OP -> = | <=> | > | >= | < | <= | != | <>
 ARITHMETIC_OP -> + | - | * | / | DIV | % | MOD
+
+E -> E + F | E - F | F
+F -> F * T | F / T | T
+T -> (E) | V
+V
