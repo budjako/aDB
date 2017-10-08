@@ -37,19 +37,19 @@ for line in metadata:
         else: cols = cols + "|" + tokens[i]
 # print(tables)
 
-keywords = (
-    'FROM', 'WHERE', 'SELECT', 'DELETE', 'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
-)
-
+insert_keywords = ('INSERT', 'INTO', 'VALUES', 'SET')
+delete_select_keywords = ('SELECT', 'DELETE')
+literal_token = ('INT_LIT', 'DOUBLE_LIT', 'STRING_LIT', 'DATE_LIT')
+arithmetic_op_token = ('ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT', 'MODULO')
+comparison_op_token = ('EQUAL', 'EQUAL_NULL', 'GT', 'GE', 'LT', 'LE', 'NE', 'NOT')
 date_keywords = (
     'ADDDATE', 'CURDATE', 'CURRENT_DATE', 'DATEDIFF', 'DAY', 'DAYNAME', 'DAYOFMONTH', 'DAYOFWEEK', 'DAYOFYEAR', 'LAST_DAY',
     'MAKEDATE', 'MONTH', 'MONTHNAME', 'SUBDATE', 'INTERVAL', 'YEAR'
 )
-
-tokens = keywords + date_keywords + (
-    'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'INT_LIT', 'DOUBLE_LIT', 'STRING_LIT', 'DATE_LIT', 'ASTERISK', 'DATE_UNIT',
-    'COMMA', 'SEMICOLON', 'ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT', 'MODULO', 'EQUAL', 'EQUAL_NULL',
-    'GT', 'GE', 'LT', 'LE', 'NE', 'NOT', 'OPENPAR', 'CLOSEPAR'
+tokens = insert_keywords + delete_select_keywords + literal_token + arithmetic_op_token + comparison_op_token + date_keywords + (
+    'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'ASTERISK', 'DATE_UNIT',
+    'COMMA', 'SEMICOLON', 'OPENPAR', 'CLOSEPAR', 'FROM', 'WHERE',
+    'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
 )
 
 t_COLUMN_NAME = r''+cols
@@ -58,10 +58,14 @@ t_TABLE_NAME = r''+tabs
 # print(t_TABLE_NAME)
 
 # Tokens
-t_FROM = r'from'
-t_WHERE = r'where'
+t_INSERT = r'insert'
 t_SELECT = r'select'
 t_DELETE = r'delete'
+t_FROM = r'from'
+t_WHERE = r'where'
+t_INTO = r'into'
+t_VALUES = r'values'
+t_SET = r'set'
 t_LIKE = r'like'
 t_FILTER_ROWS = r'(all|distinct|distinctrow)'
 t_STRING_LIT = r'\'[^\']*\''
@@ -149,8 +153,14 @@ precedence = (
 command = {}
 
 def p_statement(p):
-    '''statement : delete_statement
-            | select_statement'''
+    '''statement : insert_statement
+            | select_statement
+            | delete_statement'''
+
+def p_insert_statement(p):
+    '''insert_statement : INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+            | INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+            | INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON'''
 
 def p_select_statement(p):
     '''select_statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
@@ -159,6 +169,10 @@ def p_select_statement(p):
 def p_delete_statement(p):
     '''delete_statement : DELETE FROM TABLE_NAME SEMICOLON
             | DELETE FROM TABLE_NAME WHERE condition SEMICOLON'''
+
+def p_into_kw(p):
+    '''into_kw : INTO
+            | empty'''
 
 def p_filter_rows_op(p):
     '''filter_rows_op : FILTER_ROWS
@@ -172,6 +186,20 @@ def p_columns(p):
 def p_column_name(p):
     '''column_name : COLUMN_NAME
             | column_name COMMA COLUMN_NAME'''
+
+def p_assignment_list(p):
+    '''assignment_list : COLUMN_NAME EQUAL literals
+            | assignment_list COMMA COLUMN_NAME EQUAL literals'''
+
+def p_value_list(p):
+    '''value_list : literals
+            | value_list COMMA literals'''
+
+def p_literals(p):
+    '''literals : STRING_LIT
+            | INT_LIT
+            | DOUBLE_LIT
+            | DATE_LIT'''
 
 def p_condition(p):
     '''condition : string_cond
