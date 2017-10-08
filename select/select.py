@@ -38,7 +38,7 @@ for line in metadata:
 # print(tables)
 
 keywords = (
-    'FROM', 'WHERE', 'SELECT', 'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
+    'FROM', 'WHERE', 'SELECT', 'DELETE', 'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
 )
 
 date_keywords = (
@@ -61,9 +61,10 @@ t_TABLE_NAME = r''+tabs
 t_FROM = r'from'
 t_WHERE = r'where'
 t_SELECT = r'select'
+t_DELETE = r'delete'
 t_LIKE = r'like'
 t_FILTER_ROWS = r'(all|distinct|distinctrow)'
-t_STRING_LIT = r'\'.*\''
+t_STRING_LIT = r'\'[^\']*\''
 t_ASTERISK = r'\*'
 t_COMMA = r','
 t_SEMICOLON = r';'
@@ -111,8 +112,7 @@ t_YEAR = r'year'
 
 
 def t_DATE_LIT(t):
-    # r'\d{4}\-(0?[1-9]|10|11|12)\-(((0|1|2|3)?[0-9]))' # Year-Month-Day
-    r'\d{4}\-(0?[1-9]|10|11|12)\-(30|31|((0|1|2)?[0-9]))' # Year-Month-Day
+    r'\'\d{4}\-(0?[1-9]|10|11|12)\-(30|31|((0|1|2)?[0-9]))\'' # Year-Month-Day
     date_tokens = t.value.split("-")
     print(date_tokens)
     t.value = date(int(date_tokens[0]), int(date_tokens[1]), int(date_tokens[2]))
@@ -148,9 +148,17 @@ precedence = (
 )
 command = {}
 
+def p_statement(p):
+    '''statement : delete_statement
+            | select_statement'''
+
 def p_select_statement(p):
-    '''statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
+    '''select_statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
             | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
+
+def p_delete_statement(p):
+    '''delete_statement : DELETE FROM TABLE_NAME SEMICOLON
+            | DELETE FROM TABLE_NAME WHERE condition SEMICOLON'''
 
 def p_filter_rows_op(p):
     '''filter_rows_op : FILTER_ROWS
