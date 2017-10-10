@@ -2,14 +2,12 @@
 
 # Form implementation generated from reading ui file 'gui.ui'
 #
-# Created: Tue Oct 10 00:40:57 2017
+# Created: Tue Oct 10 01:56:04 2017
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
-import sys
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import pyqtSlot
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -44,13 +42,9 @@ class Ui_MainWindow(object):
         self.tableWidget.setCornerButtonEnabled(False)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         self.tableWidget.setColumnCount(1)
-        self.tableWidget.setRowCount(1)
-        item = QtGui.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
+        self.tableWidget.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtGui.QTableWidgetItem()
-        self.tableWidget.setItem(0, 0, item)
         self.tableWidget.horizontalHeader().setVisible(True)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setHighlightSections(False)
@@ -137,7 +131,6 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionExit)
         self.menubar.addAction(self.menuFile.menuAction())
 
-        self.populateTables()
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -157,62 +150,13 @@ class Ui_MainWindow(object):
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionImport.setText(_translate("MainWindow", "Import", None))
 
-    def populateTables(self):
-        i=0
-        for table in tables:                        # for each table specified in the metadata
-            pos = self.tableWidget.rowCount()       # create a corresponding row
-            self.tableWidget.insertRow(pos)
-            item = QtGui.QTableWidgetItem()
-            self.tableWidget.setVerticalHeaderItem(pos, item)
-
-            item = QtGui.QTableWidgetItem()
-            item.setText(table)
-            self.tableWidget.setItem(i,0,item)
-            i=i+1
-
-
-                    # pos = self.tableWidget.rowCount()       # create a corresponding row
-                    # self.tableWidget.insertRow(pos)
-                    # item = QtGui.QTableWidgetItem()
-                    # self.tableWidget.setVerticalHeaderItem(pos, item)
-                    #
-                    # item = QtGui.QTableWidgetItem()
-                    # item.setText(table)
-                    # self.tableWidget.setItem(i,0,item)
-                    # i=i+1
-
-            # item.itemClicked.connect(self.addColumnNamesAndDataTypes)
-            # @pyqtSlot()
-            # item.tableSelect():
-            #     print("a table entry was selected")
-            #     item.itemClicked.connect(tableSelect)
-    @pyqtSlot()
-    def addColumnNamesAndDataTypes():
-        for column in tables['table']:                        # for each table specified in the metadata
-            print(column)
-tables = {}
-
-def readMetadata():
-    metadata = open("metadata.txt", "r")
-
-    for line in metadata:
-        nonewline = line.rstrip('\n')
-        print(nonewline);
-        tokens = nonewline.split(" ")
-        tokens.reverse()
-        tablename = tokens.pop()
-        tokens.reverse()
-        for i in range(0,len(tokens)):
-            tokens[i] = tokens[i]
-            # tokens[i] = str.lower(tokens[i])
-        tables[str.lower(tablename)] = tokens
-    # print(tables)
 
 if __name__ == "__main__":
-    readMetadata()
+    import sys
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
