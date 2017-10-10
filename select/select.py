@@ -1,4 +1,5 @@
 import sys
+import re
 sys.path.insert(0, "..")
 
 if sys.version_info[0] >= 3:
@@ -12,54 +13,62 @@ import selectlex
 
 
 tables = {}
+cols = ''
+tabs = ''
 
-def readMetadata():
-    metadata = open("metadata.txt", "r")
+metadata = open("metadata.txt", "r")
 
-    for line in metadata:
-        nonewline = line.rstrip('\n')
-        print(nonewline);
-        tokens = nonewline.split(" ")
-        tokens.reverse()
-        tablename = tokens.pop()
-        tokens.reverse()
-        for i in range(0,len(tokens)):
-            tokens[i] = str.lower(tokens[i])
-        tables[str.lower(tablename)] = tokens
-    print(tables)
-#     updateColumnNames()
-#     updateTableNames()
-#
-# def updateColumnNames():
-#
-#
-# def updateTableNames():
+for line in metadata:
+    nonewline = line.rstrip('\n')
+    # print(nonewline);
+    tokens = nonewline.split(" ")
+    tokens.reverse()
+    tablename = str.lower(tokens.pop())
+    tokens.reverse()
+    for i in range(0,len(tokens)):
+        tokens[i] = str.lower(tokens[i])
+    tables[tablename] = tokens
 
+    if(tabs==''): tabs = tablename
+    else: tabs = tabs + "|" + tablename
+    # if(cols == None): cols = tablename
+    for i in range(0, len(tokens)):
+        if cols=='': cols = tokens[i]
+        else: cols = cols + "|" + tokens[i]
+# print(tables)
 
-keywords = (
-    'FROM', 'WHERE', 'SELECT', 'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
-)
-
+insert_keywords = ('INSERT', 'INTO', 'VALUES', 'SET')
+delete_select_keywords = ('SELECT', 'DELETE')
+literal_token = ('INT_LIT', 'DOUBLE_LIT', 'STRING_LIT', 'DATE_LIT')
+arithmetic_op_token = ('ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT', 'MODULO')
+comparison_op_token = ('EQUAL', 'EQUAL_NULL', 'GT', 'GE', 'LT', 'LE', 'NE', 'NOT')
 date_keywords = (
     'ADDDATE', 'CURDATE', 'CURRENT_DATE', 'DATEDIFF', 'DAY', 'DAYNAME', 'DAYOFMONTH', 'DAYOFWEEK', 'DAYOFYEAR', 'LAST_DAY',
     'MAKEDATE', 'MONTH', 'MONTHNAME', 'SUBDATE', 'INTERVAL', 'YEAR'
 )
-
-tokens = keywords + date_keywords + (
-    'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'INT_LIT', 'DOUBLE_LIT', 'STRING_LIT', 'DATE_LIT', 'ASTERISK', 'DATE_UNIT',
-    'COMMA', 'SEMICOLON', 'ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT', 'MODULO', 'EQUAL', 'EQUAL_NULL',
-    'GT', 'GE', 'LT', 'LE', 'NE', 'NOT', 'OPENPAR', 'CLOSEPAR'
+tokens = insert_keywords + delete_select_keywords + literal_token + arithmetic_op_token + comparison_op_token + date_keywords + (
+    'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'ASTERISK', 'DATE_UNIT',
+    'COMMA', 'SEMICOLON', 'OPENPAR', 'CLOSEPAR', 'FROM', 'WHERE',
+    'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
 )
 
+t_COLUMN_NAME = r''+cols
+t_TABLE_NAME = r''+tabs
+# print(t_COLUMN_NAME)
+# print(t_TABLE_NAME)
+
 # Tokens
+t_INSERT = r'insert'
+t_SELECT = r'select'
+t_DELETE = r'delete'
 t_FROM = r'from'
 t_WHERE = r'where'
-t_SELECT = r'select'
+t_INTO = r'into'
+t_VALUES = r'values'
+t_SET = r'set'
 t_LIKE = r'like'
-t_COLUMN_NAME = r'(studno|studentname|birthday|degree|major|unitsearned|description|action|datefiled|dateresolved|cno|ctitle|cdesc|noofunits|haslab|semoffered|semester|acadyear|cno|section|time|maxstud)'
-t_TABLE_NAME = r'(student|studenthistory|course|courseoffering|studcourse)'
 t_FILTER_ROWS = r'(all|distinct|distinctrow)'
-t_STRING_LIT = r'\'.*\''
+t_STRING_LIT = r'\'[^\']*\''
 t_ASTERISK = r'\*'
 t_COMMA = r','
 t_SEMICOLON = r';'
@@ -105,9 +114,12 @@ t_SUBDATE = r'subdate'
 t_INTERVAL = r'interval'
 t_YEAR = r'year'
 
-def t_INT_LIT(t):
-    r'\-?\d+'
-    t.value = int(t.value)
+
+def t_DATE_LIT(t):
+    r'\'\d{4}\-(0?[1-9]|10|11|12)\-(30|31|((0|1|2)?[0-9]))\'' # Year-Month-Day
+    date_tokens = t.value.split("-")
+    print(date_tokens)
+    t.value = date(int(date_tokens[0]), int(date_tokens[1]), int(date_tokens[2]))
     return t
 
 def t_DOUBLE_LIT(t):
@@ -115,9 +127,10 @@ def t_DOUBLE_LIT(t):
     t.value = float(t.value)
     return t
 
-def t_DATE_LIT(t):
-    r'\d{4}\-(0?[1-9]|10|11|12)\-(0?[1-9]|1[0-9]|2[0-9]|30|31)' # Year-Month-Day
-    t_value = date(2017, 10, 1)
+def t_INT_LIT(t):
+    r'\-?\d+'
+    t.value = int(t.value)
+    return t
 
 def t_NEWLINE(t):
     r'\n+'
@@ -133,20 +146,38 @@ def t_error(t):
 t_ignore = " \t"
 
 lexer = lex.lex()   # lexer
-
+precedence = (
+    ('left', 'ADD', 'SUBTRACT'),
+    ('left', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT')
+)
 command = {}
 
-def p_select_statement(p):
-    # '''statement : SELECT FILTER_ROWS columns FROM TABLE_NAME SEMICOLON
-    #         | SELECT FILTER_ROWS columns FROM TABLE_NAME WHERE condition SEMICOLON
-    '''statement : SELECT columns FROM TABLE_NAME SEMICOLON
-            | SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON'''
-    # print(p);
+def p_statement(p):
+    '''statement : insert_statement
+            | select_statement
+            | delete_statement'''
 
-# def p_filter_rows_op(p):
-#     '''filter_rows_op : FILTER_ROWS
-#             | empty'''
-#
+def p_insert_statement(p):
+    '''insert_statement : INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+            | INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+            | INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON'''
+
+def p_select_statement(p):
+    '''select_statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
+            | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
+
+def p_delete_statement(p):
+    '''delete_statement : DELETE FROM TABLE_NAME SEMICOLON
+            | DELETE FROM TABLE_NAME WHERE condition SEMICOLON'''
+
+def p_into_kw(p):
+    '''into_kw : INTO
+            | empty'''
+
+def p_filter_rows_op(p):
+    '''filter_rows_op : FILTER_ROWS
+            | empty'''
+
 def p_columns(p):
     '''columns : ASTERISK
             | column_name'''
@@ -155,6 +186,20 @@ def p_columns(p):
 def p_column_name(p):
     '''column_name : COLUMN_NAME
             | column_name COMMA COLUMN_NAME'''
+
+def p_assignment_list(p):
+    '''assignment_list : COLUMN_NAME EQUAL literals
+            | assignment_list COMMA COLUMN_NAME EQUAL literals'''
+
+def p_value_list(p):
+    '''value_list : literals
+            | value_list COMMA literals'''
+
+def p_literals(p):
+    '''literals : STRING_LIT
+            | INT_LIT
+            | DOUBLE_LIT
+            | DATE_LIT'''
 
 def p_condition(p):
     '''condition : string_cond
@@ -167,14 +212,14 @@ def p_condition(p):
 
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp
-            | string_exp EQUAL string_exp
             | string_exp NOT LIKE string_exp
             | STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR'''
+            # | string_exp EQUAL string_exp
     # print(p)
 
 def p_string_exp(p):
-    '''string_exp : STRING_LIT
-            | COLUMN_NAME''' # string literals include regexpressions
+    'string_exp : STRING_LIT'
+            # | COLUMN_NAME''' # string literals include regexpressions
     # print(p)
 
 def p_num_cond(p):
@@ -184,13 +229,25 @@ def p_num_cond(p):
             | num_exp IS NULL'''
 
 def p_num_exp(p):
-    '''num_exp : num_val arithmetic_op num_val
+    '''num_exp : num_exp ADD num_factor
+            | num_exp SUBTRACT num_factor
+            | num_factor'''
+
+def p_num_factor(p):
+    '''num_factor : num_factor MULTIPLY num_term
+            | num_factor DIVIDE num_term
+            | num_factor DIVIDE_INT num_term
+            | num_factor MODULO num_term
+            | num_term'''
+
+def p_num_term(p):
+    '''num_term : OPENPAR num_val CLOSEPAR
             | num_val'''
 
 def p_num_val(p):
     '''num_val : INT_LIT
             | DOUBLE_LIT
-            | COLUMN_NAME'''
+            | COLUMN_NAME'''    #also accepts column compared to column
 
 def p_date_cond(p):
     '''date_cond : date_exp comparison_op date_exp
@@ -227,13 +284,13 @@ def p_comparison_op(p):
             | EQUAL
             | EQUAL_NULL'''
 
-def p_arithmetic_op(p):
-    '''arithmetic_op : ADD
-            | SUBTRACT
-            | MULTIPLY
-            | DIVIDE
-            | DIVIDE_INT
-            | MODULO'''
+# def p_arithmetic_op(p):
+#     '''arithmetic_op : ADD
+#             | SUBTRACT
+#             | MULTIPLY
+#             | DIVIDE
+#             | DIVIDE_INT
+#             | MODULO'''
 
 def p_empty(p):
     'empty : '
