@@ -1,0 +1,7 @@
+insert_statement -> insert into tbl_name [ value_list | assignment_list ]
+
+value_list -> column [, value_list] (value) | ' '
+
+assignment_list -> assignment [, assignment] ...
+
+assignment -> column = value
