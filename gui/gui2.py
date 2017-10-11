@@ -7,6 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+# libraries
 import sys
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import pyqtSlot
@@ -25,6 +26,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
+# main window
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -61,9 +63,6 @@ class Ui_MainWindow(object):
         self.label = QtGui.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(50, 10, 121, 17))
         self.label.setObjectName(_fromUtf8("label"))
-        self.textEdit = QtGui.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
-        self.textEdit.setObjectName(_fromUtf8("textEdit"))
         self.tableWidget_2 = QtGui.QTableWidget(self.centralwidget)
         self.tableWidget_2.setEnabled(True)
         self.tableWidget_2.setGeometry(QtCore.QRect(10, 290, 211, 231))
@@ -89,12 +88,6 @@ class Ui_MainWindow(object):
         self.tableWidget_2.verticalHeader().setVisible(False)
         self.tableWidget_2.verticalHeader().setSortIndicatorShown(False)
         self.tableWidget_2.verticalHeader().setStretchLastSection(False)
-        self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(300, 285, 211, 27))
-        self.pushButton.setObjectName(_fromUtf8("pushButton"))
-        self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(520, 285, 98, 27))
-        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
         self.label_2 = QtGui.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(420, 10, 121, 17))
         self.label_2.setObjectName(_fromUtf8("label_2"))
@@ -120,19 +113,59 @@ class Ui_MainWindow(object):
         self.tableWidget_3.verticalHeader().setSortIndicatorShown(False)
         self.tableWidget_3.verticalHeader().setStretchLastSection(False)
         MainWindow.setCentralWidget(self.centralwidget)
+
+        # execute one line push button
+        self.lineBtn = QtGui.QPushButton(self.centralwidget)
+        self.lineBtn.setGeometry(QtCore.QRect(300, 285, 211, 27))
+        self.lineBtn.setObjectName(_fromUtf8("lineBtn"))
+        self.lineBtn.setStatusTip("Execute line under cursor")
+        self.lineBtn.clicked.connect(self.lineExec)
+
+        # execute all push button
+        self.allBtn = QtGui.QPushButton(self.centralwidget)
+        self.allBtn.setGeometry(QtCore.QRect(520, 285, 98, 27))
+        self.allBtn.setObjectName(_fromUtf8("allBtn"))
+        self.allBtn.setStatusTip("Execute all")
+        self.allBtn.clicked.connect(self.allExec)
+
+        # text edit
+        self.textEdit = QtGui.QTextEdit(self.centralwidget)
+        self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
+        self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        # connect to lineBtn
+        # connect to allBtn
+
+
+        # menubar
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 732, 25))
         self.menubar.setObjectName(_fromUtf8("menubar"))
+
+        # menubar files
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName(_fromUtf8("menuFile"))
         MainWindow.setMenuBar(self.menubar)
+
+        # status bar
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
-        self.actionExit = QtGui.QAction(MainWindow)
-        self.actionExit.setObjectName(_fromUtf8("actionExit"))
+
+        # actions
+        # import action
         self.actionImport = QtGui.QAction(MainWindow)
         self.actionImport.setObjectName(_fromUtf8("actionImport"))
+        self.actionImport.setShortcut("Ctrl+I")
+        self.actionImport.setStatusTip("Import database file")
+        self.actionImport.triggered.connect(self.importDB)
+        # exit action
+        self.actionExit = QtGui.QAction(MainWindow)
+        self.actionExit.setObjectName(_fromUtf8("actionExit"))
+        self.actionExit.setShortcut("Ctrl+X")
+        self.actionExit.setStatusTip("Close the application")
+        self.actionExit.triggered.connect(self.exitApp)
+        
+        # add actions to respective menu file
         self.menuFile.addAction(self.actionImport)
         self.menuFile.addAction(self.actionExit)
         self.menubar.addAction(self.menuFile.menuAction())
@@ -150,12 +183,32 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Column", None))
         item = self.tableWidget_2.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Datatype", None))
-        self.pushButton.setText(_translate("MainWindow", "Execute Line Under Cursor", None))
-        self.pushButton_2.setText(_translate("MainWindow", "Execute All", None))
+        self.lineBtn.setText(_translate("MainWindow", "Execute Line Under Cursor", None))
+        self.allBtn.setText(_translate("MainWindow", "Execute All", None))
         self.label_2.setText(_translate("MainWindow", "Command Editor", None))
         self.menuFile.setTitle(_translate("MainWindow", "File", None))
         self.actionExit.setText(_translate("MainWindow", "Exit", None))
         self.actionImport.setText(_translate("MainWindow", "Import", None))
+
+    # exit function
+    def exitApp(self):
+        print("Application closed")
+        sys.exit()
+
+    # import db function (edit this)
+    def importDB(self):
+        print("Edit importDB function")
+        sys.exit()
+
+    # button + text editor functions
+    # execute one line in text editor
+    def lineExec(self):
+        lineText = self.textEdit.toPlainText()
+        print("line: " + lineText)
+    # execute all in text editor
+    def allExec(self):
+        allText = self.textEdit.toPlainText()
+        print("all: " + allText)
 
     def populateTables(self):
         i=0
