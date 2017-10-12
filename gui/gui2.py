@@ -30,88 +30,88 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(732, 549)
+        MainWindow.resize(732, 570)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
-        self.tableWidget = QtGui.QTableWidget(self.centralwidget)
-        self.tableWidget.setEnabled(True)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 30, 211, 251))
-        self.tableWidget.setStyleSheet(_fromUtf8(""))
-        self.tableWidget.setAutoScroll(False)
-        self.tableWidget.setAlternatingRowColors(True)
-        self.tableWidget.setTextElideMode(QtCore.Qt.ElideNone)
-        self.tableWidget.setShowGrid(True)
-        self.tableWidget.setGridStyle(QtCore.Qt.SolidLine)
-        self.tableWidget.setWordWrap(False)
-        self.tableWidget.setCornerButtonEnabled(False)
-        self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
-        self.tableWidget.setColumnCount(1)
-        self.tableWidget.setRowCount(1)
+        self.tablesTW = QtGui.QTableWidget(self.centralwidget)
+        self.tablesTW.setEnabled(True)
+        self.tablesTW.setGeometry(QtCore.QRect(10, 30, 211, 251))
+        self.tablesTW.setStyleSheet(_fromUtf8(""))
+        self.tablesTW.setAutoScroll(False)
+        self.tablesTW.setAlternatingRowColors(True)
+        self.tablesTW.setTextElideMode(QtCore.Qt.ElideNone)
+        self.tablesTW.setShowGrid(True)
+        self.tablesTW.setGridStyle(QtCore.Qt.SolidLine)
+        self.tablesTW.setWordWrap(False)
+        self.tablesTW.setCornerButtonEnabled(False)
+        self.tablesTW.setObjectName(_fromUtf8("tablesTW"))
+        self.tablesTW.setColumnCount(1)
+        self.tablesTW.setRowCount(1)
         item = QtGui.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
+        self.tablesTW.setVerticalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
+        self.tablesTW.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        self.tableWidget.setItem(0, 0, item)
-        self.tableWidget.horizontalHeader().setVisible(True)
-        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.horizontalHeader().setHighlightSections(False)
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
-        self.tableWidget.verticalHeader().setVisible(False)
-        self.tableWidget.verticalHeader().setSortIndicatorShown(False)
-        self.tableWidget.verticalHeader().setStretchLastSection(False)
+        self.tablesTW.setItem(0, 0, item)
+        self.tablesTW.horizontalHeader().setVisible(True)
+        self.tablesTW.horizontalHeader().setCascadingSectionResizes(False)
+        self.tablesTW.horizontalHeader().setHighlightSections(False)
+        self.tablesTW.horizontalHeader().setStretchLastSection(True)
+        self.tablesTW.verticalHeader().setVisible(False)
+        self.tablesTW.verticalHeader().setSortIndicatorShown(False)
+        self.tablesTW.verticalHeader().setStretchLastSection(False)
         self.label = QtGui.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(50, 10, 121, 17))
         self.label.setObjectName(_fromUtf8("label"))
-        self.tableWidget_2 = QtGui.QTableWidget(self.centralwidget)
-        self.tableWidget_2.setEnabled(True)
-        self.tableWidget_2.setGeometry(QtCore.QRect(10, 290, 211, 231))
-        self.tableWidget_2.setStyleSheet(_fromUtf8(""))
-        self.tableWidget_2.setAutoScroll(False)
-        self.tableWidget_2.setAlternatingRowColors(True)
-        self.tableWidget_2.setTextElideMode(QtCore.Qt.ElideNone)
-        self.tableWidget_2.setShowGrid(True)
-        self.tableWidget_2.setGridStyle(QtCore.Qt.SolidLine)
-        self.tableWidget_2.setWordWrap(False)
-        self.tableWidget_2.setCornerButtonEnabled(False)
-        self.tableWidget_2.setObjectName(_fromUtf8("tableWidget_2"))
-        self.tableWidget_2.setColumnCount(2)
-        self.tableWidget_2.setRowCount(0)
+        self.coldatatypeTW = QtGui.QTableWidget(self.centralwidget)
+        self.coldatatypeTW.setEnabled(True)
+        self.coldatatypeTW.setGeometry(QtCore.QRect(10, 290, 211, 231))
+        self.coldatatypeTW.setStyleSheet(_fromUtf8(""))
+        self.coldatatypeTW.setAutoScroll(False)
+        self.coldatatypeTW.setAlternatingRowColors(True)
+        self.coldatatypeTW.setTextElideMode(QtCore.Qt.ElideNone)
+        self.coldatatypeTW.setShowGrid(True)
+        self.coldatatypeTW.setGridStyle(QtCore.Qt.SolidLine)
+        self.coldatatypeTW.setWordWrap(False)
+        self.coldatatypeTW.setCornerButtonEnabled(False)
+        self.coldatatypeTW.setObjectName(_fromUtf8("coldatatypeTW"))
+        self.coldatatypeTW.setColumnCount(2)
+        self.coldatatypeTW.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(0, item)
+        self.coldatatypeTW.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        self.tableWidget_2.setHorizontalHeaderItem(1, item)
-        self.tableWidget_2.horizontalHeader().setVisible(True)
-        self.tableWidget_2.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableWidget_2.horizontalHeader().setHighlightSections(False)
-        self.tableWidget_2.horizontalHeader().setStretchLastSection(True)
-        self.tableWidget_2.verticalHeader().setVisible(False)
-        self.tableWidget_2.verticalHeader().setSortIndicatorShown(False)
-        self.tableWidget_2.verticalHeader().setStretchLastSection(False)
+        self.coldatatypeTW.setHorizontalHeaderItem(1, item)
+        self.coldatatypeTW.horizontalHeader().setVisible(True)
+        self.coldatatypeTW.horizontalHeader().setCascadingSectionResizes(False)
+        self.coldatatypeTW.horizontalHeader().setHighlightSections(False)
+        self.coldatatypeTW.horizontalHeader().setStretchLastSection(True)
+        self.coldatatypeTW.verticalHeader().setVisible(False)
+        self.coldatatypeTW.verticalHeader().setSortIndicatorShown(False)
+        self.coldatatypeTW.verticalHeader().setStretchLastSection(False)
         self.label_2 = QtGui.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(420, 10, 121, 17))
         self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.tableWidget_3 = QtGui.QTableWidget(self.centralwidget)
-        self.tableWidget_3.setEnabled(True)
-        self.tableWidget_3.setGeometry(QtCore.QRect(230, 320, 491, 201))
-        self.tableWidget_3.setStyleSheet(_fromUtf8(""))
-        self.tableWidget_3.setAutoScroll(False)
-        self.tableWidget_3.setAlternatingRowColors(True)
-        self.tableWidget_3.setTextElideMode(QtCore.Qt.ElideNone)
-        self.tableWidget_3.setShowGrid(True)
-        self.tableWidget_3.setGridStyle(QtCore.Qt.SolidLine)
-        self.tableWidget_3.setWordWrap(False)
-        self.tableWidget_3.setCornerButtonEnabled(False)
-        self.tableWidget_3.setObjectName(_fromUtf8("tableWidget_3"))
-        self.tableWidget_3.setColumnCount(0)
-        self.tableWidget_3.setRowCount(0)
-        self.tableWidget_3.horizontalHeader().setVisible(True)
-        self.tableWidget_3.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableWidget_3.horizontalHeader().setHighlightSections(False)
-        self.tableWidget_3.horizontalHeader().setStretchLastSection(True)
-        self.tableWidget_3.verticalHeader().setVisible(False)
-        self.tableWidget_3.verticalHeader().setSortIndicatorShown(False)
-        self.tableWidget_3.verticalHeader().setStretchLastSection(False)
+        self.queryResultTW = QtGui.QTableWidget(self.centralwidget)
+        self.queryResultTW.setEnabled(True)
+        self.queryResultTW.setGeometry(QtCore.QRect(230, 320, 491, 201))
+        self.queryResultTW.setStyleSheet(_fromUtf8(""))
+        self.queryResultTW.setAutoScroll(False)
+        self.queryResultTW.setAlternatingRowColors(True)
+        self.queryResultTW.setTextElideMode(QtCore.Qt.ElideNone)
+        self.queryResultTW.setShowGrid(True)
+        self.queryResultTW.setGridStyle(QtCore.Qt.SolidLine)
+        self.queryResultTW.setWordWrap(False)
+        self.queryResultTW.setCornerButtonEnabled(False)
+        self.queryResultTW.setObjectName(_fromUtf8("queryResultTW"))
+        self.queryResultTW.setColumnCount(0)
+        self.queryResultTW.setRowCount(0)
+        self.queryResultTW.horizontalHeader().setVisible(True)
+        self.queryResultTW.horizontalHeader().setCascadingSectionResizes(False)
+        self.queryResultTW.horizontalHeader().setHighlightSections(False)
+        self.queryResultTW.horizontalHeader().setStretchLastSection(True)
+        self.queryResultTW.verticalHeader().setVisible(False)
+        self.queryResultTW.verticalHeader().setSortIndicatorShown(False)
+        self.queryResultTW.verticalHeader().setStretchLastSection(False)
         MainWindow.setCentralWidget(self.centralwidget)
 
         # execute one line push button
@@ -119,22 +119,19 @@ class Ui_MainWindow(object):
         self.lineBtn.setGeometry(QtCore.QRect(300, 285, 211, 27))
         self.lineBtn.setObjectName(_fromUtf8("lineBtn"))
         self.lineBtn.setStatusTip("Execute line under cursor")
-        self.lineBtn.clicked.connect(self.lineExec)
+        self.lineBtn.clicked.connect(self.lineExec)     # save a line in text edit content
 
         # execute all push button
         self.allBtn = QtGui.QPushButton(self.centralwidget)
         self.allBtn.setGeometry(QtCore.QRect(520, 285, 98, 27))
         self.allBtn.setObjectName(_fromUtf8("allBtn"))
         self.allBtn.setStatusTip("Execute all")
-        self.allBtn.clicked.connect(self.allExec)
+        self.allBtn.clicked.connect(self.allExec)       # save all text edit contents
 
         # text edit
         self.textEdit = QtGui.QTextEdit(self.centralwidget)
         self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
-        # connect to lineBtn
-        # connect to allBtn
-
 
         # menubar
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -176,12 +173,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
-        item = self.tableWidget.horizontalHeaderItem(0)
+        item = self.tablesTW.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Tables", None))
         self.label.setText(_translate("MainWindow", "Database Schema", None))
-        item = self.tableWidget_2.horizontalHeaderItem(0)
+        item = self.coldatatypeTW.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Column", None))
-        item = self.tableWidget_2.horizontalHeaderItem(1)
+        item = self.coldatatypeTW.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Datatype", None))
         self.lineBtn.setText(_translate("MainWindow", "Execute Line Under Cursor", None))
         self.allBtn.setText(_translate("MainWindow", "Execute All", None))
@@ -200,29 +197,18 @@ class Ui_MainWindow(object):
         print("Edit importDB function")
         sys.exit()
 
-    # button + text editor functions
-    # execute one line in text editor
-    def lineExec(self):
-        lineText = self.textEdit.toPlainText()
-        print("line: " + lineText)
-    # execute all in text editor
-    def allExec(self):
-        allText = self.textEdit.toPlainText()
-        print("all: " + allText)
-
     def populateTables(self):
         i=0
         for table in tables:                        # for each table specified in the metadata
-            pos = self.tableWidget.rowCount()       # create a corresponding row
-            self.tableWidget.insertRow(pos)
+            pos = self.tablesTW.rowCount()       # create a corresponding row
+            self.tablesTW.insertRow(pos)
             item = QtGui.QTableWidgetItem()
-            self.tableWidget.setVerticalHeaderItem(pos, item)
+            self.coldatatypeTW.setVerticalHeaderItem(pos, item)
 
             item = QtGui.QTableWidgetItem()
             item.setText(table)
-            self.tableWidget.setItem(i,0,item)
+            self.tablesTW.setItem(i,0,item)
             i=i+1
-
 
                     # pos = self.tableWidget.rowCount()       # create a corresponding row
                     # self.tableWidget.insertRow(pos)
@@ -243,6 +229,33 @@ class Ui_MainWindow(object):
     def addColumnNamesAndDataTypes():
         for column in tables['table']:                        # for each table specified in the metadata
             print(column)
+
+    # button + text editor functions
+    def lineExec(self):                             # execute one line in text edit
+        lineText = self.textEdit.toPlainText()
+        print("line: " + lineText)
+        self.showQueryResult()
+    
+    def allExec(self):                              # execute all in text edit
+        allText = self.textEdit.toPlainText()
+        print("all: " + allText)
+        self.showQueryResult()
+
+    def showQueryResult(self):
+        rowPosition = self.queryResultTW.rowCount()
+        self.queryResultTW.insertRow(rowPosition)
+
+        item = QtGui.QTableWidgetItem()
+        self.queryResultTW.setVerticalHeaderItem(rowPosition,item)
+
+        item = QtGui.QTableWidgetItem()
+        item.setText("Text 1")
+        self.queryResultTW.setItem(rowPosition,0,item)
+
+        # self.queryResultTW.setItem(rowPosition , 0, QtGui.QTableWidgetItem("Text 1"))
+        # self.queryResultTW.setItem(rowPosition , 1, QtGui.QTableWidgetItem("Text 2"))
+        # self.queryResultTW.setItem(rowPosition , 2, QtGui.QTableWidgetItem("Text 3"))
+
 tables = {}
 
 def readMetadata():
