@@ -161,45 +161,81 @@ def p_insert_statement(p):
     '''insert_statement : INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
             | INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
             | INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON'''
+    print("Insert statement")
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
+    print(p[0])
+    # p[0] = p[1] + " " + p[2] + " " + p[3] + " " + p[4] + " " + p[5] + " " + p[6] + " " + p[7] + " "
 
 def p_select_statement(p):
     '''select_statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
             | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
+    print("Select statement")
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
+    print(p[0])
+
 
 def p_delete_statement(p):
     '''delete_statement : DELETE FROM TABLE_NAME SEMICOLON
             | DELETE FROM TABLE_NAME WHERE condition SEMICOLON'''
+    print("Delete statement")
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
+    print(p[0])
 
 def p_into_kw(p):
     '''into_kw : INTO
             | empty'''
+    if(len(p) == 2):
+        p[0] = p[1]
+    else:
+        p[0] = None
 
 def p_filter_rows_op(p):
     '''filter_rows_op : FILTER_ROWS
             | empty'''
+    if(len(p) == 2):
+        p[0] = p[1]
+    else:
+        p[0] = None
 
 def p_columns(p):
     '''columns : ASTERISK
             | column_name'''
-    # print(p)
+    p[0] = p[1]
 
 def p_column_name(p):
     '''column_name : COLUMN_NAME
             | column_name COMMA COLUMN_NAME'''
+    if(len(p) == 2):
+        p[0] = p[1]
+    else:
+        p[0] = p[1] + " " + p[2] + " " + p[3]
 
 def p_assignment_list(p):
     '''assignment_list : COLUMN_NAME EQUAL literals
             | assignment_list COMMA COLUMN_NAME EQUAL literals'''
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
 
 def p_value_list(p):
     '''value_list : literals
             | value_list COMMA literals'''
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
 
 def p_literals(p):
     '''literals : STRING_LIT
             | INT_LIT
             | DOUBLE_LIT
             | DATE_LIT'''
+    p[0] = p[1]
 
 def p_condition(p):
     '''condition : string_cond
@@ -208,30 +244,43 @@ def p_condition(p):
             | NOT OPENPAR string_cond CLOSEPAR
             | NOT OPENPAR num_cond CLOSEPAR
             | NOT OPENPAR date_cond CLOSEPAR'''
-    # print(p)
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
 
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp
             | string_exp NOT LIKE string_exp
             | STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR'''
-            # | string_exp EQUAL string_exp
-    # print(p)
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
 
 def p_string_exp(p):
     'string_exp : STRING_LIT'
             # | COLUMN_NAME''' # string literals include regexpressions
     # print(p)
+    p[0] = p[1]
 
 def p_num_cond(p):
     '''num_cond : num_exp comparison_op num_exp
             | num_exp BETWEEN num_exp AND num_exp
             | num_exp NOT NULL
             | num_exp IS NULL'''
+    p[0] = None
+    for i in p:
+        p[0] = p[0] + " " + i
 
 def p_num_exp(p):
     '''num_exp : num_exp ADD num_factor
             | num_exp SUBTRACT num_factor
             | num_factor'''
+    if p[2] == '+':
+      p[0] = p[1] + p[3]
+    elif p[2] == '-':
+      p[0] = p[1] - p[3]
+    else:
+      p[0] = p[1]
 
 def p_num_factor(p):
     '''num_factor : num_factor MULTIPLY num_term
@@ -239,23 +288,38 @@ def p_num_factor(p):
             | num_factor DIVIDE_INT num_term
             | num_factor MODULO num_term
             | num_term'''
+    if p[2] == '*':
+      p[0] = p[1] * p[3]
+    elif p[2] == '/':
+      p[0] = p[1] / p[3]
+    elif p[2] == 'div':
+      p[0] = p[1] // p[3]
+    elif p[2] == '%':
+      p[0] = p[1] % p[3]
+    else:
+      p[0] = p[1]
 
 def p_num_term(p):
     '''num_term : OPENPAR num_val CLOSEPAR
             | num_val'''
+    p[0] = p[2]
 
 def p_num_val(p):
     '''num_val : INT_LIT
             | DOUBLE_LIT
             | COLUMN_NAME'''    #also accepts column compared to column
+    p[0] = p[1]
 
 def p_date_cond(p):
     '''date_cond : date_exp comparison_op date_exp
             | date_exp'''
+    if(len(p) == 2):
+    p[0] = p[1]
 
 def p_date_exp(p):
     '''date_exp : date_function
             | DATE_LIT'''
+    p[0] = p[1]
 
 def p_date_function(p):
     '''date_function : ADDDATE OPENPAR date_exp COMMA date_exp CLOSEPAR
@@ -283,6 +347,7 @@ def p_comparison_op(p):
             | NE
             | EQUAL
             | EQUAL_NULL'''
+    p[0] = p[1]
 
 # def p_arithmetic_op(p):
 #     '''arithmetic_op : ADD
