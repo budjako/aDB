@@ -1,11 +1,12 @@
 import sys
 import re
+import time
+
 sys.path.insert(0, "..")
 
 if sys.version_info[0] >= 3:
     raw_input = input
 
-from datetime import date
 from ply import *
 import selectlex
 # import selectparse
@@ -39,15 +40,11 @@ for line in metadata:
 
 insert_keywords = ('INSERT', 'INTO', 'VALUES', 'SET')
 delete_select_keywords = ('SELECT', 'DELETE')
-literal_token = ('INT_LIT', 'DOUBLE_LIT', 'STRING_LIT', 'DATE_LIT')
+literal_token = ('INT_LIT', 'DOUBLE_LIT', 'STRING_LIT')
 arithmetic_op_token = ('ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT', 'MODULO')
 comparison_op_token = ('EQUAL', 'EQUAL_NULL', 'GT', 'GE', 'LT', 'LE', 'NE', 'NOT')
-date_keywords = (
-    'ADDDATE', 'CURDATE', 'CURRENT_DATE', 'DATEDIFF', 'DAY', 'DAYNAME', 'DAYOFMONTH', 'DAYOFWEEK', 'DAYOFYEAR', 'LAST_DAY',
-    'MAKEDATE', 'MONTH', 'MONTHNAME', 'SUBDATE', 'INTERVAL', 'YEAR'
-)
-tokens = insert_keywords + delete_select_keywords + literal_token + arithmetic_op_token + comparison_op_token + date_keywords + (
-    'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'ASTERISK', 'DATE_UNIT',
+tokens = insert_keywords + delete_select_keywords + literal_token + arithmetic_op_token + comparison_op_token + (
+    'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'ASTERISK',
     'COMMA', 'SEMICOLON', 'OPENPAR', 'CLOSEPAR', 'FROM', 'WHERE',
     'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
 )
@@ -95,32 +92,6 @@ t_STRCMP = r'strcmp'
 t_IS = r'is'
 t_NULL = r'null'
 
-t_BETWEEN = r'between'
-t_AND = r'and'
-t_ADDDATE = r'adddate'
-t_CURDATE = r'curdate'
-t_CURRENT_DATE = r'current_date'
-t_DATEDIFF = r'datediff'
-t_DAY = r'day'
-t_DAYNAME = r'dayname'
-t_DAYOFMONTH = r'dayofmonth'
-t_DAYOFWEEK = r'dayofweek'
-t_DAYOFYEAR = r'dayofyear'
-t_LAST_DAY = r'last_day'
-t_MAKEDATE = r'makedate'
-t_MONTH = r'month'
-t_MONTHNAME = r'monthname'
-t_SUBDATE = r'subdate'
-t_INTERVAL = r'interval'
-t_YEAR = r'year'
-
-
-def t_DATE_LIT(t):
-    r'\'\d{4}\-(0?[1-9]|10|11|12)\-(30|31|((0|1|2)?[0-9]))\'' # Year-Month-Day
-    date_tokens = t.value.split("-")
-    print(date_tokens)
-    t.value = date(int(date_tokens[0]), int(date_tokens[1]), int(date_tokens[2]))
-    return t
 
 def t_DOUBLE_LIT(t):
     r'\-?\d+\.\d+'
@@ -135,9 +106,6 @@ def t_INT_LIT(t):
 def t_NEWLINE(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
-
-def t_DATE_UNIT(t):
-    r'(second|minute|day|week|month|quarter|year)'
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
@@ -198,16 +166,13 @@ def p_value_list(p):
 def p_literals(p):
     '''literals : STRING_LIT
             | INT_LIT
-            | DOUBLE_LIT
-            | DATE_LIT'''
+            | DOUBLE_LIT'''
 
 def p_condition(p):
     '''condition : string_cond
             | num_cond
-            | date_cond
             | NOT OPENPAR string_cond CLOSEPAR
-            | NOT OPENPAR num_cond CLOSEPAR
-            | NOT OPENPAR date_cond CLOSEPAR'''
+            | NOT OPENPAR num_cond CLOSEPAR'''
     # print(p)
 
 def p_string_cond(p):
@@ -227,11 +192,13 @@ def p_num_cond(p):
             | num_exp BETWEEN num_exp AND num_exp
             | num_exp NOT NULL
             | num_exp IS NULL'''
+    p[0] = p[1]
 
 def p_num_exp(p):
     '''num_exp : num_exp ADD num_factor
             | num_exp SUBTRACT num_factor
             | num_factor'''
+    p[0] = p[1]
 
 def p_num_factor(p):
     '''num_factor : num_factor MULTIPLY num_term
@@ -239,41 +206,17 @@ def p_num_factor(p):
             | num_factor DIVIDE_INT num_term
             | num_factor MODULO num_term
             | num_term'''
+    p[0] = p[1]
 
 def p_num_term(p):
     '''num_term : OPENPAR num_val CLOSEPAR
             | num_val'''
-
+    p[0] = p[1]
 def p_num_val(p):
     '''num_val : INT_LIT
             | DOUBLE_LIT
             | COLUMN_NAME'''    #also accepts column compared to column
-
-def p_date_cond(p):
-    '''date_cond : date_exp comparison_op date_exp
-            | date_exp'''
-
-def p_date_exp(p):
-    '''date_exp : date_function
-            | DATE_LIT'''
-
-def p_date_function(p):
-    '''date_function : ADDDATE OPENPAR date_exp COMMA date_exp CLOSEPAR
-             | CURDATE OPENPAR CLOSEPAR
-             | CURRENT_DATE OPENPAR CLOSEPAR
-             | CURRENT_DATE
-             | DATEDIFF OPENPAR date_exp COMMA date_exp CLOSEPAR
-             | DAY OPENPAR date_exp CLOSEPAR
-             | DAYNAME OPENPAR date_exp CLOSEPAR
-             | DAYOFMONTH OPENPAR date_exp CLOSEPAR
-             | DAYOFWEEK OPENPAR date_exp CLOSEPAR
-             | DAYOFYEAR OPENPAR date_exp CLOSEPAR
-             | LAST_DAY OPENPAR date_exp CLOSEPAR
-             | MAKEDATE OPENPAR num_exp COMMA num_exp CLOSEPAR
-             | MONTH OPENPAR date_exp CLOSEPAR
-             | MONTHNAME OPENPAR date_exp CLOSEPAR
-             | SUBDATE OPENPAR date_exp COMMA INTERVAL num_exp DATE_UNIT CLOSEPAR
-             | YEAR OPENPAR date_exp CLOSEPAR'''
+    p[0] = p[1]
 
 def p_comparison_op(p):
     '''comparison_op : GE
