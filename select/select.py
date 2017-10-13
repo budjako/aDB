@@ -41,7 +41,7 @@ for line in metadata:
 insert_keywords = ('INSERT', 'INTO', 'VALUES', 'SET')
 delete_select_keywords = ('SELECT', 'DELETE')
 literal_token = ('INT_LIT', 'DOUBLE_LIT', 'STRING_LIT')
-arithmetic_op_token = ('ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT', 'MODULO')
+arithmetic_op_token = ('ADD', 'SUBTRACT', 'DIVIDE', 'DIVIDE_INT', 'MODULO')
 comparison_op_token = ('EQUAL', 'EQUAL_NULL', 'GT', 'GE', 'LT', 'LE', 'NE', 'NOT')
 tokens = insert_keywords + delete_select_keywords + literal_token + arithmetic_op_token + comparison_op_token + (
     'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'ASTERISK',
@@ -72,7 +72,6 @@ t_SEMICOLON = r';'
 
 t_ADD = r'\+'
 t_SUBTRACT = r'-'
-t_MULTIPLY = r'\*'
 t_DIVIDE = r'/'
 t_DIVIDE_INT = r'div'
 t_MODULO = r'(mod | \%)'
@@ -116,7 +115,7 @@ t_ignore = " \t"
 lexer = lex.lex()   # lexer
 precedence = (
     ('left', 'ADD', 'SUBTRACT'),
-    ('left', 'MULTIPLY', 'DIVIDE', 'DIVIDE_INT')
+    ('left', 'ASTERISK', 'DIVIDE', 'DIVIDE_INT')
 )
 command = {}
 
@@ -130,19 +129,22 @@ def p_insert_statement(p):
             | INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
             | INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON'''
     print("Insert statement")
-    p[0] = None
+
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        if(i is not None):
+            p[0] = p[0] + " " + i
     print(p[0])
-    # p[0] = p[1] + " " + p[2] + " " + p[3] + " " + p[4] + " " + p[5] + " " + p[6] + " " + p[7] + " "
 
 def p_select_statement(p):
     '''select_statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
             | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
     print("Select statement")
-    p[0] = None
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        print(i)
+        if(i is not None):
+            p[0] = p[0] + " " + i
     print(p[0])
 
 
@@ -150,9 +152,11 @@ def p_delete_statement(p):
     '''delete_statement : DELETE FROM TABLE_NAME SEMICOLON
             | DELETE FROM TABLE_NAME WHERE condition SEMICOLON'''
     print("Delete statement")
-    p[0] = None
+
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        if(i is not None):
+            p[0] = p[0] + " " + i
     print(p[0])
 
 def p_into_kw(p):
@@ -161,7 +165,7 @@ def p_into_kw(p):
     if(len(p) == 2):
         p[0] = p[1]
     else:
-        p[0] = None
+        p[0] = ""
 
 def p_filter_rows_op(p):
     '''filter_rows_op : FILTER_ROWS
@@ -169,7 +173,7 @@ def p_filter_rows_op(p):
     if(len(p) == 2):
         p[0] = p[1]
     else:
-        p[0] = None
+        p[0] = ""
 
 def p_columns(p):
     '''columns : ASTERISK
@@ -187,16 +191,20 @@ def p_column_name(p):
 def p_assignment_list(p):
     '''assignment_list : COLUMN_NAME EQUAL literals
             | assignment_list COMMA COLUMN_NAME EQUAL literals'''
-    p[0] = None
+
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        if(i is not None):
+            p[0] = p[0] + " " + i
 
 def p_value_list(p):
     '''value_list : literals
             | value_list COMMA literals'''
-    p[0] = None
+
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        if(i is not None):
+            p[0] = p[0] + " " + i
 
 def p_literals(p):
     '''literals : STRING_LIT
@@ -209,17 +217,21 @@ def p_condition(p):
             | num_cond
             | NOT OPENPAR string_cond CLOSEPAR
             | NOT OPENPAR num_cond CLOSEPAR'''
-    p[0] = None
+
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        if(i is not None):
+            p[0] = p[0] + " " + i
 
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp
             | string_exp NOT LIKE string_exp
             | STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR'''
-    p[0] = None
+
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        if(i is not None):
+            p[0] = p[0] + " " + i
 
 def p_string_exp(p):
     'string_exp : STRING_LIT'
@@ -232,48 +244,70 @@ def p_num_cond(p):
             | num_exp BETWEEN num_exp AND num_exp
             | num_exp NOT NULL
             | num_exp IS NULL'''
-    p[0] = None
+
+    p[0] = ""
     for i in p:
-        p[0] = p[0] + " " + i
+        if(i is not None):
+            p[0] = p[0] + " " + str(i)
 
 def p_num_exp(p):
     '''num_exp : num_exp ADD num_factor
-            | num_exp SUBTRACT num_factor
+            |  num_factor SUBTRACT num_exp
             | num_factor'''
-    if p[2] == '+':
-      p[0] = p[1] + p[3]
-    elif p[2] == '-':
-      p[0] = p[1] - p[3]
+    if(len(p) > 2):
+        if((type(p[1]) == int or type(p[1]) == float) and (type(p[3]) == int or type(p[3]) == float) ):
+            if p[2] == '+':
+              p[0] = p[1] + p[3]
+            elif p[2] == '-':
+              p[0] = p[1] - p[3]
+        else:
+            p[0] = str(p[1]) + " " + p[2] + " " + str(p[3])
     else:
       p[0] = p[1]
+    print("p0",p[0])
 
 def p_num_factor(p):
-    '''num_factor : num_factor MULTIPLY num_term
+    '''num_factor : num_factor ASTERISK num_term
             | num_factor DIVIDE num_term
             | num_factor DIVIDE_INT num_term
             | num_factor MODULO num_term
             | num_term'''
-    if p[2] == '*':
-      p[0] = p[1] * p[3]
-    elif p[2] == '/':
-      p[0] = p[1] / p[3]
-    elif p[2] == 'div':
-      p[0] = p[1] // p[3]
-    elif p[2] == '%':
-      p[0] = p[1] % p[3]
+    if(len(p) > 2):
+        if((type(p[1]) == int or type(p[1]) == float) and (type(p[3]) == int or type(p[3]) == float) ):
+            if p[2] == '*':
+                p[0] = p[1] * p[3]
+            elif p[2] == '/':
+              p[0] = p[1] / p[3]
+            elif p[2] == 'div':
+              p[0] = p[1] // p[3]
+            elif p[2] == '%':
+              p[0] = p[1] % p[3]
+        else:
+            p[0] = str(p[1]) + " " + p[2] + " " + str(p[3])
     else:
       p[0] = p[1]
 
 def p_num_term(p):
-    '''num_term : OPENPAR num_val CLOSEPAR
+    '''num_term : OPENPAR num_exp CLOSEPAR
             | num_val'''
-    p[0] = p[2]
+    if(len(p) == 4):
+        if(type(p[2]) == int or type(p[2]) == float):
+            p[0] = p[2]
+        else:
+            p[0] = p[1]+p[2]+p[3]
+    else:
+        p[0] = p[1]
 
 def p_num_val(p):
     '''num_val : INT_LIT
             | DOUBLE_LIT
             | COLUMN_NAME'''    #also accepts column compared to column
-    p[0] = p[1]
+    if(p[1] == "INT_LIT"):
+        p[0] = int(p[1])
+    elif(p[1] == "DOUBLE_LIT"):
+        p[0] = float(p[1])
+    else:
+        p[0] = p[1]
 
 def p_comparison_op(p):
     '''comparison_op : GE
@@ -284,14 +318,6 @@ def p_comparison_op(p):
             | EQUAL
             | EQUAL_NULL'''
     p[0] = p[1]
-
-# def p_arithmetic_op(p):
-#     '''arithmetic_op : ADD
-#             | SUBTRACT
-#             | MULTIPLY
-#             | DIVIDE
-#             | DIVIDE_INT
-#             | MODULO'''
 
 def p_empty(p):
     'empty : '
