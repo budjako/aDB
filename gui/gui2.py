@@ -35,6 +35,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.tablesTW = QtGui.QTableWidget(self.centralwidget)
         self.tablesTW.setEnabled(True)
+        self.tablesTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
         self.tablesTW.setGeometry(QtCore.QRect(10, 30, 211, 251))
         self.tablesTW.setStyleSheet(_fromUtf8(""))
         self.tablesTW.setAutoScroll(False)
@@ -46,7 +47,7 @@ class Ui_MainWindow(object):
         self.tablesTW.setCornerButtonEnabled(False)
         self.tablesTW.setObjectName(_fromUtf8("tablesTW"))
         self.tablesTW.setColumnCount(1)
-        self.tablesTW.setRowCount(1)
+        self.tablesTW.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tablesTW.setVerticalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
@@ -63,6 +64,9 @@ class Ui_MainWindow(object):
         self.label = QtGui.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(50, 10, 121, 17))
         self.label.setObjectName(_fromUtf8("label"))
+
+        self.tablesTW.cellClicked.connect(self.tableClick)
+
         self.coldatatypeTW = QtGui.QTableWidget(self.centralwidget)
         self.coldatatypeTW.setEnabled(True)
         self.coldatatypeTW.setGeometry(QtCore.QRect(10, 290, 211, 231))
@@ -77,6 +81,7 @@ class Ui_MainWindow(object):
         self.coldatatypeTW.setObjectName(_fromUtf8("coldatatypeTW"))
         self.coldatatypeTW.setColumnCount(2)
         self.coldatatypeTW.setRowCount(0)
+
         item = QtGui.QTableWidgetItem()
         self.coldatatypeTW.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
@@ -88,6 +93,8 @@ class Ui_MainWindow(object):
         self.coldatatypeTW.verticalHeader().setVisible(False)
         self.coldatatypeTW.verticalHeader().setSortIndicatorShown(False)
         self.coldatatypeTW.verticalHeader().setStretchLastSection(False)
+        # self.coldatatypeTW.setText('hello world!')
+        
         self.label_2 = QtGui.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(420, 10, 121, 17))
         self.label_2.setObjectName(_fromUtf8("label_2"))
@@ -199,16 +206,19 @@ class Ui_MainWindow(object):
 
     def populateTables(self):
         i=0
-        for table in tables:                        # for each table specified in the metadata
+        # print(tables)
+        for i in range(0,len(tables2),1):                        # for each table specified in the metadata
             pos = self.tablesTW.rowCount()       # create a corresponding row
+            # print("pos", pos)
             self.tablesTW.insertRow(pos)
-            item = QtGui.QTableWidgetItem()
-            self.coldatatypeTW.setVerticalHeaderItem(pos, item)
+            # item = QtGui.QTableWidgetItem()
+            # self.coldatatypeTW.setVerticalHeaderItem(pos, item)
 
-            item = QtGui.QTableWidgetItem()
-            item.setText(table)
-            self.tablesTW.setItem(i,0,item)
-            i=i+1
+            # item = QtGui.QTableWidgetItem()
+            # item.setText(table)
+            # self.tablesTW.setItem(i,0,item)
+            self.tablesTW.setItem(i,0, QtGui.QTableWidgetItem(tables2[i]))
+            # print(table)        
 
                     # pos = self.tableWidget.rowCount()       # create a corresponding row
                     # self.tableWidget.insertRow(pos)
@@ -256,23 +266,43 @@ class Ui_MainWindow(object):
         # self.queryResultTW.setItem(rowPosition , 1, QtGui.QTableWidgetItem("Text 2"))
         # self.queryResultTW.setItem(rowPosition , 2, QtGui.QTableWidgetItem("Text 3"))
 
+    @pyqtSlot()
+    def tableClick(self, row, column):
+            print(tables[tables2[row]])
+            self.coldatatypeTW.clearContents()
+
+            self.coldatatypeTW.setRowCount(len(tables[tables2[row]])/2)
+
+            j = 0
+            for i in range(0, len(tables[tables2[row]])/2, 1):                
+                self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(tables[tables2[row]][j]))
+                self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[tables2[row]][j+1]))
+                j += 2  
+
+
 tables = {}
+tables2 = {}
 
 def readMetadata():
     metadata = open("metadata.txt", "r")
-
+    row = 0
     for line in metadata:
         nonewline = line.rstrip('\n')
-        print(nonewline);
+        # print(nonewline);
         tokens = nonewline.split(" ")
         tokens.reverse()
         tablename = tokens.pop()
+        # print(tablename)
         tokens.reverse()
-        for i in range(0,len(tokens)):
+        for i in range(0,len(tokens),2):
             tokens[i] = tokens[i]
+            # print(tokens[i], tokens[i+1])
             # tokens[i] = str.lower(tokens[i])
         tables[str.lower(tablename)] = tokens
-    # print(tables)
+
+        tables2[row] = str.lower(tablename)         
+        row += 1
+    # print(tables2)
 
 if __name__ == "__main__":
     readMetadata()
