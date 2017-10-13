@@ -69,6 +69,7 @@ class Ui_MainWindow(object):
 
         self.coldatatypeTW = QtGui.QTableWidget(self.centralwidget)
         self.coldatatypeTW.setEnabled(True)
+        self.coldatatypeTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
         self.coldatatypeTW.setGeometry(QtCore.QRect(10, 290, 211, 231))
         self.coldatatypeTW.setStyleSheet(_fromUtf8(""))
         self.coldatatypeTW.setAutoScroll(False)
@@ -268,13 +269,13 @@ class Ui_MainWindow(object):
 
     @pyqtSlot()
     def tableClick(self, row, column):
-            print(tables[tables2[row]])
+            # print(tables[tables2[row]])
             self.coldatatypeTW.clearContents()
 
             self.coldatatypeTW.setRowCount(len(tables[tables2[row]])/2)
 
             j = 0
-            for i in range(0, len(tables[tables2[row]])/2, 1):                
+            for i in range(0, int(len(tables[tables2[row]])/2), 1):                
                 self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(tables[tables2[row]][j]))
                 self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[tables2[row]][j+1]))
                 j += 2  
