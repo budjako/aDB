@@ -139,6 +139,7 @@ class Ui_MainWindow(object):
         self.textEdit = QtGui.QTextEdit(self.centralwidget)
         self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        self.textEdit.setFocus(True)
 
         # menubar
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -202,7 +203,7 @@ class Ui_MainWindow(object):
     # import db function (edit this)
     def importDB(self):
         print("Edit importDB function")
-        sys.exit()
+        pass
 
     def populateTables(self):
         i=0
@@ -242,29 +243,69 @@ class Ui_MainWindow(object):
 
     # button + text editor functions
     def lineExec(self):                             # execute one line in text edit
-        lineText = self.textEdit.toPlainText()
-        print("line: " + lineText)
-        self.showQueryResult()
+        lineText = self.textEdit.toPlainText()      # save content of text edit
+        
+        if lineText in tables.keys():                  
+            print("line: " + lineText)
+            text = lineText.lower()
+            self.showQueryResult(text)
+        else:
+            # execute message box
+            self.noQuery()
     
     def allExec(self):                              # execute all in text edit
         allText = self.textEdit.toPlainText()
-        print("all: " + allText)
-        self.showQueryResult()
+        
+        if allText in tables.keys():  
+            print("all: " + allText)
+            text = allText.lower()
+            self.showQueryResult(text)
+        else:
+            # execute message box
+            self.noQuery()
 
-    def showQueryResult(self):
-        rowPosition = self.queryResultTW.rowCount()
-        self.queryResultTW.insertRow(rowPosition)
+    # show query result
+    def showQueryResult(self, textIn):
+        self.queryResultTW.clearContents()
 
-        item = QtGui.QTableWidgetItem()
-        self.queryResultTW.setVerticalHeaderItem(rowPosition,item)
+        # create table size
+        col = (int(len(tables[textIn])/2))
+        self.queryResultTW.setColumnCount(col)
 
-        item = QtGui.QTableWidgetItem()
-        item.setText("Text 1")
-        self.queryResultTW.setItem(rowPosition,0,item)
+        horHeaders = []
+        
+        # fill table widget
+        for n, colName in zip(range(0, col*2), tables[textIn]):
+            if n%2 == 0:
+                horHeaders.append(colName)
+        # for m, item in enumerate(tables[textIn]):
+            # newItem = QtGui.QTableWidgetItem(item)
+            # self.queryResultTW.setItem(m, n, newItem)
 
-        # self.queryResultTW.setItem(rowPosition , 0, QtGui.QTableWidgetItem("Text 1"))
-        # self.queryResultTW.setItem(rowPosition , 1, QtGui.QTableWidgetItem("Text 2"))
-        # self.queryResultTW.setItem(rowPosition , 2, QtGui.QTableWidgetItem("Text 3"))
+        # add column names to table
+        self.queryResultTW.setHorizontalHeaderLabels(horHeaders)
+
+        # adjust size of table according to contents
+        self.queryResultTW.resizeColumnsToContents()
+        self.queryResultTW.resizeRowsToContents()
+
+    # no query prompt method
+    def noQuery(self):
+        self.noQueryMsgBox = QtGui.QMessageBox()
+        self.noQueryMsgBox.setWindowTitle('My Database (Error)')
+        self.noQueryMsgBox.setWindowIcon(QtGui.QIcon('dblogo.png'))
+        self.noQueryMsgBox.setIcon(QtGui.QMessageBox.Warning)
+        self.noQueryMsgBox.setText('Enter a table name (for now)')
+        self.noQueryMsgBox.setInformativeText('STUDENT <br> STUDENTHISTORY <br> COURSE <br> COURSEOFFERING <br> STUDCOURSE')
+        self.noQueryMsgBox.addButton(QtGui.QMessageBox.Ok)
+        self.noQueryMsgBox.show()
+
+        print('Enter a table name (for now)')
+        print('STUDENT')
+        print('STUDENTHISTORY')
+        print('COURSE')
+        print('COURSEOFFERING')
+        print('STUDCOURSE')
 
     @pyqtSlot()
     def tableClick(self, row, column):
@@ -274,7 +315,7 @@ class Ui_MainWindow(object):
             self.coldatatypeTW.setRowCount(len(tables[tables2[row]])/2)
 
             j = 0
-            for i in range(0, len(tables[tables2[row]])/2, 1):                
+            for i in range(0, int(len(tables[tables2[row]])/2), 1):                
                 self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(tables[tables2[row]][j]))
                 self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[tables2[row]][j+1]))
                 j += 2  
@@ -282,6 +323,7 @@ class Ui_MainWindow(object):
 
 tables = {}
 tables2 = {}
+textIn = ''
 
 def readMetadata():
     metadata = open("metadata.txt", "r")
@@ -310,5 +352,7 @@ if __name__ == "__main__":
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    MainWindow.setWindowTitle('My Database')
+    MainWindow.setWindowIcon(QtGui.QIcon('dblogo.png'))
     MainWindow.show()
     sys.exit(app.exec_())
