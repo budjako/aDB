@@ -255,11 +255,10 @@ class Ui_MainWindow(object):
         # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
         cursor.select(QtGui.QTextCursor.LineUnderCursor)
         
-        lineText = cursor.selectedText()                    # save content of line under cursor in text edit          
-        
+        lineText = cursor.selectedText().lower()            # save content of line under cursor in text edit          
+
         if lineText in tables.keys():                  
-            text = lineText.lower()
-            self.showQueryResult(text)
+            self.showQueryResult(lineText)
         else:
             self.noQuery()                                  # execute message box
 
@@ -267,11 +266,10 @@ class Ui_MainWindow(object):
 
     # execute all lines in text edit
     def allExec(self):                             
-        allText = self.textEdit.toPlainText()
-        
+        allText = self.textEdit.toPlainText().lower()
+
         if allText in tables.keys():  
-            text = allText.lower()
-            self.showQueryResult(text)
+            self.showQueryResult(allText)
         else:
             self.noQuery()                                  # execute message box
 
