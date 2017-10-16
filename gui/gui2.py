@@ -255,23 +255,45 @@ class Ui_MainWindow(object):
         # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
         cursor.select(QtGui.QTextCursor.LineUnderCursor)
         
-        lineText = cursor.selectedText().lower()            # save content of line under cursor in text edit          
+        selText = cursor.selectedText().lower()            # save content of line under cursor in text edit          
 
-        if lineText in tables.keys():                  
-            self.showQueryResult(lineText)
+        if lineText in tables.keys():                       # if text is a key in the dict              
+            self.showQueryResult(selText)
         else:
             self.noQuery()                                  # execute message box
 
         self.textEdit.setFocus(True)                        # focus on text edit
 
     # execute all lines in text edit
-    def allExec(self):                             
-        allText = self.textEdit.toPlainText().lower()
+    def allExec(self):
+        # count lines in text edit
+        self.textEdit.moveCursor(QtGui.QTextCursor.End)
+        self.textEdit.setFocus(True)
+        cursor = self.textEdit.textCursor() 
+        curEnd = cursor.blockNumber() + 1
 
-        if allText in tables.keys():  
-            self.showQueryResult(allText)
-        else:
-            self.noQuery()                                  # execute message box
+        # start at the beginnign of text edit
+        self.textEdit.moveCursor(QtGui.QTextCursor.Start)
+
+
+        for i in range(0, curEnd):
+            # save line in text edit
+            cursor = self.textEdit.textCursor()
+            cursor.select(QtGui.QTextCursor.LineUnderCursor)     
+            selText = cursor.selectedText().lower()
+
+            if selText is not None:
+                if selText in tables.keys():                       # if text is a key in the dict              
+                    allTextList.append(selText)
+                    self.showQueryResult(selText)
+                else:
+                    self.noQuery()
+
+            # move to next line
+            curPos = cursor.blockNumber() + 1 
+            self.textEdit.moveCursor(QtGui.QTextCursor.Down)
+
+        print(allTextList)
 
     # show query result
     def showQueryResult(self, textIn):
@@ -309,6 +331,7 @@ class Ui_MainWindow(object):
         self.noQueryMsgBox.addButton(QtGui.QMessageBox.Ok)
         self.noQueryMsgBox.show()
 
+
     @pyqtSlot()
     def tableClick(self, row, column):
             print(tables[tables2[row]])
@@ -326,6 +349,7 @@ class Ui_MainWindow(object):
 tables = {}
 tables2 = {}
 textIn = ''
+allTextList = []
 
 def readMetadata():
     metadata = open("metadata.txt", "r")
@@ -356,5 +380,6 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.setWindowTitle('My Database')
     MainWindow.setWindowIcon(QtGui.QIcon('dblogo.png'))
+    MainWindow.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
     MainWindow.show()
     sys.exit(app.exec_())
