@@ -257,15 +257,16 @@ class Ui_MainWindow(object):
         
         selText = cursor.selectedText().lower()            # save content of line under cursor in text edit          
 
-        if lineText in tables.keys():                       # if text is a key in the dict              
+        if selText in tables.keys():                       # if text is a key in the dict              
             self.showQueryResult(selText)
         else:
             self.noQuery()                                  # execute message box
 
         self.textEdit.setFocus(True)                        # focus on text edit
+        print(selText + ': ', tables[selText]) 
 
     # execute all lines in text edit
-    def allExec(self):
+    def allExec(self):       
         # count lines in text edit
         self.textEdit.moveCursor(QtGui.QTextCursor.End)
         self.textEdit.setFocus(True)
@@ -275,7 +276,6 @@ class Ui_MainWindow(object):
         # start at the beginnign of text edit
         self.textEdit.moveCursor(QtGui.QTextCursor.Start)
 
-
         for i in range(0, curEnd):
             # save line in text edit
             cursor = self.textEdit.textCursor()
@@ -284,16 +284,17 @@ class Ui_MainWindow(object):
 
             if selText is not None:
                 if selText in tables.keys():                       # if text is a key in the dict              
-                    allTextList.append(selText)
-                    self.showQueryResult(selText)
+                    allTextList.append(selText)                    # each line goes in a list
+                    self.showQueryResult(selText)                  # and shows query result
+                    print(selText + ': ', tables[selText])  
                 else:
                     self.noQuery()
 
             # move to next line
             curPos = cursor.blockNumber() + 1 
             self.textEdit.moveCursor(QtGui.QTextCursor.Down)
-
-        print(allTextList)
+        
+        allTextList.clear()                                         # clear contents of the selText list
 
     # show query result
     def showQueryResult(self, textIn):
