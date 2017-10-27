@@ -37,6 +37,16 @@ class Ui_MainWindow(object):
         MainWindow.resize(732, 570)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+
+        # labels
+        self.label = QtGui.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(50, 10, 121, 17))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.label_2 = QtGui.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(420, 10, 121, 17))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+
+        # tables table widget
         self.tablesTW = QtGui.QTableWidget(self.centralwidget)
         self.tablesTW.setEnabled(True)
         self.tablesTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
@@ -65,12 +75,10 @@ class Ui_MainWindow(object):
         self.tablesTW.verticalHeader().setVisible(False)
         self.tablesTW.verticalHeader().setSortIndicatorShown(False)
         self.tablesTW.verticalHeader().setStretchLastSection(False)
-        self.label = QtGui.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(50, 10, 121, 17))
-        self.label.setObjectName(_fromUtf8("label"))
 
         self.tablesTW.cellClicked.connect(self.tableClick)
 
+        # column - data type table widget
         self.coldatatypeTW = QtGui.QTableWidget(self.centralwidget)
         self.coldatatypeTW.setEnabled(True)
         self.coldatatypeTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
@@ -86,7 +94,6 @@ class Ui_MainWindow(object):
         self.coldatatypeTW.setObjectName(_fromUtf8("coldatatypeTW"))
         self.coldatatypeTW.setColumnCount(2)
         self.coldatatypeTW.setRowCount(0)
-
         item = QtGui.QTableWidgetItem()
         self.coldatatypeTW.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
@@ -98,11 +105,8 @@ class Ui_MainWindow(object):
         self.coldatatypeTW.verticalHeader().setVisible(False)
         self.coldatatypeTW.verticalHeader().setSortIndicatorShown(False)
         self.coldatatypeTW.verticalHeader().setStretchLastSection(False)
-        # self.coldatatypeTW.setText('hello world!')
-        
-        self.label_2 = QtGui.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(420, 10, 121, 17))
-        self.label_2.setObjectName(_fromUtf8("label_2"))
+
+        # query result table widget
         self.queryResultTW = QtGui.QTableWidget(self.centralwidget)
         self.queryResultTW.setEnabled(True)
         self.queryResultTW.setGeometry(QtCore.QRect(230, 320, 491, 201))
@@ -124,7 +128,7 @@ class Ui_MainWindow(object):
         self.queryResultTW.verticalHeader().setVisible(False)
         self.queryResultTW.verticalHeader().setSortIndicatorShown(False)
         self.queryResultTW.verticalHeader().setStretchLastSection(False)
-        MainWindow.setCentralWidget(self.centralwidget)
+        
 
         # execute one line push button
         self.lineBtn = QtGui.QPushButton(self.centralwidget)
@@ -144,6 +148,7 @@ class Ui_MainWindow(object):
         self.textEdit = QtGui.QTextEdit(self.centralwidget)
         self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        self.textEdit.setFocus(True)
 
         # menubar
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -180,7 +185,9 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuFile.menuAction())
 
         self.populateTables()
+
         self.retranslateUi(MainWindow)
+        MainWindow.setCentralWidget(self.centralwidget)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -259,7 +266,6 @@ class Ui_MainWindow(object):
 
         f.close()
 
-
     def populateTables(self):
         i=0
         # print(tables)
@@ -291,36 +297,96 @@ class Ui_MainWindow(object):
             # item.tableSelect():
             #     print("a table entry was selected")
             #     item.itemClicked.connect(tableSelect)
+    
     @pyqtSlot()
     def addColumnNamesAndDataTypes():
         for column in tables['table']:                        # for each table specified in the metadata
             print(column)
 
-    # button + text editor functions
-    def lineExec(self):                             # execute one line in text edit
-        lineText = self.textEdit.toPlainText()
-        print("line: " + lineText)
-        self.showQueryResult()
-    
-    def allExec(self):                              # execute all in text edit
-        allText = self.textEdit.toPlainText()
-        print("all: " + allText)
-        self.showQueryResult()
+    # execute one line in text edit
+    def lineExec(self):       
+        # text edit cursor
+        cursor = self.textEdit.textCursor()
+        # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
+        cursor.select(QtGui.QTextCursor.LineUnderCursor)
+        
+        selText = cursor.selectedText().lower()            # save content of line under cursor in text edit          
 
-    def showQueryResult(self):
-        rowPosition = self.queryResultTW.rowCount()
-        self.queryResultTW.insertRow(rowPosition)
+        if selText in tables.keys():                       # if text is a key in the dict              
+            self.showQueryResult(selText)
+        else:
+            self.noQuery()                                  # execute message box
 
-        item = QtGui.QTableWidgetItem()
-        self.queryResultTW.setVerticalHeaderItem(rowPosition,item)
+        self.textEdit.setFocus(True)                        # focus on text edit
+        print(selText + ': ', tables[selText]) 
 
-        item = QtGui.QTableWidgetItem()
-        item.setText("Text 1")
-        self.queryResultTW.setItem(rowPosition,0,item)
+    # execute all lines in text edit
+    def allExec(self):       
+        # count lines in text edit
+        self.textEdit.moveCursor(QtGui.QTextCursor.End)
+        self.textEdit.setFocus(True)
+        cursor = self.textEdit.textCursor() 
+        curEnd = cursor.blockNumber() + 1
 
-        # self.queryResultTW.setItem(rowPosition , 0, QtGui.QTableWidgetItem("Text 1"))
-        # self.queryResultTW.setItem(rowPosition , 1, QtGui.QTableWidgetItem("Text 2"))
-        # self.queryResultTW.setItem(rowPosition , 2, QtGui.QTableWidgetItem("Text 3"))
+        # start at the beginnign of text edit
+        self.textEdit.moveCursor(QtGui.QTextCursor.Start)
+
+        for i in range(0, curEnd):
+            # save line in text edit
+            cursor = self.textEdit.textCursor()
+            cursor.select(QtGui.QTextCursor.LineUnderCursor)     
+            selText = cursor.selectedText().lower()
+
+            if selText is not None:
+                if selText in tables.keys():                       # if text is a key in the dict              
+                    allTextList.append(selText)                    # each line goes in a list
+                    self.showQueryResult(selText)                  # and shows query result
+                    print(selText + ': ', tables[selText])  
+                else:
+                    self.noQuery()
+
+            # move to next line
+            curPos = cursor.blockNumber() + 1 
+            self.textEdit.moveCursor(QtGui.QTextCursor.Down)
+        
+        allTextList.clear()                                         # clear contents of the selText list
+
+    # show query result
+    def showQueryResult(self, textIn):
+        self.queryResultTW.clearContents()
+
+        # create table size
+        col = (int(len(tables[textIn])/2))
+        self.queryResultTW.setColumnCount(col)
+
+        colNames = []
+        
+        # fill table widget
+        for n, key in zip(range(0, col*2), tables[textIn]):
+            if n%2 == 0:
+                colNames.append(key)
+        # for m, item in enumerate(tables[textIn]):
+            # newItem = QtGui.QTableWidgetItem(item)
+            # self.queryResultTW.setItem(m, n, newItem)
+
+        # add column names to table
+        self.queryResultTW.setHorizontalHeaderLabels(colNames)
+
+        # adjust size of table according to contents
+        self.queryResultTW.resizeColumnsToContents()
+        self.queryResultTW.resizeRowsToContents()
+
+    # no query prompt method
+    def noQuery(self):
+        self.noQueryMsgBox = QtGui.QMessageBox()
+        self.noQueryMsgBox.setWindowTitle('My Database (Error)')
+        self.noQueryMsgBox.setWindowIcon(QtGui.QIcon('dblogo.png'))
+        self.noQueryMsgBox.setIcon(QtGui.QMessageBox.Warning)
+        self.noQueryMsgBox.setText('Enter a table name. Choose one from the items listed below.')
+        self.noQueryMsgBox.setInformativeText('STUDENT <br> STUDENTHISTORY <br> COURSE <br> COURSEOFFERING <br> STUDCOURSE')
+        self.noQueryMsgBox.addButton(QtGui.QMessageBox.Ok)
+        self.noQueryMsgBox.show()
+
 
     @pyqtSlot()
     def tableClick(self, row, column):
@@ -338,6 +404,8 @@ class Ui_MainWindow(object):
 
 tables = {}
 tables2 = {}
+textIn = ''
+allTextList = []
 
 def readMetadata():
     metadata = open("metadata.txt", "r")
@@ -366,5 +434,8 @@ if __name__ == "__main__":
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    MainWindow.setWindowTitle('My Database')
+    MainWindow.setWindowIcon(QtGui.QIcon('dblogo.png'))
+    MainWindow.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
     MainWindow.show()
     sys.exit(app.exec_())
