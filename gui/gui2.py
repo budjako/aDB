@@ -240,7 +240,7 @@ class Ui_MainWindow(object):
                         else:
                             dataString += "'" + data + "',"
                     dataString = dataString[:-1]                    
-                    insertString2 = "INSERT INTO " + nameOfFile + " VALUES(" + dataString + ");"                      #Without column names
+                    insertString2 = "INSERT INTO '" + nameOfFile + "'' VALUES(" + dataString + ");"                      #Without column names
                     print insertString2
         if f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
@@ -248,10 +248,10 @@ class Ui_MainWindow(object):
             for line in iter(f):
                 if re.match(commentRegex, line) and not multiLineCommentFlag:
                     multiLineCommentFlag = True
-                    print "Start"
+                    # print "Start"
                 elif re.match(commentRegex, line) and multiLineCommentFlag:
                     multiLineCommentFlag = False
-                    print "End"
+                    # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     print line                      #Will then be sent to finished parser
 
