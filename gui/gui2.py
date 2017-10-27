@@ -8,6 +8,8 @@
 # WARNING! All changes made in this file will be lost!
 
 # libraries
+import csv
+import re
 import sys
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import pyqtSlot, QStringList
@@ -206,17 +208,56 @@ class Ui_MainWindow(object):
         print("Edit importDB function")
 
         dlg = QFileDialog()
-        dlg.setFileMode(QFileDialog.AnyFile)
-        dlg.setFilter("Text files (*.txt)")
+        dlg.setFileMode(QFileDialog.AnyFile)        
         filenames = QStringList()
 
         if dlg.exec_():
          filenames = dlg.selectedFiles()
-         f = open(filenames[0], 'r')
+         f = open(filenames[0], 'rU')
             
-         with f:
-            data = f.read()
-            print(data)
+         # with f:
+         #    data = f.read()
+         #    print(data)
+        a =0;
+        nameOfFile = f.name[:-4]
+        tableColumns = []
+        tableStringEx = "("        
+        if f.name[-4:] == ('.csv'):
+            print("pumasok")
+            reader = csv.reader(f)
+            for row in reader:
+                if a == 0:                                          #To get first line
+                    for column in row:
+                        tableColumns.append(column)
+                        tableStringEx = tableStringEx + column + ","
+                    tableStringEx=tableStringEx[:-1] + ")"
+                    a+=1
+                else:
+                    dataString = ""
+                    for data in row:
+                        if data.isdigit() or data == "NULL":
+                            dataString += data + ","
+                        else:
+                            dataString += "'" + data + "',"
+                    dataString = dataString[:-1]                    
+                    insertString2 = "INSERT INTO " + nameOfFile + " VALUES(" + dataString + ");"                      #Without column names
+                    print insertString2
+        if f.name[-4:] == ('.sql'):
+            multiLineCommentFlag = False
+            commentRegex = r'/\*|.*\*/|//'
+            for line in iter(f):
+                if re.match(commentRegex, line) and not multiLineCommentFlag:
+                    multiLineCommentFlag = True
+                    print "Start"
+                elif re.match(commentRegex, line) and multiLineCommentFlag:
+                    multiLineCommentFlag = False
+                    print "End"
+                elif not multiLineCommentFlag and not re.match(commentRegex, line):
+                    print line                      #Will then be sent to finished parser
+
+
+        f.close()
+
 
     def populateTables(self):
         i=0
