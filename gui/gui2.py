@@ -10,6 +10,7 @@
 # libraries
 import csv
 import re
+import os
 import sys
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import pyqtSlot, QStringList
@@ -219,11 +220,11 @@ class Ui_MainWindow(object):
          #    data = f.read()
          #    print(data)
         a =0;
-        nameOfFile = f.name[:-4]
+        nameOfFile = os.path.basename(unicode(f.name[:-4]))
         tableColumns = []
-        tableStringEx = "("        
-        if f.name[-4:] == ('.csv'):
-            print("pumasok")
+        tableStringEx = "(" 
+        print(f.name[:])       
+        if f.name[-4:] == ('.csv'):            
             reader = csv.reader(f)
             for row in reader:
                 if a == 0:                                          #To get first line
@@ -240,7 +241,7 @@ class Ui_MainWindow(object):
                         else:
                             dataString += "'" + data + "',"
                     dataString = dataString[:-1]                    
-                    insertString2 = "INSERT INTO '" + nameOfFile + "'' VALUES(" + dataString + ");"                      #Without column names
+                    insertString2 = "INSERT INTO '" + nameOfFile + "' VALUES(" + dataString + ");"                      #Without column names
                     print insertString2
         if f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
