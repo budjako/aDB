@@ -10,7 +10,8 @@
 # libraries
 import sys
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import pyqtSlot
+from PyQt4.QtCore import pyqtSlot, QStringList
+from PyQt4.QtGui import QFileDialog
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -203,7 +204,19 @@ class Ui_MainWindow(object):
     # import db function (edit this)
     def importDB(self):
         print("Edit importDB function")
-        sys.exit()
+
+        dlg = QFileDialog()
+        dlg.setFileMode(QFileDialog.AnyFile)
+        dlg.setFilter("Text files (*.txt)")
+        filenames = QStringList()
+
+        if dlg.exec_():
+         filenames = dlg.selectedFiles()
+         f = open(filenames[0], 'r')
+            
+         with f:
+            data = f.read()
+            print(data)
 
     def populateTables(self):
         i=0
