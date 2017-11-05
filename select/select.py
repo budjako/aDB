@@ -13,10 +13,16 @@ import selectlex
 # import selectinterp
 
 
-tables = {}
+
+
+tables = {'student': ['StudNo','StudentName','Birthday','Degree','Major','UnitsEarned'],
+          'studenthistory' : ['StudNo','Description','Action','DateFiled','DateResolved'],
+          'course': ['CNo','CTitle','CDesc','NoOfUnits','HasLab','SemOffered'],
+          'courseoffering': ['Semester','AcadYear','CNo','Section','Time','MaxStud'],
+          'studcourse': ['StudNo','CNo','Semester','AcadYear']
+         }
 cols = ''
 tabs = ''
-
 metadata = open("metadata.txt", "r")
 
 for line in metadata:
@@ -122,6 +128,11 @@ operation = None
 columns = []
 table_selected = None
 withcondition = False
+value_list = None
+assignment_list = None
+value_list_bool = False
+column_name_bool = False
+
 condition = []  # format: lhs comparison_operator rhs
 
 def p_statement(p):
@@ -139,6 +150,29 @@ def p_insert_statement(p):
     for i in p:
         if(i is not None):
             p[0] = p[0] + " " + i
+
+    global operation
+    global table_selected
+    global value_list
+    global assignment_list
+    global value_list_bool
+    global column_name_bool
+    
+    operation = p[1]
+
+    table_selected = p[3]
+
+
+    if value_list_bool:
+        if column_name_bool:
+            value_list = p[9]
+        else:
+            value_list = p[6]
+        #print("Value list: " + value_list)
+    else:
+        assignment_list = p[5]
+        #print("Assignment list: " + assignment_list)
+
 
 def p_select_statement(p):
     '''select_statement : SELECT columns FROM TABLE_NAME SEMICOLON
@@ -160,8 +194,19 @@ def p_select_statement(p):
             p[0] = p[0] + " " + i
 
     operation = p[1]
-    columns = p[2]
+    columns = p[2].split(',')
+
     table_selected = p[4]
+    if table_selected in tables.keys():
+        print("Valid table name")
+    else:
+        print("Invalid table name")
+
+    for x1 in columns:
+        if x1 in tables[table_selected]:
+            print("Column " + x1 + " is in " + table_selected)
+        else:
+            print("Column " + x1 + " is not in " + table_selected)
 
     if(len(p) == 6):
         withcondition = False
@@ -189,6 +234,11 @@ def p_delete_statement(p):
 
     operation = p[1]
     table_selected = p[3]
+
+    if table_selected in tables.keys():
+        print("Valid table name")
+    else:
+        print("Invalid table name")
 
     if(len(p) == 5):
         withcondition = False
@@ -226,6 +276,8 @@ def p_column_name(p):
         p[0] = p[1]
     else:
         p[0] = p[1] + " " + p[2] + " " + p[3]
+    global column_name_bool
+    column_name_bool = True
 
 def p_assignment_list(p):
     '''assignment_list : COLUMN_NAME EQUAL literals
@@ -235,6 +287,8 @@ def p_assignment_list(p):
     for i in p:
         if(i is not None):
             p[0] = p[0] + " " + i
+    global value_list_bool
+    value_list_bool = False
 
 def p_value_list(p):
     '''value_list : literals
@@ -244,6 +298,8 @@ def p_value_list(p):
     for i in p:
         if(i is not None):
             p[0] = p[0] + " " + i
+    global value_list_bool
+    value_list_bool = True
 
 def p_literals(p):
     '''literals : STRING_LIT
@@ -436,10 +492,32 @@ while 1:
 
 
     print("Operation: ", operation)
-    print("Columns: ")
-    for i in columns:
-        if(i is not None):
-            print(i)
-    print("table_selected: ", table_selected)
-    print("withcondition: ", withcondition)
-    print("condition: ", condition)
+    if operation == 'select':
+        print("Columns: ")
+        for i in columns:
+            if(i is not None):
+                print(i)
+        print("table_selected: ", table_selected)
+        print("withcondition: ", withcondition)
+        print("condition: ", condition)
+    elif operation == 'insert':
+        print("table_selected:", table_selected)
+        if value_list_bool:
+            print("Value list: " + value_list)
+        else:
+            print("Assignment list: " + assignment_list)
+    elif operation == 'delete':
+        print("table_selected:", table_selected)
+        if withcondition:
+            print("Condition: ", condition)
+        else:
+            print("Condition: No Condition")
+
+
+    operation = ''
+    columns = ''
+    table_selected = '';
+    withcondition = '';
+    condition = '';
+    value_list = '';
+    assignment_list = '';
