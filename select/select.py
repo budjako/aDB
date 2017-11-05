@@ -285,21 +285,56 @@ def p_num_cond(p):
             | num_exp IS NULL'''
 
     p[0] = ""
-    for i in p:
-        if(i is not None):
-            p[0] = p[0] + " " + str(i)
-    # if len(i) == 4:
-    #     lhs = p[1]
-    #     rhs = p[3]
-    #     comp_op = p[2]
-    # elif len(i) == 5:
-    #     lhs = p[1]
-    #     rhs = p[4]
-    #     comp_op = p[2] + " " + p[3]
-    # else:
-    #     lhs = p[3]
-    #     rhs = p[5]
-    #     comp_op = p[1]
+    #print(p[2] + 'dapatgt')
+    if(p[2] == '<=>'):
+        if((p[1] == 'null' and p[3] != 'null') or (p[1] != 'null' and p[3] == 'null')):
+            print('<=> no entry')
+            p[0] = 'False'
+        elif(p[1] == 'null' and p[3] == 'null'):
+            p[0] = 'True'
+        elif((type(p[1]) == int or type(p[1]) == float) and (type(p[3]) == int or type(p[3]) == float)):
+            if(p[1] == p[3]):
+                p[0] = 'True'
+            else:
+                p[0] = 'False'
+        else:
+            print('<=> no entry')
+            p[0] = p[1];
+    elif((type(p[1]) == int or type(p[1]) == float) and (type(p[3]) == int or type(p[3]) == float) ):
+        if(p[2] == '>'):
+            if(p[1] > p[3]):
+                p[0] = 'True'
+            else:
+                p[0] = 'False'
+        elif(p[2] == '>='):
+            if(p[1] >= p[3]):
+                p[0] = 'True'
+            else:
+                p[0] = 'False'
+        elif(p[2] == '<'):
+            if(p[1] < p[3]):
+                p[0] = 'True'
+            else:
+                p[0] = 'False'
+        elif(p[2] == '<='):
+            if(p[1] <= p[3]):
+                p[0] = 'True'
+            else:
+                p[0] = 'False'
+        elif(p[2] == '='):
+            if(p[1] == p[3]):
+                p[0] = 'True'
+            else:
+                p[0] = 'False'
+        elif(p[2] == '<>'):
+            if(p[1] != p[3]):
+                p[0] = 'True'
+            else:
+                p[0] = 'False'
+    else:
+        for i in p:
+            if(i is not None):
+                p[0] = p[0] + " " + str(i)
 
 def p_num_exp(p):
     '''num_exp : num_exp ADD num_factor
@@ -369,6 +404,7 @@ def p_comparison_op(p):
             | EQUAL
             | EQUAL_NULL'''
     p[0] = p[1]
+
 
 def p_empty(p):
     'empty : '
