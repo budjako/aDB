@@ -13,8 +13,8 @@ import re
 import os
 import sys
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import pyqtSlot, QStringList
-from PyQt4.QtGui import QFileDialog
+from PyQt4.QtCore import pyqtSlot
+# from PyQt4.QtGui import QFileDialog
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -215,9 +215,9 @@ class Ui_MainWindow(object):
     def importDB(self):
         print("Edit importDB function")
 
-        dlg = QFileDialog()
+        dlg = QtGui.QFileDialog()
         dlg.setFileMode(QFileDialog.AnyFile)        
-        filenames = QStringList()
+        filenames = QtCore.QStringList()
 
         if dlg.exec_():
          filenames = dlg.selectedFiles()
@@ -249,7 +249,7 @@ class Ui_MainWindow(object):
                             dataString += "'" + data + "',"
                     dataString = dataString[:-1]                    
                     insertString2 = "INSERT INTO '" + nameOfFile + "' VALUES(" + dataString + ");"                      #Without column names
-                    print insertString2
+                    print(insertString2)
         if f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
             commentRegex = r'/\*|.*\*/|//'
@@ -261,7 +261,7 @@ class Ui_MainWindow(object):
                     multiLineCommentFlag = False
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
-                    print line                      #Will then be sent to finished parser
+                    print(line)                      #Will then be sent to finished parser
 
 
         f.close()
