@@ -14,7 +14,7 @@ import os
 import sys
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtCore import pyqtSlot
-# from PyQt4.QtGui import QFileDialog
+from PyQt4.QtGui import QFileDialog
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
 
         dlg = QtGui.QFileDialog()
         dlg.setFileMode(QFileDialog.AnyFile)        
-        filenames = QtCore.QStringList()
+        filenames = list()
 
         if dlg.exec_():
          filenames = dlg.selectedFiles()
@@ -226,8 +226,8 @@ class Ui_MainWindow(object):
          # with f:
          #    data = f.read()
          #    print(data)
-        a =0;
-        nameOfFile = os.path.basename(unicode(f.name[:-4]))
+        a =0
+        nameOfFile = os.path.basename(f.name[:-4])
         tableColumns = []
         tableStringEx = "(" 
         print(f.name[:])       
