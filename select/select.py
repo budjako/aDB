@@ -44,7 +44,7 @@ literal_token = ('INT_LIT', 'DOUBLE_LIT', 'STRING_LIT')
 arithmetic_op_token = ('ADD', 'SUBTRACT', 'DIVIDE', 'DIVIDE_INT', 'MODULO')
 comparison_op_token = ('EQUAL', 'EQUAL_NULL', 'GT', 'GE', 'LT', 'LE', 'NE', 'NOT')
 tokens = insert_keywords + delete_select_keywords + literal_token + arithmetic_op_token + comparison_op_token + (
-    'COLUMN_NAME', 'TABLE_NAME', 'FILTER_ROWS', 'ASTERISK',
+    'COLUMN_NAME', 'TABLE_NAME', 'ASTERISK', # 'FILTER_ROWS',
     'COMMA', 'SEMICOLON', 'OPENPAR', 'CLOSEPAR', 'FROM', 'WHERE',
     'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
 )
@@ -64,7 +64,7 @@ t_INTO = r'into'
 t_VALUES = r'values'
 t_SET = r'set'
 t_LIKE = r'like'
-t_FILTER_ROWS = r'(all|distinct|distinctrow)'
+# t_FILTER_ROWS = r'(all|distinct|distinctrow)'
 t_STRING_LIT = r'\'[^\']*\''
 t_ASTERISK = r'\*'
 t_COMMA = r','
@@ -117,7 +117,12 @@ precedence = (
     ('left', 'ADD', 'SUBTRACT'),
     ('left', 'ASTERISK', 'DIVIDE', 'DIVIDE_INT')
 )
-command = {}
+
+operation = None
+columns = []
+table_selected = None
+withcondition = False
+condition = []  # format: lhs comparison_operator rhs
 
 def p_statement(p):
     '''statement : insert_statement
@@ -128,36 +133,70 @@ def p_insert_statement(p):
     '''insert_statement : INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
             | INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
             | INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON'''
-    print("Insert statement")
+    # print("Insert statement")
 
     p[0] = ""
     for i in p:
         if(i is not None):
             p[0] = p[0] + " " + i
-    print(p[0])
 
 def p_select_statement(p):
-    '''select_statement : SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
-            | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
-    print("Select statement")
+    '''select_statement : SELECT columns FROM TABLE_NAME SEMICOLON
+            | SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON'''
+            # SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
+            #         | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
+    # print("Select statement")
+
+    global operation
+    global columns
+    global table_selected
+    global withcondition
+    global condition
+
     p[0] = ""
     for i in p:
-        print(i)
+        # print (i)
         if(i is not None):
             p[0] = p[0] + " " + i
-    print(p[0])
 
+    operation = p[1]
+    columns = p[2]
+    table_selected = p[4]
+
+    if(len(p) == 6):
+        withcondition = False
+        condition = []
+
+    elif(len(p) == 8):
+        withcondition = True
+        condition = p[6]
 
 def p_delete_statement(p):
     '''delete_statement : DELETE FROM TABLE_NAME SEMICOLON
             | DELETE FROM TABLE_NAME WHERE condition SEMICOLON'''
-    print("Delete statement")
+    # print("Delete statement")
+
+    global operation
+    global columns
+    global table_selected
+    global withcondition
+    global condition
 
     p[0] = ""
     for i in p:
         if(i is not None):
             p[0] = p[0] + " " + i
-    print(p[0])
+
+    operation = p[1]
+    table_selected = p[3]
+
+    if(len(p) == 5):
+        withcondition = False
+        condition = []
+
+    elif(len(p) == 7):
+        withcondition = True
+        condition = p[5]
 
 def p_into_kw(p):
     '''into_kw : INTO
@@ -167,13 +206,13 @@ def p_into_kw(p):
     else:
         p[0] = ""
 
-def p_filter_rows_op(p):
-    '''filter_rows_op : FILTER_ROWS
-            | empty'''
-    if(len(p) == 2):
-        p[0] = p[1]
-    else:
-        p[0] = ""
+# def p_filter_rows_op(p):
+#     '''filter_rows_op : FILTER_ROWS
+#             | empty'''
+#     if(len(p) == 2):
+#         p[0] = p[1]
+#     else:
+#         p[0] = ""
 
 def p_columns(p):
     '''columns : ASTERISK
@@ -249,6 +288,18 @@ def p_num_cond(p):
     for i in p:
         if(i is not None):
             p[0] = p[0] + " " + str(i)
+    # if len(i) == 4:
+    #     lhs = p[1]
+    #     rhs = p[3]
+    #     comp_op = p[2]
+    # elif len(i) == 5:
+    #     lhs = p[1]
+    #     rhs = p[4]
+    #     comp_op = p[2] + " " + p[3]
+    # else:
+    #     lhs = p[3]
+    #     rhs = p[5]
+    #     comp_op = p[1]
 
 def p_num_exp(p):
     '''num_exp : num_exp ADD num_factor
@@ -338,11 +389,21 @@ while 1:
         s = raw_input('mysql > ')
         s = s.lower()
         lex.input(s)
-        for tok in iter(lex.token, None):
-            print(tok)
-            print(repr(tok.type), repr(tok.value))
+        # for tok in iter(lex.token, None):
+            # print(to)
+            # print(repr(tok.type), repr(tok.value))
     except EOFError:
         break
     if not s:
         continue
     yacc.parse(s)
+
+
+    print("Operation: ", operation)
+    print("Columns: ")
+    for i in columns:
+        if(i is not None):
+            print(i)
+    print("table_selected: ", table_selected)
+    print("withcondition: ", withcondition)
+    print("condition: ", condition)
