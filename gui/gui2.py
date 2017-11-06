@@ -222,12 +222,12 @@ class Ui_MainWindow(object):
         if dlg.exec_():
          filenames = dlg.selectedFiles()
          f = open(filenames[0], 'rU')
-            
          # with f:
          #    data = f.read()
          #    print(data)
         a =0
         nameOfFile = os.path.basename(f.name[:-4])
+        append = open(nameOfFile + ".dat", 'a')
         tableColumns = []
         tableStringEx = "(" 
         print(f.name[:])       
@@ -250,6 +250,7 @@ class Ui_MainWindow(object):
                     dataString = dataString[:-1]                    
                     insertString2 = "INSERT INTO '" + nameOfFile + "' VALUES(" + dataString + ");"                      #Without column names
                     print(insertString2)
+                    append.write(dataString+";\n")
         if f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
             commentRegex = r'/\*|.*\*/|//'
@@ -261,10 +262,18 @@ class Ui_MainWindow(object):
                     multiLineCommentFlag = False
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
-                    print(line)                      #Will then be sent to finished parser
+                    # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
+                    # print(tables[nameOfFile])
+                    if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
+                        append.write(line[line.find("VALUES (")+6:line.find(");")+2])
+                    else:
+                        print("with column names")
+
+
 
 
         f.close()
+        append.close()
 
     def populateTables(self):
         i=0

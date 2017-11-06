@@ -4,7 +4,7 @@ LIMIT 0, 1000
 
 -- Date: 2017-10-01 19:41
 */
-INSERT INTO `crops` (`id`,`name`,`crop_type`,`cycle_min`,`cycle_max`,`created_at`,`updated_at`,`deleted_at`) VALUES (1,'Incidunt sequi iusto inventore aut et nostrum.',1,1,3,'2017-08-03 13:47:13','2017-08-03 13:47:13',NULL);
+INSERT INTO `crops` ('id',`name`,`crop_type`,`cycle_min`,`cycle_max`,`created_at`,`updated_at`,`deleted_at`) VALUES (1,'Incidunt sequi iusto inventore aut et nostrum.',1,1,3,'2017-08-03 13:47:13','2017-08-03 13:47:13',NULL);
 INSERT INTO `crops` (`id`,`name`,`crop_type`,`cycle_min`,`cycle_max`,`created_at`,`updated_at`,`deleted_at`) VALUES (2,'Impedit quaerat facere velit.',2,2,5,'2017-08-03 13:47:13','2017-08-03 13:47:13',NULL);
 INSERT INTO `crops` (`id`,`name`,`crop_type`,`cycle_min`,`cycle_max`,`created_at`,`updated_at`,`deleted_at`) VALUES (3,'Omnis porro corporis explicabo quibusdam excepturi.',2,2,5,'2017-08-03 13:47:13','2017-08-03 13:47:13',NULL);
 INSERT INTO `crops` (`id`,`name`,`crop_type`,`cycle_min`,`cycle_max`,`created_at`,`updated_at`,`deleted_at`) VALUES (4,'Dolore amet inventore ipsam.',2,2,3,'2017-08-03 13:47:13','2017-08-03 13:47:13',NULL);
