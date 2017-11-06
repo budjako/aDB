@@ -91,3 +91,69 @@ for i in btree.keys():
     print(row)
     tabledata.write(row)
     tabledata.write("\n")
+
+
+operation = "insert"
+table_selected = "student"
+value_list = "'2011-12314','Gerald Emalada','1995-06-10','BSCS','null','18'"
+val_ins = '';
+col_name = ' studno , studentname , birthday , degree , major , unitsearned ';
+value_list_bool = False;
+column_name_bool = False;
+assignment_list = " 'studno' = '2012-29339' , 'studentname' = 'Gerald Emalada' , 'birthday' = '1995-06-10' , 'degree' = 'bscs' , 'major' = 'null' , 'unitsearned' = '18' ";
+
+if operation == 'insert':
+    if table_selected == 'student':
+        if value_list_bool and not column_name_bool: #first case input
+            value_list = value_list.split(',')
+            for i in range(0, len(value_list)):
+                value_list[i] = value_list[i].rstrip('\'')
+                value_list[i] = value_list[i].lstrip('\'')
+            if value_list[0] not in btree:
+                btree.update({value_list[0]: {cols[1]: value_list[1], cols[2]: value_list[2], cols[3]: value_list[3], cols[4]: value_list[4], cols[5]: value_list[5]}})
+                print(value_list)
+            else:
+                print("Already in BTree")
+
+        elif value_list_bool and column_name_bool: #second case input
+            col_name = col_name.replace(" ", "")
+            value_list = value_list.split(',')
+            for i in range(0, len(value_list)):
+                value_list[i] = value_list[i].rstrip('\'')
+                value_list[i] = value_list[i].lstrip('\'')
+            col_name = col_name.split(',')
+            key_index = col_name.index("studno")
+            key_col_name = col_name.pop(key_index)
+            key_value_list = value_list.pop(key_index)
+            dict_cols_vals = dict(zip(col_name,value_list))
+
+            if key_value_list not in btree:
+                btree.update({key_value_list: dict_cols_vals})
+            else:
+                print("Already in BTree")
+
+        elif not value_list_bool and not column_name_bool: #third case input
+            assignment_list = assignment_list.split(',')
+            insert_list = []
+            col_name = []
+            value_list = []
+
+            for i in range(0,len(assignment_list)):
+                split_list = assignment_list[i].split("=")
+                col_ext = split_list[0][2:-2]
+                val_ext = split_list[1][2:-2]
+                col_name.append(col_ext)
+                value_list.append(val_ext)
+
+            key_index = col_name.index("studno")
+            key_col_name = col_name.pop(key_index)
+            key_value_list = value_list.pop(key_index)
+            dict_cols_vals = dict(zip(col_name,value_list))
+
+            if key_value_list not in btree:
+                btree.update({key_value_list: dict_cols_vals})
+            else:
+                print("Already in BTree")
+
+print(list(btree))
+print(btree["2012-29339"])
