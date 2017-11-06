@@ -1,6 +1,5 @@
-STUDENT StudNo StudentName Birthday Degree Major UnitsEarned
-STUDENTHISTORY StudNo Description Action DateFiled DateResolved
-COURSE CNo CTitle CDesc NoOfUnits HasLab SemOffered
-COURSEOFFERING Semester AcadYear CNo Section Time MaxStud
-STUDCOURSE StudNo Cno Semester AcadYear
-haha
+STUDENT StudNo varchar StudentName varchar Birthday date Degree varchar Major varchar UnitsEarned integer
+STUDENTHISTORY StudNo varhcar Description varchar Action varchar DateFiled date DateResolved date
+COURSE CNo varchar CTitle varchar CDesc varchar NoOfUnits integer HasLab integer SemOffered varchar
+COURSEOFFERING Semester varchar AcadYear date CNo varchar Section varchar Time date MaxStud integer
+STUDCOURSE StudNo varchar Cno varchar Semester varchar AcadYear date
