@@ -17,6 +17,7 @@ value_list = None
 assignment_list = None
 value_list_bool = False
 column_name_bool = False
+col_name = None
 
 condition = []  # format: lhs comparison_operator rhs
 
@@ -42,6 +43,7 @@ def p_insert_statement(p):
     global assignment_list
     global value_list_bool
     global column_name_bool
+    global col_name
 
     operation = p[1]
 
@@ -51,6 +53,7 @@ def p_insert_statement(p):
     if value_list_bool:
         if column_name_bool:
             value_list = p[9]
+            col_name = p[5]
         else:
             value_list = p[6]
         #print("Value list: " + value_list)
