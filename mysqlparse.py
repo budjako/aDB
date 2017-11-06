@@ -1,124 +1,9 @@
-import sys
-import re
-import time
-
-sys.path.insert(0, "..")
-
-if sys.version_info[0] >= 3:
-    raw_input = input
-
 from ply import *
-import selectlex
-# import selectparse
-# import selectinterp
+import mysqllex
 
+tables = mysqllex.tables
+tokens = mysqllex.tokens
 
-
-
-tables = {'student': ['StudNo','StudentName','Birthday','Degree','Major','UnitsEarned'],
-          'studenthistory' : ['StudNo','Description','Action','DateFiled','DateResolved'],
-          'course': ['CNo','CTitle','CDesc','NoOfUnits','HasLab','SemOffered'],
-          'courseoffering': ['Semester','AcadYear','CNo','Section','Time','MaxStud'],
-          'studcourse': ['StudNo','CNo','Semester','AcadYear']
-         }
-cols = ''
-tabs = ''
-metadata = open("metadata.txt", "r")
-
-for line in metadata:
-    nonewline = line.rstrip('\n')
-    # print(nonewline);
-    tokens = nonewline.split(" ")
-    tokens.reverse()
-    tablename = str.lower(tokens.pop())
-    tokens.reverse()
-    for i in range(0,len(tokens)):
-        tokens[i] = str.lower(tokens[i])
-    tables[tablename] = tokens
-
-    if(tabs==''): tabs = tablename
-    else: tabs = tabs + "|" + tablename
-    # if(cols == None): cols = tablename
-    for i in range(0, len(tokens)):
-        if cols=='': cols = tokens[i]
-        else: cols = cols + "|" + tokens[i]
-# print(tables)
-
-insert_keywords = ('INSERT', 'INTO', 'VALUES', 'SET')
-delete_select_keywords = ('SELECT', 'DELETE')
-literal_token = ('INT_LIT', 'DOUBLE_LIT', 'STRING_LIT')
-arithmetic_op_token = ('ADD', 'SUBTRACT', 'DIVIDE', 'DIVIDE_INT', 'MODULO')
-comparison_op_token = ('EQUAL', 'EQUAL_NULL', 'GT', 'GE', 'LT', 'LE', 'NE', 'NOT')
-tokens = insert_keywords + delete_select_keywords + literal_token + arithmetic_op_token + comparison_op_token + (
-    'COLUMN_NAME', 'TABLE_NAME', 'ASTERISK', # 'FILTER_ROWS',
-    'COMMA', 'SEMICOLON', 'OPENPAR', 'CLOSEPAR', 'FROM', 'WHERE',
-    'LIKE', 'STRCMP', 'IS', 'NULL', 'BETWEEN', 'AND'
-)
-
-t_COLUMN_NAME = r''+cols
-t_TABLE_NAME = r''+tabs
-# print(t_COLUMN_NAME)
-# print(t_TABLE_NAME)
-
-# Tokens
-t_INSERT = r'insert'
-t_SELECT = r'select'
-t_DELETE = r'delete'
-t_FROM = r'from'
-t_WHERE = r'where'
-t_INTO = r'into'
-t_VALUES = r'values'
-t_SET = r'set'
-t_LIKE = r'like'
-# t_FILTER_ROWS = r'(all|distinct|distinctrow)'
-t_STRING_LIT = r'\'[^\']*\''
-t_ASTERISK = r'\*'
-t_COMMA = r','
-t_SEMICOLON = r';'
-
-t_ADD = r'\+'
-t_SUBTRACT = r'-'
-t_DIVIDE = r'/'
-t_DIVIDE_INT = r'div'
-t_MODULO = r'(mod | \%)'
-t_EQUAL = r'='
-
-t_NOT = r'(!|not)'
-t_OPENPAR = r'\('
-t_CLOSEPAR = r'\)'
-t_GT = r'>'
-t_GE = r'>='
-t_LT = r'<'
-t_LE = r'<='
-t_NE = r'<>'
-t_EQUAL_NULL = r'<=>'
-
-t_STRCMP = r'strcmp'
-t_IS = r'is'
-t_NULL = r'null'
-
-
-def t_DOUBLE_LIT(t):
-    r'\-?\d+\.\d+'
-    t.value = float(t.value)
-    return t
-
-def t_INT_LIT(t):
-    r'\-?\d+'
-    t.value = int(t.value)
-    return t
-
-def t_NEWLINE(t):
-    r'\n+'
-    t.lexer.lineno += t.value.count("\n")
-
-def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
-    t.lexer.skip(1)
-
-t_ignore = " \t"
-
-lexer = lex.lex()   # lexer
 precedence = (
     ('left', 'ADD', 'SUBTRACT'),
     ('left', 'ASTERISK', 'DIVIDE', 'DIVIDE_INT')
@@ -157,7 +42,7 @@ def p_insert_statement(p):
     global assignment_list
     global value_list_bool
     global column_name_bool
-    
+
     operation = p[1]
 
     table_selected = p[3]
@@ -474,50 +359,11 @@ def p_error(p):
         print("Syntax error at EOF")
 
 import ply.yacc as yacc
-yacc.yacc() # parser
+mysqlparser = yacc.yacc() # parser
 
-while 1:
-    try:
-        s = raw_input('mysql > ')
-        s = s.lower()
-        lex.input(s)
-        # for tok in iter(lex.token, None):
-            # print(to)
-            # print(repr(tok.type), repr(tok.value))
-    except EOFError:
-        break
-    if not s:
-        continue
-    yacc.parse(s)
-
-
-    print("Operation: ", operation)
-    if operation == 'select':
-        print("Columns: ")
-        for i in columns:
-            if(i is not None):
-                print(i)
-        print("table_selected: ", table_selected)
-        print("withcondition: ", withcondition)
-        print("condition: ", condition)
-    elif operation == 'insert':
-        print("table_selected:", table_selected)
-        if value_list_bool:
-            print("Value list: " + value_list)
-        else:
-            print("Assignment list: " + assignment_list)
-    elif operation == 'delete':
-        print("table_selected:", table_selected)
-        if withcondition:
-            print("Condition: ", condition)
-        else:
-            print("Condition: No Condition")
-
-
-    operation = ''
-    columns = ''
-    table_selected = '';
-    withcondition = '';
-    condition = '';
-    value_list = '';
-    assignment_list = '';
+def parse(data, debug=0):
+    mysqlparser.error = 0
+    p = mysqlparser.parse(data, debug = debug)
+    if(mysqlparser.error):
+        return None
+    return p
