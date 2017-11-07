@@ -15,9 +15,11 @@ for line in metadata:
     rows = []
     for i in range(0,len(tokens),2):
         # print(i)
+        tokens[i] = str.lower(tokens[i])
         rows.append(str.lower(tokens[i]))
         # print(rows)
     tables[tablename] = rows
+
 
     if(tabs==''): tabs = tablename
     else: tabs = tabs + "|" + tablename
