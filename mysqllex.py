@@ -12,14 +12,17 @@ for line in metadata:
     tokens.reverse()
     tablename = str.lower(tokens.pop())
     tokens.reverse()
-    for i in range(0,len(tokens)):
-        tokens[i] = str.lower(tokens[i])
-    tables[tablename] = tokens
+    rows = []
+    for i in range(0,len(tokens),2):
+        # print(i)
+        rows.append(str.lower(tokens[i]))
+        # print(rows)
+    tables[tablename] = rows
 
     if(tabs==''): tabs = tablename
     else: tabs = tabs + "|" + tablename
     # if(cols == None): cols = tablename
-    for i in range(0, len(tokens)):
+    for i in range(0, len(tokens),2):
         if cols=='': cols = tokens[i]
         else: cols = cols + "|" + tokens[i]
 print(tables)
