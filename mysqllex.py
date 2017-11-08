@@ -27,8 +27,8 @@ for line in metadata:
         else: cols = cols + "|" + tokens[i]
 
 
-print("tables")
-print(tables)
+# print("tables")
+# print(tables)
 
 insert_keywords = ('INSERT', 'INTO', 'VALUES', 'SET')
 delete_select_keywords = ('SELECT', 'DELETE')
