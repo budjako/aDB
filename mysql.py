@@ -25,7 +25,7 @@ if sys.version_info[0] >= 3:
 
 import mysqllex
 import mysqlparse
-
+import btrees
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -398,6 +398,7 @@ class Ui_MainWindow(object):
             self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[keys[row]][columns[i]]))         # datatype
 
 
+trees = []
 tables = {}
 keys = []
 textIn = ''
@@ -405,6 +406,11 @@ textIn = ''
 if __name__ == "__main__":
     tables = mysqllex.tables
     keys = list(tables.keys())
+
+
+    for i in range(0, len(keys)):
+        trees[i] = btrees.TableBTree(keys[i], tables)
+
 
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
