@@ -12,17 +12,23 @@ for line in metadata:
     tokens.reverse()
     tablename = str.lower(tokens.pop())
     tokens.reverse()
-    for i in range(0,len(tokens)):
+    datatype = {}
+    for i in range(0,len(tokens),2):
         tokens[i] = str.lower(tokens[i])
-    tables[tablename] = tokens
+        datatype[tokens[i]] = tokens[i+1]
+
+    tables[tablename] = datatype
 
     if(tabs==''): tabs = tablename
     else: tabs = tabs + "|" + tablename
     # if(cols == None): cols = tablename
-    for i in range(0, len(tokens)):
+    for i in range(0, len(tokens),2):
         if cols=='': cols = tokens[i]
         else: cols = cols + "|" + tokens[i]
-print(tables)
+
+
+# print("tables")
+# print(tables)
 
 insert_keywords = ('INSERT', 'INTO', 'VALUES', 'SET')
 delete_select_keywords = ('SELECT', 'DELETE')
