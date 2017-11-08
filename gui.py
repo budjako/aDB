@@ -309,14 +309,13 @@ class Ui_MainWindow(object):
         cursor.select(QtGui.QTextCursor.LineUnderCursor)
 
         selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
+        print("selText")
+        print(selText)
 
-        if selText in tables.keys():                       # if text is a key in the dict
-            self.showQueryResult(selText)
-        else:
-            self.noQuery()                                  # execute message box
+        selText = selText.lower()
+        prog = mysqlparse.parse(selText)
+        print(prog)
 
-        self.textEdit.setFocus(True)                        # focus on text edit
-        print(selText + ': ', tables[selText])
 
     # execute all lines in text edit
     def allExec(self):
@@ -325,6 +324,8 @@ class Ui_MainWindow(object):
         self.textEdit.setFocus(True)
         cursor = self.textEdit.textCursor()
         curEnd = cursor.blockNumber() + 1
+
+        print(curEnd)
 
         # start at the beginnign of text edit
         self.textEdit.moveCursor(QtGui.QTextCursor.Start)
@@ -335,19 +336,18 @@ class Ui_MainWindow(object):
             cursor.select(QtGui.QTextCursor.LineUnderCursor)
             selText = cursor.selectedText().lower()
 
-            if selText is not None:
-                if selText in tables.keys():                       # if text is a key in the dict
-                    allTextList.append(selText)                    # each line goes in a list
-                    self.showQueryResult(selText)                  # and shows query result
-                    print(selText + ': ', tables[selText])
-                else:
-                    self.noQuery()
+            selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
+            print("selText")
+            print(selText)
+
+            selText = selText.lower()
+            prog = mysqlparse.parse(selText)
+            print(prog)
 
             # move to next line
             curPos = cursor.blockNumber() + 1
             self.textEdit.moveCursor(QtGui.QTextCursor.Down)
 
-        allTextList.clear()                                         # clear contents of the selText list
 
     # show query result
     def showQueryResult(self, textIn):
@@ -388,17 +388,11 @@ class Ui_MainWindow(object):
 
     @pyqtSlot()
     def tableClick(self, row, column):
-        print(row)
-        print(column)
         self.coldatatypeTW.clearContents()
         self.coldatatypeTW.setRowCount(len(tables[keys[row]]))
-        print("set row count")
-        print(len(tables[keys[row]]))
 
         columns = list(tables[keys[row]].keys())
-        # columns = sorted(columns)
-        print("columns")
-        print(columns)
+
         for i in range(0, len(columns)):                                                  # insert rows in the table
             self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(columns[i]))           # column
             self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[keys[row]][columns[i]]))         # datatype
@@ -407,7 +401,6 @@ class Ui_MainWindow(object):
 tables = {}
 keys = []
 textIn = ''
-allTextList = []
 
 if __name__ == "__main__":
     tables = mysqllex.tables
@@ -421,20 +414,4 @@ if __name__ == "__main__":
     MainWindow.setWindowIcon(QtGui.QIcon('dblogo.png'))
     MainWindow.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
     MainWindow.show()
-
-
-    while 1:
-        try:
-            s = raw_input('mysql > ')
-            s = s.lower()
-        except EOFError:
-            raise SystemExit
-        if not s:
-            continue
-        prog = mysqlparse.parse(s)
-        if not prog:
-            continue
-
-        print(prog)
-
     sys.exit(app.exec_())
