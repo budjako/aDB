@@ -398,7 +398,7 @@ class Ui_MainWindow(object):
             self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[keys[row]][columns[i]]))         # datatype
 
 
-trees = []
+trees = {}
 tables = {}
 keys = []
 textIn = ''
@@ -409,7 +409,7 @@ if __name__ == "__main__":
 
 
     for i in range(0, len(keys)):
-        trees[i] = btrees.TableBTree(keys[i], tables)
+        trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
 
 
     app = QtGui.QApplication(sys.argv)

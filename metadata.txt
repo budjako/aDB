@@ -1,4 +1,4 @@
-STUDENTHISTORY StudNo varhcar Description varchar Action varchar DateFiled date DateResolved date
+STUDENTHISTORY StudNo varchar Description varchar Action varchar DateFiled date DateResolved date
 STUDENT StudNo varchar StudentName varchar Birthday date Degree varchar Major varchar UnitsEarned integer
 STUDCOURSE StudNo varchar Cno varchar Semester varchar AcadYear date
 COURSEOFFERING Semester varchar AcadYear date CNo varchar Section varchar Time date MaxStud integer
