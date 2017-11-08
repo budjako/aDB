@@ -157,3 +157,17 @@ if operation == 'insert':
 
 print(list(btree))
 print(btree["2012-29339"])
+
+select = '*'
+
+for j, k in zip(btree.keys(), btree.values()):
+    if select == '*':
+        print(j + " ", end="")
+        print(k['studentname'] + " ", end="")
+        print(k['birthday'] + " ", end="")
+        print(k['degree'] + " ", end="")
+        print(k['major'] + " ", end="")
+        print(k['unitsearned'] + " ", end="")
+        print("")
+    else:
+        print(k[select])
