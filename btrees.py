@@ -75,7 +75,12 @@ class TableBTree:
     def printData(self):
         for i in self.data.keys():
             print(str(i))
-            print(self.data[str(i)])
+            print(self.data[i])
+
+    def delete(self, table_selected, columns, withcond, condition):
+
+    # def insertData(self):
+
 
 
     # def saveToFile(self):
