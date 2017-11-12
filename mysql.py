@@ -218,9 +218,16 @@ class Ui_MainWindow(object):
         self.actionImport.setText(_translate("MainWindow", "Import", None))
 
     # exit function
-    def exitApp(self):
-        print("Application closed")
-        sys.exit()
+    def exitApp(self, event):
+        quit_msg = "Are you sure you want to exit the program?"
+        reply = QtGui.QMessageBox.question(self.centralwidget, 'Message', 
+                         quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+
+        if reply == QtGui.QMessageBox.Yes:
+            sys.exit()
+            return
+        else:
+            return
 
     # import db function (edit this)
     def importDB(self):
@@ -310,11 +317,27 @@ class Ui_MainWindow(object):
 
         selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
         # print("selText")
+        # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
+        selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         print(selText)
 
         selText = selText.lower()
         prog = mysqlparse.parse(selText)
-        # print(prog)
+        print(mysqlparse.operation)
+        print(mysqlparse.columns)
+        print(mysqlparse.table_selected)
+        print(mysqlparse.withcondition)
+        print(mysqlparse.value_list)
+        print(mysqlparse.assignment_list)
+        print(mysqlparse.value_list_bool)       #
+        print(mysqlparse.column_name_bool)
+        print(mysqlparse.col_name)
+
+        if mysqlparse.operation == 'select':
+
+        if mysqlparse.operation == 'delete':
+
+        if mysqlparse.operation == 'insert':
 
 
     # execute all lines in text edit
@@ -327,7 +350,7 @@ class Ui_MainWindow(object):
 
         # print(curEnd)
 
-        # start at the beginnign of text edit
+        # start at the beginning of text edit
         self.textEdit.moveCursor(QtGui.QTextCursor.Start)
 
         for i in range(0, curEnd):
@@ -342,7 +365,7 @@ class Ui_MainWindow(object):
 
             selText = selText.lower()
             prog = mysqlparse.parse(selText)
-            # print(prog)
+            print(mysqlparse.operation)
 
             # move to next line
             curPos = cursor.blockNumber() + 1
@@ -408,7 +431,7 @@ if __name__ == "__main__":
     keys = list(tables.keys())
 
 
-    for i in range(0, 1):
+    for i in range(0, len(keys)):
         trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
         # trees[keys[i]] = btrees.TableBTree('courseoffering', tables[keys[i]])
         # trees[keys[i]] = btrees.TableBTree('student', tables[keys[i]])
