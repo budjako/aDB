@@ -14,7 +14,7 @@ class TableBTree:
         self.loadData()
         print("tablespecs")
         print(tablespecs)
-        self.printData()
+        # self.printData()
 
     def loadData(self):
         print("Loading data of "+self.tablename+" table.")
@@ -52,7 +52,7 @@ class TableBTree:
                 data = nonewline.split("^")
                 value = {}
                 for i in range(0, len(data)):
-                    print("data: "+data[i])
+                    # print("data: "+data[i])
                     # data[i] = data[i].rstrip('\'')
                     # data[i] = data[i].lstrip('\'')
                     value[cols[i]] = data[i]
@@ -66,8 +66,8 @@ class TableBTree:
                         if(i>0): key = key+","+str(value[self.primarykey[i]])
                         else: key = str(value[self.primarykey[i]])
                     self.data.update({key: value})
-                    print(key)
-                    print(value)
+                    # print(key)
+                    # print(value)
         tabledata.close()
 
     def printData(self):
@@ -98,6 +98,34 @@ class TableBTree:
 
     # def insertData(self):
 
+    # this function overwrites the contents of the destination file
+    def saveToFile(self):
+        print("Writing data of "+self.tablename+" table.")
+        tabledata = open("data/"+self.tablename+".dat", "w")
+        # print("Writing data of "+self.tablename+" table.")
+        # tabledata = open("data/"+self.tablename+"save.dat", "w")
 
+        out = ""
+        for i in range(0, len(self.columns)):
+            if(i == 0): out = self.columns[i] + " " + self.tablespecs[self.columns[i]]
+            else: out = out + "," + self.columns[i] + " " + self.tablespecs[self.columns[i]]
+        tabledata.write(out)
+        tabledata.write("\n")
 
-    # def saveToFile(self):
+        out = ""
+        for i in range(0, len(self.primarykey)):
+            if(i == 0): out = self.primarykey[i]
+            else: out = out + "," + self.primarykey[i]
+        tabledata.write(out)
+        tabledata.write("\n")
+
+        keys = self.data.keys()
+        for i in range(0, len(keys)):               # keys - primary keys of the data
+            out = ""                                # for each row in the table
+            for j in range(0, len(self.columns)):   # self.columns is an array
+                if(j == 0): out = str(self.data[keys[i]][self.columns[j]])
+                else: out = out + "^" + str(self.data[keys[i]][self.columns[j]])
+            tabledata.write(out)
+            tabledata.write("\n")
+
+        tabledata.close()

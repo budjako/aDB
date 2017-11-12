@@ -220,7 +220,7 @@ class Ui_MainWindow(object):
     # exit function
     def exitApp(self, event):
         quit_msg = "Are you sure you want to exit the program?"
-        reply = QtGui.QMessageBox.question(self.centralwidget, 'Message', 
+        reply = QtGui.QMessageBox.question(self.centralwidget, 'Message',
                          quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
 
         if reply == QtGui.QMessageBox.Yes:
@@ -442,14 +442,15 @@ if __name__ == "__main__":
 
 
     # for i in range(0, 1):
-        # trees['course'] = btrees.TableBTree('course', tables[keys[i]])
-        # trees['courseoffering'] = btrees.TableBTree('courseoffering', tables[keys[i]])
-        # trees['student'] = btrees.TableBTree('student', tables[keys[i]])
-        # trees['studenthistory'] = btrees.TableBTree('studenthistory', tables[keys[i]])
-        # trees['studcourse'] = btrees.TableBTree('studcourse', tables[keys[i]])
-
+        # trees['course'] = btrees.TableBTree('course', tables['course'])
+        # trees['course'].saveToFile()
+        # trees['courseoffering'] = btrees.TableBTree('courseoffering', tables['courseoffering'])
+        # trees['student'] = btrees.TableBTree('student', tables['student'])
+        # trees['studenthistory'] = btrees.TableBTree('studenthistory', tables['studenthistory'])
+        # trees['studcourse'] = btrees.TableBTree('studcourse', tables['studcourse'])
     for i in range(0, len(keys)):
         trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
+        # trees[keys[i]].saveToFile()
 
 
     app = QtGui.QApplication(sys.argv)
