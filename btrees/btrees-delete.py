@@ -47,48 +47,90 @@ for line in metadata:
 
                 btree.update({data[0]: {cols[1]: data[1], cols[2]: data[2], cols[3]: data[3], cols[4]: data[4], cols[5]: data[5]}})
 
-operation = "delete" # delete
-conditionIsGiven = False
-primaryKeyGiven = False
-primaryKey = "2011-29712"
-colName = "degree"
-valType = "varchar"
-colValue = "BSCS"
+#################################
 
-print('LIST:')
-for key in btree.keys():
-    print(btree.values(key)[0][colName])
+def binoperation(bo, v1, v2):
+    if bo == 'plus':
+        v1 = v1 + v2
+    elif bo == 'minus':
+        v1 = v1 - v2
+    elif bo == 'times':
+        v1 = v1 * v2
+    elif bo == 'divide':
+        v1 = v1 / v2
+    elif bo == 'modulo':
+        v1 = v1 % v2
+    
+    return v1
 
-print('\n')
+def comoperation(co, lv, cv, k):
+    if co == 'lthan':
+        if lv < cv:
+            print('removed:', k)
+            btree.pop(k)
+    elif co == 'gthan':
+        if lv > cv:
+            print('removed:', k)
+            btree.pop(k)
+    elif co == 'leq':
+        if lv <= cv:
+            print('removed:', k)
+            btree.pop(k)
+    elif co == 'geq':
+        if lv >= cv:
+            print('removed:', k)
+            btree.pop(k)
+    elif co == 'neq':
+        if lv != cv:
+            print('removed:', k)
+            btree.pop(k)
+
+##################################
+
+operation = "delete"
+conditionIsGiven = True # where clause
+primaryKeyIsGiven = False
+binOpIsGiven = True
+compOpIsGiven = True
+comop = "leq" # lthan, gthan, leq, geq, neq
+binop = "minus"  # plus, minus, times, divide, modulo
+primaryKey = "2008-56411"
+colName = "unitsearned"
+valType = "integer"
+colValue = 144
+colValue2 = 1
+
+#################################
+
+print('LIST:', list(btree), '\n')
 
 if operation == 'delete':
     # has condition
     if conditionIsGiven:
         # delete using primary key
-        if primaryKeyGiven:
+        if primaryKeyIsGiven:
             if btree.has_key(primaryKey) > 0:
                 btree.pop(primaryKey)
             else:
                 print("Key not found")
         # delete using column names
         else:
-
             for key in list(btree.keys()):
                 listValue = list(btree.values(key))[0][colName]
-
                 if valType == 'integer':
                     listValue = int(listValue)
-                
-                if listValue == colValue:
-                    print(key, ':', listValue, 'removed')
-                    btree.pop(key)
-
+                    if binOpIsGiven:
+                        colValue = binoperation(binop, colValue, colValue2)
+                    if compOpIsGiven: 
+                        comoperation(comop, listValue, colValue, key)
+                    elif listValue == colValue:
+                            print('removed:', key)
+                            btree.pop(key)
+                elif listValue == colValue:
+                            print('removed:', key)
+                            btree.pop(key)
     # no condition
     else:
         btree.clear()
 
-    print('\nUPDATED LIST:')
-    print(list(btree))
-
-else:
-    print("No such key")
+    print('\nUPDATED LIST:', list(btree))
