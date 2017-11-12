@@ -90,14 +90,14 @@ def comoperation(co, lv, cv, k):
 operation = "delete"
 conditionIsGiven = True # where clause
 primaryKeyIsGiven = False
-binOpIsGiven = True
+binOpIsGiven = False
 compOpIsGiven = True
-comop = "leq" # lthan, gthan, leq, geq, neq
-binop = "minus"  # plus, minus, times, divide, modulo
+comop = "neq" # lthan, gthan, leq, geq, neq
+binop = "plus"  # plus, minus, times, divide, modulo
 primaryKey = "2008-56411"
 colName = "unitsearned"
 valType = "integer"
-colValue = 144
+colValue = 36
 colValue2 = 1
 
 #################################
@@ -120,10 +120,12 @@ if operation == 'delete':
                 if valType == 'integer':
                     listValue = int(listValue)
                     if binOpIsGiven:
-                        colValue = binoperation(binop, colValue, colValue2)
+                        colValue3 = binoperation(binop, colValue, colValue2)
+                    else:
+                        colValue3 = colValue
                     if compOpIsGiven: 
-                        comoperation(comop, listValue, colValue, key)
-                    elif listValue == colValue:
+                        comoperation(comop, listValue, colValue3, key)
+                    elif listValue == colValue3:
                             print('removed:', key)
                             btree.pop(key)
                 elif listValue == colValue:
