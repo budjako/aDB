@@ -5,6 +5,7 @@ class TableBTree:
     def __init__(self, tablename, tablespecs):
         self.tablename = tablename
         self.primarykey = []
+        self.columns = []
         self.tablespecs = tablespecs
         self.data = OOBTree()
         self.counter = 0
@@ -26,58 +27,74 @@ class TableBTree:
         for line in tabledata:
             if(counter == 0):       # column names
                 nonewline = line.rstrip('\n')
-                column_names = nonewline.split(";")
-                for i in range(0,len(column_names)):
-                    if(column_names[i] != ""):
-                        column = column_names[i].split(",")
-                        for i in range(0,len(column)):
-                            name = column[i].split(" ")
-                            cols.append(name[0])
-                            datatypes.append(name[1])
+                column = nonewline.split(",")
+                for i in range(0,len(column)):
+                    name = column[i].split(" ")
+                    cols.append(name[0])
+                    self.columns.append(name[0])
+                    datatypes.append(name[1])
                 counter = counter + 1
 
             elif(counter == 1):     # primary key/s
                 nonewline = line.rstrip('\n')
-                keys = nonewline.split(";")
-                if(len(keys) == 0):
+                if(nonewline == ""):    # table has no primary key
                     self.counter = 0
-                else:
-                    for i in range(0,len(keys)):
-                        if(keys[i] != ''):  # table has one or more primary keys
-                            keyset = keys[i].split(",")
-                            for i in range(0,len(keyset)):
-                                if i != '':
-                                    self.primarykey.append(keyset[i])
+                else:                   # table has one or more primary keys
+                    keyset = nonewline.split(",")
+                    for i in range(0,len(keyset)):
+                        if i != '':
+                            self.primarykey.append(keyset[i])
+
+                    print(keyset)
                 counter = counter + 1
             else:
                 nonewline = line.rstrip('\n')
-                rows = nonewline.split(";")
-                for i in range(0,len(rows)):
-                    if(rows[i] != ""):
-                        data = rows[i].split("^")
-                        value = {}
-                        for i in range(0, len(data)):
-                            data[i] = data[i].rstrip('\'')
-                            data[i] = data[i].lstrip('\'')
-                            value[cols[i]] = data[i]
-                        if(len(self.primarykey) == 0):
-                            self.data.update({self.counter: value})
-                            self.counter = self.counter + 1
-                        else:
-                            # create a list out of the primary keys then use as key
-                            key = ""
-                            for i in range(0, len(self.primarykey)):
-                                if(i>0): key = key+","+str(value[self.primarykey[i]])
-                                else: key = str(value[self.primarykey[i]])
-                            self.data.update({key: value})
+                data = nonewline.split("^")
+                value = {}
+                for i in range(0, len(data)):
+                    print("data: "+data[i])
+                    # data[i] = data[i].rstrip('\'')
+                    # data[i] = data[i].lstrip('\'')
+                    value[cols[i]] = data[i]
+                if(len(self.primarykey) == 0):
+                    self.data.update({self.counter: value})
+                    self.counter = self.counter + 1
+                else:
+                    # create a list out of the primary keys then use as key
+                    key = ""
+                    for i in range(0, len(self.primarykey)):
+                        if(i>0): key = key+","+str(value[self.primarykey[i]])
+                        else: key = str(value[self.primarykey[i]])
+                    self.data.update({key: value})
+                    print(key)
+                    print(value)
         tabledata.close()
 
     def printData(self):
         for i in self.data.keys():
-            print(str(i))
+            # print(str(i))
             print(self.data[i])
 
-    def delete(self, table_selected, columns, withcond, condition):
+    def select(self, columns, withcondition, condition):
+        retdata = []
+        cols = []
+        row = []
+        print("SELECT OPERATION ON "+self.tablename)
+        if columns[0] == "*":
+            for i in self.columns:
+                cols.append(i)
+                # print(i)
+            retdata.append(cols)
+
+            for j in self.data:
+                row = []
+                for i in self.columns:
+                    print(self.data[j][i])
+                    row.append(self.data[j][i])
+                retdata.append(row)
+        return retdata
+
+    # def delete(self, table_selected, columns, withcond, condition):
 
     # def insertData(self):
 
