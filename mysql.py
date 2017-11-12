@@ -218,9 +218,16 @@ class Ui_MainWindow(object):
         self.actionImport.setText(_translate("MainWindow", "Import", None))
 
     # exit function
-    def exitApp(self):
-        print("Application closed")
-        sys.exit()
+    def exitApp(self, event):
+        quit_msg = "Are you sure you want to exit the program?"
+        reply = QtGui.QMessageBox.question(self.centralwidget, 'Message', 
+                         quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+
+        if reply == QtGui.QMessageBox.Yes:
+            sys.exit()
+            return
+        else:
+            return
 
     # import db function (edit this)
     def importDB(self):
@@ -378,7 +385,7 @@ class Ui_MainWindow(object):
 
         # print(curEnd)
 
-        # start at the beginnign of text edit
+        # start at the beginning of text edit
         self.textEdit.moveCursor(QtGui.QTextCursor.Start)
 
         for i in range(0, curEnd):
