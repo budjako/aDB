@@ -57,9 +57,9 @@ tabledata.close()
 
 operation = "select"
 primaryKeyIsGiven = False
-binOpIsGiven = True
+binOpIsGiven = False
 compOpIsGiven = True
-comop = "leq" # lthan, gthan, leq, geq, neq
+comop = "lthan" # lthan, gthan, leq, geq, neq
 binop = "minus"  # plus, minus, times, divide, modulo
 primaryKey = "2007-12345" # sample primary key
 colSelect = "unitsearned" # *, <column names>
@@ -146,8 +146,12 @@ if operation == 'select':
                     listValue = int(listValue)
                     if binOpIsGiven:
                         colValue3 = binoperation(binop, colValue, colValue2)
-                    if compOpIsGiven: 
+                    else:
+                        colValue3 = colValue
+
+                    if compOpIsGiven:
                         comoperation(comop, listValue, colValue3, key)
+
                     elif listValue == colValue3:
                         selectCol = list(btree.values(key))[0]
                         for colName in colNames:
