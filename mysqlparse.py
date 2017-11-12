@@ -192,7 +192,8 @@ def p_value_list(p):
 def p_literals(p):
     '''literals : STRING_LIT
             | INT_LIT
-            | DOUBLE_LIT'''
+            | DOUBLE_LIT
+            | NULL'''
     p[0] = p[1]
 
 def p_condition(p):
