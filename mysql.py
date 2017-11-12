@@ -410,6 +410,9 @@ if __name__ == "__main__":
 
     for i in range(0, len(keys)):
         trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
+        # trees[keys[i]] = btrees.TableBTree('courseoffering', tables[keys[i]])
+        # trees[keys[i]] = btrees.TableBTree('student', tables[keys[i]])
+        # trees[keys[i]] = btrees.TableBTree('studcourse', tables[keys[i]])
 
 
     app = QtGui.QApplication(sys.argv)
