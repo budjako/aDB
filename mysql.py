@@ -341,6 +341,17 @@ class Ui_MainWindow(object):
         for column in tables['table']:                        # for each table specified in the metadata
             print(column)
 
+    def clearGlobals(self):
+        mysqlparse.operation = None
+        mysqlparse.columns = []
+        mysqlparse.table_selected = None
+        mysqlparse.withcondition = False
+        mysqlparse.value_list = None
+        mysqlparse.assignment_list = None
+        mysqlparse.value_list_bool = False
+        mysqlparse.column_name_bool = False
+        mysqlparse.col_name = None
+
     # execute one line in text edit
     def lineExec(self):
         # text edit cursor
@@ -374,7 +385,7 @@ class Ui_MainWindow(object):
         #
         # if mysqlparse.operation == 'insert':
 
-
+        self.clearGlobals()
     # execute all lines in text edit
     def allExec(self):
         # count lines in text edit
