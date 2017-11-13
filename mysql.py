@@ -44,21 +44,24 @@ except AttributeError:
 # main window
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(732, 570)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
+        self.centralwidget.setLayout(QtGui.QGridLayout())
+
         # labels
-        self.label = QtGui.QLabel(self.centralwidget)
+        self.label = QtGui.QLabel()
         self.label.setGeometry(QtCore.QRect(50, 10, 121, 17))
         self.label.setObjectName(_fromUtf8("label"))
-        self.label_2 = QtGui.QLabel(self.centralwidget)
+        self.label_2 = QtGui.QLabel()
         self.label_2.setGeometry(QtCore.QRect(420, 10, 121, 17))
         self.label_2.setObjectName(_fromUtf8("label_2"))
 
         # tables table widget
-        self.tablesTW = QtGui.QTableWidget(self.centralwidget)
+        self.tablesTW = QtGui.QTableWidget()
         self.tablesTW.setEnabled(True)
         self.tablesTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
         self.tablesTW.setGeometry(QtCore.QRect(10, 30, 211, 251))
@@ -90,7 +93,7 @@ class Ui_MainWindow(object):
         self.tablesTW.cellClicked.connect(self.tableClick)
 
         # column - data type table widget
-        self.coldatatypeTW = QtGui.QTableWidget(self.centralwidget)
+        self.coldatatypeTW = QtGui.QTableWidget()
         self.coldatatypeTW.setEnabled(True)
         self.coldatatypeTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
         self.coldatatypeTW.setGeometry(QtCore.QRect(10, 290, 211, 231))
@@ -118,7 +121,7 @@ class Ui_MainWindow(object):
         self.coldatatypeTW.verticalHeader().setStretchLastSection(False)
 
         # query result table widget
-        self.queryResultTW = QtGui.QTableWidget(self.centralwidget)
+        self.queryResultTW = QtGui.QTableWidget()
         self.queryResultTW.setEnabled(True)
         self.queryResultTW.setGeometry(QtCore.QRect(230, 320, 491, 201))
         self.queryResultTW.setStyleSheet(_fromUtf8(""))
@@ -142,21 +145,21 @@ class Ui_MainWindow(object):
 
 
         # execute one line push button
-        self.lineBtn = QtGui.QPushButton(self.centralwidget)
+        self.lineBtn = QtGui.QPushButton()
         self.lineBtn.setGeometry(QtCore.QRect(300, 285, 211, 27))
         self.lineBtn.setObjectName(_fromUtf8("lineBtn"))
         self.lineBtn.setStatusTip("Execute line under cursor")
         self.lineBtn.clicked.connect(self.lineExec)     # save a line in text edit content
 
         # execute all push button
-        self.allBtn = QtGui.QPushButton(self.centralwidget)
+        self.allBtn = QtGui.QPushButton()
         self.allBtn.setGeometry(QtCore.QRect(520, 285, 98, 27))
         self.allBtn.setObjectName(_fromUtf8("allBtn"))
         self.allBtn.setStatusTip("Execute all")
         self.allBtn.clicked.connect(self.allExec)       # save all text edit contents
 
         # text edit
-        self.textEdit = QtGui.QTextEdit(self.centralwidget)
+        self.textEdit = QtGui.QTextEdit()
         self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
         self.textEdit.setFocus(True)
@@ -194,6 +197,23 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionImport)
         self.menuFile.addAction(self.actionExit)
         self.menubar.addAction(self.menuFile.menuAction())
+
+        # positioning of widgets in the QGridLayout
+        self.centralwidget.layout().addWidget(self.label, 0, 0, QtCore.Qt.AlignCenter)
+        self.centralwidget.layout().addWidget(self.label_2, 0, 1, 1, 2, QtCore.Qt.AlignCenter)
+        self.centralwidget.layout().addWidget(self.tablesTW, 1, 0)
+        self.centralwidget.layout().addWidget(self.textEdit, 1, 1, 1, 2)
+        self.centralwidget.layout().addWidget(self.coldatatypeTW, 2, 0, 2, 1)
+        self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
+        self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
+        self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
+
+        # make only the columns on the right stretchable
+        self.centralwidget.layout().setColumnStretch(0, 0)
+        self.centralwidget.layout().setColumnStretch(1, 1)        
+        self.centralwidget.layout().setColumnStretch(2, 1)        
+
+        self.centralwidget.layout().setSpacing(10)                
 
         self.populateTables()
 
