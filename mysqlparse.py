@@ -175,7 +175,7 @@ def p_assignment_list(p):
     p[0] = ""
     for i in p:
         if(i is not None):
-            p[0] = p[0] + " " + i
+            p[0] = p[0] + " " + str(i)
     global value_list_bool
     value_list_bool = False
 
