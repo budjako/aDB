@@ -185,14 +185,15 @@ def p_value_list(p):
     p[0] = ""
     for i in p:
         if(i is not None):
-            p[0] = p[0] + " " + i
+            p[0] = p[0] + " " + str(i)
     global value_list_bool
     value_list_bool = True
 
 def p_literals(p):
     '''literals : STRING_LIT
             | INT_LIT
-            | DOUBLE_LIT'''
+            | DOUBLE_LIT
+            | NULL'''
     p[0] = p[1]
 
 def p_condition(p):

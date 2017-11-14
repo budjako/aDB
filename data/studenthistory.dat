@@ -1,2 +1,2 @@
-studno varchar description varchar action varchar datefiled date dateresolved date;
-studno;
+studno varchar,description varchar,action varchar,datefiled date,dateresolved date
+studno

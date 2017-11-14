@@ -44,21 +44,24 @@ except AttributeError:
 # main window
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(732, 570)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
 
+        self.centralwidget.setLayout(QtGui.QGridLayout())
+
         # labels
-        self.label = QtGui.QLabel(self.centralwidget)
+        self.label = QtGui.QLabel()
         self.label.setGeometry(QtCore.QRect(50, 10, 121, 17))
         self.label.setObjectName(_fromUtf8("label"))
-        self.label_2 = QtGui.QLabel(self.centralwidget)
+        self.label_2 = QtGui.QLabel()
         self.label_2.setGeometry(QtCore.QRect(420, 10, 121, 17))
         self.label_2.setObjectName(_fromUtf8("label_2"))
 
         # tables table widget
-        self.tablesTW = QtGui.QTableWidget(self.centralwidget)
+        self.tablesTW = QtGui.QTableWidget()
         self.tablesTW.setEnabled(True)
         self.tablesTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
         self.tablesTW.setGeometry(QtCore.QRect(10, 30, 211, 251))
@@ -90,7 +93,7 @@ class Ui_MainWindow(object):
         self.tablesTW.cellClicked.connect(self.tableClick)
 
         # column - data type table widget
-        self.coldatatypeTW = QtGui.QTableWidget(self.centralwidget)
+        self.coldatatypeTW = QtGui.QTableWidget()
         self.coldatatypeTW.setEnabled(True)
         self.coldatatypeTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers) # disable editing of cell contents
         self.coldatatypeTW.setGeometry(QtCore.QRect(10, 290, 211, 231))
@@ -118,7 +121,7 @@ class Ui_MainWindow(object):
         self.coldatatypeTW.verticalHeader().setStretchLastSection(False)
 
         # query result table widget
-        self.queryResultTW = QtGui.QTableWidget(self.centralwidget)
+        self.queryResultTW = QtGui.QTableWidget()
         self.queryResultTW.setEnabled(True)
         self.queryResultTW.setGeometry(QtCore.QRect(230, 320, 491, 201))
         self.queryResultTW.setStyleSheet(_fromUtf8(""))
@@ -142,21 +145,21 @@ class Ui_MainWindow(object):
 
 
         # execute one line push button
-        self.lineBtn = QtGui.QPushButton(self.centralwidget)
+        self.lineBtn = QtGui.QPushButton()
         self.lineBtn.setGeometry(QtCore.QRect(300, 285, 211, 27))
         self.lineBtn.setObjectName(_fromUtf8("lineBtn"))
         self.lineBtn.setStatusTip("Execute line under cursor")
         self.lineBtn.clicked.connect(self.lineExec)     # save a line in text edit content
 
         # execute all push button
-        self.allBtn = QtGui.QPushButton(self.centralwidget)
+        self.allBtn = QtGui.QPushButton()
         self.allBtn.setGeometry(QtCore.QRect(520, 285, 98, 27))
         self.allBtn.setObjectName(_fromUtf8("allBtn"))
         self.allBtn.setStatusTip("Execute all")
         self.allBtn.clicked.connect(self.allExec)       # save all text edit contents
 
         # text edit
-        self.textEdit = QtGui.QTextEdit(self.centralwidget)
+        self.textEdit = QtGui.QTextEdit()
         self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
         self.textEdit.setFocus(True)
@@ -195,6 +198,23 @@ class Ui_MainWindow(object):
         self.menuFile.addAction(self.actionExit)
         self.menubar.addAction(self.menuFile.menuAction())
 
+        # positioning of widgets in the QGridLayout
+        self.centralwidget.layout().addWidget(self.label, 0, 0, QtCore.Qt.AlignCenter)
+        self.centralwidget.layout().addWidget(self.label_2, 0, 1, 1, 2, QtCore.Qt.AlignCenter)
+        self.centralwidget.layout().addWidget(self.tablesTW, 1, 0)
+        self.centralwidget.layout().addWidget(self.textEdit, 1, 1, 1, 2)
+        self.centralwidget.layout().addWidget(self.coldatatypeTW, 2, 0, 2, 1)
+        self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
+        self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
+        self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
+
+        # make only the columns on the right stretchable
+        self.centralwidget.layout().setColumnStretch(0, 0)
+        self.centralwidget.layout().setColumnStretch(1, 1)        
+        self.centralwidget.layout().setColumnStretch(2, 1)        
+
+        self.centralwidget.layout().setSpacing(10)                
+
         self.populateTables()
 
         self.retranslateUi(MainWindow)
@@ -218,9 +238,16 @@ class Ui_MainWindow(object):
         self.actionImport.setText(_translate("MainWindow", "Import", None))
 
     # exit function
-    def exitApp(self):
-        print("Application closed")
-        sys.exit()
+    def exitApp(self, event):
+        quit_msg = "Are you sure you want to exit the program?"
+        reply = QtGui.QMessageBox.question(self.centralwidget, 'Message',
+                         quit_msg, QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+
+        if reply == QtGui.QMessageBox.Yes:
+            sys.exit()
+            return
+        else:
+            return
 
     # import db function (edit this)
     def importDB(self):
@@ -296,10 +323,54 @@ class Ui_MainWindow(object):
             self.tablesTW.insertRow(pos)
             self.tablesTW.setItem(i,0, QtGui.QTableWidgetItem(keys[i]))
 
+    # show query result
+    def showQueryResult(self, results):
+        print('showQueryResult')
+        print(results)
+        self.queryResultTW.clear()
+        self.queryResultTW.clearContents()
+        self.queryResultTW.setColumnCount(0)
+        self.queryResultTW.setRowCount(0)
+
+        # create table size
+        col = (len(results[0]))
+        self.queryResultTW.setColumnCount(col)
+
+        # add column names to table
+        self.queryResultTW.setHorizontalHeaderLabels(results[0])
+
+        print(len(results))
+        if(len(results) == 1):
+            pos = self.queryResultTW.rowCount()                       # create a corresponding row
+            self.queryResultTW.insertRow(pos)
+            for j in range(0, len(results[0])):
+                self.queryResultTW.setItem(pos,j, QtGui.QTableWidgetItem("NULL"))
+        for i in range(1, len(results)):
+            pos = self.queryResultTW.rowCount()                       # create a corresponding row
+            self.queryResultTW.insertRow(pos)
+            for j in range(0, len(results[i])):
+                self.queryResultTW.setItem(pos,j, QtGui.QTableWidgetItem(str(results[i][j])))
+
+        # adjust size of table according to contents
+        self.queryResultTW.resizeColumnsToContents()
+        self.queryResultTW.resizeRowsToContents()
+
+
     @pyqtSlot()
     def addColumnNamesAndDataTypes():
         for column in tables['table']:                        # for each table specified in the metadata
             print(column)
+
+    def clearGlobals(self):
+        mysqlparse.operation = None
+        mysqlparse.columns = []
+        mysqlparse.table_selected = None
+        mysqlparse.withcondition = False
+        mysqlparse.value_list = None
+        mysqlparse.assignment_list = None
+        mysqlparse.value_list_bool = False
+        mysqlparse.column_name_bool = False
+        mysqlparse.col_name = None
 
     # execute one line in text edit
     def lineExec(self):
@@ -311,15 +382,16 @@ class Ui_MainWindow(object):
         selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
         # print("selText")
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
-        selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
+        # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         print(selText)
 
         selText = selText.lower()
         prog = mysqlparse.parse(selText)
         print(mysqlparse.operation)
-        print(mysqlparse.columns)
+        print(mysqlparse.columns)           #
         print(mysqlparse.table_selected)
-        print(mysqlparse.withcondition)
+        print(mysqlparse.withcondition)     #
+        print(mysqlparse.condition)     #
         print(mysqlparse.value_list)
         print(mysqlparse.assignment_list)
         print(mysqlparse.value_list_bool)       #
@@ -327,12 +399,13 @@ class Ui_MainWindow(object):
         print(mysqlparse.col_name)
 
         if mysqlparse.operation == 'select':
+            returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition)
+            self.showQueryResult(returned_rows)
+        # if mysqlparse.operation == 'delete':
+        #
+        # if mysqlparse.operation == 'insert':
 
-        if mysqlparse.operation == 'delete':
-
-        if mysqlparse.operation == 'insert':
-
-
+        self.clearGlobals()
     # execute all lines in text edit
     def allExec(self):
         # count lines in text edit
@@ -343,7 +416,7 @@ class Ui_MainWindow(object):
 
         # print(curEnd)
 
-        # start at the beginnign of text edit
+        # start at the beginning of text edit
         self.textEdit.moveCursor(QtGui.QTextCursor.Start)
 
         for i in range(0, curEnd):
@@ -364,31 +437,6 @@ class Ui_MainWindow(object):
             curPos = cursor.blockNumber() + 1
             self.textEdit.moveCursor(QtGui.QTextCursor.Down)
 
-
-    # show query result
-    def showQueryResult(self, textIn):
-        self.queryResultTW.clearContents()
-
-        # create table size
-        col = (int(len(tables[textIn])/2))
-        self.queryResultTW.setColumnCount(col)
-
-        colNames = []
-
-        # fill table widget
-        for n, key in zip(range(0, col*2), tables[textIn]):
-            if n%2 == 0:
-                colNames.append(key)
-        # for m, item in enumerate(tables[textIn]):
-            # newItem = QtGui.QTableWidgetItem(item)
-            # self.queryResultTW.setItem(m, n, newItem)
-
-        # add column names to table
-        self.queryResultTW.setHorizontalHeaderLabels(colNames)
-
-        # adjust size of table according to contents
-        self.queryResultTW.resizeColumnsToContents()
-        self.queryResultTW.resizeRowsToContents()
 
     # no query prompt method
     def noQuery(self):
@@ -424,11 +472,16 @@ if __name__ == "__main__":
     keys = list(tables.keys())
 
 
+    # for i in range(0, 1):
+        # trees['course'] = btrees.TableBTree('course', tables['course'])
+        # trees['course'].saveToFile()
+        # trees['courseoffering'] = btrees.TableBTree('courseoffering', tables['courseoffering'])
+        # trees['student'] = btrees.TableBTree('student', tables['student'])
+        # trees['studenthistory'] = btrees.TableBTree('studenthistory', tables['studenthistory'])
+        # trees['studcourse'] = btrees.TableBTree('studcourse', tables['studcourse'])
     for i in range(0, len(keys)):
         trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
-        # trees[keys[i]] = btrees.TableBTree('courseoffering', tables[keys[i]])
-        # trees[keys[i]] = btrees.TableBTree('student', tables[keys[i]])
-        # trees[keys[i]] = btrees.TableBTree('studcourse', tables[keys[i]])
+        # trees[keys[i]].saveToFile()
 
 
     app = QtGui.QApplication(sys.argv)
