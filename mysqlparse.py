@@ -91,6 +91,7 @@ def p_select_statement(p):
         print("Invalid table name")
 
     for x1 in columns:
+        x1 = x1.strip(" ")
         if x1 in tables[table_selected] or x1 == "*":
             print("Column " + x1 + " is in " + table_selected)
         else:
