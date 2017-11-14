@@ -92,9 +92,29 @@ class TableBTree:
                     print(self.data[j][i])
                     row.append(self.data[j][i])
                 retdata.append(row)
+        else:
+            print('withcondition') 
         return retdata
 
-    # def delete(self, table_selected, columns, withcond, condition):
+    def delete(self, columns, withcondition, condition):
+        retdata = []
+        colNames = []
+        row = []
+
+        for col in self.columns:
+            colNames.append(col)    
+        retdata.append(colNames)
+
+        if withcondition:
+            print('condition')
+        else:            
+            self.data.clear()
+            for pk in self.data:
+                for col in self.columns:
+                    col = col.strip(" ")
+                    row.append(self.data[pk][col])
+                retdata.append(row)
+        return retdata
 
     # def insertData(self):
 

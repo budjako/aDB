@@ -387,22 +387,27 @@ class Ui_MainWindow(object):
 
         selText = selText.lower()
         prog = mysqlparse.parse(selText)
-        print(mysqlparse.operation)
-        print(mysqlparse.columns)           #
-        print(mysqlparse.table_selected)
-        print(mysqlparse.withcondition)     #
-        print(mysqlparse.condition)     #
-        print(mysqlparse.value_list)
-        print(mysqlparse.assignment_list)
-        print(mysqlparse.value_list_bool)       #
-        print(mysqlparse.column_name_bool)
-        print(mysqlparse.col_name)
+        print('operation: ', mysqlparse.operation)
+        print('columns: ', mysqlparse.columns)           #
+        print('table_selected: ', mysqlparse.table_selected)
+        print('withcondition: ', mysqlparse.withcondition)     #
+        print('condition: ', mysqlparse.condition)     #
+        print('value_list: ', mysqlparse.value_list)
+        print('assignment_list: ', mysqlparse.assignment_list)
+        print('value_list_bool: ', mysqlparse.value_list_bool)       #
+        print('column_name_bool: ', mysqlparse.column_name_bool)
+        print('col_name: ', mysqlparse.col_name)
+
+        # print('\ntrees: ', trees)
 
         if mysqlparse.operation == 'select':
             returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition)
             self.showQueryResult(returned_rows)
-        # if mysqlparse.operation == 'delete':
-        #
+
+        if mysqlparse.operation == 'delete':
+            returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition)
+            self.showQueryResult(returned_rows)
+            
         # if mysqlparse.operation == 'insert':
 
         self.clearGlobals()
@@ -444,8 +449,7 @@ class Ui_MainWindow(object):
         self.noQueryMsgBox.setWindowTitle('My Database (Error)')
         self.noQueryMsgBox.setWindowIcon(QtGui.QIcon('dblogo.png'))
         self.noQueryMsgBox.setIcon(QtGui.QMessageBox.Warning)
-        self.noQueryMsgBox.setText('Enter a table name. Choose one from the items listed below.')
-        self.noQueryMsgBox.setInformativeText('STUDENT <br> STUDENTHISTORY <br> COURSE <br> COURSEOFFERING <br> STUDCOURSE')
+        self.noQueryMsgBox.setText('Syntax Error')
         self.noQueryMsgBox.addButton(QtGui.QMessageBox.Ok)
         self.noQueryMsgBox.show()
 
