@@ -10,14 +10,14 @@ class TableBTree:
         self.data = OOBTree()
         self.counter = 0
 
-        print("Initialize "+tablename)
+        # print("Initialize "+tablename)
         self.loadData()
-        print("tablespecs")
-        print(tablespecs)
+        # print("tablespecs")
+        # print(tablespecs)
         # self.printData()
 
     def loadData(self):
-        print("Loading data of "+self.tablename+" table.")
+        # print("Loading data of "+self.tablename+" table.")
         tabledata = open("data/"+self.tablename+".dat", "r")
         counter = 0
         cols = []
@@ -45,7 +45,7 @@ class TableBTree:
                         if i != '':
                             self.primarykey.append(keyset[i])
 
-                    print(keyset)
+                    # print(keyset)
                 counter = counter + 1
             else:
                 nonewline = line.rstrip('\n')
@@ -73,7 +73,8 @@ class TableBTree:
     def printData(self):
         for i in self.data.keys():
             # print(str(i))
-            print(self.data[i])
+            # print(self.data[i])
+            return
 
     def select(self, columns, withcondition, condition):
         retdata = []
@@ -93,7 +94,7 @@ class TableBTree:
                     row.append(self.data[j][i])
                 retdata.append(row)
         else:
-            print('withcondition') 
+            print(columns)
         return retdata
 
     def delete(self, columns, withcondition, condition):

@@ -138,7 +138,7 @@ class Ui_MainWindow(object):
         self.queryResultTW.horizontalHeader().setVisible(True)
         self.queryResultTW.horizontalHeader().setCascadingSectionResizes(False)
         self.queryResultTW.horizontalHeader().setHighlightSections(False)
-        self.queryResultTW.horizontalHeader().setStretchLastSection(True)
+        self.queryResultTW.horizontalHeader().setStretchLastSection(False)
         self.queryResultTW.verticalHeader().setVisible(False)
         self.queryResultTW.verticalHeader().setSortIndicatorShown(False)
         self.queryResultTW.verticalHeader().setStretchLastSection(False)
@@ -270,26 +270,33 @@ class Ui_MainWindow(object):
         tableStringEx = "("
         print(f.name[:])
         if f.name[-4:] == ('.csv'):
-            reader = csv.reader(f)
-            for row in reader:
-                if a == 0:                                          #To get first line
-                    for column in row:
-                        tableColumns.append(column)
-                        tableStringEx = tableStringEx + column + ","
-                    tableStringEx=tableStringEx[:-1] + ")"
-                    a+=1
-                else:
-                    dataString = ""
-                    for data in row:
-                        if data.isdigit() or data == "NULL":
-                            dataString += data + ","
-                        else:
-                            dataString += "'" + data + "',"
-                    dataString = dataString[:-1]
-                    insertString2 = "INSERT INTO '" + nameOfFile + "' VALUES(" + dataString + ");"                      #Without column names
-                    print(insertString2)
-                    append.write(dataString+";\n")
-        if f.name[-4:] == ('.sql'):
+
+            # Show QInputDialog with dropdown list to choose which table to import into
+            self.dropdown, ok = QtGui.QInputDialog.getItem(self.centralwidget, "Select table name", "", list(tables.keys()), 0, False )
+
+            if ok and self.dropdown:
+                print(self.dropdown)
+
+                reader = csv.reader(f)
+                for row in reader:
+                    if a == 0:                                          #To get first line
+                        for column in row:
+                            tableColumns.append(column)
+                            tableStringEx = tableStringEx + column + ","
+                        tableStringEx=tableStringEx[:-1] + ")"
+                        a+=1
+                    else:
+                        dataString = ""
+                        for data in row:
+                            if data.isdigit() or data == "NULL":
+                                dataString += data + ","
+                            else:
+                                dataString += "'" + data + "',"
+                        dataString = dataString[:-1]
+                        insertString2 = "INSERT INTO " + self.dropdown + " VALUES(" + dataString + ");"                      #Without column names
+                        print(insertString2)
+                        append.write(dataString+";\n")
+        elif f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
             commentRegex = r'/\*|.*\*/|//'
             for line in iter(f):
@@ -306,6 +313,14 @@ class Ui_MainWindow(object):
                         append.write(line[line.find("VALUES (")+6:line.find(");")+2])
                     else:
                         print("with column names")
+        else:
+            self.fileNameError = QtGui.QMessageBox()
+            self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
+            self.fileNameError.setText("Only csv and sql files are accepted!")
+            self.fileNameError.setWindowTitle("File type error")
+            self.fileNameError.addButton(QtGui.QMessageBox.Ok)
+            self.fileNameError.show()
+
 
 
 
@@ -333,27 +348,30 @@ class Ui_MainWindow(object):
         self.queryResultTW.setRowCount(0)
 
         # create table size
-        col = (len(results[0]))
-        self.queryResultTW.setColumnCount(col)
+        if results:
+            col = (len(results[0]))
+            self.queryResultTW.setColumnCount(col)
 
-        # add column names to table
-        self.queryResultTW.setHorizontalHeaderLabels(results[0])
+            # add column names to table
+            self.queryResultTW.setHorizontalHeaderLabels(results[0])
 
-        print(len(results))
-        if(len(results) == 1):
-            pos = self.queryResultTW.rowCount()                       # create a corresponding row
-            self.queryResultTW.insertRow(pos)
-            for j in range(0, len(results[0])):
-                self.queryResultTW.setItem(pos,j, QtGui.QTableWidgetItem("NULL"))
-        for i in range(1, len(results)):
-            pos = self.queryResultTW.rowCount()                       # create a corresponding row
-            self.queryResultTW.insertRow(pos)
-            for j in range(0, len(results[i])):
-                self.queryResultTW.setItem(pos,j, QtGui.QTableWidgetItem(str(results[i][j])))
+            print(len(results))
+            if(len(results) == 0):
+                return
+            if(len(results) == 1):
+                pos = self.queryResultTW.rowCount()                       # create a corresponding row
+                self.queryResultTW.insertRow(pos)
+                for j in range(0, len(results[0])):
+                    self.queryResultTW.setItem(pos,j, QtGui.QTableWidgetItem("NULL"))
+            for i in range(1, len(results)):
+                pos = self.queryResultTW.rowCount()                       # create a corresponding row
+                self.queryResultTW.insertRow(pos)
+                for j in range(0, len(results[i])):
+                    self.queryResultTW.setItem(pos,j, QtGui.QTableWidgetItem(str(results[i][j])))
 
-        # adjust size of table according to contents
-        self.queryResultTW.resizeColumnsToContents()
-        self.queryResultTW.resizeRowsToContents()
+            # adjust size of table according to contents
+            self.queryResultTW.resizeColumnsToContents()
+            self.queryResultTW.resizeRowsToContents()
 
 
     @pyqtSlot()
@@ -483,10 +501,12 @@ if __name__ == "__main__":
         # trees['student'] = btrees.TableBTree('student', tables['student'])
         # trees['studenthistory'] = btrees.TableBTree('studenthistory', tables['studenthistory'])
         # trees['studcourse'] = btrees.TableBTree('studcourse', tables['studcourse'])
+
+    print("trees")
     for i in range(0, len(keys)):
         trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
         # trees[keys[i]].saveToFile()
-
+    print(list(trees['student'].data))
 
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
