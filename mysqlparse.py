@@ -211,8 +211,10 @@ def p_condition(p):
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp
             | string_exp NOT LIKE string_exp
+            | string_exp EQUAL string_exp
             | STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR'''
 
+    print("string_cond")
     p[0] = ""
     for i in p:
         if(i is not None):
@@ -286,6 +288,8 @@ def p_num_exp(p):
     '''num_exp : num_exp ADD num_factor
             |  num_factor SUBTRACT num_exp
             | num_factor'''
+    print("length" + str(len(p)))
+    print(list(p))
     if(len(p) > 2):
         if((type(p[1]) == int or type(p[1]) == float) and (type(p[3]) == int or type(p[3]) == float) ):
             if p[2] == '+':
@@ -296,7 +300,7 @@ def p_num_exp(p):
             p[0] = str(p[1]) + " " + p[2] + " " + str(p[3])
     else:
       p[0] = p[1]
-    print("p0",p[0])
+    print("num_exp p0",p[0])
 
 def p_num_factor(p):
     '''num_factor : num_factor ASTERISK num_term

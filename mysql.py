@@ -162,7 +162,6 @@ class Ui_MainWindow(object):
         self.textEdit = QtGui.QTextEdit()
         self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
-        self.textEdit.setFocus(True)
 
         # menubar
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -207,6 +206,9 @@ class Ui_MainWindow(object):
         self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
         self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
         self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
+
+        # set focus to textedit widget upon opening the window
+        self.textEdit.setFocus(True)
 
         # make only the columns on the right stretchable
         self.centralwidget.layout().setColumnStretch(0, 0)

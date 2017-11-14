@@ -81,20 +81,40 @@ class TableBTree:
         cols = []
         row = []
         print("SELECT OPERATION ON "+self.tablename)
+        print("condition")
+        print(condition)
         if columns[0] == "*":
-            for i in self.columns:
-                cols.append(i)
-                # print(i)
-            retdata.append(cols)
-
-            for j in self.data:
-                row = []
+            if withcondition:
+                return
+            else:
                 for i in self.columns:
-                    print(self.data[j][i])
-                    row.append(self.data[j][i])
-                retdata.append(row)
+                    cols.append(i)
+                    # print(i)
+                retdata.append(cols)
+
+                for j in self.data:
+                    row = []
+                    for i in self.columns:
+                        print(self.data[j][i])
+                        row.append(self.data[j][i])
+                    retdata.append(row)
+
         else:
-            print(columns)
+            if withcondition:
+                return
+            else:
+                for i in columns:
+                    cols.append(i)
+                    # print(i)
+                retdata.append(cols)
+
+                for j in self.data:
+                    row = []
+                    for i in columns:
+                        i = i.strip(" ")
+                        print(self.data[j][i])
+                        row.append(self.data[j][i])
+                    retdata.append(row)
         return retdata
 
     # def delete(self, table_selected, columns, withcond, condition):
