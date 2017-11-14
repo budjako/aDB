@@ -11,14 +11,14 @@ class TableBTree:
         self.data = OOBTree()
         self.counter = 0
 
-        print("Initialize "+tablename)
+        # print("Initialize "+tablename)
         self.loadData()
-        print("tablespecs")
-        print(tablespecs)
+        # print("tablespecs")
+        # print(tablespecs)
         # self.printData()
 
     def loadData(self):
-        print("Loading data of "+self.tablename+" table.")
+        # print("Loading data of "+self.tablename+" table.")
         tabledata = open("data/"+self.tablename+".dat", "r")
         counter = 0
         cols = []
@@ -46,7 +46,7 @@ class TableBTree:
                         if i != '':
                             self.primarykey.append(keyset[i])
 
-                    print(keyset)
+                    # print(keyset)
                 counter = counter + 1
             else:
                 nonewline = line.rstrip('\n')
@@ -74,7 +74,8 @@ class TableBTree:
     def printData(self):
         for i in self.data.keys():
             # print(str(i))
-            print(self.data[i])
+            # print(self.data[i])
+            return
 
     def insert(self, value_list_bool, column_name_bool, value_list, col_name, assignment_list):
         error1 = False
@@ -658,9 +659,29 @@ class TableBTree:
                     print(self.data[j][i])
                     row.append(self.data[j][i])
                 retdata.append(row)
+        else:
+            print(columns)
         return retdata
 
-    # def delete(self, table_selected, columns, withcond, condition):
+    def delete(self, columns, withcondition, condition):
+        retdata = []
+        colNames = []
+        row = []
+
+        for col in self.columns:
+            colNames.append(col)    
+        retdata.append(colNames)
+
+        if withcondition:
+            print('condition')
+        else:            
+            self.data.clear()
+            for pk in self.data:
+                for col in self.columns:
+                    col = col.strip(" ")
+                    row.append(self.data[pk][col])
+                retdata.append(row)
+        return retdata
 
     # def insertData(self):
 
