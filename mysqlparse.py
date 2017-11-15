@@ -225,11 +225,8 @@ def p_col_cond(p):
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp
             | string_exp NOT LIKE string_exp
-<<<<<<< HEAD
             | string_exp EQUAL string_exp
-=======
             | string_exp comparison_op string_exp
->>>>>>> 7a9ccd466dcbacb7a241277b9047f0ec23896544
             | STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR'''
 
     print("string_cond")
