@@ -211,6 +211,7 @@ def p_condition(p):
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp
             | string_exp NOT LIKE string_exp
+            | string_exp comparison_op string_exp
             | STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR'''
 
     p[0] = ""
