@@ -647,8 +647,12 @@ class TableBTree:
         cols = []
         row = []
         print("SELECT OPERATION ON "+self.tablename)
+<<<<<<< HEAD
         print("condition")
         print(condition)
+=======
+        print("Condition:  ", condition)
+>>>>>>> 7a9ccd466dcbacb7a241277b9047f0ec23896544
         if columns[0] == "*":
             if withcondition:
                 return

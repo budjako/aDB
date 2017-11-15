@@ -428,7 +428,7 @@ class Ui_MainWindow(object):
             returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition)
             self.showQueryResult(returned_rows)
             
-         if mysqlparse.operation == 'insert':
+        if mysqlparse.operation == 'insert':
             #returned_rows = trees[mysqlparse.table_selected].insert
             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
             if not errorcheck:
