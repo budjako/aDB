@@ -198,7 +198,8 @@ def p_literals(p):
     p[0] = p[1]
 
 def p_condition(p):
-    '''condition : string_cond
+    '''condition : col_cond
+            | string_cond
             | num_cond
             | NOT OPENPAR string_cond CLOSEPAR
             | NOT OPENPAR num_cond CLOSEPAR'''
@@ -207,6 +208,19 @@ def p_condition(p):
     for i in p:
         if(i is not None):
             p[0] = p[0] + " " + i
+
+def p_col_cond(p):
+    '''col_cond : column_name comparison_op string_exp
+            | column_name comparison_op num_exp
+            | column_name LIKE string_exp
+            | column_name NOT LIKE string_exp'''
+
+    p[0] = ""
+    for i in p:
+        if(i is not None):
+            p[0] = p[0] + " " + i
+            print("p["+str(i)+"]: "+ str(i))
+
 
 def p_string_cond(p):
     '''string_cond : string_exp LIKE string_exp

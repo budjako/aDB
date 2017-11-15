@@ -647,6 +647,7 @@ class TableBTree:
         cols = []
         row = []
         print("SELECT OPERATION ON "+self.tablename)
+        print("Condition:  ", condition)
         if columns[0] == "*":
             for i in self.columns:
                 cols.append(i)
