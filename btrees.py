@@ -646,23 +646,34 @@ class TableBTree:
         retdata = []
         cols = []
         row = []
+        where_column = False
+
         print("SELECT OPERATION ON "+self.tablename)
         print("Condition:  ", condition)
 
-        if condition:
+        if col_name is not None:
+            where_column = True
+
+        if condition and where_column:
             print("colname:'"+col_name+"'")
             print("comp_operator:'"+comp_operator+"'")
-            print("cond_exp:'"+cond_exp+"'")
+            print("cond_exp:'"+str(cond_exp)+"'")
+            col_name = col_name[1:-1]
+            comp_operator = comp_operator[1:-1]
+            if not isinstance(cond_exp, int):
+                cond_exp = cond_exp[1:-1]
+
 
         if columns[0] == "*":
-            if withcondition:
-                return
+            if withcondition and where_column: #If True lang, print all pa din
+                #return
+                print("cas")
             else:
                 for i in self.columns:
-                    cols.append(i)
-                    # print(i)
+                      cols.append(i)
+                     # print(i)
                 retdata.append(cols)
-
+ 
                 for j in self.data:
                     row = []
                     for i in self.columns:
@@ -672,26 +683,21 @@ class TableBTree:
 
         else:
             #print(columns)
-            ctr = 0
-            if len(columns) > 1:
+            if withcondition:
+                return
+            else:
                 for i in columns:
-                    if i[0] == ' ':
-                        columns[ctr] = columns[ctr][1:]
-                    if i[(len(i)-1)] == ' ':
-                        columns[ctr] = columns[ctr][:-1]
-                    ctr = ctr + 1
-            print(columns)
-            ctr = 0
-            for i in columns:
-                cols.append(i)
-            retdata.append(cols)
-
-            for j in self.data:
-                row = []
-                for k in columns:
-                    print(self.data[j][k])
-                    row.append(self.data[j][k])
-                retdata.append(row)
+                    cols.append(i)
+                    # print(i)
+                retdata.append(cols)
+ 
+                for j in self.data:
+                    row = []
+                    for i in columns:
+                        i = i.strip(" ")
+                        print(self.data[j][i])
+                        row.append(self.data[j][i])
+                    retdata.append(row)
         return retdata
 
     def delete(self, columns, withcondition, condition):

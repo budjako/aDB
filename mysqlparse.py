@@ -228,7 +228,7 @@ def p_col_cond(p):
     p[0] = ""
     for i in p:
         if(i is not None):
-            p[0] = p[0] + " " + i
+            p[0] = p[0] + " " + str(i)
             print("p["+str(i)+"]: "+ str(i))
 
 
