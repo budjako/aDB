@@ -414,6 +414,8 @@ class Ui_MainWindow(object):
         mysqlparse.value_list_bool = False
         mysqlparse.column_name_bool = False
         mysqlparse.col_name = None
+        mysqlparse.comp_operator = None
+        mysqlparse.cond_exp = None
 
     # execute one line in text edit
     def lineExec(self):
@@ -440,11 +442,13 @@ class Ui_MainWindow(object):
         print('value_list_bool: ', mysqlparse.value_list_bool)       #
         print('column_name_bool: ', mysqlparse.column_name_bool)
         print('col_name: ', mysqlparse.col_name)
+        print('comp_operator: ', mysqlparse.comp_operator)
+        print('cond_exp: ', mysqlparse.cond_exp)
 
         # print('\ntrees: ', trees)
 
         if mysqlparse.operation == 'select':
-            returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition)
+            returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
 
         if mysqlparse.operation == 'delete':

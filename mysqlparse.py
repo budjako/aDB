@@ -18,6 +18,8 @@ assignment_list = None
 value_list_bool = False
 column_name_bool = False
 col_name = None
+comp_operator = None
+cond_exp = None
 
 condition = []  # format: lhs comparison_operator rhs
 
@@ -214,6 +216,14 @@ def p_col_cond(p):
             | column_name comparison_op num_exp
             | column_name LIKE string_exp
             | column_name NOT LIKE string_exp'''
+
+    global col_name
+    global comp_operator
+    global cond_exp
+
+    col_name = p[1]
+    comp_operator = p[2]
+    cond_exp = p[3]
 
     p[0] = ""
     for i in p:
