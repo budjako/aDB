@@ -799,28 +799,51 @@ class TableBTree:
                     retdata.append(row)
         return retdata
 
-    def delete(self, columns, withCondition, selCol, compOp, condExp):
+    def delete(self, columns, withCond, selCol, compOp, condExp):
         retdata = []
         colNames = []
         row = []
 
+        # append column names
         for col in self.columns:
             colNames.append(col)    
         retdata.append(colNames)
 
         # delete with condition
-        if withCondition:
-            for key in list(self.data.keys()):
-                if 
-
+        if withCond:
+            for key in list(self.data.keys()):                                          # search value in btrees
+                dataValue = self.data[key][selCol]
+                if isinstance(condExp, str):                                            # if value is a string
+                    dataValue = str(dataValue).lower()
+                    condExp = condExp.lower()
+                    if (compOp == 'like' and dataValue == condExp):                     # delete like
+                        self.data.pop(key)
+                    # elif (compOp == ''):
+                if isinstance(condExp, int): 
+                    dataValue = int(dataValue)                                          # if value is an integer
+                    if (compOp == '<' and dataValue < condExp):                         # delete less than
+                        self.data.pop(key)
+                    elif (compOp == '>' and dataValue > condExp):                       # delete greater than
+                        self.data.pop(key)
+                    elif (compOp == '<=' and dataValue <= condExp):                     # delete less than or equal
+                        self.data.pop(key)
+                    elif (compOp == '>=' and dataValue >= condExp):                     # delete greather than or equal
+                        self.data.pop(key)
+                if (compOp == '=' and dataValue == condExp):                            # delete equal
+                    self.data.pop(key)
+                if ((compOp == '!=' or compOp == '<>') and dataValue != condExp):       # delete not equal
+                    self.data.pop(key)
+                    
         # delete all
         else:            
             self.data.clear()
-            for pk in self.data:
-                for col in self.columns:
-                    col = col.strip(" ")
-                    row.append(self.data[pk][col])
-                retdata.append(row)
+        
+        # append row values
+        for key in self.data:
+            for col in columns:
+                col = col.strip(" ")
+                row.append(self.data.values(key)[key][col])
+            retdata.append(row)
 
         return retdata
 
