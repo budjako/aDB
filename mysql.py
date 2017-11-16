@@ -440,7 +440,7 @@ class Ui_MainWindow(object):
             self.showQueryResult(returned_rows)
 
         if mysqlparse.operation == 'delete':
-            returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition)
+            returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
             
         if mysqlparse.operation == 'insert':

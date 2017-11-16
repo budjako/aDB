@@ -940,7 +940,7 @@ class TableBTree:
                     retdata.append(row)
         return retdata
 
-    def delete(self, columns, withcondition, condition):
+    def delete(self, columns, withCondition, selCol, compOp, condExp):
         retdata = []
         colNames = []
         row = []
@@ -949,8 +949,12 @@ class TableBTree:
             colNames.append(col)    
         retdata.append(colNames)
 
-        if withcondition:
-            print('condition')
+        # delete with condition
+        if withCondition:
+            for key in list(self.data.keys()):
+                if 
+
+        # delete all
         else:            
             self.data.clear()
             for pk in self.data:
@@ -958,6 +962,7 @@ class TableBTree:
                     col = col.strip(" ")
                     row.append(self.data[pk][col])
                 retdata.append(row)
+
         return retdata
 
     # def insertData(self):
