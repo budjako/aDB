@@ -658,24 +658,65 @@ class TableBTree:
             print("colname:'"+col_name+"'")
             print("comp_operator:'"+comp_operator+"'")
             print("cond_exp:'"+str(cond_exp)+"'")
-            col_name = col_name[1:-1]
-            comp_operator = comp_operator[1:-1]
-            if not isinstance(cond_exp, int):
-                cond_exp = cond_exp[1:-1]
-
-
         if columns[0] == "*":
-            if withcondition and where_column: #If True lang, print all pa din
-                #return
-                print("cas")
-            else:
-                for i in self.columns:
-                      cols.append(i)
-                     # print(i)
-                retdata.append(cols)
- 
-                for j in self.data:
-                    row = []
+            for i in self.columns:
+                cols.append(i)
+            retdata.append(cols)
+
+            for j in self.data:
+                row = []
+                if withcondition and where_column:#If True lang, print all pa din
+                    if isinstance(cond_exp,str):
+                        print(self.data[j][col_name] + " = " + cond_exp)
+                        if(str.lower(self.data[j][col_name]) == cond_exp):  #just to lowercase until input is normalized
+                            for i in self.columns:
+                                print(self.data[j][i])
+                                row.append(self.data[j][i])
+                            retdata.append(row)
+                    else:
+                        if comp_operator == '=':
+                            if float(self.data[j][col_name]) == float(cond_exp):
+                                for i in self.columns:
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '>=':
+                            if float(self.data[j][col_name]) >= float(cond_exp):
+                                for i in self.columns:
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '>':
+                            if float(self.data[j][col_name]) > float(cond_exp):
+                                for i in self.columns:
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '<':
+                            if float(self.data[j][col_name]) < float(cond_exp):
+                                for i in self.columns:
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '<=':
+                            if float(self.data[j][col_name]) <= float(cond_exp):
+                                for i in self.columns:
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '!=':
+                            if float(self.data[j][col_name]) != float(cond_exp):
+                                for i in self.columns:
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '<>':
+                            if float(self.data[j][col_name]) != float(cond_exp):
+                                for i in self.columns:
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                else:
                     for i in self.columns:
                         print(self.data[j][i])
                         row.append(self.data[j][i])
@@ -683,16 +724,74 @@ class TableBTree:
 
         else:
             #print(columns)
-            if withcondition:
-                return
-            else:
-                for i in columns:
-                    cols.append(i)
-                    # print(i)
-                retdata.append(cols)
- 
-                for j in self.data:
-                    row = []
+            
+            for i in columns:
+                cols.append(i)
+                # print(i)
+            retdata.append(cols)
+
+            for j in self.data:
+                row = []
+                if withcondition and where_column:
+                    if isinstance(cond_exp,str):
+                            print(self.data[j][col_name] + " = " + cond_exp)
+                            if(str.lower(self.data[j][col_name]) == cond_exp):  #just to lowercase until input is normalized
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                    else:
+                        if comp_operator == '=':
+                            if float(self.data[j][col_name]) == float(cond_exp):
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '>=':
+                            if float(self.data[j][col_name]) >= float(cond_exp):
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '>':
+                            if float(self.data[j][col_name]) > float(cond_exp):
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '<':
+                            if float(self.data[j][col_name]) < float(cond_exp):
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '<=':
+                            if float(self.data[j][col_name]) <= float(cond_exp):
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '!=':
+                            if float(self.data[j][col_name]) != float(cond_exp):
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                        elif comp_operator == '<>':
+                            if float(self.data[j][col_name]) != float(cond_exp):
+                                for i in columns:
+                                    i = i.strip(" ")
+                                    print(self.data[j][i])
+                                    row.append(self.data[j][i])
+                                retdata.append(row)
+                else:
                     for i in columns:
                         i = i.strip(" ")
                         print(self.data[j][i])
