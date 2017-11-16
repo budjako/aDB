@@ -654,20 +654,22 @@ class TableBTree:
             print("comp_operator:'"+comp_operator+"'")
             print("cond_exp:'"+cond_exp+"'")
 
-
-
         if columns[0] == "*":
-            for i in self.columns:
-                cols.append(i)
-                # print(i)
-            retdata.append(cols)
-
-            for j in self.data:
-                row = []
+            if withcondition:
+                return
+            else:
                 for i in self.columns:
-                    print(self.data[j][i])
-                    row.append(self.data[j][i])
-                retdata.append(row)
+                    cols.append(i)
+                    # print(i)
+                retdata.append(cols)
+
+                for j in self.data:
+                    row = []
+                    for i in self.columns:
+                        print(self.data[j][i])
+                        row.append(self.data[j][i])
+                    retdata.append(row)
+
         else:
             #print(columns)
             ctr = 0
@@ -690,7 +692,6 @@ class TableBTree:
                     print(self.data[j][k])
                     row.append(self.data[j][k])
                 retdata.append(row)
-
         return retdata
 
     def delete(self, columns, withcondition, condition):

@@ -162,7 +162,6 @@ class Ui_MainWindow(object):
         self.textEdit = QtGui.QTextEdit()
         self.textEdit.setGeometry(QtCore.QRect(230, 30, 491, 251))
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
-        self.textEdit.setFocus(True)
 
         # menubar
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -207,6 +206,9 @@ class Ui_MainWindow(object):
         self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
         self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
         self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
+
+        # set focus to textedit widget upon opening the window
+        self.textEdit.setFocus(True)
 
         # make only the columns on the right stretchable
         self.centralwidget.layout().setColumnStretch(0, 0)
@@ -294,8 +296,19 @@ class Ui_MainWindow(object):
                                 dataString += "'" + data + "',"
                         dataString = dataString[:-1]
                         insertString2 = "INSERT INTO " + self.dropdown + " VALUES(" + dataString + ");"                      #Without column names
-                        print(insertString2)
-                        append.write(dataString+";\n")
+                        # print(insertString2)
+                        # append.write(dataString+";\n")
+
+                        insertString2 = insertString2.lower()
+                        prog = mysqlparse.parse(insertString2)
+
+                        if mysqlparse.operation == 'insert':
+                            #returned_rows = trees[mysqlparse.table_selected].insert
+                            errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                            if not errorcheck:
+                                print("Insert successful")
+                            else:
+                                print("Error seen")
         elif f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
             commentRegex = r'/\*|.*\*/|//'
