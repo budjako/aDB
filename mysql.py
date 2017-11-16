@@ -296,7 +296,7 @@ class Ui_MainWindow(object):
                                 dataString += "'" + data + "',"
                         dataString = dataString[:-1]
                         insertString2 = "INSERT INTO " + self.dropdown + " VALUES(" + dataString + ");"                      #Without column names
-                        # print(insertString2)
+                        print(insertString2)
                         # append.write(dataString+";\n")
 
                         insertString2 = insertString2.lower()
@@ -321,11 +321,23 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
-                    # print(tables[nameOfFile])
-                    if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
-                        append.write(line[line.find("VALUES (")+6:line.find(");")+2])
-                    else:
-                        print("with column names")
+                    line = line.lower()
+                    prog = mysqlparse.parse(line)
+
+                    if mysqlparse.operation == 'insert':
+                        #returned_rows = trees[mysqlparse.table_selected].insert
+                        errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                        if not errorcheck:
+                            print("Insert successful")
+                        else:
+                            print("Error seen")
+                    # print(line)
+                    # # print(tables[nameOfFile])
+                    # if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
+                    #     # append.write(line[line.find("VALUES (")+6:line.find(");")+2])
+                    #     print(line[line.find("VALUES (")+6:line.find(");")+2])
+                    # else:
+                    #     print("with column names")
         else:
             self.fileNameError = QtGui.QMessageBox()
             self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
