@@ -983,8 +983,9 @@ class TableBTree:
                     condExp = condExp.lower()
                     if (compOp == 'like' and dataValue == condExp):                     # delete like
                         self.data.pop(key)
-                    # elif (compOp == ''):
-                if isinstance(condExp, int):
+                    elif (compOp == 'not like' and dataValue != condExp):
+                        self.data.pop(key)
+                if isinstance(condExp, int): 
                     dataValue = int(dataValue)                                          # if value is an integer
                     if (compOp == '<' and dataValue < condExp):                         # delete less than
                         self.data.pop(key)
@@ -998,6 +999,11 @@ class TableBTree:
                     self.data.pop(key)
                 if ((compOp == '!=' or compOp == '<>') and dataValue != condExp):       # delete not equal
                     self.data.pop(key)
+                if (compOp == 'is null' and dataValue == 'null'):                       # delete equal null
+                    self.data.pop(key)                                                  
+                if (compOp == 'not null' and dataValue != 'null'):                      # delete not equal null
+                    self.data.pop(key)                    
+                    
 
         # delete all
         else:
