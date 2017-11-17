@@ -433,16 +433,16 @@ class Ui_MainWindow(object):
         print('cond_exp: ', mysqlparse.cond_exp)
 
         # print('\ntrees: ', trees)
-
-        if mysqlparse.operation == 'select':
+        mysqlparse.table_selected = mysqlparse.table_selected.lower()
+        if mysqlparse.operation == 'select' or mysqlparse.operation == 'SELECT':
             returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'delete':
+        if mysqlparse.operation == 'delete' or mysqlparse.operation == 'DELETE':
             returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'insert':
+        if mysqlparse.operation == 'insert' or mysqlparse.operation == 'INSERT':
             #returned_rows = trees[mysqlparse.table_selected].insert
             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
             if not errorcheck:

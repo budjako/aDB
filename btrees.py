@@ -82,7 +82,7 @@ class TableBTree:
         birthday_pattern = re.compile("^'\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])'$")
         studno_pattern = re.compile("^'\d{4}-\d{5}'$")
         time_pattern = re.compile("^'([0-1]?[0-9]|2[0-3]):[0-5][0-9]-([0-1]?[0-9]|2[0-3]):[0-5][0-9]'$")
-        sem_pattern = re.compile("'((1st)|(2nd)|(3rd))'")
+        sem_pattern = re.compile("'((1st)|(2nd)|(Sum)|(Mid))'")
 
         if self.tablename == 'student':
             if value_list_bool and not column_name_bool: #first case input
@@ -118,7 +118,7 @@ class TableBTree:
                     error1 = True
 
             elif value_list_bool and column_name_bool: #second case input
-                col_name = col_name.replace(" ", "")
+                col_name = col_name.lower().replace(" ", "")
                 #value_list = value_list.split(' , ')
                 #value_list = re.split(" , ",value_list)
                 value_list = re.split(" , ",value_list)
@@ -183,7 +183,7 @@ class TableBTree:
                     if i == 0:
                         split_list[0] = split_list[0][12:]
                     
-                    col_ext = split_list[0].replace(" ","")
+                    col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
                         val_ext = val_ext[:-1]
@@ -263,7 +263,7 @@ class TableBTree:
                     error1 = True
 
             elif value_list_bool and column_name_bool: #second case input
-                col_name = col_name.replace(" ", "")
+                col_name = col_name.lower().replace(" ", "")
                 #value_list = (value_list + " ").split(',')
                 value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
@@ -317,7 +317,7 @@ class TableBTree:
                     if i == 0:
                         split_list[0] = split_list[0][10:]
                     
-                    col_ext = split_list[0].replace(" ","")
+                    col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
                         val_ext = val_ext[:-1]
@@ -392,7 +392,7 @@ class TableBTree:
                     error1 = True
 
             elif value_list_bool and column_name_bool: #second case input
-                col_name = col_name.replace(" ", "")
+                col_name = col_name.lower().replace(" ", "")
                 #value_list = (value_list + "  ").split(',')
                 value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
@@ -454,7 +454,7 @@ class TableBTree:
                     if i == 0:
                         split_list[0] = split_list[0][12:]
                     
-                    col_ext = split_list[0].replace(" ","")
+                    col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
                         val_ext = val_ext[:-1]
@@ -543,7 +543,7 @@ class TableBTree:
                     error1 = True
 
             elif value_list_bool and column_name_bool: #second case input
-                col_name = col_name.replace(" ", "")
+                col_name = col_name.lower().replace(" ", "")
                 #value_list = value_list.split(',')
 
                 value_list = re.split(" , ",value_list)
@@ -619,7 +619,7 @@ class TableBTree:
 
                 for i in range(0,len(assignment_list)):
                     split_list = assignment_list[i].split("=")
-                    col_ext = split_list[0].replace(" ","")
+                    col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1]
                     if re.search("'null'",val_ext):
                         val_ext = "NULL"
@@ -718,7 +718,7 @@ class TableBTree:
 
 
             elif value_list_bool and column_name_bool: #second case input
-                col_name = col_name.replace(" ", "")
+                col_name = col_name.lower().replace(" ", "")
                 value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
                     print(value_list[i])
@@ -766,7 +766,7 @@ class TableBTree:
                     if i == 0:
                         split_list[0] = split_list[0][8:]
                     
-                    col_ext = split_list[0].replace(" ","")
+                    col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
                         val_ext = val_ext[:-1]
