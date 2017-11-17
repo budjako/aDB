@@ -44,6 +44,8 @@ except AttributeError:
 # main window
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        def __init__(self, parent=None):
+            super(MainWindow, self).__init__(parent)
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(732, 570)
@@ -407,6 +409,7 @@ class Ui_MainWindow(object):
         mysqlparse.col_name = None
         mysqlparse.comp_operator = None
         mysqlparse.cond_exp = None
+        mysqlparse.error1 = None
 
     # execute one line in text edit
     def lineExec(self):
@@ -448,10 +451,12 @@ class Ui_MainWindow(object):
         if mysqlparse.operation.lower() == 'insert':
             #returned_rows = trees[mysqlparse.table_selected].insert
             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
-            if not errorcheck:
+            if errorcheck is None:
                 print("Insert successful")
             else:
                 print("Error seen")
+                self.showErrorDialog(errorcheck,"Error at Insert")
+
 
         self.clearGlobals()
     # execute all lines in text edit

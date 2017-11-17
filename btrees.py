@@ -78,11 +78,13 @@ class TableBTree:
             return
 
     def insert(self, value_list_bool, column_name_bool, value_list, col_name, assignment_list):
-        error1 = False
+
+
+        error1 = None
         birthday_pattern = re.compile("^'\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])'$")
         studno_pattern = re.compile("^'\d{4}-\d{5}'$")
         time_pattern = re.compile("^'([0-1]?[0-9]|2[0-3]):[0-5][0-9]-([0-1]?[0-9]|2[0-3]):[0-5][0-9]'$")
-        sem_pattern = re.compile("'((1st)|(2nd)|(Sum)|(Mid))'")
+        sem_pattern = re.compile("'((1st)|(2nd)|(Sum))'")
 
         if self.tablename == 'student':
             if value_list_bool and not column_name_bool: #first case input
@@ -97,25 +99,25 @@ class TableBTree:
                 #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 if not birthday_pattern.match(value_list[2]):
                     print("Birthday format isn't correct")
-                    error1 = True
+                    error1 = "Birthday format isn't correct"
                 if not studno_pattern.match(value_list[0]):
                     print("Student number format isn't correct")
-                    error1 = True
+                    error1 = "Student number format isn't correct"
                 if not value_list[5].isdigit():
                     print("Units earned format isn't correct")
-                    error1 = True
+                    error1 = "Units earned format isn't correct"
 
                 if value_list[0] not in self.data and not error1:
                     if len(value_list) == 6:
                         self.data.update({value_list[0]: {self.columns[0]: value_list[0], self.columns[1]: value_list[1], self.columns[2]: value_list[2], self.columns[3]: value_list[3], self.columns[4]: value_list[4], self.columns[5]: value_list[5]}})
                     else:
                         print("Column values are lacking")
-                        error1 = True
+                        error1 = "Column values are lacking"
                 elif error1:
                     print("Input is wrong")
                 else:
                     print("Already in BTree")
-                    error1 = True
+                    error1 = "Already in BTree"
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.lower().replace(" ", "")
@@ -135,12 +137,12 @@ class TableBTree:
                 
                 if not studno_pattern.match(value_list[key_index]):
                     print("Student number format isn't correct")
-                    error1 = True
+                    error1 = "Student number format isn't correct"
 
                 col_name = col_name.split(',')
                 if "studno" not in col_name:
                     print("No primary key")
-                    error1 = True
+                    error1 = "No primary key"
                 else:
                     key_value_list = value_list[key_index]
                     dict_cols_vals = dict(zip(col_name,value_list))
@@ -152,7 +154,7 @@ class TableBTree:
                     else:
                         if not birthday_pattern.match(value_list[col_name.index("birthday")]):
                             print("Birthday format isn't correct")
-                            error1 = True
+                            error1 = "Birthday format isn't correct"
                     if 'degree' not in dict_cols_vals:
                         dict_cols_vals['degree'] = "NULL";
                     if 'major' not in dict_cols_vals:
@@ -162,7 +164,7 @@ class TableBTree:
                     else:
                         if not value_list[col_name.index("unitsearned")].isdigit():
                             print("Units earned format isn't correct")
-                            error1 = True
+                            error1 = "Units earned format isn't correct"
 
                     if key_value_list not in self.data and not error1:
                         self.data.update({key_value_list: dict_cols_vals})
@@ -170,7 +172,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
             elif not value_list_bool and not column_name_bool: #third case input
                 assignment_list = (assignment_list + " ").split(' , ')
@@ -195,7 +197,7 @@ class TableBTree:
 
                 if "studno" not in col_name:
                     print("No primary key")
-                    error1 = True
+                    error1 = "No primary key"
                 else:
                     key_index = col_name.index("studno")
                     key_value_list = value_list[key_index]
@@ -203,7 +205,7 @@ class TableBTree:
 
                     if not studno_pattern.match(dict_cols_vals['studno']):
                         print("Student number format isn't correct")
-                        error1 = True
+                        error1 = "Student number format isn't correct"
 
 
                     if 'studentname' not in dict_cols_vals:
@@ -223,7 +225,7 @@ class TableBTree:
                     else:
                         if not dict_cols_vals['unitsearned'].isdigit():
                             print("Units earned format isn't correct")
-                            error1 = True
+                            error1 = "Units earned format isn't correct"
 
 
                     if key_value_list not in self.data and not error1:
@@ -232,7 +234,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
         elif self.tablename == 'studenthistory':
             if value_list_bool and not column_name_bool: #first case input
@@ -248,19 +250,19 @@ class TableBTree:
                 #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 if not studno_pattern.match(value_list[0]):
                     print("Student number format isn't correct")
-                    error1 = True
+                    error1 = "Student number format isn't correct"
 
                 if value_list[0] not in self.data and not error1:
                     if len(value_list) == 5:
                         self.data.update({value_list[0]: {self.columns[0]: value_list[0], self.columns[1]: value_list[1], self.columns[2]: value_list[2], self.columns[3]: value_list[3], self.columns[4]: value_list[4]}})
                     else:
                         print("Column values are lacking")
-                        error1 = True
+                        error1 = "Column values are lacking"
                 elif error1:
                     print("Input is wrong")
                 else:
                     print("Already in BTree")
-                    error1 = True
+                    error1 = "Already in BTree"
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.lower().replace(" ", "")
@@ -280,11 +282,11 @@ class TableBTree:
 
                 if not studno_pattern.match(value_list[key_index]):
                     print("Student number format isn't correct")
-                    error1 = True
+                    error1 = "Student number format isn't correct"
 
                 if "studno" not in col_name:
                     print("No primary key")
-                    error1 = True
+                    error1 = "No primary key"
                 else:
                     key_value_list = value_list[key_index]
                     dict_cols_vals = dict(zip(col_name,value_list))
@@ -304,7 +306,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
             elif not value_list_bool and not column_name_bool: #third case input
                 assignment_list = (assignment_list + " ").split(' , ')
@@ -329,7 +331,7 @@ class TableBTree:
 
                 if "studno" not in col_name:
                     print("No primary key")
-                    error1 = True
+                    error1 = "No primary key"
                 else:
                     key_index = col_name.index("studno")
                     key_value_list = value_list[key_index]
@@ -337,7 +339,7 @@ class TableBTree:
 
                     if not studno_pattern.match(dict_cols_vals['studno']):
                         print("Student number format isn't correct")
-                        error1 = True
+                        error1 = "Student number format isn't correct"
 
                     if 'description' not in dict_cols_vals:
                         dict_cols_vals['description'] = "NULL";
@@ -354,7 +356,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
         elif self.tablename == 'course':
             if value_list_bool and not column_name_bool: #first case input
@@ -371,25 +373,25 @@ class TableBTree:
 
                 if not value_list[3].isdigit():
                     print("NoOfUnits format isn't correct")
-                    error1 = True
+                    error1 = "NoOfUnits format isn't correct"
                 if not value_list[4].isdigit():
                     print("HasLab format isn't correct")
-                    error1 = True
+                    error1 = "HasLab format isn't correct"
                 if not sem_pattern.match(value_list[5]):
                     print("SemOffered format isn't correct")
-                    error1 = True
+                    error1 = "SemOffered format isn't correct"
 
                 if value_list[0] not in self.data and not error1:
                     if len(value_list) == 6:
                         self.data.update({value_list[0]: {self.columns[0]: value_list[0], self.columns[1]: value_list[1], self.columns[2]: value_list[2], self.columns[3]: value_list[3], self.columns[4]: value_list[4], self.columns[5]: value_list[5]}})
                     else:
                         print("Column values are lacking")
-                        error1 = True
+                        error1 = "Column values are lacking"
                 elif error1:
                     print("Input is wrong")
                 else:
                     print("Already in BTree")
-                    error1 = True
+                    error1 = "Already in BTree"
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.lower().replace(" ", "")
@@ -407,7 +409,7 @@ class TableBTree:
                 col_name = col_name.split(',')
                 if "cno" not in col_name:
                     print("No primary key")
-                    error1 = True
+                    error1 = "No primary key"
                 else:
                     key_value_list = value_list[key_index]
                     dict_cols_vals = dict(zip(col_name,value_list))
@@ -421,19 +423,19 @@ class TableBTree:
                     else:
                         if not value_list[col_name.index("noofunits")].isdigit():
                             print("NoOfUnits format isn't correct")
-                            error1 = True
+                            error1 = "NoOfUnits format isn't correct"
                     if 'haslab' not in dict_cols_vals:
                         dict_cols_vals['haslab'] = "NULL";
                     else:
                         if not value_list[col_name.index("haslab")].isdigit():
                             print("HasLab format isn't correct")
-                            error1 = True
+                            error1 = "HasLab format isn't correct"
                     if 'semoffered' not in dict_cols_vals:
                         dict_cols_vals['semoffered'] = "NULL";
                     else:
                         if not sem_pattern.match(dict_cols_vals['semoffered']):
                             print("SemOffered format isn't correct")
-                            error1 = True
+                            error1 = "SemOffered format isn't correct"
 
                     if key_value_list not in self.data and not error1:
                         self.data.update({key_value_list: dict_cols_vals})
@@ -441,7 +443,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
             elif not value_list_bool and not column_name_bool: #third case input
                 assignment_list = (assignment_list + " ").split(' , ')
@@ -466,7 +468,7 @@ class TableBTree:
 
                 if "cno" not in col_name:
                     print("No primary key")
-                    error1 = True
+                    error1 = "No primary key"
                 else:
                     key_index = col_name.index("cno")
                     key_value_list = value_list[key_index]
@@ -482,20 +484,20 @@ class TableBTree:
                         if not dict_cols_vals['noofunits'].isdigit():
                             print(dict_cols_vals['noofunits'])
                             print("NoOfUnits format isn't correct")
-                            error1 = True
+                            error1 = "NoOfUnits format isn't correct"
                     if 'haslab' not in dict_cols_vals:
                         dict_cols_vals['haslab'] = "NULL";
                     else:
                         if not dict_cols_vals['haslab'].isdigit():
                             print(dict_cols_vals['haslab'])
                             print("HasLab format isn't correct")
-                            error1 = True
+                            error1 = "HasLab format isn't correct"
                     if 'semoffered' not in dict_cols_vals:
                         dict_cols_vals['semoffered'] = "NULL";
                     else:
                         if not sem_pattern.match(dict_cols_vals['semoffered']):
                             print("SemOffered format isn't correct")
-                            error1 = True
+                            error1 = "SemOffered format isn't correct"
 
                     if key_value_list not in self.data and not error1:
                         self.data.update({key_value_list: dict_cols_vals})
@@ -503,7 +505,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
         elif self.tablename == 'courseoffering':
             if value_list_bool and not column_name_bool: #first case input
@@ -520,13 +522,13 @@ class TableBTree:
 
                 if not sem_pattern.match(value_list[0]):
                     print("Semester format isn't correct")
-                    error1 = True
+                    error1 = "Semester format isn't correct"
                 if not time_pattern.match(value_list[4]):
                     print("Time format isn't correct")
-                    error1 = True
+                    error1 = "Time format isn't correct"
                 if not value_list[5].isdigit():
                     print("MaxStud format isn't correct")
-                    error1 = True
+                    error1 = "MaxStud format isn't correct"
 
                 print(value_list[0:4])
                 if (value_list[0:4]) not in self.data.keys() and not error1:
@@ -535,12 +537,12 @@ class TableBTree:
                         self.data.update({",".join(value_list[0:4]): {self.columns[0]: value_list[0], self.columns[1]: value_list[1], self.columns[2]: value_list[2], self.columns[3]: value_list[3], self.columns[4]: value_list[4], self.columns[5]: value_list[5]}})
                     else:
                         print("Column values are lacking")
-                        error1 = True
+                        error1 = "Column values are lacking"
                 elif error1:
                     print("Input is wrong")
                 else:
                     print("Already in BTree")
-                    error1 = True
+                    error1 = "Already in BTree"
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.lower().replace(" ", "")
@@ -559,7 +561,7 @@ class TableBTree:
 
                 if ("semester" not in col_name) or ("acadyear" not in col_name) or ("cno" not in col_name) or ("section" not in col_name):
                     print("No primary key/s")
-                    error1 = True
+                    error1 = "No primary key/s"
                 else:
                     key_index = ['','','','']
                     key_col_name = ['','','','']
@@ -585,20 +587,20 @@ class TableBTree:
 
                     if not sem_pattern.match(key_value_list[0]):
                         print("Semester format isn't correct")
-                        error1 = True
+                        error1 = "Semester format isn't correct"
 
                     if 'time' not in dict_cols_vals:
                         dict_cols_vals['time'] = "NULL";
                     else:
                         if not time_pattern.match(dict_cols_vals['time']):
                             print("Time format isn't correct")
-                            error1 = True
+                            error1 = "Time format isn't correct"
                     if 'maxstud' not in dict_cols_vals:
                         dict_cols_vals['maxstud'] = "NULL";
                     else:
                         if not dict_cols_vals['maxstud'].isdigit():
                             print("MaxStud format isn't correct")
-                            error1 = True
+                            error1 = "MaxStud format isn't correct"
 
                     primary_key_string = key_value_list[0] + "," + key_value_list[1] + "," + key_value_list[2] + "," + key_value_list[3]
                     if primary_key_string not in self.data and not error1:
@@ -609,7 +611,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
             elif not value_list_bool and not column_name_bool: #third case input
                 assignment_list = (assignment_list + " ").split(',')
@@ -630,7 +632,7 @@ class TableBTree:
 
                 if ("semester" not in col_name) or ("acadyear" not in col_name) or ("cno" not in col_name) or ("section" not in col_name):
                     print("No primary key")
-                    error1 = True
+                    error1 = "No primary key"
                 else:
                     key_index = ['','','','']
                     key_col_name = ['','','','']
@@ -656,20 +658,20 @@ class TableBTree:
 
                     if not sem_pattern.match(key_value_list[0]):
                         print("Semester format isn't correct")
-                        error1 = True
+                        error1 = "Semester format isn't correct"
 
                     if 'time' not in dict_cols_vals:
                         dict_cols_vals['time'] = "NULL";
                     else:
                         if not time_pattern.match(dict_cols_vals['time']):
                             print("Time format isn't correct")
-                            error1 = True
+                            error1 = "Time format isn't correct"
                     if 'maxstud' not in dict_cols_vals:
                         dict_cols_vals['maxstud'] = "NULL";
                     else:
                         if not dict_cols_vals['maxstud'].isdigit():
                             print("MaxStud format isn't correct")
-                            error1 = True
+                            error1 = "MaxStud format isn't correct"
 
                     primary_key_string = key_value_list[0] + "," + key_value_list[1] + "," + key_value_list[2] + "," + key_value_list[3]
 
@@ -681,7 +683,7 @@ class TableBTree:
                         print("Input is wrong")
                     else:
                         print("Already in BTree")
-                        error1 = True
+                        error1 = "Already in BTree"
 
         elif self.tablename == 'studcourse':
             if value_list_bool and not column_name_bool: #first case input
@@ -697,10 +699,10 @@ class TableBTree:
                 #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 if not studno_pattern.match(value_list[0]):
                     print("Student number format isn't correct")
-                    error1 = True
+                    error1 = "Student number format isn't correct"
                 if not sem_pattern.match(value_list[2]):
                     print("Semester format isn't correct")
-                    error1 = True
+                    error1 = "Semester format isn't correct"
 
                 if len(value_list) == 4 and not error1:
                     #btreelen = self.counter + 1
@@ -713,7 +715,7 @@ class TableBTree:
                     print("Input is wrong")
                 else:
                     print("Column values are lacking")
-                    error1 = True
+                    error1 = "Column values are lacking"
 
 
 
@@ -737,7 +739,7 @@ class TableBTree:
                 else:
                     if not studno_pattern.match(dict_cols_vals['studno']):
                         print("Student number format isn't correct")
-                        error1 = True
+                        error1 = "Student number format isn't correct"
                 if 'cno' not in dict_cols_vals:
                         dict_cols_vals['cno'] = "NULL";
                 if 'semester' not in dict_cols_vals:
@@ -745,7 +747,7 @@ class TableBTree:
                 else:
                     if not sem_pattern.match(dict_cols_vals['semester']):
                         print("Semester format isn't correct")
-                        error1 = True
+                        error1 = "Semester format isn't correct"
                 if 'acadyear' not in dict_cols_vals:
                         dict_cols_vals['acadyear'] = "NULL";
 
@@ -785,7 +787,7 @@ class TableBTree:
                 else:
                     if not studno_pattern.match(dict_cols_vals['studno']):
                         print("Student number format isn't correct")
-                        error1 = True
+                        error1 = "Student number format isn't correct"
                 if 'cno' not in dict_cols_vals:
                         dict_cols_vals['cno'] = "NULL";
                 if 'semester' not in dict_cols_vals:
@@ -793,7 +795,7 @@ class TableBTree:
                 else:
                     if not sem_pattern.match(dict_cols_vals['semester']):
                         print("Semester format isn't correct")
-                        error1 = True
+                        error1 = "Semester format isn't correct"
                 if 'acadyear' not in dict_cols_vals:
                         dict_cols_vals['acadyear'] = "NULL";
 
