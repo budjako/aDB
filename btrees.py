@@ -131,10 +131,10 @@ class TableBTree:
                     elif i == 0:
                         value_list[i] = value_list[i][12:]
                     print(value_list[i])
-                    
+
                 key_index = col_name.index("studno")
                 #value_list[key_index] = "'" + value_list[key_index].split("'")[1] + "'"
-                
+
                 if not studno_pattern.match(value_list[key_index]):
                     print("Student number format isn't correct")
                     error1 = "Student number format isn't correct"
@@ -184,7 +184,7 @@ class TableBTree:
                     split_list = assignment_list[i].split("=")
                     if i == 0:
                         split_list[0] = split_list[0][12:]
-                    
+
                     col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
@@ -318,7 +318,7 @@ class TableBTree:
                     split_list = assignment_list[i].split("=")
                     if i == 0:
                         split_list[0] = split_list[0][10:]
-                    
+
                     col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
@@ -455,7 +455,7 @@ class TableBTree:
                     split_list = assignment_list[i].split("=")
                     if i == 0:
                         split_list[0] = split_list[0][12:]
-                    
+
                     col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
@@ -767,7 +767,7 @@ class TableBTree:
                     split_list = assignment_list[i].split("=")
                     if i == 0:
                         split_list[0] = split_list[0][8:]
-                    
+
                     col_ext = split_list[0].lower().replace(" ","")
                     val_ext = split_list[1][1:]
                     if i == len(assignment_list) - 1:
@@ -889,7 +889,7 @@ class TableBTree:
 
         else:
             #print(columns)
-            
+
             for i in columns:
                 cols.append(i)
                 # print(i)
@@ -971,7 +971,7 @@ class TableBTree:
 
         # append column names
         for col in self.columns:
-            colNames.append(col)    
+            colNames.append(col)
         retdata.append(colNames)
 
         # delete with condition
@@ -984,7 +984,7 @@ class TableBTree:
                     if (compOp == 'like' and dataValue == condExp):                     # delete like
                         self.data.pop(key)
                     # elif (compOp == ''):
-                if isinstance(condExp, int): 
+                if isinstance(condExp, int):
                     dataValue = int(dataValue)                                          # if value is an integer
                     if (compOp == '<' and dataValue < condExp):                         # delete less than
                         self.data.pop(key)
@@ -998,11 +998,11 @@ class TableBTree:
                     self.data.pop(key)
                 if ((compOp == '!=' or compOp == '<>') and dataValue != condExp):       # delete not equal
                     self.data.pop(key)
-                    
+
         # delete all
-        else:            
+        else:
             self.data.clear()
-        
+
         # append row values
         for key in self.data:
             for col in columns:
@@ -1010,6 +1010,7 @@ class TableBTree:
                 row.append(self.data.values(key)[key][col])
             retdata.append(row)
 
+        self.saveToFile()
         return retdata
 
     # def insertData(self):
@@ -1017,7 +1018,7 @@ class TableBTree:
     # this function overwrites the contents of the destination file
     def saveToFile(self):
         print("Writing data of "+self.tablename+" table.")
-        tabledata = open("data/"+self.tablename+".dat", "w")
+        tabledata = open("data/"+self.tablename+"save.dat", "w")
         # print("Writing data of "+self.tablename+" table.")
         # tabledata = open("data/"+self.tablename+"save.dat", "w")
 
