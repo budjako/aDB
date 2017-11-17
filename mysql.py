@@ -325,7 +325,6 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
-                    line = line.lower()
                     prog = mysqlparse.parse(line)
 
                     if mysqlparse.operation == 'insert':
@@ -425,51 +424,14 @@ class Ui_MainWindow(object):
 
         # text edit cursor
         cursor = self.textEdit.textCursor()
-        self.textEdit.setTextCursor(QtGui.QTextCursor(self.textEdit.document().findBlockByLineNumber(0)))
-        curPos = cursor.blockNumber() + 1
-        # print(curPos)
-
-        # # count lines in text edit
-        # self.textEdit.moveCursor(QtGui.QTextCursor.End)        
-        # curEnd = cursor.blockNumber() + 1                   # position of the cursor in text edit
-
-        selText = ''
-        
-        self.textEdit.moveCursor(QtGui.QTextCursor.Up)
-        print(cursor.blockNumber() + 1)
-
-        # for i in range(0, curEnd):
-        #     # save line in text edit
-        #     cursor = self.textEdit.textCursor()
-        #     cursor.select(QtGui.QTextCursor.LineUnderCursor)
-        #     line = cursor.selectedText()
-
-        #     print('line: ', selText)
-
-        #     if ';' in line:
-        #         # move to previous line
-        #         curPos = cursor.blockNumber() + 1
-        #         self.textEdit.moveCursor(QtGui.QTextCursor.Up)
-        #         # find more lines above
-        #         while ';' not in line:
-        #             curPos = cursor.blockNumber() + 1
-        #             self.textEdit.moveCursor(QtGui.QTextCursor.Up)
-        #             if 
-        #         selText = line + selText
-            
-        #     else:
-        #         # move to next line
-        #         curPos = cursor.blockNumber() + 1
-        #         self.textEdit.moveCursor(QtGui.QTextCursor.Down)
-
-        #     selText = selText + line
+        # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
+        cursor.select(QtGui.QTextCursor.LineUnderCursor)
 
         selText = cursor.selectedText()            # save content of line under cursor in text edit
         # print("selText")
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
-
-        print('\n', selText, '\n')
+        print(selText)
 
         prog = mysqlparse.parse(selText)
         if(mysqlparse.error):
