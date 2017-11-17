@@ -804,7 +804,8 @@ class TableBTree:
                     self.counter = self.counter + 1
                 else:
                     print("Input is wrong")
-
+        if error1 is None:
+            self.saveToFile()
         return error1
 
     def select(self, columns, withcondition, condition, col_name, comp_operator, cond_exp):
@@ -1024,7 +1025,7 @@ class TableBTree:
     # this function overwrites the contents of the destination file
     def saveToFile(self):
         print("Writing data of "+self.tablename+" table.")
-        tabledata = open("data/"+self.tablename+"save.dat", "w")
+        tabledata = open("data/"+self.tablename+".dat", "w")
         # print("Writing data of "+self.tablename+" table.")
         # tabledata = open("data/"+self.tablename+"save.dat", "w")
 
