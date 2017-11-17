@@ -44,6 +44,8 @@ except AttributeError:
 # main window
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        def __init__(self, parent=None):
+            super(MainWindow, self).__init__(parent)
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(732, 570)
@@ -299,10 +301,10 @@ class Ui_MainWindow(object):
                         # print(insertString2)
                         # append.write(dataString+";\n")
 
-                        insertString2 = insertString2.lower()
+                        # insertString2 = insertString2.lower()
                         prog = mysqlparse.parse(insertString2)
 
-                        if mysqlparse.operation == 'insert':
+                        if mysqlparse.operation.lower() == 'insert':
                             #returned_rows = trees[mysqlparse.table_selected].insert
                             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                             if not errorcheck:
@@ -321,22 +323,25 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
-                    # print(tables[nameOfFile])
-                    if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
-                        append.write(line[line.find("VALUES (")+6:line.find(");")+2])
-                    else:
-                        print("with column names")
+                    line = line.lower()
+                    prog = mysqlparse.parse(line)
+
+                    if mysqlparse.operation == 'insert':
+                        #returned_rows = trees[mysqlparse.table_selected].insert
+                        errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                        if not errorcheck:
+                            print("Insert successful")
+                        else:
+                            print("Error seen")
+                    # print(line)
+                    # # print(tables[nameOfFile])
+                    # if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
+                    #     # append.write(line[line.find("VALUES (")+6:line.find(");")+2])
+                    #     print(line[line.find("VALUES (")+6:line.find(");")+2])
+                    # else:
+                    #     print("with column names")
         else:
-            self.fileNameError = QtGui.QMessageBox()
-            self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
-            self.fileNameError.setText("Only csv and sql files are accepted!")
-            self.fileNameError.setWindowTitle("File type error")
-            self.fileNameError.addButton(QtGui.QMessageBox.Ok)
-            self.fileNameError.show()
-
-
-
-
+            self.showErrorDialog("Only csv and sql files are accepted!", "File type error")
 
         f.close()
         append.close()
@@ -404,6 +409,7 @@ class Ui_MainWindow(object):
         mysqlparse.col_name = None
         mysqlparse.comp_operator = None
         mysqlparse.cond_exp = None
+        mysqlparse.error1 = None
 
     # execute one line in text edit
     def lineExec(self):
@@ -513,6 +519,14 @@ class Ui_MainWindow(object):
         for i in range(0, len(columns)):                                                  # insert rows in the table
             self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(columns[i]))           # column
             self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[keys[row]][columns[i]]))         # datatype
+
+    def showErrorDialog(self, errormessage, errortitle):
+        self.fileNameError = QtGui.QMessageBox()
+        self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
+        self.fileNameError.setText(errormessage)
+        self.fileNameError.setWindowTitle(errortitle)
+        self.fileNameError.addButton(QtGui.QMessageBox.Ok)
+        self.fileNameError.show()
 
 
 trees = {}
