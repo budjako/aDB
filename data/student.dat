@@ -1,6 +1,1006 @@
-studno varchar,studentname varchar,birthday varchar,degree varchar,major varchar,unitsearned integer
+studno varchar,studentname varchar,birthday date,degree varchar,major varchar,unitsearned integer
 studno
-'2011-29712'^'Dyanara Dela Rosa'^'1994-07-29'^'BSCS'^NULL^144
-'2011-29339'^'Gerald Benedict Emalada'^'1995-06-10'^'BSCS'^NULL^144
-'2008-56411'^'Janah Monsanto'^'1991-09-15'^'BSAP'^NULL^36
 '2007-12345'^'Paul Anacay'^'1990-06-25'^'BSCS'^NULL^144
+'2008-56411'^'Janah Monsanto'^'1991-09-15'^'BSAP'^NULL^36
+'2011-29712'^'Dyanara Dela Rosa'^'1994-07-29'^'BSCS'^NULL^144
+'2017-10001'^'saloma errol'^'1992-10-19'^'bs computer engineering'^'business services'^50
+'2017-10002'^'arlie laurance'^'2001-03-29'^'bs mathematics'^'n/a'^24
+'2017-10003'^'hyacinthe broomfield'^'2009-04-19'^'bs mathematics'^'industrial machinery/components'^45
+'2017-10004'^'paolo staten'^'1992-10-25'^'ba sociology'^'integrated oil companies'^14
+'2017-10005'^'merissa willshaw'^'2001-06-10'^'bs applied physics'^'major banks'^46
+'2017-10006'^'boris stegell'^'1996-02-12'^'bs chemistry'^'professional services'^3
+'2017-10007'^'fern yekel'^'1999-02-24'^'bs mathematics'^'engineering & construction'^80
+'2017-10008'^'kirbee forward'^'1992-04-06'^'bs chemistry'^'beverages (production/distribution)'^30
+'2017-10009'^'rooney tennewell'^'2008-12-21'^'bs chemical engineering'^'finance: consumer services'^21
+'2017-10010'^'erna loyd'^'2000-09-07'^'bs applied physics'^'n/a'^85
+'2017-10011'^'gae youell'^'2005-07-11'^'ba sociology'^'n/a'^40
+'2017-10012'^'ethelin vost'^'2002-05-28'^'bs statistics'^'services-misc. amusement & recreation'^63
+'2017-10013'^'aidan sheer'^'1994-08-04'^'ba sociology'^'property-casualty insurers'^153
+'2017-10014'^'gabriello matschke'^'2009-09-25'^'bs industrial engineering'^'biotechnology: laboratory analytical instruments'^1
+'2017-10015'^'boy mouat'^'2001-12-19'^'bs chemistry'^'semiconductors'^77
+'2017-10016'^'bradan cafferky'^'1997-06-25'^'bs computer engineering'^'n/a'^77
+'2017-10017'^'geri klaus'^'2010-03-12'^'bs computer science'^'oil & gas production'^111
+'2017-10018'^'stafani grindell'^'2006-08-10'^'ba sociology'^'consumer specialties'^140
+'2017-10019'^'bethena medcalf'^'2006-12-28'^'ba sociology'^'real estate investment trusts'^47
+'2017-10020'^'gaston macshirrie'^'2010-10-29'^'bs industrial engineering'^'edp services'^138
+'2017-10021'^'sheeree mingo'^'2004-01-28'^'bs computer engineering'^'biotechnology: electromedical & electrotherapeutic apparatus'^158
+'2017-10022'^'aleksandr duckit'^'2010-09-06'^'bs computer science'^'real estate investment trusts'^104
+'2017-10023'^'wain heggs'^'2009-06-03'^'ba sociology'^'home furnishings'^94
+'2017-10024'^'ondrea mcmeyler'^'2009-11-07'^'ba communication arts'^'specialty chemicals'^72
+'2017-10025'^'jonathon brittian'^'1997-05-11'^'bs computer engineering'^'major banks'^122
+'2017-10026'^'antonio zorzetti'^'1992-02-26'^'bs industrial engineering'^'office equipment/supplies/services'^116
+'2017-10027'^'ludwig londing'^'1999-08-03'^'bs statistics'^'property-casualty insurers'^148
+'2017-10028'^'daffy bickmore'^'2010-03-01'^'bs applied physics'^'power generation'^60
+'2017-10029'^'shelli berecloth'^'2007-01-06'^'bs mathematics'^'n/a'^142
+'2017-10030'^'vivie staries'^'2003-01-28'^'bs chemistry'^'automotive aftermarket'^90
+'2017-10031'^'melanie macnamara'^'2002-11-10'^'ba sociology'^'television services'^90
+'2017-10032'^'lara domingues'^'1992-12-16'^'bs applied physics'^'n/a'^123
+'2017-10033'^'jeannie berni'^'1995-01-04'^'bs applied physics'^'motor vehicles'^19
+'2017-10034'^'bonnibelle deighton'^'1993-09-11'^'bs chemistry'^'industrial machinery/components'^8
+'2017-10035'^'purcell simao'^'2009-05-04'^'bs applied physics'^'diversified commercial services'^9
+'2017-10036'^'wilow shobrook'^'1994-02-13'^'bs statistics'^'military/government/technical'^100
+'2017-10037'^'barbee crang'^'1999-08-17'^'bs computer engineering'^'publishing'^86
+'2017-10038'^'sherry le brun'^'1992-10-19'^'ba communication arts'^'professional services'^64
+'2017-10039'^'lula chesterman'^'2007-12-08'^'bs industrial engineering'^'property-casualty insurers'^17
+'2017-10040'^'bess backen'^'2001-05-11'^'bs chemical engineering'^'n/a'^83
+'2017-10041'^'krishna yarr'^'2009-03-30'^'bs mathematics'^'major banks'^137
+'2017-10042'^'porty yegorov'^'1999-04-10'^'bs chemical engineering'^'railroads'^67
+'2017-10043'^'gerty adger'^'2002-04-11'^'ba communication arts'^'business services'^2
+'2017-10044'^'katine vaneev'^'1995-03-03'^'bs applied physics'^'major pharmaceuticals'^11
+'2017-10045'^'ursala physick'^'2006-10-31'^'bs mathematics'^'television services'^152
+'2017-10046'^'winni kneller'^'2007-09-09'^'ba communication arts'^'industrial machinery/components'^74
+'2017-10047'^'hugo kaesmakers'^'1999-06-23'^'bs mathematics'^'major chemicals'^54
+'2017-10048'^'bartolemo burness'^'2002-05-12'^'bs mathematics'^'n/a'^28
+'2017-10049'^'marietta faustian'^'2002-05-23'^'ba communication arts'^'major pharmaceuticals'^101
+'2017-10050'^'nolan tigner'^'2005-01-17'^'bs chemistry'^'steel/iron ore'^146
+'2017-10051'^'bridget kenneford'^'2006-02-20'^'bs industrial engineering'^'telecommunications equipment'^141
+'2017-10052'^'mario ghiron'^'1998-03-20'^'bs statistics'^'n/a'^55
+'2017-10053'^'alford tilliards'^'1996-12-01'^'bs computer engineering'^'radio and television broadcasting and communications equipment'^49
+'2017-10054'^'willem wrightim'^'2009-01-19'^'bs mathematics'^'precious metals'^19
+'2017-10055'^'noach heams'^'2001-03-23'^'ba communication arts'^'biotechnology: biological products (no diagnostic substances)'^131
+'2017-10056'^'alisa muirden'^'2008-10-31'^'bs industrial engineering'^'computer software: prepackaged software'^76
+'2017-10057'^'abby o''shiels'^'1996-07-31'^'bs statistics'^'oil & gas production'^97
+'2017-10058'^'stephenie fulkes'^'2006-07-04'^'ba communication arts'^'publishing'^78
+'2017-10059'^'vikki kealy'^'1997-07-31'^'ba communication arts'^'real estate investment trusts'^112
+'2017-10060'^'abraham caulton'^'2000-11-08'^'bs computer engineering'^'department/specialty retail stores'^101
+'2017-10061'^'bell renachowski'^'2004-01-02'^'bs applied physics'^'business services'^47
+'2017-10062'^'dylan ealles'^'2005-02-08'^'bs chemistry'^'specialty chemicals'^103
+'2017-10063'^'sophey thody'^'2005-09-29'^'bs chemical engineering'^'oil & gas production'^113
+'2017-10064'^'susannah smail'^'2008-11-17'^'bs chemical engineering'^'homebuilding'^116
+'2017-10065'^'maighdiln dobrowski'^'2007-07-18'^'bs computer science'^'computer software: prepackaged software'^14
+'2017-10066'^'miran ruggieri'^'2001-07-25'^'bs computer science'^'commercial banks'^54
+'2017-10067'^'patrizius arnecke'^'2004-10-26'^'bs applied physics'^'oil refining/marketing'^132
+'2017-10068'^'meriel maciver'^'2007-04-27'^'bs mathematics'^'major pharmaceuticals'^12
+'2017-10069'^'tandie gostick'^'1993-12-22'^'bs chemistry'^'medical/dental instruments'^86
+'2017-10070'^'noel melloi'^'1996-02-03'^'bs computer science'^'clothing/shoe/accessory stores'^152
+'2017-10071'^'fraze goatman'^'2009-09-20'^'ba communication arts'^'professional services'^151
+'2017-10072'^'larine dunnan'^'2000-01-12'^'bs computer engineering'^'hotels/resorts'^127
+'2017-10073'^'donnamarie forsdicke'^'2007-06-23'^'bs computer science'^'trucking freight/courier services'^107
+'2017-10074'^'dorothea walas'^'2006-06-11'^'ba communication arts'^'n/a'^20
+'2017-10075'^'ruthe careswell'^'2001-01-01'^'bs chemistry'^'biotechnology: biological products (no diagnostic substances)'^160
+'2017-10076'^'nealy baynom'^'1993-10-27'^'ba sociology'^'major pharmaceuticals'^117
+'2017-10077'^'kirstyn gorgler'^'2001-04-10'^'bs chemical engineering'^'commercial banks'^128
+'2017-10078'^'eydie baylay'^'2001-02-10'^'bs statistics'^'major chemicals'^67
+'2017-10079'^'goober tamburi'^'2006-04-09'^'ba sociology'^'rental/leasing companies'^52
+'2017-10080'^'brooke maundrell'^'2007-12-04'^'bs computer engineering'^'n/a'^107
+'2017-10081'^'waldemar allott'^'2008-10-04'^'bs mathematics'^'n/a'^81
+'2017-10082'^'aleta crosi'^'2010-02-25'^'bs statistics'^'oil refining/marketing'^99
+'2017-10083'^'melany kaubisch'^'2006-08-15'^'ba communication arts'^'industrial specialties'^92
+'2017-10084'^'federico goodlad'^'2007-01-13'^'bs chemical engineering'^'computer software: prepackaged software'^46
+'2017-10085'^'kendricks ainge'^'2010-05-11'^'bs chemical engineering'^'real estate'^45
+'2017-10086'^'zebadiah thorsby'^'1992-07-26'^'ba communication arts'^'edp services'^27
+'2017-10087'^'sutherland verecker'^'2000-05-14'^'bs computer engineering'^'n/a'^99
+'2017-10088'^'thom tamblyn'^'1992-05-04'^'bs mathematics'^'major chemicals'^86
+'2017-10089'^'page mercik'^'2009-12-31'^'bs industrial engineering'^'oil & gas production'^139
+'2017-10090'^'morris ridesdale'^'2003-06-15'^'ba sociology'^'natural gas distribution'^27
+'2017-10091'^'roana hayball'^'2003-05-25'^'bs chemistry'^'major banks'^87
+'2017-10092'^'amie burnhard'^'2003-12-06'^'bs applied physics'^'savings institutions'^73
+'2017-10093'^'rachelle allsworth'^'1994-09-20'^'bs mathematics'^'metal fabrications'^36
+'2017-10094'^'norrie routh'^'1996-09-08'^'bs computer engineering'^'marine transportation'^54
+'2017-10095'^'ashlin rumsey'^'1995-06-01'^'bs applied physics'^'engineering & construction'^43
+'2017-10096'^'othilie vinson'^'1997-02-18'^'bs mathematics'^'electric utilities: central'^152
+'2017-10097'^'ford jouannin'^'1993-05-19'^'bs mathematics'^'major banks'^29
+'2017-10098'^'dolf noyce'^'2000-07-01'^'ba communication arts'^'n/a'^117
+'2017-10099'^'morris mearns'^'2008-02-18'^'bs computer science'^'catalog/specialty distribution'^35
+'2017-10100'^'roanna ploughwright'^'2006-03-03'^'ba communication arts'^'n/a'^116
+'2017-10101'^'leigh charlwood'^'1997-01-19'^'bs computer science'^'other transportation'^151
+'2017-10102'^'yetta berney'^'2000-07-14'^'bs applied physics'^'computer software: programming, data processing'^143
+'2017-10103'^'waylen besant'^'2003-03-24'^'ba sociology'^'major pharmaceuticals'^136
+'2017-10104'^'laurie hirche'^'1997-06-04'^'ba sociology'^'n/a'^130
+'2017-10105'^'cammi cicculi'^'1993-01-13'^'bs statistics'^'n/a'^149
+'2017-10106'^'benson skelhorne'^'2002-03-07'^'bs mathematics'^'n/a'^139
+'2017-10107'^'corrina bullivent'^'2007-04-10'^'ba communication arts'^'military/government/technical'^111
+'2017-10108'^'mallory jorry'^'2009-02-25'^'bs industrial engineering'^'n/a'^37
+'2017-10109'^'audrey durrans'^'2000-07-02'^'ba communication arts'^'semiconductors'^73
+'2017-10110'^'evaleen hansill'^'1992-02-28'^'ba sociology'^'transportation services'^75
+'2017-10111'^'odelle connew'^'1998-12-20'^'bs chemical engineering'^'accident &health insurance'^126
+'2017-10112'^'randolf izkovicz'^'1998-05-21'^'bs computer science'^'metal fabrications'^122
+'2017-10113'^'giuseppe butters'^'2006-06-11'^'bs industrial engineering'^'natural gas distribution'^102
+'2017-10114'^'donovan witts'^'2004-10-18'^'bs industrial engineering'^'n/a'^76
+'2017-10115'^'gert everett'^'2007-04-29'^'bs applied physics'^'consumer specialties'^59
+'2017-10116'^'leonhard shelley'^'2009-06-27'^'bs mathematics'^'telecommunications equipment'^92
+'2017-10117'^'skippy celand'^'2003-08-09'^'bs statistics'^'steel/iron ore'^121
+'2017-10118'^'lynnette soldner'^'1992-10-03'^'bs mathematics'^'major pharmaceuticals'^42
+'2017-10119'^'olav redparth'^'2001-03-22'^'bs chemistry'^'telecommunications equipment'^129
+'2017-10120'^'brendon o''scandall'^'2005-08-26'^'bs computer engineering'^'electric utilities: central'^36
+'2017-10121'^'urbain raysdale'^'2007-12-08'^'ba sociology'^'n/a'^45
+'2017-10122'^'hart babington'^'1994-10-12'^'ba communication arts'^'air freight/delivery services'^56
+'2017-10123'^'suzann woods'^'2010-01-25'^'bs computer engineering'^'business services'^156
+'2017-10124'^'isidora wray'^'2000-01-10'^'bs statistics'^'major pharmaceuticals'^149
+'2017-10125'^'joline paunsford'^'2000-12-27'^'bs computer science'^'n/a'^140
+'2017-10126'^'katrina ambler'^'2009-08-04'^'bs chemical engineering'^'major banks'^108
+'2017-10127'^'sunny stuer'^'1994-10-30'^'bs chemistry'^'major banks'^23
+'2017-10128'^'janka matterface'^'2003-02-10'^'bs mathematics'^'major pharmaceuticals'^108
+'2017-10129'^'beret nickoll'^'1993-04-30'^'ba communication arts'^'telecommunications equipment'^32
+'2017-10130'^'son littrell'^'2002-06-27'^'bs applied physics'^'real estate investment trusts'^92
+'2017-10131'^'patton quinlan'^'1996-11-08'^'bs computer engineering'^'computer software: prepackaged software'^56
+'2017-10132'^'gardie steade'^'2005-12-01'^'bs chemistry'^'n/a'^91
+'2017-10133'^'bree tibalt'^'1992-12-30'^'bs mathematics'^'n/a'^2
+'2017-10134'^'cassandry janaszewski'^'2000-09-15'^'bs applied physics'^'farming/seeds/milling'^62
+'2017-10135'^'sutton de voiels'^'2006-10-02'^'ba sociology'^'property-casualty insurers'^82
+'2017-10136'^'eolanda dukelow'^'2006-06-22'^'bs computer science'^'movies/entertainment'^119
+'2017-10137'^'jaimie pauleau'^'2001-12-15'^'bs industrial engineering'^'property-casualty insurers'^81
+'2017-10138'^'zebadiah byram'^'1998-04-15'^'bs chemical engineering'^'property-casualty insurers'^103
+'2017-10139'^'jaynell tschirschky'^'2009-05-20'^'bs mathematics'^'business services'^112
+'2017-10140'^'kipper dhillon'^'2010-08-10'^'bs chemistry'^'n/a'^35
+'2017-10141'^'etheline gregory'^'2009-05-09'^'ba sociology'^'hotels/resorts'^52
+'2017-10142'^'elvin radbourne'^'1992-11-21'^'bs applied physics'^'edp services'^80
+'2017-10143'^'gabbie wherton'^'1999-06-01'^'bs computer science'^'edp services'^84
+'2017-10144'^'marla juett'^'1999-06-04'^'bs chemistry'^'railroads'^93
+'2017-10145'^'gina filipson'^'1999-07-22'^'bs statistics'^'major pharmaceuticals'^132
+'2017-10146'^'pia apedaile'^'2003-07-30'^'bs mathematics'^'business services'^144
+'2017-10147'^'gaston rucklesse'^'1999-08-07'^'bs applied physics'^'n/a'^47
+'2017-10148'^'lil elloy'^'2000-09-24'^'bs chemical engineering'^'n/a'^66
+'2017-10149'^'jewell battrum'^'2002-09-23'^'bs computer science'^'major pharmaceuticals'^132
+'2017-10150'^'harmony topliss'^'2004-08-31'^'bs chemistry'^'commercial banks'^11
+'2017-10151'^'phylys decaze'^'1994-07-31'^'ba communication arts'^'n/a'^22
+'2017-10152'^'kasper mcmennum'^'1998-07-29'^'bs chemistry'^'mining & quarrying of nonmetallic minerals (no fuels)'^49
+'2017-10153'^'luella cashmore'^'2010-01-17'^'bs mathematics'^'business services'^145
+'2017-10154'^'iolanthe hazeldene'^'2006-06-21'^'bs computer engineering'^'semiconductors'^9
+'2017-10155'^'winnie shillingford'^'1997-07-06'^'bs mathematics'^'major banks'^35
+'2017-10156'^'august burrill'^'1996-12-25'^'ba sociology'^'major pharmaceuticals'^148
+'2017-10157'^'tabitha stilldale'^'2002-10-04'^'bs applied physics'^'retail: building materials'^135
+'2017-10158'^'sapphira kinde'^'1993-06-20'^'bs chemical engineering'^'real estate investment trusts'^52
+'2017-10159'^'britta brodhead'^'2010-06-05'^'bs applied physics'^'n/a'^119
+'2017-10160'^'ruthanne deave'^'1998-10-15'^'bs chemical engineering'^'investment bankers/brokers/service'^15
+'2017-10161'^'esmeralda dehm'^'2007-10-04'^'bs computer science'^'n/a'^39
+'2017-10162'^'hillier gohier'^'1997-12-12'^'bs mathematics'^'marine transportation'^58
+'2017-10163'^'julio giroldo'^'2002-11-26'^'bs mathematics'^'major pharmaceuticals'^61
+'2017-10164'^'ronica goudge'^'2006-04-15'^'bs chemistry'^'industrial machinery/components'^85
+'2017-10165'^'tilda dict'^'1999-07-03'^'bs applied physics'^'major banks'^99
+'2017-10166'^'meryl greenslade'^'2007-03-31'^'bs chemistry'^'building materials'^24
+'2017-10167'^'beverie holliar'^'2010-03-22'^'bs mathematics'^'n/a'^40
+'2017-10168'^'glenine fawssett'^'1995-12-12'^'bs computer engineering'^'advertising'^84
+'2017-10169'^'cate penhearow'^'2001-04-03'^'bs mathematics'^'building materials'^33
+'2017-10170'^'vernice joiner'^'2000-02-18'^'bs statistics'^'n/a'^54
+'2017-10171'^'milli lackinton'^'1998-12-01'^'bs mathematics'^'biotechnology: laboratory analytical instruments'^42
+'2017-10172'^'luis blanko'^'2009-02-17'^'bs mathematics'^'biotechnology: laboratory analytical instruments'^11
+'2017-10173'^'fiorenze archbold'^'2003-05-29'^'bs computer science'^'broadcasting'^73
+'2017-10174'^'didi stratz'^'2007-08-28'^'ba sociology'^'diversified commercial services'^40
+'2017-10175'^'de tenman'^'2006-02-25'^'bs mathematics'^'computer software: prepackaged software'^89
+'2017-10176'^'mortimer kane'^'2010-01-29'^'bs computer engineering'^'n/a'^61
+'2017-10177'^'ola gallihawk'^'1993-01-29'^'bs applied physics'^'major pharmaceuticals'^147
+'2017-10178'^'oona petersen'^'2001-05-21'^'bs industrial engineering'^'n/a'^11
+'2017-10179'^'tedmund hitschke'^'2001-02-05'^'bs statistics'^'n/a'^130
+'2017-10180'^'elsie deschelle'^'2002-06-02'^'bs computer science'^'television services'^42
+'2017-10181'^'devora padly'^'1995-03-31'^'bs chemistry'^'automotive aftermarket'^140
+'2017-10182'^'frasier domonkos'^'1995-01-08'^'bs chemistry'^'telecommunications equipment'^81
+'2017-10183'^'drusie keele'^'2000-10-22'^'ba communication arts'^'business services'^135
+'2017-10184'^'noble fermoy'^'1993-11-04'^'bs applied physics'^'fluid controls'^40
+'2017-10185'^'gorden brehault'^'2005-07-28'^'bs chemical engineering'^'farming/seeds/milling'^130
+'2017-10186'^'mirella lokier'^'2007-03-10'^'ba sociology'^'business services'^120
+'2017-10187'^'edie marieton'^'1998-01-12'^'ba sociology'^'n/a'^28
+'2017-10188'^'harriot prestner'^'2009-07-13'^'bs applied physics'^'n/a'^139
+'2017-10189'^'chauncey yewman'^'2004-01-01'^'ba communication arts'^'major chemicals'^100
+'2017-10190'^'raimund mohan'^'1995-01-07'^'bs computer engineering'^'ordnance and accessories'^153
+'2017-10191'^'min peckitt'^'2001-12-03'^'bs mathematics'^'diversified commercial services'^82
+'2017-10192'^'vernen fairbank'^'1995-03-11'^'bs industrial engineering'^'n/a'^36
+'2017-10193'^'amalita golborn'^'1998-01-04'^'bs mathematics'^'n/a'^43
+'2017-10194'^'viviene rosenstein'^'2008-01-04'^'bs mathematics'^'semiconductors'^88
+'2017-10195'^'jacenta legion'^'1998-01-19'^'bs computer engineering'^'oil & gas production'^119
+'2017-10196'^'daveen hurren'^'2003-07-09'^'bs industrial engineering'^'n/a'^150
+'2017-10197'^'susana hanhardt'^'1996-03-26'^'bs chemical engineering'^'n/a'^120
+'2017-10198'^'manny caston'^'2008-09-11'^'ba sociology'^'n/a'^45
+'2017-10199'^'merrie rigden'^'1992-05-13'^'bs computer engineering'^'plastic products'^36
+'2017-10200'^'griff tarpey'^'1995-01-10'^'bs computer engineering'^'n/a'^155
+'2017-10201'^'harold campbell'^'1992-03-31'^'bs chemistry'^'oil & gas production'^11
+'2017-10202'^'jesus upward'^'2010-04-12'^'ba sociology'^'hospital/nursing management'^3
+'2017-10203'^'izabel doolan'^'2007-01-15'^'ba sociology'^'real estate investment trusts'^149
+'2017-10204'^'westbrooke sail'^'2003-06-26'^'bs chemistry'^'other consumer services'^70
+'2017-10205'^'aubrie brammer'^'1993-09-10'^'bs chemical engineering'^'computer communications equipment'^51
+'2017-10206'^'kenyon shemwell'^'2002-06-14'^'bs mathematics'^'computer software: programming, data processing'^97
+'2017-10207'^'ethyl crangle'^'1995-09-06'^'bs applied physics'^'hotels/resorts'^14
+'2017-10208'^'starlene evensden'^'1992-03-09'^'bs statistics'^'major banks'^87
+'2017-10209'^'doll fenemore'^'1999-08-06'^'bs mathematics'^'real estate investment trusts'^84
+'2017-10210'^'humphrey bransgrove'^'2003-06-04'^'bs mathematics'^'hospital/nursing management'^10
+'2017-10211'^'hewie elsegood'^'2005-10-17'^'bs mathematics'^'industrial machinery/components'^152
+'2017-10212'^'dinny allibon'^'1998-10-30'^'bs computer science'^'beverages (production/distribution)'^90
+'2017-10213'^'zaccaria o''dempsey'^'1997-06-21'^'ba sociology'^'major banks'^138
+'2017-10214'^'cynthia longhorne'^'2009-12-23'^'bs chemical engineering'^'major pharmaceuticals'^8
+'2017-10215'^'ezechiel sherman'^'2000-02-22'^'bs mathematics'^'industrial machinery/components'^118
+'2017-10216'^'faydra launder'^'2005-06-01'^'bs statistics'^'computer software: prepackaged software'^136
+'2017-10217'^'darrel nardoni'^'1992-12-16'^'ba communication arts'^'railroads'^121
+'2017-10218'^'flori morais'^'1994-05-22'^'bs chemistry'^'ordnance and accessories'^105
+'2017-10219'^'babbette downing'^'1995-01-19'^'bs chemistry'^'major chemicals'^16
+'2017-10220'^'welch antonellini'^'2006-10-03'^'ba communication arts'^'property-casualty insurers'^80
+'2017-10221'^'alec sterrie'^'2009-11-21'^'ba communication arts'^'n/a'^55
+'2017-10222'^'theresita pennycock'^'1992-01-13'^'bs mathematics'^'marine transportation'^133
+'2017-10223'^'tammy filippazzo'^'2003-01-30'^'bs applied physics'^'semiconductors'^117
+'2017-10224'^'valry gitting'^'2008-06-17'^'bs computer engineering'^'package goods/cosmetics'^61
+'2017-10225'^'joaquin baxendale'^'2006-09-01'^'bs industrial engineering'^'n/a'^160
+'2017-10226'^'wang lyddiard'^'2009-03-18'^'ba communication arts'^'biotechnology: biological products (no diagnostic substances)'^71
+'2017-10227'^'rorke althorpe'^'1997-02-08'^'bs statistics'^'oil refining/marketing'^102
+'2017-10228'^'nickolas philpin'^'2001-09-06'^'bs statistics'^'automotive aftermarket'^129
+'2017-10229'^'nancey pethybridge'^'2001-08-05'^'bs mathematics'^'computer software: prepackaged software'^102
+'2017-10230'^'gregg sames'^'2008-04-03'^'bs chemical engineering'^'real estate investment trusts'^21
+'2017-10231'^'danella howler'^'2006-04-09'^'ba sociology'^'n/a'^31
+'2017-10232'^'kingsley lillo'^'2001-06-08'^'bs computer science'^'real estate investment trusts'^157
+'2017-10233'^'merry lutz'^'1996-10-24'^'bs computer science'^'radio and television broadcasting and communications equipment'^118
+'2017-10234'^'barbie ventom'^'1993-03-28'^'bs mathematics'^'marine transportation'^155
+'2017-10235'^'zechariah briggdale'^'2008-02-20'^'bs computer science'^'restaurants'^135
+'2017-10236'^'hestia lawden'^'1999-02-20'^'bs chemistry'^'edp services'^111
+'2017-10237'^'abra phillpot'^'2003-03-08'^'bs computer science'^'paper'^134
+'2017-10238'^'eyde chappell'^'2010-03-12'^'bs mathematics'^'industrial machinery/components'^17
+'2017-10239'^'averil drane'^'2002-12-05'^'ba communication arts'^'real estate investment trusts'^157
+'2017-10240'^'ivar mateos'^'2004-11-20'^'bs chemistry'^'restaurants'^80
+'2017-10241'^'raviv pietranek'^'1996-03-12'^'bs computer science'^'other consumer services'^119
+'2017-10242'^'peyter esposi'^'2004-03-28'^'ba sociology'^'real estate investment trusts'^83
+'2017-10243'^'keslie harcourt'^'1998-04-29'^'bs computer science'^'electronic components'^35
+'2017-10244'^'fayth darlasson'^'2008-06-10'^'bs computer engineering'^'n/a'^152
+'2017-10245'^'lars pinshon'^'1997-02-09'^'bs statistics'^'edp services'^92
+'2017-10246'^'delmore cribbins'^'2003-09-23'^'bs mathematics'^'pollution control equipment'^53
+'2017-10247'^'elyse rodenburg'^'1995-07-14'^'bs computer science'^'computer peripheral equipment'^82
+'2017-10248'^'eadie bernadot'^'2001-02-28'^'bs applied physics'^'major pharmaceuticals'^76
+'2017-10249'^'oren breeze'^'1997-10-31'^'ba communication arts'^'marine transportation'^94
+'2017-10250'^'peggie mccorley'^'1999-08-13'^'bs computer science'^'electric utilities: central'^74
+'2017-10251'^'gale foss'^'2000-08-25'^'bs industrial engineering'^'major banks'^125
+'2017-10252'^'liz staddon'^'2009-02-02'^'bs industrial engineering'^'edp services'^55
+'2017-10253'^'rhys lawless'^'2005-04-11'^'bs statistics'^'industrial machinery/components'^90
+'2017-10254'^'jermaine frow'^'1994-02-21'^'bs industrial engineering'^'telecommunications equipment'^24
+'2017-10255'^'pen wands'^'1996-12-27'^'bs mathematics'^'specialty chemicals'^136
+'2017-10256'^'hilliary camm'^'1995-08-24'^'bs computer engineering'^'finance: consumer services'^102
+'2017-10257'^'rustin blaik'^'2001-01-19'^'bs chemistry'^'major banks'^68
+'2017-10258'^'truda burden'^'2001-06-01'^'bs applied physics'^'plastic products'^147
+'2017-10259'^'kingsly gheorghescu'^'2000-07-26'^'bs chemistry'^'specialty chemicals'^35
+'2017-10260'^'fredericka clows'^'1998-01-09'^'bs computer science'^'office equipment/supplies/services'^50
+'2017-10261'^'halsy mcgilmartin'^'1992-06-09'^'ba sociology'^'n/a'^15
+'2017-10262'^'alfie whitlow'^'1995-04-19'^'bs chemical engineering'^'auto manufacturing'^141
+'2017-10263'^'clemmie billsberry'^'1993-10-17'^'bs computer engineering'^'electric utilities: central'^65
+'2017-10264'^'crista drysdell'^'2001-09-03'^'bs chemical engineering'^'biotechnology: in vitro & in vivo diagnostic substances'^131
+'2017-10265'^'che mcenhill'^'1999-12-25'^'bs industrial engineering'^'n/a'^85
+'2017-10266'^'rene rubens'^'2006-02-22'^'bs statistics'^'edp services'^146
+'2017-10267'^'vikky scotchmoor'^'1996-07-28'^'bs computer science'^'finance/investors services'^141
+'2017-10268'^'elana reiner'^'2004-12-31'^'bs statistics'^'biotechnology: in vitro & in vivo diagnostic substances'^8
+'2017-10269'^'stephana featley'^'1998-12-04'^'bs computer engineering'^'specialty chemicals'^19
+'2017-10270'^'steve hadrill'^'1998-03-24'^'bs chemistry'^'major chemicals'^108
+'2017-10271'^'gib aldhouse'^'2002-04-13'^'bs mathematics'^'electric utilities: central'^106
+'2017-10272'^'lavinia durnall'^'2006-03-20'^'bs statistics'^'automotive aftermarket'^90
+'2017-10273'^'flss belchem'^'2004-01-24'^'bs chemical engineering'^'n/a'^142
+'2017-10274'^'janot zanetello'^'1998-07-04'^'bs chemistry'^'computer software: programming, data processing'^66
+'2017-10275'^'jermaine maharg'^'2005-11-30'^'bs statistics'^'major banks'^130
+'2017-10276'^'zebulen bulle'^'2005-10-21'^'bs applied physics'^'major pharmaceuticals'^118
+'2017-10277'^'kitty dollman'^'2009-05-18'^'bs mathematics'^'real estate investment trusts'^13
+'2017-10278'^'irma thor'^'1995-07-21'^'bs statistics'^'biotechnology: biological products (no diagnostic substances)'^47
+'2017-10279'^'nona veal'^'1995-12-31'^'bs chemical engineering'^'homebuilding'^159
+'2017-10280'^'noak bendig'^'1992-08-06'^'bs computer science'^'diversified commercial services'^51
+'2017-10281'^'leonerd willerson'^'2001-01-02'^'bs chemical engineering'^'computer software: prepackaged software'^129
+'2017-10282'^'merrill kleinert'^'2008-02-17'^'bs chemistry'^'real estate investment trusts'^111
+'2017-10283'^'bunny rouby'^'2000-02-25'^'bs chemical engineering'^'n/a'^23
+'2017-10284'^'lucia balmann'^'2010-02-12'^'bs computer science'^'n/a'^101
+'2017-10285'^'goldia manginot'^'2010-09-08'^'bs industrial engineering'^'n/a'^50
+'2017-10286'^'murielle heyward'^'2007-04-28'^'bs mathematics'^'n/a'^152
+'2017-10287'^'florence cargon'^'1995-08-19'^'bs computer engineering'^'n/a'^58
+'2017-10288'^'dee dee jaime'^'1995-07-25'^'ba communication arts'^'biotechnology: biological products (no diagnostic substances)'^23
+'2017-10289'^'lonni elington'^'1995-01-31'^'ba sociology'^'business services'^124
+'2017-10290'^'cleavland jacobsohn'^'1993-06-09'^'ba sociology'^'life insurance'^18
+'2017-10291'^'rosalinda heaker'^'1996-08-14'^'bs computer science'^'medical/dental instruments'^13
+'2017-10292'^'perry signorelli'^'1997-09-05'^'ba sociology'^'n/a'^156
+'2017-10293'^'shaine stelfax'^'1992-02-17'^'bs computer science'^'hotels/resorts'^23
+'2017-10294'^'tadd duberry'^'1993-11-05'^'ba sociology'^'trucking freight/courier services'^87
+'2017-10295'^'bevan samson'^'1995-09-28'^'bs computer engineering'^'biotechnology: electromedical & electrotherapeutic apparatus'^84
+'2017-10296'^'mannie warlowe'^'1994-12-21'^'bs chemistry'^'precious metals'^90
+'2017-10297'^'mata gabbat'^'1996-08-08'^'bs mathematics'^'commercial banks'^115
+'2017-10298'^'kipp de filippis'^'2006-01-19'^'bs computer science'^'major banks'^27
+'2017-10299'^'antonia o''glassane'^'2000-09-15'^'bs mathematics'^'n/a'^20
+'2017-10300'^'michelina guiden'^'2005-08-21'^'bs mathematics'^'biotechnology: biological products (no diagnostic substances)'^63
+'2017-10301'^'enrico sargint'^'2001-02-16'^'bs mathematics'^'n/a'^112
+'2017-10302'^'brooks dinse'^'1998-09-22'^'bs chemistry'^'n/a'^145
+'2017-10303'^'merrick mintoff'^'1997-11-22'^'ba communication arts'^'n/a'^159
+'2017-10304'^'fidela mallinson'^'1998-01-22'^'bs chemical engineering'^'other specialty stores'^73
+'2017-10305'^'karly keele'^'1994-12-05'^'ba sociology'^'property-casualty insurers'^132
+'2017-10306'^'calhoun loughead'^'1997-11-26'^'ba sociology'^'biotechnology: biological products (no diagnostic substances)'^76
+'2017-10307'^'bordie lardeur'^'2006-01-09'^'bs chemical engineering'^'n/a'^39
+'2017-10308'^'lian christoffels'^'2010-07-23'^'ba communication arts'^'major chemicals'^148
+'2017-10309'^'lil turner'^'2007-10-31'^'bs industrial engineering'^'apparel'^74
+'2017-10310'^'etheline benmore'^'1992-12-20'^'bs mathematics'^'steel/iron ore'^146
+'2017-10311'^'cele aberkirdo'^'1994-06-20'^'ba sociology'^'coal mining'^142
+'2017-10312'^'talya scarman'^'2008-07-25'^'bs mathematics'^'real estate'^19
+'2017-10313'^'kingsley frichley'^'1992-05-02'^'bs applied physics'^'industrial specialties'^154
+'2017-10314'^'charley bartolomeoni'^'2005-04-22'^'ba sociology'^'metal fabrications'^9
+'2017-10315'^'noak harbottle'^'2008-04-24'^'bs industrial engineering'^'n/a'^153
+'2017-10316'^'clari langston'^'2001-06-25'^'bs mathematics'^'n/a'^120
+'2017-10317'^'perceval lauritsen'^'2005-12-20'^'bs mathematics'^'broadcasting'^154
+'2017-10318'^'gabey uebel'^'2007-10-13'^'ba sociology'^'n/a'^57
+'2017-10319'^'inez beautyman'^'2009-09-19'^'bs industrial engineering'^'business services'^34
+'2017-10320'^'brose stallwood'^'1996-06-09'^'ba communication arts'^'n/a'^71
+'2017-10321'^'cornelius paish'^'1997-06-10'^'bs industrial engineering'^'n/a'^55
+'2017-10322'^'caroljean fairhurst'^'1995-04-16'^'bs chemical engineering'^'finance: consumer services'^33
+'2017-10323'^'perceval bernardez'^'2006-07-04'^'bs mathematics'^'n/a'^42
+'2017-10324'^'kalina mussilli'^'2009-10-20'^'bs mathematics'^'n/a'^114
+'2017-10325'^'bev pringer'^'1998-06-21'^'bs mathematics'^'real estate investment trusts'^65
+'2017-10326'^'willi rawling'^'2001-10-31'^'bs industrial engineering'^'water supply'^154
+'2017-10327'^'jacky belliveau'^'2001-04-12'^'bs industrial engineering'^'n/a'^56
+'2017-10328'^'dorise cameron'^'2004-09-10'^'bs industrial engineering'^'marine transportation'^150
+'2017-10329'^'nehemiah brolan'^'2009-12-24'^'bs statistics'^'medical specialities'^114
+'2017-10330'^'bill pattisson'^'2006-01-19'^'bs statistics'^'n/a'^106
+'2017-10331'^'kirsti paffitt'^'1992-11-16'^'bs industrial engineering'^'investment bankers/brokers/service'^127
+'2017-10332'^'gilbertine menham'^'1997-03-20'^'bs chemistry'^'computer software: programming, data processing'^71
+'2017-10333'^'lurline bere'^'1993-09-27'^'bs statistics'^'real estate investment trusts'^47
+'2017-10334'^'jeanie skehens'^'1996-04-10'^'bs chemistry'^'professional services'^12
+'2017-10335'^'celene hanwell'^'1992-01-18'^'bs mathematics'^'other specialty stores'^69
+'2017-10336'^'marilee gatch'^'2002-11-16'^'ba communication arts'^'major banks'^113
+'2017-10337'^'gardy jermey'^'2007-05-16'^'bs chemical engineering'^'diversified commercial services'^112
+'2017-10338'^'juliane plows'^'2007-08-14'^'bs computer engineering'^'broadcasting'^93
+'2017-10339'^'dino genner'^'2010-05-15'^'bs applied physics'^'n/a'^30
+'2017-10340'^'lowrance balcers'^'1994-02-10'^'bs chemistry'^'finance: consumer services'^10
+'2017-10341'^'allianora maccall'^'1997-02-21'^'ba communication arts'^'savings institutions'^123
+'2017-10342'^'eustacia castellini'^'1993-07-19'^'bs applied physics'^'other specialty stores'^7
+'2017-10343'^'twyla fyall'^'1994-02-25'^'bs statistics'^'business services'^90
+'2017-10344'^'tabitha machostie'^'2005-01-29'^'bs mathematics'^'hotels/resorts'^139
+'2017-10345'^'hewett jados'^'1999-10-31'^'ba sociology'^'hotels/resorts'^107
+'2017-10346'^'matty redington'^'1995-09-05'^'bs statistics'^'n/a'^62
+'2017-10347'^'gabey fitzharris'^'1995-10-27'^'ba sociology'^'n/a'^103
+'2017-10348'^'rhett bernardot'^'1995-12-22'^'bs mathematics'^'savings institutions'^130
+'2017-10349'^'lilly maclucais'^'1996-09-24'^'ba communication arts'^'transportation services'^95
+'2017-10350'^'terrence hitcham'^'1996-04-06'^'ba communication arts'^'air freight/delivery services'^67
+'2017-10351'^'chariot esposito'^'2008-02-08'^'bs mathematics'^'real estate investment trusts'^90
+'2017-10352'^'shalna layton'^'1996-12-22'^'bs computer science'^'real estate'^7
+'2017-10353'^'cati goold'^'1997-06-25'^'ba communication arts'^'n/a'^121
+'2017-10354'^'malena headland'^'2001-05-12'^'ba communication arts'^'meat/poultry/fish'^45
+'2017-10355'^'andrea stoller'^'2001-09-27'^'bs chemistry'^'n/a'^19
+'2017-10356'^'marita ralph'^'2001-10-08'^'bs applied physics'^'n/a'^29
+'2017-10357'^'rem mochar'^'1997-10-09'^'bs mathematics'^'major pharmaceuticals'^154
+'2017-10358'^'jacquetta djokic'^'1993-02-25'^'bs statistics'^'major banks'^142
+'2017-10359'^'sara boyat'^'1996-03-20'^'bs chemistry'^'marine transportation'^51
+'2017-10360'^'rodge titcombe'^'2006-06-14'^'bs statistics'^'edp services'^87
+'2017-10361'^'merv sillett'^'2007-11-22'^'bs applied physics'^'electric utilities: central'^154
+'2017-10362'^'daveen artz'^'2002-01-08'^'bs chemistry'^'restaurants'^31
+'2017-10363'^'diarmid byway'^'2007-01-11'^'bs chemical engineering'^'savings institutions'^80
+'2017-10364'^'lynna simione'^'1993-04-20'^'bs statistics'^'n/a'^35
+'2017-10365'^'jacklyn lucy'^'2006-04-13'^'bs applied physics'^'n/a'^99
+'2017-10366'^'gran rutigliano'^'2009-05-10'^'bs chemical engineering'^'n/a'^116
+'2017-10367'^'ileana nizet'^'2006-05-05'^'bs mathematics'^'catalog/specialty distribution'^46
+'2017-10368'^'hewe beswetherick'^'2004-12-21'^'bs chemical engineering'^'marine transportation'^1
+'2017-10369'^'lloyd thews'^'1995-12-02'^'ba sociology'^'retail: building materials'^48
+'2017-10370'^'constantine twort'^'2009-08-24'^'bs mathematics'^'hotels/resorts'^102
+'2017-10371'^'paten elias'^'2010-05-03'^'bs mathematics'^'oil & gas production'^56
+'2017-10372'^'dino gerardeaux'^'2003-03-02'^'bs computer engineering'^'electric utilities: central'^27
+'2017-10373'^'karlene casina'^'1992-06-18'^'bs chemistry'^'finance: consumer services'^86
+'2017-10374'^'fern catterall'^'1996-01-18'^'bs chemical engineering'^'n/a'^43
+'2017-10375'^'hettie coghlan'^'1993-11-22'^'ba communication arts'^'n/a'^116
+'2017-10376'^'linn macredmond'^'2006-01-25'^'bs statistics'^'n/a'^5
+'2017-10377'^'jessey laterza'^'1995-06-16'^'bs mathematics'^'savings institutions'^88
+'2017-10378'^'taryn ship'^'1994-08-14'^'bs chemical engineering'^'hotels/resorts'^50
+'2017-10379'^'quentin filippo'^'1992-09-09'^'bs computer engineering'^'beverages (production/distribution)'^147
+'2017-10380'^'amandy cudd'^'1998-12-08'^'bs mathematics'^'semiconductors'^97
+'2017-10381'^'cissy lowery'^'1998-09-16'^'ba communication arts'^'electronic components'^104
+'2017-10382'^'claude mosedall'^'2008-06-29'^'bs mathematics'^'oil & gas production'^73
+'2017-10383'^'daryl warrington'^'1999-06-24'^'bs industrial engineering'^'investment managers'^17
+'2017-10384'^'edy walesa'^'1992-12-30'^'ba communication arts'^'investment bankers/brokers/service'^10
+'2017-10385'^'web chicco'^'1999-10-10'^'bs computer science'^'auto parts:o.e.m.'^115
+'2017-10386'^'gerard griswaite'^'2008-05-22'^'bs statistics'^'natural gas distribution'^13
+'2017-10387'^'rodney dellenbrook'^'1993-08-20'^'bs chemistry'^'n/a'^24
+'2017-10388'^'bette-ann panons'^'1998-02-15'^'bs mathematics'^'metal fabrications'^34
+'2017-10389'^'creighton timperley'^'1995-02-03'^'ba communication arts'^'n/a'^155
+'2017-10390'^'seumas craddock'^'2000-10-10'^'bs applied physics'^'edp services'^139
+'2017-10391'^'simona rudgard'^'2002-05-17'^'ba communication arts'^'paper'^132
+'2017-10392'^'corrine cregeen'^'1998-06-09'^'bs chemistry'^'finance: consumer services'^90
+'2017-10393'^'lucius cumo'^'1996-09-02'^'bs computer engineering'^'oil & gas production'^73
+'2017-10394'^'westleigh hoppner'^'2001-12-27'^'bs mathematics'^'real estate investment trusts'^28
+'2017-10395'^'abrahan donohue'^'2007-09-25'^'bs industrial engineering'^'recreational products/toys'^109
+'2017-10396'^'padraic broz'^'2004-02-02'^'ba sociology'^'n/a'^87
+'2017-10397'^'marietta giovanardi'^'2002-03-16'^'bs mathematics'^'movies/entertainment'^74
+'2017-10398'^'myrle yuranovev'^'2010-05-09'^'bs mathematics'^'marine transportation'^78
+'2017-10399'^'casper egdell'^'2000-05-27'^'bs mathematics'^'auto parts:o.e.m.'^85
+'2017-10400'^'woodie beatens'^'2009-11-24'^'ba sociology'^'engineering & construction'^102
+'2017-10401'^'jermain sute'^'1992-02-27'^'ba sociology'^'commercial banks'^67
+'2017-10402'^'ricoriki barg'^'2002-02-03'^'bs computer engineering'^'savings institutions'^88
+'2017-10403'^'indira loughhead'^'2010-03-22'^'bs statistics'^'clothing/shoe/accessory stores'^73
+'2017-10404'^'wayland munslow'^'2006-09-02'^'bs computer engineering'^'n/a'^33
+'2017-10405'^'enriqueta castell'^'1992-11-20'^'bs statistics'^'n/a'^52
+'2017-10406'^'meier tomkowicz'^'1997-06-04'^'bs computer science'^'medical/dental instruments'^2
+'2017-10407'^'yorgo wilcox'^'1996-07-09'^'bs mathematics'^'n/a'^136
+'2017-10408'^'torrey eckart'^'2008-09-04'^'bs chemistry'^'telecommunications equipment'^36
+'2017-10409'^'nathalia o''doogan'^'1995-02-21'^'bs statistics'^'n/a'^17
+'2017-10410'^'selina grinyakin'^'2005-06-26'^'bs applied physics'^'biotechnology: commercial physical & biological resarch'^127
+'2017-10411'^'tobit breddy'^'2003-08-27'^'bs industrial engineering'^'n/a'^19
+'2017-10412'^'cherry denyakin'^'2005-09-18'^'bs mathematics'^'major pharmaceuticals'^3
+'2017-10413'^'eolanda fassum'^'1999-12-10'^'bs mathematics'^'fluid controls'^157
+'2017-10414'^'gilles cersey'^'2007-05-19'^'bs mathematics'^'n/a'^25
+'2017-10415'^'win scotchbourouge'^'2009-08-24'^'bs chemistry'^'medical/dental instruments'^22
+'2017-10416'^'estevan loch'^'2006-10-01'^'bs industrial engineering'^'n/a'^109
+'2017-10417'^'micheal briar'^'1997-06-14'^'bs applied physics'^'finance: consumer services'^121
+'2017-10418'^'vito girardengo'^'2009-11-23'^'bs chemical engineering'^'n/a'^138
+'2017-10419'^'dulcine habershon'^'2004-01-11'^'ba communication arts'^'semiconductors'^131
+'2017-10420'^'maribeth nowaczyk'^'2001-05-18'^'ba sociology'^'transportation services'^29
+'2017-10421'^'nickie o''sheils'^'2008-04-21'^'ba communication arts'^'edp services'^48
+'2017-10422'^'kerrie niblock'^'2001-05-29'^'bs statistics'^'edp services'^151
+'2017-10423'^'toinette drinan'^'2008-08-19'^'ba communication arts'^'industrial machinery/components'^107
+'2017-10424'^'fin redferne'^'1999-12-17'^'ba communication arts'^'n/a'^49
+'2017-10425'^'loutitia ordemann'^'2009-02-27'^'bs mathematics'^'retail: building materials'^75
+'2017-10426'^'sharia dorrins'^'1999-02-24'^'bs computer science'^'marine transportation'^79
+'2017-10427'^'karina batters'^'1994-02-15'^'bs industrial engineering'^'natural gas distribution'^113
+'2017-10428'^'nedda reid'^'2007-09-10'^'ba communication arts'^'movies/entertainment'^51
+'2017-10429'^'adolphe sallarie'^'2007-07-13'^'ba sociology'^'investment bankers/brokers/service'^61
+'2017-10430'^'nealy sumshon'^'2004-05-02'^'bs computer science'^'medical/dental instruments'^20
+'2017-10431'^'verile chastney'^'1999-08-11'^'bs computer science'^'restaurants'^25
+'2017-10432'^'brockie droghan'^'2001-01-07'^'bs chemistry'^'savings institutions'^10
+'2017-10433'^'glennis van brug'^'1993-04-19'^'bs applied physics'^'major pharmaceuticals'^113
+'2017-10434'^'roxanna maunder'^'2000-04-22'^'ba communication arts'^'finance: consumer services'^78
+'2017-10435'^'christie crosgrove'^'1997-07-10'^'bs computer science'^'marine transportation'^68
+'2017-10436'^'neila krug'^'2002-08-01'^'bs mathematics'^'n/a'^43
+'2017-10437'^'maurie shere'^'2003-01-24'^'bs chemical engineering'^'major banks'^157
+'2017-10438'^'elka andreazzi'^'2002-11-05'^'bs applied physics'^'electrical products'^144
+'2017-10439'^'georg kentish'^'1999-11-05'^'bs chemistry'^'catalog/specialty distribution'^105
+'2017-10440'^'hillier carme'^'2000-02-01'^'bs computer engineering'^'marine transportation'^150
+'2017-10441'^'boothe luckett'^'2007-09-02'^'ba sociology'^'oil & gas production'^140
+'2017-10442'^'brant schwand'^'2005-02-14'^'bs computer science'^'finance: consumer services'^28
+'2017-10443'^'kevan erlam'^'2006-04-20'^'bs chemistry'^'hospital/nursing management'^35
+'2017-10444'^'vinnie hurlin'^'1998-09-11'^'bs statistics'^'major pharmaceuticals'^136
+'2017-10445'^'immanuel swinford'^'2000-02-23'^'ba communication arts'^'telecommunications equipment'^29
+'2017-10446'^'adelaida broomhead'^'2008-04-14'^'bs applied physics'^'packaged foods'^88
+'2017-10447'^'alleyn foyster'^'1992-12-07'^'ba communication arts'^'n/a'^64
+'2017-10448'^'sean ettles'^'2003-09-29'^'bs applied physics'^'hotels/resorts'^131
+'2017-10449'^'ari wyrall'^'2008-03-28'^'bs mathematics'^'n/a'^73
+'2017-10450'^'kelcie ivankin'^'1999-06-22'^'bs mathematics'^'major pharmaceuticals'^108
+'2017-10451'^'sybyl petren'^'2008-03-30'^'bs applied physics'^'business services'^49
+'2017-10452'^'concettina banbridge'^'2003-06-14'^'bs chemical engineering'^'n/a'^120
+'2017-10453'^'lev castellani'^'2007-03-04'^'ba sociology'^'real estate investment trusts'^63
+'2017-10454'^'zahara rodrigo'^'2008-05-01'^'ba sociology'^'electric utilities: central'^125
+'2017-10455'^'mercy iredale'^'2008-02-07'^'bs mathematics'^'n/a'^23
+'2017-10456'^'cyndi tregent'^'1995-01-26'^'bs applied physics'^'edp services'^146
+'2017-10457'^'killie burrill'^'2005-02-01'^'bs computer engineering'^'n/a'^138
+'2017-10458'^'puff yellowlee'^'1998-06-30'^'bs mathematics'^'metal fabrications'^148
+'2017-10459'^'opal wilkenson'^'1997-10-28'^'bs chemistry'^'n/a'^16
+'2017-10460'^'reba twell'^'2000-08-04'^'bs chemistry'^'major chemicals'^55
+'2017-10461'^'nikaniki eyer'^'2000-12-21'^'bs chemistry'^'apparel'^139
+'2017-10462'^'yancey mulvey'^'2007-05-09'^'bs chemistry'^'major banks'^50
+'2017-10463'^'ike o''calleran'^'1999-11-21'^'bs industrial engineering'^'n/a'^74
+'2017-10464'^'ethe downs'^'2009-05-16'^'bs chemical engineering'^'business services'^57
+'2017-10465'^'ogden dowty'^'2007-09-09'^'bs chemical engineering'^'other consumer services'^114
+'2017-10466'^'pierce lanfranchi'^'1995-04-13'^'bs mathematics'^'building products'^29
+'2017-10467'^'elliott pibworth'^'2008-06-07'^'bs chemistry'^'radio and television broadcasting and communications equipment'^99
+'2017-10468'^'barth glaisner'^'1997-07-06'^'ba sociology'^'package goods/cosmetics'^45
+'2017-10469'^'niels lissenden'^'1994-11-28'^'bs applied physics'^'investment bankers/brokers/service'^77
+'2017-10470'^'hazlett gibbins'^'1994-05-02'^'bs chemical engineering'^'telecommunications equipment'^13
+'2017-10471'^'oliy narrie'^'2000-11-19'^'bs statistics'^'real estate'^19
+'2017-10472'^'mozes lissandre'^'2010-03-04'^'bs chemistry'^'n/a'^71
+'2017-10473'^'odille yoslowitz'^'2006-12-23'^'ba sociology'^'n/a'^112
+'2017-10474'^'almira stanman'^'1993-03-17'^'bs chemical engineering'^'n/a'^47
+'2017-10475'^'inness margerrison'^'2004-10-11'^'ba communication arts'^'telecommunications equipment'^98
+'2017-10476'^'alley batchellor'^'1996-09-18'^'ba communication arts'^'commercial banks'^13
+'2017-10477'^'cirilo milsted'^'2000-09-20'^'bs applied physics'^'medical/nursing services'^149
+'2017-10478'^'connie mcsarry'^'1997-03-06'^'bs statistics'^'finance: consumer services'^92
+'2017-10479'^'tuesday tompkinson'^'2006-08-01'^'bs computer engineering'^'power generation'^46
+'2017-10480'^'gordie edwicke'^'1995-10-16'^'bs computer engineering'^'electric utilities: central'^92
+'2017-10481'^'zondra churchin'^'2002-12-10'^'bs industrial engineering'^'major pharmaceuticals'^54
+'2017-10482'^'marcile lettuce'^'2008-11-07'^'bs computer engineering'^'computer software: programming, data processing'^67
+'2017-10483'^'rafi mathivet'^'2001-09-27'^'ba communication arts'^'medical/dental instruments'^134
+'2017-10484'^'janenna pichan'^'1994-10-31'^'ba sociology'^'n/a'^11
+'2017-10485'^'avictor laugier'^'2000-07-05'^'bs computer science'^'professional services'^117
+'2017-10486'^'heindrick vince'^'2007-02-09'^'bs computer science'^'n/a'^119
+'2017-10487'^'terrill indruch'^'2004-08-21'^'bs mathematics'^'savings institutions'^116
+'2017-10488'^'bree aslam'^'1999-01-09'^'bs chemistry'^'real estate investment trusts'^155
+'2017-10489'^'johnna plaid'^'1997-09-15'^'bs computer science'^'n/a'^92
+'2017-10490'^'hamil laxon'^'1999-06-28'^'bs statistics'^'oil refining/marketing'^96
+'2017-10491'^'hamilton playhill'^'1999-02-18'^'bs chemistry'^'specialty chemicals'^79
+'2017-10492'^'bucky dugget'^'2003-12-19'^'bs mathematics'^'biotechnology: biological products (no diagnostic substances)'^50
+'2017-10493'^'saloma barkhouse'^'1997-05-31'^'bs industrial engineering'^'major banks'^30
+'2017-10494'^'barty shakespear'^'2000-05-04'^'ba sociology'^'property-casualty insurers'^119
+'2017-10495'^'marius pawlowicz'^'1999-12-03'^'bs computer science'^'semiconductors'^149
+'2017-10496'^'rivy lugden'^'2010-04-14'^'bs chemistry'^'n/a'^110
+'2017-10497'^'madella gile'^'1998-03-06'^'bs computer engineering'^'beverages (production/distribution)'^4
+'2017-10498'^'prissie darracott'^'1995-07-20'^'bs chemical engineering'^'business services'^87
+'2017-10499'^'gene o''lunny'^'2008-05-10'^'bs computer science'^'natural gas distribution'^63
+'2017-10500'^'neile traise'^'2003-04-12'^'bs mathematics'^'telecommunications equipment'^91
+'2017-10501'^'carita henzer'^'1998-07-15'^'bs chemical engineering'^'power generation'^86
+'2017-10502'^'maggie filippyev'^'2005-10-31'^'bs statistics'^'major pharmaceuticals'^119
+'2017-10503'^'leonore insall'^'1992-08-17'^'bs computer engineering'^'newspapers/magazines'^21
+'2017-10504'^'borden grindell'^'2004-08-10'^'bs applied physics'^'real estate investment trusts'^153
+'2017-10505'^'ezmeralda verissimo'^'1995-11-27'^'bs mathematics'^'semiconductors'^130
+'2017-10506'^'marlee chomiszewski'^'2009-07-21'^'bs statistics'^'n/a'^54
+'2017-10507'^'lissie freiberg'^'2006-01-08'^'bs statistics'^'specialty chemicals'^32
+'2017-10508'^'galen ferrer'^'1995-12-19'^'bs industrial engineering'^'plastic products'^148
+'2017-10509'^'bailey huzzey'^'1994-11-15'^'bs chemical engineering'^'real estate investment trusts'^95
+'2017-10510'^'northrup constable'^'2003-04-05'^'bs chemical engineering'^'n/a'^21
+'2017-10511'^'binny dwelly'^'2009-07-22'^'bs chemistry'^'electric utilities: central'^63
+'2017-10512'^'briney wych'^'2002-10-13'^'ba sociology'^'n/a'^128
+'2017-10513'^'svend glasser'^'1993-10-27'^'bs chemical engineering'^'n/a'^75
+'2017-10514'^'olga medley'^'2010-02-01'^'bs statistics'^'major banks'^117
+'2017-10515'^'huntley humerstone'^'2007-11-07'^'bs computer engineering'^'major banks'^112
+'2017-10516'^'almeda gentle'^'1998-04-09'^'bs mathematics'^'biotechnology: commercial physical & biological resarch'^109
+'2017-10517'^'eba segar'^'2008-03-17'^'bs chemistry'^'n/a'^111
+'2017-10518'^'don leaman'^'1995-08-15'^'bs chemistry'^'major pharmaceuticals'^12
+'2017-10519'^'kennett ginie'^'1992-10-26'^'bs industrial engineering'^'n/a'^89
+'2017-10520'^'hazel aikett'^'1998-03-27'^'bs mathematics'^'business services'^14
+'2017-10521'^'carree aglione'^'2007-08-29'^'ba sociology'^'major banks'^131
+'2017-10522'^'aeriela mewha'^'2003-07-16'^'bs chemistry'^'diversified commercial services'^60
+'2017-10523'^'pauletta rojel'^'2000-09-13'^'bs industrial engineering'^'business services'^100
+'2017-10524'^'theodora physic'^'1997-01-19'^'bs chemistry'^'n/a'^69
+'2017-10525'^'kelley jansky'^'2001-09-10'^'bs mathematics'^'n/a'^21
+'2017-10526'^'bunnie rushford'^'2003-02-18'^'bs chemistry'^'medical/nursing services'^63
+'2017-10527'^'carmencita blackbourn'^'2006-07-28'^'bs applied physics'^'investment bankers/brokers/service'^95
+'2017-10528'^'aurelea talman'^'2003-04-22'^'bs mathematics'^'metal fabrications'^136
+'2017-10529'^'lind vigrass'^'1994-09-23'^'bs statistics'^'real estate investment trusts'^93
+'2017-10530'^'benni puckett'^'2008-12-04'^'ba communication arts'^'major chemicals'^36
+'2017-10531'^'valeria beacom'^'2003-07-28'^'bs computer engineering'^'n/a'^24
+'2017-10532'^'trista clubbe'^'1992-08-07'^'bs mathematics'^'n/a'^65
+'2017-10533'^'vanya hammerman'^'1993-06-07'^'ba sociology'^'professional services'^27
+'2017-10534'^'zorina luigi'^'1997-07-07'^'bs mathematics'^'computer communications equipment'^16
+'2017-10535'^'bryce corry'^'2007-11-29'^'bs chemical engineering'^'industrial specialties'^154
+'2017-10536'^'brendan chellingworth'^'1994-05-27'^'bs mathematics'^'paper'^59
+'2017-10537'^'alex branca'^'2005-03-16'^'bs computer science'^'medical/dental instruments'^143
+'2017-10538'^'garrek viscovi'^'2000-04-26'^'ba communication arts'^'n/a'^86
+'2017-10539'^'carolyn pinckard'^'1992-10-14'^'bs computer engineering'^'specialty insurers'^101
+'2017-10540'^'phaedra dracksford'^'1993-11-11'^'bs mathematics'^'n/a'^15
+'2017-10541'^'inna snoday'^'1994-11-30'^'bs mathematics'^'computer software: prepackaged software'^111
+'2017-10542'^'olwen gresswood'^'2010-06-26'^'ba sociology'^'oil refining/marketing'^65
+'2017-10543'^'miles dabling'^'2003-09-16'^'bs industrial engineering'^'n/a'^7
+'2017-10544'^'sherman varty'^'1993-11-04'^'bs mathematics'^'oil & gas production'^4
+'2017-10545'^'wyndham josephsen'^'1992-04-26'^'bs applied physics'^'telecommunications equipment'^83
+'2017-10546'^'tamar sapseed'^'1994-06-09'^'bs applied physics'^'major pharmaceuticals'^49
+'2017-10547'^'tobey crenage'^'2007-10-23'^'ba communication arts'^'pollution control equipment'^13
+'2017-10548'^'merwin demougeot'^'2004-08-19'^'bs computer science'^'major banks'^109
+'2017-10549'^'dasya di gregorio'^'1997-02-20'^'bs applied physics'^'auto parts:o.e.m.'^54
+'2017-10550'^'rockey lere'^'2003-01-12'^'bs computer science'^'electric utilities: central'^38
+'2017-10551'^'benetta mcmennum'^'2002-07-25'^'bs computer science'^'major pharmaceuticals'^53
+'2017-10552'^'sheffie colloby'^'1994-08-04'^'ba sociology'^'n/a'^10
+'2017-10553'^'bailie levens'^'2007-08-18'^'bs chemical engineering'^'hotels/resorts'^98
+'2017-10554'^'marieann gartell'^'2009-07-31'^'bs industrial engineering'^'accident &health insurance'^159
+'2017-10555'^'virgilio rothery'^'2005-10-23'^'ba sociology'^'real estate investment trusts'^121
+'2017-10556'^'babs sankey'^'1999-12-14'^'bs chemistry'^'n/a'^1
+'2017-10557'^'esmaria wigginton'^'1998-05-21'^'bs mathematics'^'engineering & construction'^31
+'2017-10558'^'julianna grenter'^'1998-09-07'^'bs chemical engineering'^'broadcasting'^21
+'2017-10559'^'brigitte tesyro'^'2002-03-23'^'bs industrial engineering'^'business services'^91
+'2017-10560'^'holt grundon'^'1993-10-10'^'ba communication arts'^'apparel'^105
+'2017-10561'^'bennett birds'^'1998-05-12'^'ba sociology'^'n/a'^125
+'2017-10562'^'yurik mangenet'^'2008-03-18'^'bs mathematics'^'semiconductors'^127
+'2017-10563'^'wynne hazle'^'1993-09-06'^'ba communication arts'^'radio and television broadcasting and communications equipment'^82
+'2017-10564'^'alf varker'^'1997-04-19'^'bs mathematics'^'marine transportation'^93
+'2017-10565'^'rafaela crippen'^'2006-01-25'^'bs chemistry'^'electronic components'^33
+'2017-10566'^'claude blonfield'^'2000-07-15'^'bs chemical engineering'^'investment bankers/brokers/service'^30
+'2017-10567'^'laurel hobden'^'2009-06-03'^'bs chemical engineering'^'computer peripheral equipment'^97
+'2017-10568'^'gertrude mazzey'^'1996-02-09'^'bs computer science'^'automotive aftermarket'^149
+'2017-10569'^'marylee percifer'^'1993-12-30'^'bs computer engineering'^'clothing/shoe/accessory stores'^112
+'2017-10570'^'korey methley'^'2005-07-04'^'bs statistics'^'major banks'^1
+'2017-10571'^'towny carlet'^'1999-10-27'^'bs chemical engineering'^'n/a'^107
+'2017-10572'^'carline hasnip'^'1993-11-11'^'bs computer engineering'^'n/a'^109
+'2017-10573'^'tome brennen'^'1993-01-10'^'bs mathematics'^'n/a'^75
+'2017-10574'^'alfy shemilt'^'1992-01-25'^'bs applied physics'^'n/a'^95
+'2017-10575'^'beryle carlone'^'1994-08-16'^'bs chemical engineering'^'motor vehicles'^98
+'2017-10576'^'charlton hamberston'^'2009-10-19'^'bs computer engineering'^'investment bankers/brokers/service'^53
+'2017-10577'^'kimball mangeney'^'2007-06-04'^'bs statistics'^'n/a'^16
+'2017-10578'^'jayne malins'^'2008-11-27'^'ba sociology'^'major banks'^27
+'2017-10579'^'torin girod'^'2009-09-05'^'bs computer science'^'biotechnology: laboratory analytical instruments'^39
+'2017-10580'^'antonio railton'^'2002-05-11'^'ba sociology'^'oil/gas transmission'^59
+'2017-10581'^'bettine pargetter'^'2003-04-27'^'bs chemical engineering'^'major pharmaceuticals'^71
+'2017-10582'^'nelson tawton'^'2009-02-28'^'ba communication arts'^'n/a'^74
+'2017-10583'^'sutherland plumtree'^'2007-01-03'^'ba sociology'^'n/a'^121
+'2017-10584'^'cyndy parks'^'1997-07-30'^'bs computer engineering'^'edp services'^75
+'2017-10585'^'olivia occleshaw'^'1992-01-10'^'ba sociology'^'major banks'^44
+'2017-10586'^'willi voase'^'2006-05-24'^'bs chemistry'^'natural gas distribution'^1
+'2017-10587'^'amelina tonkinson'^'1994-05-18'^'bs mathematics'^'biotechnology: in vitro & in vivo diagnostic substances'^48
+'2017-10588'^'birgit vink'^'2005-09-17'^'ba sociology'^'packaged foods'^140
+'2017-10589'^'jacquenetta zielinski'^'1997-06-17'^'bs statistics'^'edp services'^38
+'2017-10590'^'walker lough'^'2007-08-21'^'ba communication arts'^'n/a'^23
+'2017-10591'^'elaina shwalbe'^'2008-10-06'^'bs mathematics'^'medical/nursing services'^122
+'2017-10592'^'bard dudny'^'2002-12-09'^'bs computer science'^'advertising'^1
+'2017-10593'^'rodd wybron'^'2008-10-12'^'bs chemical engineering'^'industrial machinery/components'^146
+'2017-10594'^'benjy holywell'^'2010-08-16'^'bs mathematics'^'n/a'^28
+'2017-10595'^'quinta murison'^'1996-05-12'^'bs industrial engineering'^'industrial machinery/components'^43
+'2017-10596'^'candida sellers'^'2005-08-26'^'bs industrial engineering'^'industrial machinery/components'^85
+'2017-10597'^'wolfy fearns'^'2001-01-07'^'bs chemical engineering'^'n/a'^25
+'2017-10598'^'noelyn eynon'^'1992-02-26'^'ba communication arts'^'packaged foods'^54
+'2017-10599'^'shirleen miranda'^'1996-05-09'^'bs computer science'^'n/a'^83
+'2017-10600'^'nelson coudray'^'2000-03-26'^'bs industrial engineering'^'n/a'^11
+'2017-10601'^'ab jaggli'^'2009-06-04'^'bs chemical engineering'^'n/a'^144
+'2017-10602'^'blondie dabinett'^'2002-09-04'^'ba sociology'^'n/a'^26
+'2017-10603'^'janela jansik'^'1992-04-08'^'bs chemistry'^'n/a'^130
+'2017-10604'^'annamaria insoll'^'2006-06-22'^'bs applied physics'^'n/a'^108
+'2017-10605'^'zora clifford'^'2000-02-10'^'bs mathematics'^'major banks'^82
+'2017-10606'^'lolita bampkin'^'2009-12-10'^'bs statistics'^'computer software: prepackaged software'^103
+'2017-10607'^'barry matijasevic'^'2009-11-20'^'bs computer engineering'^'semiconductors'^10
+'2017-10608'^'ephrayim suston'^'1996-11-27'^'bs mathematics'^'business services'^155
+'2017-10609'^'gwendolin hele'^'2001-10-13'^'bs chemical engineering'^'biotechnology: biological products (no diagnostic substances)'^81
+'2017-10610'^'stormy edgars'^'1998-12-31'^'bs computer engineering'^'trucking freight/courier services'^117
+'2017-10611'^'hannie asche'^'2009-01-23'^'bs industrial engineering'^'marine transportation'^85
+'2017-10612'^'emelen hessing'^'2010-03-21'^'ba sociology'^'n/a'^59
+'2017-10613'^'lacee proback'^'2009-06-29'^'bs applied physics'^'n/a'^81
+'2017-10614'^'deidre jordon'^'1999-08-28'^'bs computer science'^'electric utilities: central'^42
+'2017-10615'^'paulie serfati'^'2007-02-03'^'ba sociology'^'commercial banks'^154
+'2017-10616'^'koressa kibbel'^'2006-08-14'^'bs mathematics'^'business services'^19
+'2017-10617'^'blanche rape'^'2007-03-30'^'bs chemistry'^'n/a'^99
+'2017-10618'^'rockey klimentyev'^'1998-09-25'^'ba sociology'^'major banks'^57
+'2017-10619'^'francine sahlstrom'^'2004-02-06'^'bs computer science'^'telecommunications equipment'^131
+'2017-10620'^'katherine bage'^'2009-08-12'^'bs computer engineering'^'telecommunications equipment'^68
+'2017-10621'^'merci culwen'^'1995-12-07'^'bs industrial engineering'^'n/a'^141
+'2017-10622'^'dwain whitcombe'^'2003-11-25'^'bs statistics'^'n/a'^84
+'2017-10623'^'rey hyder'^'2004-07-14'^'bs mathematics'^'department/specialty retail stores'^5
+'2017-10624'^'stuart ferronet'^'1996-05-04'^'bs applied physics'^'investment bankers/brokers/service'^151
+'2017-10625'^'mariel barrowclough'^'1994-06-03'^'ba communication arts'^'major pharmaceuticals'^34
+'2017-10626'^'pammy cassley'^'2009-08-25'^'bs mathematics'^'n/a'^24
+'2017-10627'^'orazio monery'^'2005-10-29'^'ba sociology'^'real estate investment trusts'^13
+'2017-10628'^'gael tomblings'^'1992-07-16'^'bs computer engineering'^'oil & gas production'^60
+'2017-10629'^'ilyssa johansson'^'1998-07-06'^'ba communication arts'^'n/a'^151
+'2017-10630'^'bernadene llop'^'1992-05-21'^'bs statistics'^'real estate investment trusts'^64
+'2017-10631'^'tandi courtney'^'2010-06-21'^'bs industrial engineering'^'major pharmaceuticals'^78
+'2017-10632'^'gill kasparski'^'1992-03-18'^'bs industrial engineering'^'multi-sector companies'^58
+'2017-10633'^'eldredge stadden'^'2009-08-21'^'ba sociology'^'business services'^68
+'2017-10634'^'jacqui redsall'^'2003-08-23'^'ba sociology'^'precious metals'^156
+'2017-10635'^'ham rackam'^'1993-05-14'^'bs computer science'^'clothing/shoe/accessory stores'^92
+'2017-10636'^'fredi budge'^'2006-04-28'^'bs chemistry'^'n/a'^43
+'2017-10637'^'chev ariss'^'1997-05-07'^'bs computer science'^'n/a'^26
+'2017-10638'^'cynthy castellino'^'2003-03-06'^'bs computer engineering'^'n/a'^28
+'2017-10639'^'dominica manton'^'2002-12-20'^'bs industrial engineering'^'n/a'^84
+'2017-10640'^'dana dawks'^'1999-11-24'^'bs mathematics'^'business services'^41
+'2017-10641'^'talyah moxted'^'2009-08-22'^'bs chemical engineering'^'auto parts:o.e.m.'^123
+'2017-10642'^'debora dicken'^'2003-09-06'^'bs mathematics'^'electronic components'^8
+'2017-10643'^'brietta cunnow'^'1995-07-25'^'bs mathematics'^'n/a'^122
+'2017-10644'^'gerladina rodrigues'^'2008-06-28'^'bs industrial engineering'^'n/a'^77
+'2017-10645'^'meade coutthart'^'1998-05-18'^'bs statistics'^'savings institutions'^13
+'2017-10646'^'nickolas biggerdike'^'2004-11-19'^'bs computer engineering'^'major banks'^96
+'2017-10647'^'reeva fawson'^'1999-11-21'^'bs chemistry'^'paper'^114
+'2017-10648'^'briana netting'^'2008-06-19'^'bs computer science'^'oilfield services/equipment'^9
+'2017-10649'^'genvieve gossage'^'1998-07-06'^'bs mathematics'^'major pharmaceuticals'^94
+'2017-10650'^'dorelia binks'^'1995-03-13'^'bs chemistry'^'n/a'^64
+'2017-10651'^'billi budgett'^'2005-03-12'^'bs chemistry'^'major pharmaceuticals'^30
+'2017-10652'^'zia swaysland'^'1998-01-15'^'bs chemical engineering'^'industrial specialties'^25
+'2017-10653'^'sayre milner'^'2000-09-10'^'ba communication arts'^'real estate investment trusts'^30
+'2017-10654'^'terry springle'^'2007-04-01'^'bs mathematics'^'electric utilities: central'^19
+'2017-10655'^'zerk kinzel'^'2005-03-03'^'bs computer science'^'life insurance'^55
+'2017-10656'^'holly gillitt'^'2005-08-20'^'bs chemical engineering'^'n/a'^57
+'2017-10657'^'fiann mcgillacoell'^'2009-03-06'^'ba communication arts'^'oil refining/marketing'^20
+'2017-10658'^'tobit signorelli'^'1999-03-10'^'bs computer science'^'computer software: prepackaged software'^130
+'2017-10659'^'renato clemett'^'1997-02-15'^'bs mathematics'^'oil & gas production'^45
+'2017-10660'^'ginevra antuk'^'2001-11-13'^'bs statistics'^'property-casualty insurers'^62
+'2017-10661'^'benyamin o''luby'^'2008-04-15'^'bs mathematics'^'oil/gas transmission'^138
+'2017-10662'^'talbot southerill'^'1992-08-20'^'ba communication arts'^'telecommunications equipment'^95
+'2017-10663'^'ronny duddle'^'2009-02-11'^'bs computer engineering'^'business services'^53
+'2017-10664'^'brittne maccolgan'^'2007-04-28'^'bs industrial engineering'^'n/a'^92
+'2017-10665'^'constantin barkworth'^'2010-09-05'^'bs chemistry'^'power generation'^49
+'2017-10666'^'jayme kenna'^'1994-07-26'^'bs industrial engineering'^'agricultural chemicals'^122
+'2017-10667'^'ferne loweth'^'2000-03-30'^'bs applied physics'^'n/a'^24
+'2017-10668'^'mick bresner'^'1999-11-23'^'bs applied physics'^'n/a'^93
+'2017-10669'^'alf amberg'^'2007-09-09'^'bs computer science'^'n/a'^51
+'2017-10670'^'aubree petzolt'^'2000-10-01'^'bs computer engineering'^'major banks'^10
+'2017-10671'^'neal daggett'^'1993-08-30'^'bs mathematics'^'n/a'^76
+'2017-10672'^'clem koppel'^'2007-04-30'^'bs mathematics'^'n/a'^15
+'2017-10673'^'stacee week'^'2007-02-06'^'ba sociology'^'precious metals'^117
+'2017-10674'^'irwin selby'^'2005-06-27'^'bs computer engineering'^'industrial machinery/components'^21
+'2017-10675'^'cori o'' meara'^'1994-12-20'^'bs chemistry'^'n/a'^158
+'2017-10676'^'kathie basek'^'1997-06-29'^'bs mathematics'^'business services'^116
+'2017-10677'^'walton corradini'^'2001-05-08'^'bs applied physics'^'major banks'^139
+'2017-10678'^'noelani balnave'^'2005-12-07'^'bs computer engineering'^'medical/dental instruments'^63
+'2017-10679'^'leonie copping'^'2010-03-18'^'bs computer engineering'^'n/a'^121
+'2017-10680'^'cindee ruilton'^'1995-07-25'^'bs industrial engineering'^'major banks'^137
+'2017-10681'^'dario wisham'^'2008-07-11'^'bs computer science'^'n/a'^9
+'2017-10682'^'kit tomblin'^'1994-02-21'^'ba communication arts'^'major pharmaceuticals'^151
+'2017-10683'^'lindsay mccathy'^'1992-08-24'^'bs mathematics'^'n/a'^110
+'2017-10684'^'husain atterley'^'2008-02-21'^'ba communication arts'^'n/a'^127
+'2017-10685'^'iggie mungane'^'2004-07-10'^'bs computer engineering'^'investment managers'^42
+'2017-10686'^'valentine brosius'^'1999-07-11'^'bs mathematics'^'industrial machinery/components'^133
+'2017-10687'^'sean chesnut'^'1995-10-31'^'ba communication arts'^'n/a'^59
+'2017-10688'^'eleni klagges'^'1992-09-29'^'bs statistics'^'n/a'^139
+'2017-10689'^'roseanna halburton'^'2000-01-27'^'bs computer engineering'^'computer software: programming, data processing'^25
+'2017-10690'^'marlyn eggleton'^'1993-02-22'^'bs computer engineering'^'life insurance'^145
+'2017-10691'^'karisa thorlby'^'1994-06-07'^'bs chemistry'^'real estate'^94
+'2017-10692'^'damaris van oord'^'2010-01-07'^'bs computer engineering'^'n/a'^42
+'2017-10693'^'cad lonergan'^'1997-06-01'^'bs mathematics'^'major banks'^132
+'2017-10694'^'latrena anglin'^'1996-05-28'^'bs mathematics'^'major pharmaceuticals'^146
+'2017-10695'^'melodie chaffen'^'2002-08-13'^'bs mathematics'^'investment managers'^21
+'2017-10696'^'doreen rowles'^'2009-09-17'^'bs chemical engineering'^'business services'^27
+'2017-10697'^'vivyanne ornillos'^'2000-02-24'^'ba communication arts'^'n/a'^119
+'2017-10698'^'nefen streeter'^'1996-11-29'^'bs statistics'^'finance companies'^52
+'2017-10699'^'gabrielle borrett'^'1994-03-13'^'bs industrial engineering'^'major banks'^138
+'2017-10700'^'quinn haps'^'2002-11-18'^'bs industrial engineering'^'medical/dental instruments'^80
+'2017-10701'^'chev llelweln'^'2005-04-24'^'bs applied physics'^'restaurants'^34
+'2017-10702'^'garret fuzzard'^'1992-01-16'^'ba sociology'^'telecommunications equipment'^65
+'2017-10703'^'jerrilee skep'^'1999-12-12'^'ba sociology'^'other consumer services'^118
+'2017-10704'^'bridget dedon'^'1999-05-04'^'bs computer engineering'^'major banks'^141
+'2017-10705'^'dulcie ronca'^'2007-02-27'^'bs applied physics'^'packaged foods'^16
+'2017-10706'^'guthrey dorling'^'1997-12-03'^'bs statistics'^'beverages (production/distribution)'^47
+'2017-10707'^'alf doget'^'2001-09-26'^'bs mathematics'^'n/a'^41
+'2017-10708'^'liliane o''carrol'^'2008-01-08'^'bs computer engineering'^'savings institutions'^78
+'2017-10709'^'jasmina pilger'^'2008-03-12'^'bs chemistry'^'industrial machinery/components'^70
+'2017-10710'^'leland cerro'^'2009-05-25'^'ba communication arts'^'major banks'^45
+'2017-10711'^'darrell macneish'^'2001-07-14'^'bs applied physics'^'oil & gas production'^28
+'2017-10712'^'gun pollicatt'^'2009-08-31'^'ba communication arts'^'computer peripheral equipment'^134
+'2017-10713'^'salomi pistol'^'1996-03-12'^'bs chemistry'^'n/a'^24
+'2017-10714'^'cullin calafate'^'2001-09-20'^'ba communication arts'^'n/a'^77
+'2017-10715'^'delia kaman'^'2005-04-06'^'bs industrial engineering'^'electric utilities: central'^136
+'2017-10716'^'ulric caitlin'^'2006-06-16'^'bs mathematics'^'commercial banks'^37
+'2017-10717'^'verney sichardt'^'1996-05-25'^'bs industrial engineering'^'n/a'^136
+'2017-10718'^'mar sor'^'1999-12-16'^'bs applied physics'^'metal fabrications'^99
+'2017-10719'^'brook haspineall'^'2004-05-27'^'bs chemical engineering'^'n/a'^52
+'2017-10720'^'karla baistow'^'1994-04-12'^'ba communication arts'^'finance/investors services'^29
+'2017-10721'^'salomo tunn'^'2006-05-09'^'ba communication arts'^'real estate investment trusts'^44
+'2017-10722'^'tiena stroyan'^'2000-05-23'^'bs chemistry'^'professional services'^154
+'2017-10723'^'alidia squibbes'^'2008-07-07'^'ba communication arts'^'major pharmaceuticals'^44
+'2017-10724'^'myrilla klais'^'2010-01-19'^'bs chemical engineering'^'n/a'^157
+'2017-10725'^'gaile chicchetto'^'1998-11-05'^'ba sociology'^'business services'^16
+'2017-10726'^'nikkie haigh'^'1992-06-19'^'ba communication arts'^'farming/seeds/milling'^28
+'2017-10727'^'blinni brady'^'2000-09-15'^'bs industrial engineering'^'n/a'^85
+'2017-10728'^'winna eddis'^'1999-02-15'^'bs computer science'^'real estate investment trusts'^89
+'2017-10729'^'elianora dunley'^'2004-03-01'^'ba sociology'^'biotechnology: laboratory analytical instruments'^142
+'2017-10730'^'cleopatra hought'^'2000-05-16'^'bs mathematics'^'major banks'^118
+'2017-10731'^'masha binfield'^'2007-04-10'^'bs applied physics'^'n/a'^128
+'2017-10732'^'farris mays'^'1997-09-25'^'bs computer science'^'military/government/technical'^55
+'2017-10733'^'rudy harce'^'1995-07-24'^'bs statistics'^'electronic components'^65
+'2017-10734'^'neille beatey'^'2000-11-16'^'bs mathematics'^'major pharmaceuticals'^108
+'2017-10735'^'case jeafferson'^'1993-09-22'^'ba communication arts'^'major banks'^122
+'2017-10736'^'esdras duggon'^'2004-03-15'^'bs computer engineering'^'coal mining'^90
+'2017-10737'^'jacintha fleisch'^'2005-03-03'^'bs chemistry'^'oil & gas production'^52
+'2017-10738'^'erma bollis'^'1995-06-11'^'bs statistics'^'major pharmaceuticals'^128
+'2017-10739'^'kennett fedynski'^'1992-03-29'^'bs computer engineering'^'property-casualty insurers'^9
+'2017-10740'^'payton dyster'^'2010-07-19'^'ba communication arts'^'telecommunications equipment'^18
+'2017-10741'^'augustus nellis'^'1997-06-11'^'bs chemistry'^'marine transportation'^70
+'2017-10742'^'curran redholls'^'2005-09-21'^'bs computer science'^'major pharmaceuticals'^102
+'2017-10743'^'mathian mosconi'^'2009-10-14'^'bs industrial engineering'^'marine transportation'^160
+'2017-10744'^'barclay chartres'^'1995-01-30'^'bs computer science'^'catalog/specialty distribution'^62
+'2017-10745'^'flynn grishinov'^'1999-05-29'^'bs applied physics'^'telecommunications equipment'^61
+'2017-10746'^'devinne mcmechan'^'1997-12-10'^'bs chemistry'^'finance: consumer services'^36
+'2017-10747'^'murdoch gepson'^'2003-10-04'^'bs applied physics'^'computer software: programming, data processing'^20
+'2017-10748'^'sawyer pemberton'^'1994-03-10'^'ba sociology'^'computer software: prepackaged software'^90
+'2017-10749'^'chrissie compton'^'2000-03-29'^'bs computer engineering'^'n/a'^30
+'2017-10750'^'berrie row'^'2008-07-18'^'bs statistics'^'n/a'^111
+'2017-10751'^'larine loughren'^'1994-06-28'^'ba communication arts'^'n/a'^98
+'2017-10752'^'fancie bursnoll'^'1999-05-19'^'ba communication arts'^'n/a'^91
+'2017-10753'^'grier daymond'^'1994-02-09'^'bs computer engineering'^'oil & gas production'^28
+'2017-10754'^'teresita kinworthy'^'2001-03-29'^'bs computer engineering'^'advertising'^129
+'2017-10755'^'thorstein bedle'^'2009-07-08'^'bs industrial engineering'^'edp services'^106
+'2017-10756'^'bird luttgert'^'2009-04-16'^'ba sociology'^'professional services'^117
+'2017-10757'^'tierney firminger'^'2007-04-20'^'bs industrial engineering'^'major banks'^114
+'2017-10758'^'alfonso trench'^'2007-09-30'^'bs chemistry'^'biotechnology: electromedical & electrotherapeutic apparatus'^45
+'2017-10759'^'corina adshead'^'1995-03-10'^'ba communication arts'^'major chemicals'^21
+'2017-10760'^'mathilde o''brollachain'^'2007-11-26'^'ba sociology'^'restaurants'^37
+'2017-10761'^'clarinda capelin'^'2003-09-24'^'bs mathematics'^'precious metals'^35
+'2017-10762'^'dexter loomes'^'2007-11-01'^'bs computer science'^'real estate investment trusts'^19
+'2017-10763'^'britt hebbard'^'2004-11-12'^'ba communication arts'^'n/a'^103
+'2017-10764'^'anjela belsham'^'2004-02-14'^'bs statistics'^'life insurance'^15
+'2017-10765'^'tate pottery'^'2002-08-17'^'bs industrial engineering'^'computer software: prepackaged software'^119
+'2017-10766'^'millie prium'^'1996-01-15'^'bs computer science'^'major banks'^113
+'2017-10767'^'merill bilovsky'^'1993-10-31'^'bs computer engineering'^'n/a'^90
+'2017-10768'^'davie sygroves'^'2002-01-14'^'bs applied physics'^'n/a'^92
+'2017-10769'^'gilberta collibear'^'2003-02-17'^'bs industrial engineering'^'farming/seeds/milling'^123
+'2017-10770'^'midge wiszniewski'^'2005-08-27'^'bs mathematics'^'n/a'^147
+'2017-10771'^'stacie josephoff'^'2009-10-22'^'ba communication arts'^'business services'^28
+'2017-10772'^'orran ainsley'^'2004-12-18'^'bs computer engineering'^'real estate'^134
+'2017-10773'^'drew headon'^'2005-07-03'^'bs mathematics'^'real estate investment trusts'^39
+'2017-10774'^'gabrila guerner'^'2009-02-22'^'bs chemical engineering'^'power generation'^100
+'2017-10775'^'calv melton'^'1994-11-12'^'bs applied physics'^'commercial banks'^85
+'2017-10776'^'odelia feavers'^'2004-08-12'^'bs chemical engineering'^'military/government/technical'^46
+'2017-10777'^'concordia oldfield'^'1995-12-08'^'ba sociology'^'major banks'^130
+'2017-10778'^'wilfrid fochs'^'2003-01-28'^'bs mathematics'^'oilfield services/equipment'^26
+'2017-10779'^'gus bleazard'^'1992-12-09'^'bs statistics'^'coal mining'^15
+'2017-10780'^'romola lansdowne'^'2004-11-04'^'bs computer science'^'electric utilities: central'^112
+'2017-10781'^'malachi willavize'^'1995-12-28'^'bs computer engineering'^'professional services'^139
+'2017-10782'^'vina golde'^'1996-11-04'^'bs computer science'^'integrated oil companies'^94
+'2017-10783'^'lorie clarkin'^'2004-11-08'^'bs computer engineering'^'n/a'^3
+'2017-10784'^'markus yexley'^'1994-05-25'^'bs chemical engineering'^'n/a'^20
+'2017-10785'^'idalina eckersall'^'2001-09-06'^'bs mathematics'^'n/a'^111
+'2017-10786'^'rosamond cable'^'2001-05-15'^'bs industrial engineering'^'trucking freight/courier services'^130
+'2017-10787'^'olia ebrall'^'1995-10-25'^'bs mathematics'^'metal fabrications'^75
+'2017-10788'^'sherlocke simister'^'1994-01-08'^'bs computer science'^'consumer electronics/video chains'^58
+'2017-10789'^'vallie mamwell'^'1994-02-26'^'bs applied physics'^'major banks'^121
+'2017-10790'^'muffin dupey'^'1993-11-16'^'bs chemistry'^'auto manufacturing'^102
+'2017-10791'^'devinne hopkins'^'2007-01-18'^'bs mathematics'^'ophthalmic goods'^131
+'2017-10792'^'ashien stuchbery'^'2009-08-28'^'bs chemistry'^'semiconductors'^142
+'2017-10793'^'wynn dabling'^'2007-04-26'^'bs computer engineering'^'n/a'^110
+'2017-10794'^'boniface sinnatt'^'1993-01-19'^'bs computer science'^'oil & gas production'^159
+'2017-10795'^'roshelle sterley'^'2010-04-18'^'bs chemistry'^'major pharmaceuticals'^68
+'2017-10796'^'onfroi pinchback'^'1999-11-18'^'bs chemical engineering'^'oil & gas production'^34
+'2017-10797'^'gracia jozef'^'1993-03-12'^'bs chemical engineering'^'computer software: prepackaged software'^58
+'2017-10798'^'amii kirkby'^'2009-02-28'^'bs computer engineering'^'n/a'^135
+'2017-10799'^'rustin broun'^'1993-07-23'^'bs computer engineering'^'movies/entertainment'^133
+'2017-10800'^'katuscha americi'^'1997-02-12'^'bs computer science'^'major pharmaceuticals'^1
+'2017-10801'^'dalston ivkovic'^'1992-07-24'^'bs computer science'^'computer software: prepackaged software'^73
+'2017-10802'^'krishna pettifer'^'2006-07-28'^'bs chemical engineering'^'n/a'^30
+'2017-10803'^'lotta paolinelli'^'2008-10-16'^'bs computer science'^'marine transportation'^9
+'2017-10804'^'randie schops'^'1993-03-21'^'ba communication arts'^'n/a'^9
+'2017-10805'^'avis layborn'^'2010-10-29'^'bs industrial engineering'^'business services'^149
+'2017-10806'^'kermie dinan'^'1998-04-19'^'bs chemistry'^'banks'^106
+'2017-10807'^'meriel walkington'^'2003-01-14'^'ba sociology'^'plastic products'^9
+'2017-10808'^'cherey bazoge'^'2010-01-18'^'bs chemistry'^'other specialty stores'^117
+'2017-10809'^'kelsey shapland'^'2007-08-21'^'bs applied physics'^'major banks'^158
+'2017-10810'^'jocko melvin'^'2004-01-28'^'bs applied physics'^'computer peripheral equipment'^67
+'2017-10811'^'storm comfort'^'1999-02-19'^'ba sociology'^'major pharmaceuticals'^64
+'2017-10812'^'gerhardine fippe'^'2001-06-20'^'bs chemical engineering'^'n/a'^154
+'2017-10813'^'sammy wych'^'2009-09-26'^'bs mathematics'^'auto parts:o.e.m.'^92
+'2017-10814'^'storm benois'^'2009-05-05'^'bs mathematics'^'n/a'^116
+'2017-10815'^'harp alsobrook'^'1993-07-24'^'bs computer engineering'^'major banks'^21
+'2017-10816'^'ondrea spray'^'1993-12-20'^'bs computer engineering'^'major chemicals'^86
+'2017-10817'^'doti benduhn'^'2000-06-02'^'bs computer engineering'^'beverages (production/distribution)'^96
+'2017-10818'^'lionello dumberrill'^'2001-07-10'^'bs computer engineering'^'n/a'^9
+'2017-10819'^'celka bolwell'^'1997-08-20'^'bs mathematics'^'major pharmaceuticals'^33
+'2017-10820'^'alisha prescott'^'2009-01-21'^'ba communication arts'^'finance: consumer services'^158
+'2017-10821'^'sonny rubertis'^'2008-01-06'^'bs computer science'^'medical/nursing services'^93
+'2017-10822'^'tore braithwaite'^'2009-02-10'^'bs applied physics'^'real estate investment trusts'^64
+'2017-10823'^'deloria troppmann'^'2001-11-15'^'bs chemistry'^'oil & gas production'^69
+'2017-10824'^'bobbi kitchinham'^'1997-02-07'^'bs mathematics'^'n/a'^133
+'2017-10825'^'jolee taveriner'^'1998-12-13'^'bs mathematics'^'steel/iron ore'^137
+'2017-10826'^'corella bittleson'^'1996-11-15'^'ba communication arts'^'electric utilities: central'^1
+'2017-10827'^'gerrie blackaller'^'2002-05-27'^'bs mathematics'^'business services'^76
+'2017-10828'^'kaitlin mossom'^'2000-04-14'^'bs industrial engineering'^'hotels/resorts'^88
+'2017-10829'^'hazel myrick'^'1998-07-14'^'ba communication arts'^'natural gas distribution'^60
+'2017-10830'^'rosalinda coxon'^'2001-05-06'^'bs computer engineering'^'miscellaneous manufacturing industries'^9
+'2017-10831'^'briggs austins'^'2000-10-19'^'bs mathematics'^'major pharmaceuticals'^53
+'2017-10832'^'lillis gofforth'^'1994-03-02'^'ba communication arts'^'marine transportation'^59
+'2017-10833'^'carolynn denes'^'1994-04-07'^'ba sociology'^'n/a'^56
+'2017-10834'^'luce skottle'^'2010-04-02'^'bs chemistry'^'savings institutions'^128
+'2017-10835'^'charlot timperley'^'2006-01-02'^'bs computer engineering'^'precious metals'^136
+'2017-10836'^'skell struss'^'2009-03-28'^'ba sociology'^'electric utilities: central'^124
+'2017-10837'^'darrel bagott'^'2008-10-15'^'bs applied physics'^'n/a'^154
+'2017-10838'^'charin dunniom'^'2000-03-20'^'ba communication arts'^'biotechnology: biological products (no diagnostic substances)'^34
+'2017-10839'^'giacinta trenaman'^'1999-09-30'^'ba communication arts'^'medical/dental instruments'^42
+'2017-10840'^'grace denne'^'1992-09-19'^'ba sociology'^'major banks'^69
+'2017-10841'^'barry samart'^'2009-07-01'^'ba communication arts'^'newspapers/magazines'^145
+'2017-10842'^'reinaldos radwell'^'2008-04-12'^'bs industrial engineering'^'home furnishings'^4
+'2017-10843'^'nathaniel marshland'^'2002-10-17'^'bs computer engineering'^'electric utilities: central'^132
+'2017-10844'^'ward feore'^'2009-06-23'^'bs chemistry'^'n/a'^43
+'2017-10845'^'jere spuner'^'1999-07-25'^'bs applied physics'^'integrated oil companies'^69
+'2017-10846'^'kliment maus'^'2002-05-23'^'ba sociology'^'edp services'^30
+'2017-10847'^'brietta nel'^'2000-09-19'^'bs chemistry'^'hospital/nursing management'^122
+'2017-10848'^'alf bilovsky'^'2002-04-12'^'bs industrial engineering'^'semiconductors'^83
+'2017-10849'^'taber dossetter'^'2009-04-23'^'bs computer science'^'n/a'^75
+'2017-10850'^'reagan birkwood'^'1996-08-31'^'bs mathematics'^'biotechnology: electromedical & electrotherapeutic apparatus'^62
+'2017-10851'^'roseanna roistone'^'1995-11-28'^'bs computer science'^'n/a'^128
+'2017-10852'^'gothart sute'^'2005-03-09'^'bs statistics'^'investment managers'^115
+'2017-10853'^'melisa duncan'^'2003-04-03'^'bs computer engineering'^'clothing/shoe/accessory stores'^69
+'2017-10854'^'mada geggus'^'2007-05-02'^'bs mathematics'^'clothing/shoe/accessory stores'^55
+'2017-10855'^'leontyne habgood'^'2006-11-09'^'ba communication arts'^'n/a'^34
+'2017-10856'^'oralle pringuer'^'1999-12-25'^'bs applied physics'^'business services'^152
+'2017-10857'^'kaylee ormrod'^'2003-08-30'^'bs statistics'^'marine transportation'^62
+'2017-10858'^'godfrey selwyn'^'1995-11-10'^'bs mathematics'^'investment managers'^38
+'2017-10859'^'bibbye girsch'^'2002-01-02'^'bs chemical engineering'^'n/a'^31
+'2017-10860'^'faythe milmoe'^'1997-07-03'^'bs chemical engineering'^'property-casualty insurers'^139
+'2017-10861'^'theda street'^'1999-11-26'^'bs computer engineering'^'commercial banks'^60
+'2017-10862'^'tomlin rothman'^'1997-04-13'^'ba sociology'^'major chemicals'^75
+'2017-10863'^'jobina ottey'^'1993-05-07'^'bs computer engineering'^'major pharmaceuticals'^114
+'2017-10864'^'aristotle camelia'^'1996-03-21'^'bs industrial engineering'^'n/a'^1
+'2017-10865'^'merrick hourihane'^'2000-10-02'^'bs statistics'^'computer communications equipment'^83
+'2017-10866'^'guss henrichs'^'2010-07-21'^'ba communication arts'^'marine transportation'^108
+'2017-10867'^'yul oleksiak'^'1993-06-11'^'bs computer engineering'^'oil & gas production'^10
+'2017-10868'^'sibyl greenshields'^'1998-10-02'^'bs mathematics'^'n/a'^40
+'2017-10869'^'tucker pogosian'^'1998-07-20'^'bs computer engineering'^'real estate investment trusts'^84
+'2017-10870'^'rickie triggs'^'1993-06-07'^'bs computer engineering'^'business services'^91
+'2017-10871'^'benedict rotherham'^'2009-06-07'^'bs mathematics'^'edp services'^64
+'2017-10872'^'stearne corson'^'1996-08-22'^'bs chemical engineering'^'specialty insurers'^49
+'2017-10873'^'adam saxton'^'2006-10-12'^'ba communication arts'^'major pharmaceuticals'^62
+'2017-10874'^'vilhelmina downie'^'1999-03-13'^'ba sociology'^'savings institutions'^126
+'2017-10875'^'darn dyter'^'2008-12-05'^'bs chemistry'^'metal fabrications'^74
+'2017-10876'^'granger foale'^'1994-08-03'^'bs statistics'^'restaurants'^137
+'2017-10877'^'viole batha'^'2010-05-25'^'bs mathematics'^'n/a'^52
+'2017-10878'^'howard smullen'^'1992-11-12'^'ba sociology'^'n/a'^55
+'2017-10879'^'rebeca upshall'^'1993-01-13'^'ba communication arts'^'business services'^75
+'2017-10880'^'stirling yemm'^'2001-07-03'^'bs industrial engineering'^'major pharmaceuticals'^78
+'2017-10881'^'rowen brinson'^'1994-01-14'^'bs chemical engineering'^'marine transportation'^29
+'2017-10882'^'merrile tattershall'^'2009-05-24'^'bs computer engineering'^'computer software: prepackaged software'^105
+'2017-10883'^'odey silmon'^'2007-10-08'^'bs chemical engineering'^'food distributors'^48
+'2017-10884'^'rachele haton'^'2001-06-10'^'bs statistics'^'natural gas distribution'^148
+'2017-10885'^'klement guinnane'^'2009-09-28'^'bs computer engineering'^'diversified commercial services'^23
+'2017-10886'^'flinn strangwood'^'2008-04-07'^'bs statistics'^'marine transportation'^42
+'2017-10887'^'elisha terrill'^'1994-12-31'^'bs chemical engineering'^'commercial banks'^137
+'2017-10888'^'freddy nagle'^'1996-04-10'^'ba sociology'^'major chemicals'^53
+'2017-10889'^'kassie philliskirk'^'2002-03-23'^'ba sociology'^'n/a'^126
+'2017-10890'^'taite napoli'^'2005-01-14'^'bs applied physics'^'n/a'^62
+'2017-10891'^'tulley cobleigh'^'1993-11-30'^'bs industrial engineering'^'water supply'^119
+'2017-10892'^'glenda fidele'^'1998-04-22'^'bs computer engineering'^'major chemicals'^84
+'2017-10893'^'wes rayne'^'1996-01-10'^'bs mathematics'^'major chemicals'^89
+'2017-10894'^'dani hilldrup'^'2006-07-13'^'bs chemical engineering'^'industrial specialties'^75
+'2017-10895'^'melba mcgilben'^'2006-04-09'^'bs applied physics'^'consumer electronics/appliances'^128
+'2017-10896'^'berny bearcock'^'1994-11-10'^'bs mathematics'^'industrial machinery/components'^155
+'2017-10897'^'tanhya waistell'^'1996-09-11'^'bs industrial engineering'^'medical/dental instruments'^82
+'2017-10898'^'madelaine maton'^'1998-10-05'^'ba sociology'^'biotechnology: laboratory analytical instruments'^156
+'2017-10899'^'florette landell'^'1996-07-28'^'bs computer engineering'^'computer software: programming, data processing'^152
+'2017-10900'^'hedwig macwhan'^'1992-08-17'^'bs mathematics'^'n/a'^160
+'2017-10901'^'carmella cram'^'1998-06-25'^'bs applied physics'^'electronic components'^19
+'2017-10902'^'lianna burgne'^'2007-10-13'^'ba sociology'^'n/a'^18
+'2017-10903'^'elsy cave'^'1997-11-28'^'bs computer engineering'^'semiconductors'^97
+'2017-10904'^'flossi huckell'^'2001-07-27'^'ba sociology'^'medical/dental instruments'^136
+'2017-10905'^'darline geleman'^'2008-07-20'^'bs mathematics'^'telecommunications equipment'^55
+'2017-10906'^'leonardo dashkovich'^'2002-11-01'^'ba communication arts'^'n/a'^56
+'2017-10907'^'page ayars'^'2005-06-15'^'bs industrial engineering'^'catalog/specialty distribution'^107
+'2017-10908'^'sansone foxhall'^'2008-02-22'^'bs mathematics'^'semiconductors'^129
+'2017-10909'^'cairistiona heinzler'^'2001-08-22'^'bs industrial engineering'^'major banks'^45
+'2017-10910'^'yuma willmett'^'2003-06-10'^'bs mathematics'^'hotels/resorts'^79
+'2017-10911'^'trudie kesper'^'2000-08-12'^'bs computer engineering'^'accident &health insurance'^137
+'2017-10912'^'aldo jenson'^'1994-10-19'^'bs applied physics'^'property-casualty insurers'^46
+'2017-10913'^'vivie lamblot'^'2001-08-25'^'bs chemistry'^'n/a'^119
+'2017-10914'^'ulrick curton'^'2006-08-17'^'bs chemical engineering'^'military/government/technical'^24
+'2017-10915'^'rosemarie strathman'^'1996-12-12'^'bs chemistry'^'major banks'^145
+'2017-10916'^'baldwin buesden'^'2004-06-03'^'bs computer engineering'^'n/a'^20
+'2017-10917'^'edgardo droghan'^'1999-08-30'^'ba communication arts'^'n/a'^107
+'2017-10918'^'dinnie neilson'^'2008-10-03'^'ba communication arts'^'n/a'^6
+'2017-10919'^'monica hurler'^'2007-04-29'^'bs industrial engineering'^'computer software: programming, data processing'^44
+'2017-10920'^'nathanial mark'^'2010-05-13'^'bs computer science'^'forest products'^21
+'2017-10921'^'hilary hollidge'^'1993-07-04'^'bs mathematics'^'transportation services'^57
+'2017-10922'^'harv hearl'^'2007-09-20'^'bs industrial engineering'^'agricultural chemicals'^141
+'2017-10923'^'darryl guys'^'2003-01-11'^'bs industrial engineering'^'major chemicals'^151
+'2017-10924'^'catarina steger'^'2003-09-24'^'ba sociology'^'semiconductors'^87
+'2017-10925'^'jarred itzcovichch'^'1996-02-11'^'bs computer science'^'textiles'^87
+'2017-10926'^'bowie eisikowitz'^'2004-07-23'^'bs mathematics'^'n/a'^41
+'2017-10927'^'randy houndson'^'2006-02-17'^'bs computer engineering'^'package goods/cosmetics'^27
+'2017-10928'^'talbot mayer'^'2010-01-31'^'bs mathematics'^'computer software: prepackaged software'^48
+'2017-10929'^'billie billingsley'^'2006-04-08'^'bs applied physics'^'n/a'^77
+'2017-10930'^'marcelline bulch'^'2005-08-10'^'ba communication arts'^'n/a'^128
+'2017-10931'^'brittani garahan'^'2001-08-12'^'bs industrial engineering'^'industrial machinery/components'^155
+'2017-10932'^'roger gosz'^'2007-09-20'^'bs statistics'^'apparel'^144
+'2017-10933'^'donnamarie edmett'^'1997-01-15'^'bs mathematics'^'n/a'^79
+'2017-10934'^'lucias steed'^'1994-08-28'^'ba sociology'^'n/a'^31
+'2017-10935'^'isaiah petegrew'^'1995-10-10'^'bs applied physics'^'computer manufacturing'^43
+'2017-10936'^'riley keen'^'2000-05-31'^'bs chemical engineering'^'real estate investment trusts'^153
+'2017-10937'^'lesli droogan'^'1996-04-13'^'bs computer engineering'^'oil refining/marketing'^8
+'2017-10938'^'rob hurdiss'^'2010-09-04'^'bs applied physics'^'telecommunications equipment'^19
+'2017-10939'^'josh langwade'^'1998-07-03'^'bs chemistry'^'n/a'^159
+'2017-10940'^'meade trott'^'2002-04-13'^'bs computer engineering'^'real estate investment trusts'^31
+'2017-10941'^'guillema vsanelli'^'2001-05-20'^'bs computer engineering'^'retail: building materials'^3
+'2017-10942'^'bryn shivlin'^'1999-08-21'^'bs applied physics'^'edp services'^8
+'2017-10943'^'haven kilbourn'^'2001-01-16'^'bs chemistry'^'real estate investment trusts'^139
+'2017-10944'^'jeannie cescotti'^'1999-07-13'^'bs mathematics'^'medical specialities'^119
+'2017-10945'^'stuart soltan'^'1998-02-27'^'bs chemistry'^'military/government/technical'^38
+'2017-10946'^'baron piburn'^'2002-02-06'^'bs industrial engineering'^'package goods/cosmetics'^56
+'2017-10947'^'lorna huyche'^'2007-05-17'^'bs statistics'^'major pharmaceuticals'^32
+'2017-10948'^'ola lunn'^'2002-11-22'^'bs computer science'^'property-casualty insurers'^121
+'2017-10949'^'batholomew burwood'^'1993-04-13'^'bs mathematics'^'biotechnology: biological products (no diagnostic substances)'^98
+'2017-10950'^'jerrold lees'^'1994-12-19'^'ba sociology'^'television services'^101
+'2017-10951'^'zorah dreng'^'1994-05-19'^'bs applied physics'^'business services'^7
+'2017-10952'^'dierdre bindley'^'1996-06-30'^'bs mathematics'^'containers/packaging'^106
+'2017-10953'^'alix mesant'^'2008-08-31'^'bs mathematics'^'n/a'^49
+'2017-10954'^'benedict tampin'^'1997-07-03'^'bs mathematics'^'other consumer services'^94
+'2017-10955'^'dickie rissen'^'2008-12-13'^'bs statistics'^'savings institutions'^45
+'2017-10956'^'nixie fayre'^'2002-09-29'^'ba sociology'^'retail: computer software & peripheral equipment'^61
+'2017-10957'^'gaelan town'^'1993-07-01'^'bs industrial engineering'^'precious metals'^41
+'2017-10958'^'bern kealy'^'2006-07-26'^'bs industrial engineering'^'business services'^25
+'2017-10959'^'ania weatherburn'^'1993-10-28'^'bs applied physics'^'restaurants'^1
+'2017-10960'^'lowrance mckie'^'1995-10-23'^'bs chemical engineering'^'real estate investment trusts'^35
+'2017-10961'^'domenico inskipp'^'2005-06-09'^'bs mathematics'^'medical specialities'^98
+'2017-10962'^'ingrim seger'^'2001-04-27'^'bs chemical engineering'^'n/a'^123
+'2017-10963'^'odille dowey'^'2000-08-21'^'bs statistics'^'n/a'^96
+'2017-10964'^'ian goacher'^'2003-03-22'^'bs industrial engineering'^'electric utilities: central'^148
+'2017-10965'^'hadleigh mosdall'^'2007-02-07'^'bs chemistry'^'hospital/nursing management'^47
+'2017-10966'^'lauritz mccaffrey'^'2010-05-29'^'bs chemical engineering'^'n/a'^29
+'2017-10967'^'sully hartzog'^'2000-12-20'^'bs computer science'^'n/a'^158
+'2017-10968'^'royce lemme'^'2008-05-04'^'ba communication arts'^'medical/dental instruments'^132
+'2017-10969'^'danny offer'^'2003-01-04'^'ba communication arts'^'oil & gas production'^140
+'2017-10970'^'jacky baumert'^'2005-04-15'^'bs mathematics'^'metal fabrications'^35
+'2017-10971'^'raimondo averay'^'2000-11-06'^'ba communication arts'^'major banks'^97
+'2017-10972'^'launce owens'^'2006-06-17'^'bs computer engineering'^'radio and television broadcasting and communications equipment'^68
+'2017-10973'^'stuart donat'^'2009-06-03'^'ba communication arts'^'real estate investment trusts'^154
+'2017-10974'^'germaine cordero'^'2004-03-02'^'ba sociology'^'commercial banks'^126
+'2017-10975'^'carina matuszkiewicz'^'2007-10-04'^'bs mathematics'^'investment bankers/brokers/service'^150
+'2017-10976'^'godfree fyfield'^'1996-07-24'^'bs chemical engineering'^'edp services'^21
+'2017-10977'^'shalne bellon'^'2002-03-25'^'ba communication arts'^'n/a'^1
+'2017-10978'^'eimile hillyatt'^'2008-06-29'^'bs computer science'^'biotechnology: commercial physical & biological resarch'^113
+'2017-10979'^'inga langfitt'^'2003-03-16'^'bs mathematics'^'services-misc. amusement & recreation'^31
+'2017-10980'^'abbott martinez'^'1995-02-17'^'bs chemical engineering'^'property-casualty insurers'^116
+'2017-10981'^'dyanne goulthorp'^'2009-03-24'^'bs industrial engineering'^'n/a'^118
+'2017-10982'^'artemis rizzardo'^'1998-01-12'^'bs mathematics'^'real estate investment trusts'^116
+'2017-10983'^'leopold peckett'^'2002-01-31'^'bs statistics'^'n/a'^24
+'2017-10984'^'gusty girkin'^'2002-02-11'^'bs mathematics'^'n/a'^87
+'2017-10985'^'aldwin hathorn'^'2009-12-05'^'bs applied physics'^'commercial banks'^50
+'2017-10986'^'garrick plesing'^'2009-08-30'^'bs chemistry'^'edp services'^151
+'2017-10987'^'keenan colthurst'^'1995-02-15'^'bs statistics'^'computer software: prepackaged software'^40
+'2017-10988'^'gates fitzmaurice'^'2004-06-07'^'bs computer science'^'n/a'^87
+'2017-10989'^'erika eardley'^'1996-12-28'^'bs mathematics'^'metal fabrications'^105
+'2017-10990'^'judith kumaar'^'1995-11-18'^'bs computer science'^'broadcasting'^9
+'2017-10991'^'jim curry'^'1998-06-08'^'bs industrial engineering'^'n/a'^147
+'2017-10992'^'thornie smitherman'^'2008-02-24'^'bs industrial engineering'^'major pharmaceuticals'^101
+'2017-10993'^'otes trenam'^'2009-03-28'^'bs applied physics'^'n/a'^14
+'2017-10994'^'jsandye geeves'^'1993-05-11'^'bs computer science'^'business services'^36
+'2017-10995'^'laird brownstein'^'2008-04-12'^'bs applied physics'^'n/a'^126
+'2017-10996'^'peter nayshe'^'2007-01-03'^'bs computer engineering'^'retail: building materials'^133
+'2017-10997'^'tomlin michelle'^'2005-02-08'^'bs chemistry'^'business services'^21
+'2017-10998'^'chase heathorn'^'1994-07-15'^'bs industrial engineering'^'business services'^142
+'2017-10999'^'carny ridger'^'1999-06-15'^'bs chemistry'^'natural gas distribution'^158
+'2017-11000'^'rani baxstair'^'1993-03-15'^'bs computer engineering'^'major pharmaceuticals'^42
+'2017-40005'^'Alfie Van der Brugge'^'1997-02-27'^'BS Industrial Engineering'^'Natural Gas Distribution'^138

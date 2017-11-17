@@ -323,16 +323,18 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
-                    line = line.lower()
+                    line = line#.lower()
                     prog = mysqlparse.parse(line)
-
+                    mysqlparse.table_selected = mysqlparse.table_selected.lower();
                     if mysqlparse.operation == 'insert':
+                        print(line)
                         #returned_rows = trees[mysqlparse.table_selected].insert
                         errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                         if not errorcheck:
                             print("Insert successful")
                         else:
                             print("Error seen")
+                            break
                     # print(line)
                     # # print(tables[nameOfFile])
                     # if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
@@ -427,7 +429,7 @@ class Ui_MainWindow(object):
         cursor.select(QtGui.QTextCursor.LineUnderCursor)
 
         selText = cursor.selectedText()            # save content of line under cursor in text edit
-        # print("selText")
+        print(selText)
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         print(selText)
@@ -448,6 +450,7 @@ class Ui_MainWindow(object):
             print('col_name: ', mysqlparse.col_name)
             print('comp_operator: ', mysqlparse.comp_operator)
             print('cond_exp: ', mysqlparse.cond_exp)
+            mysqlparse.table_selected = mysqlparse.table_selected.lower()
 
             # print('\ntrees: ', trees)
 
