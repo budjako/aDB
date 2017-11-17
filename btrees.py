@@ -81,21 +81,20 @@ class TableBTree:
         error1 = False
         birthday_pattern = re.compile("^'\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])'$")
         studno_pattern = re.compile("^'\d{4}-\d{5}'$")
-        time_pattern = re.compile("^'([0-1]?[0-9]|2[0-3]):[0-5][0-9]'$")
+        time_pattern = re.compile("^'([0-1]?[0-9]|2[0-3]):[0-5][0-9]-([0-1]?[0-9]|2[0-3]):[0-5][0-9]'$")
+        sem_pattern = re.compile("'((1st)|(2nd)|(3rd))'")
 
         if self.tablename == 'student':
             if value_list_bool and not column_name_bool: #first case input
-                value_list = value_list.split(',')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
-                    value_list[i] = value_list[i].rstrip('\'')
-                    value_list[i] = value_list[i].lstrip('\'')
-                    value_list[i] = value_list[i][1:]
-                    if re.search("'null'",value_list[i]):
+                    print(value_list[i])
+                    if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    if not value_list[i].isdigit() and not value_list[i] == "NULL":
-                        value_list[i] = value_list[i][:-1]
-                #key_index = col_name.index("studno")
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
+                    elif i == 0:
+                        value_list[i] = value_list[i][12:]
+                    print("-"+value_list[i]+"-")
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 if not birthday_pattern.match(value_list[2]):
                     print("Birthday format isn't correct")
                     error1 = True
@@ -120,23 +119,19 @@ class TableBTree:
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.replace(" ", "")
-                value_list = value_list.split(',')
+                #value_list = value_list.split(' , ')
+                #value_list = re.split(" , ",value_list)
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
                     print(value_list[i])
                     if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    else:
-                        value_list[i] = value_list[i].rstrip('\'')
-                        value_list[i] = value_list[i].lstrip('\'')
-            
-                        value_list[i] = value_list[i][1:]
-
-                    if not value_list[i].isdigit() and value_list[i] != "NULL":
-                        value_list[i] = value_list[i][:-1]
+                    elif i == 0:
+                        value_list[i] = value_list[i][12:]
                     print(value_list[i])
                     
                 key_index = col_name.index("studno")
-                value_list[key_index] = "'" + value_list[key_index].split("'")[1] + "'"
+                #value_list[key_index] = "'" + value_list[key_index].split("'")[1] + "'"
                 
                 if not studno_pattern.match(value_list[key_index]):
                     print("Student number format isn't correct")
@@ -178,19 +173,23 @@ class TableBTree:
                         error1 = True
 
             elif not value_list_bool and not column_name_bool: #third case input
-                assignment_list = (assignment_list + " ").split(',')
+                assignment_list = (assignment_list + " ").split(' , ')
                 insert_list = []
                 col_name = []
                 value_list = []
 
                 for i in range(0,len(assignment_list)):
                     split_list = assignment_list[i].split("=")
+                    if i == 0:
+                        split_list[0] = split_list[0][12:]
+                    
                     col_ext = split_list[0].replace(" ","")
-                    val_ext = split_list[1]
+                    val_ext = split_list[1][1:]
+                    if i == len(assignment_list) - 1:
+                        val_ext = val_ext[:-1]
                     if re.search("'null'",val_ext):
                         val_ext = "NULL"
-                    else:
-                        val_ext = split_list[1][1:-1]
+                    print(col_ext + "-" + val_ext + "-")
                     col_name.append(col_ext)
                     value_list.append(val_ext)
 
@@ -237,17 +236,16 @@ class TableBTree:
 
         elif self.tablename == 'studenthistory':
             if value_list_bool and not column_name_bool: #first case input
-                value_list = (value_list + " ").split(',')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
-                    value_list[i] = value_list[i].rstrip('\'')
-                    value_list[i] = value_list[i].lstrip('\'')
-                    value_list[i] = value_list[i][1:]
-                    if re.search("'null'",value_list[i]):
+                    print(value_list[i])
+                    if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    if not value_list[i].isdigit() and value_list[i] == "NULL":
-                        value_list[i] = value_list[i][:-1]
+                    elif i == 0:
+                        value_list[i] = value_list[i][10:]
+                    print("-"+value_list[i]+"-")
                 #key_index = col_name.index("studno")
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 if not studno_pattern.match(value_list[0]):
                     print("Student number format isn't correct")
                     error1 = True
@@ -266,23 +264,18 @@ class TableBTree:
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.replace(" ", "")
-                value_list = (value_list + " ").split(',')
+                #value_list = (value_list + " ").split(',')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
                     print(value_list[i])
                     if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    else:
-                        value_list[i] = value_list[i].rstrip('\'')
-                        value_list[i] = value_list[i].lstrip('\'')
-
-                        value_list[i] = value_list[i][1:]
-
-                    if not value_list[i].isdigit() and value_list[i] != "NULL":
-                        value_list[i] = value_list[i][:-1]
+                    elif i == 0:
+                        value_list[i] = value_list[i][10:]
                     print(value_list[i])
 
                 key_index = col_name.index("studno")
-                value_list[key_index] = "'" + value_list[key_index].split("'")[1] + "'"
+                #value_list[key_index] = "'" + value_list[key_index].split("'")[1] + "'"
                 col_name = col_name.split(',')
 
                 if not studno_pattern.match(value_list[key_index]):
@@ -314,19 +307,23 @@ class TableBTree:
                         error1 = True
 
             elif not value_list_bool and not column_name_bool: #third case input
-                assignment_list = (assignment_list + " ").split(',')
+                assignment_list = (assignment_list + " ").split(' , ')
                 insert_list = []
                 col_name = []
                 value_list = []
 
                 for i in range(0,len(assignment_list)):
                     split_list = assignment_list[i].split("=")
+                    if i == 0:
+                        split_list[0] = split_list[0][10:]
+                    
                     col_ext = split_list[0].replace(" ","")
-                    val_ext = split_list[1]
+                    val_ext = split_list[1][1:]
+                    if i == len(assignment_list) - 1:
+                        val_ext = val_ext[:-1]
                     if re.search("'null'",val_ext):
                         val_ext = "NULL"
-                    else:
-                        val_ext = split_list[1][1:-1]
+                    print(col_ext + "-" + val_ext + "-")
                     col_name.append(col_ext)
                     value_list.append(val_ext)
 
@@ -361,22 +358,25 @@ class TableBTree:
 
         elif self.tablename == 'course':
             if value_list_bool and not column_name_bool: #first case input
-                value_list = (value_list + " ").split(',')
+                #value_list = (value_list + " ").split(' , ')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
-                    value_list[i] = value_list[i].rstrip('\'')
-                    value_list[i] = value_list[i].lstrip('\'')
-                    value_list[i] = value_list[i][1:]
-                    if re.search("'null'",value_list[i]):
+                    print(value_list[i])
+                    if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    if not value_list[i].isdigit() and value_list[i] == "NULL":
-                        value_list[i] = value_list[i][:-1]
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
+                    elif i == 0:
+                        value_list[i] = value_list[i][12:]
+                    print("-"+value_list[i]+"-")
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
 
                 if not value_list[3].isdigit():
                     print("NoOfUnits format isn't correct")
                     error1 = True
                 if not value_list[4].isdigit():
                     print("HasLab format isn't correct")
+                    error1 = True
+                if not sem_pattern.match(value_list[5]):
+                    print("SemOffered format isn't correct")
                     error1 = True
 
                 if value_list[0] not in self.data and not error1:
@@ -393,22 +393,17 @@ class TableBTree:
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.replace(" ", "")
-                value_list = (value_list + "  ").split(',')
+                #value_list = (value_list + "  ").split(',')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
                     print(value_list[i])
                     if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    else:
-                        value_list[i] = value_list[i].rstrip('\'')
-                        value_list[i] = value_list[i].lstrip('\'')
-            
-                        value_list[i] = value_list[i][1:]
+                    elif i == 0:
+                        value_list[i] = value_list[i][12:]
 
-                    if not value_list[i].isdigit() and value_list[i] != "NULL":
-                        value_list[i] = value_list[i][:-1]
-                    print(value_list[i])
                 key_index = col_name.index("cno")
-                value_list[key_index] = "'" + value_list[key_index].split("'")[1] + "'"
+                #value_list[key_index] = "'" + value_list[key_index].split("'")[1] + "'"
                 col_name = col_name.split(',')
                 if "cno" not in col_name:
                     print("No primary key")
@@ -435,6 +430,10 @@ class TableBTree:
                             error1 = True
                     if 'semoffered' not in dict_cols_vals:
                         dict_cols_vals['semoffered'] = "NULL";
+                    else:
+                        if not sem_pattern.match(dict_cols_vals['semoffered']):
+                            print("SemOffered format isn't correct")
+                            error1 = True
 
                     if key_value_list not in self.data and not error1:
                         self.data.update({key_value_list: dict_cols_vals})
@@ -445,19 +444,23 @@ class TableBTree:
                         error1 = True
 
             elif not value_list_bool and not column_name_bool: #third case input
-                assignment_list = (assignment_list + " ").split(',')
+                assignment_list = (assignment_list + " ").split(' , ')
                 insert_list = []
                 col_name = []
                 value_list = []
 
                 for i in range(0,len(assignment_list)):
                     split_list = assignment_list[i].split("=")
+                    if i == 0:
+                        split_list[0] = split_list[0][12:]
+                    
                     col_ext = split_list[0].replace(" ","")
-                    val_ext = split_list[1]
+                    val_ext = split_list[1][1:]
+                    if i == len(assignment_list) - 1:
+                        val_ext = val_ext[:-1]
                     if re.search("'null'",val_ext):
                         val_ext = "NULL"
-                    else:
-                        val_ext = split_list[1][1:-1]
+                    print(col_ext + "-" + val_ext + "-")
                     col_name.append(col_ext)
                     value_list.append(val_ext)
 
@@ -477,16 +480,22 @@ class TableBTree:
                         dict_cols_vals['noofunits'] = "NULL";
                     else:
                         if not dict_cols_vals['noofunits'].isdigit():
+                            print(dict_cols_vals['noofunits'])
                             print("NoOfUnits format isn't correct")
                             error1 = True
                     if 'haslab' not in dict_cols_vals:
                         dict_cols_vals['haslab'] = "NULL";
                     else:
                         if not dict_cols_vals['haslab'].isdigit():
+                            print(dict_cols_vals['haslab'])
                             print("HasLab format isn't correct")
                             error1 = True
                     if 'semoffered' not in dict_cols_vals:
                         dict_cols_vals['semoffered'] = "NULL";
+                    else:
+                        if not sem_pattern.match(dict_cols_vals['semoffered']):
+                            print("SemOffered format isn't correct")
+                            error1 = True
 
                     if key_value_list not in self.data and not error1:
                         self.data.update({key_value_list: dict_cols_vals})
@@ -498,18 +507,20 @@ class TableBTree:
 
         elif self.tablename == 'courseoffering':
             if value_list_bool and not column_name_bool: #first case input
-                value_list = (value_list+ " ").split(',')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
-                    value_list[i] = value_list[i].rstrip('\'')
-                    value_list[i] = value_list[i].lstrip('\'')
-                    value_list[i] = value_list[i][1:-1]
-                    if re.search("'null'",value_list[i]):
+                    print(value_list[i])
+                    if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    if not value_list[i].isdigit() and value_list[i] == "NULL":
-                        value_list[i] = value_list[i][:-1]
+                    elif i == 0:
+                        value_list[i] = value_list[i][12:]
+                    print("-"+value_list[i]+"-")
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
 
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
 
+                if not sem_pattern.match(value_list[0]):
+                    print("Semester format isn't correct")
+                    error1 = True
                 if not time_pattern.match(value_list[4]):
                     print("Time format isn't correct")
                     error1 = True
@@ -533,21 +544,17 @@ class TableBTree:
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.replace(" ", "")
-                value_list = value_list.split(',')
+                #value_list = value_list.split(',')
+
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
                     print(value_list[i])
                     if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    else:
-                        value_list[i] = value_list[i].rstrip('\'')
-                        value_list[i] = value_list[i].lstrip('\'')
-            
-                        value_list[i] = value_list[i][1:]
-
-                    if not value_list[i].isdigit() and value_list[i] != "NULL":
-                        value_list[i] = value_list[i][:-1]
+                    elif i == 0:
+                        value_list[i] = value_list[i][12:]
                     print(value_list[i])
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 col_name = col_name.split(',')
 
                 if ("semester" not in col_name) or ("acadyear" not in col_name) or ("cno" not in col_name) or ("section" not in col_name):
@@ -576,6 +583,10 @@ class TableBTree:
 
                     dict_cols_vals = dict(zip(col_name,value_list))
 
+                    if not sem_pattern.match(key_value_list[0]):
+                        print("Semester format isn't correct")
+                        error1 = True
+
                     if 'time' not in dict_cols_vals:
                         dict_cols_vals['time'] = "NULL";
                     else:
@@ -643,6 +654,10 @@ class TableBTree:
 
                     dict_cols_vals = dict(zip(col_name,value_list))
 
+                    if not sem_pattern.match(key_value_list[0]):
+                        print("Semester format isn't correct")
+                        error1 = True
+
                     if 'time' not in dict_cols_vals:
                         dict_cols_vals['time'] = "NULL";
                     else:
@@ -670,21 +685,21 @@ class TableBTree:
 
         elif self.tablename == 'studcourse':
             if value_list_bool and not column_name_bool: #first case input
-                value_list = (value_list + " ").split(',')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
-                    value_list[i] = value_list[i].rstrip('\'')
-                    value_list[i] = value_list[i].lstrip('\'')
-                    value_list[i] = value_list[i][1:-1]
-
-                    if re.search("'null'",value_list[i]):
+                    print(value_list[i])
+                    if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    if not value_list[i].isdigit() and value_list[i] == "NULL":
-                        value_list[i] = value_list[i][:-1]
-                    print(value_list[i] + "-val")
+                    elif i == 0:
+                        value_list[i] = value_list[i][8:]
+                    print("-"+value_list[i]+"-")
 
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 if not studno_pattern.match(value_list[0]):
                     print("Student number format isn't correct")
+                    error1 = True
+                if not sem_pattern.match(value_list[2]):
+                    print("Semester format isn't correct")
                     error1 = True
 
                 if len(value_list) == 4 and not error1:
@@ -704,22 +719,16 @@ class TableBTree:
 
             elif value_list_bool and column_name_bool: #second case input
                 col_name = col_name.replace(" ", "")
-                value_list = (value_list + " ").split(',')
+                value_list = re.split(" , ",value_list)
                 for i in range(0, len(value_list)):
                     print(value_list[i])
                     if re.search("'null'",value_list[i]):# == " 'null'":
                         value_list[i] = "NULL"
-                    else:
-                        value_list[i] = value_list[i].rstrip('\'')
-                        value_list[i] = value_list[i].lstrip('\'')
-            
-                        value_list[i] = value_list[i][1:]
-
-                    if not value_list[i].isdigit() and value_list[i] != "NULL":
-                        value_list[i] = value_list[i][:-1]
+                    elif i == 0:
+                        value_list[i] = value_list[i][8:]
                     print(value_list[i])
                 col_name = col_name.split(',')
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 dict_cols_vals = dict(zip(col_name,value_list))
 
 
@@ -733,6 +742,10 @@ class TableBTree:
                         dict_cols_vals['cno'] = "NULL";
                 if 'semester' not in dict_cols_vals:
                         dict_cols_vals['semester'] = "NULL";
+                else:
+                    if not sem_pattern.match(dict_cols_vals['semester']):
+                        print("Semester format isn't correct")
+                        error1 = True
                 if 'acadyear' not in dict_cols_vals:
                         dict_cols_vals['acadyear'] = "NULL";
 
@@ -743,23 +756,28 @@ class TableBTree:
                     print("Input is wrong")
 
             elif not value_list_bool and not column_name_bool: #third case input
-                assignment_list = (assignment_list + " ").split(',')
+                assignment_list = (assignment_list + " ").split(' , ')
                 insert_list = []
                 col_name = []
                 value_list = []
 
                 for i in range(0,len(assignment_list)):
                     split_list = assignment_list[i].split("=")
+                    if i == 0:
+                        split_list[0] = split_list[0][8:]
+                    
                     col_ext = split_list[0].replace(" ","")
-                    val_ext = split_list[1]
+                    val_ext = split_list[1][1:]
+                    if i == len(assignment_list) - 1:
+                        val_ext = val_ext[:-1]
                     if re.search("'null'",val_ext):
                         val_ext = "NULL"
-                    else:
-                        val_ext = split_list[1][1:-1]
+                    print(col_ext + "-" + val_ext + "-")
                     col_name.append(col_ext)
                     value_list.append(val_ext)
 
-                value_list[0] = "'" + value_list[0].split("'")[1] + "'"
+
+                #value_list[0] = "'" + value_list[0].split("'")[1] + "'"
                 dict_cols_vals = dict(zip(col_name,value_list))
 
                 if 'studno' not in dict_cols_vals:
@@ -772,6 +790,10 @@ class TableBTree:
                         dict_cols_vals['cno'] = "NULL";
                 if 'semester' not in dict_cols_vals:
                         dict_cols_vals['semester'] = "NULL";
+                else:
+                    if not sem_pattern.match(dict_cols_vals['semester']):
+                        print("Semester format isn't correct")
+                        error1 = True
                 if 'acadyear' not in dict_cols_vals:
                         dict_cols_vals['acadyear'] = "NULL";
 
