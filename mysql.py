@@ -125,6 +125,7 @@ class Ui_MainWindow(object):
         # query result table widget
         self.queryResultTW = QtGui.QTableWidget()
         self.queryResultTW.setEnabled(True)
+        self.queryResultTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.queryResultTW.setGeometry(QtCore.QRect(230, 320, 491, 201))
         self.queryResultTW.setStyleSheet(_fromUtf8(""))
         self.queryResultTW.setAutoScroll(False)
