@@ -548,6 +548,7 @@ if __name__ == "__main__":
 
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
+    app.setActiveWindow(MainWindow)
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.setWindowTitle('My Database')
