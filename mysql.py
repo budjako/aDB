@@ -44,6 +44,8 @@ except AttributeError:
 # main window
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        def __init__(self, parent=None):
+            super(MainWindow, self).__init__(parent)
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(732, 570)
