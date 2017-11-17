@@ -212,10 +212,10 @@ class Ui_MainWindow(object):
 
         # make only the columns on the right stretchable
         self.centralwidget.layout().setColumnStretch(0, 0)
-        self.centralwidget.layout().setColumnStretch(1, 1)        
-        self.centralwidget.layout().setColumnStretch(2, 1)        
+        self.centralwidget.layout().setColumnStretch(1, 1)
+        self.centralwidget.layout().setColumnStretch(2, 1)
 
-        self.centralwidget.layout().setSpacing(10)                
+        self.centralwidget.layout().setSpacing(10)
 
         self.populateTables()
 
@@ -424,13 +424,12 @@ class Ui_MainWindow(object):
         # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
         cursor.select(QtGui.QTextCursor.LineUnderCursor)
 
-        selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
+        selText = cursor.selectedText()            # save content of line under cursor in text edit
         # print("selText")
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         print(selText)
 
-        selText = selText.lower()
         prog = mysqlparse.parse(selText)
         print('operation: ', mysqlparse.operation)
         print('columns: ', mysqlparse.columns)           #
@@ -446,16 +445,16 @@ class Ui_MainWindow(object):
         print('cond_exp: ', mysqlparse.cond_exp)
 
         # print('\ntrees: ', trees)
-
-        if mysqlparse.operation == 'select':
+        mysqlparse.table_selected = mysqlparse.table_selected.lower()
+        if mysqlparse.operation == 'select' or mysqlparse.operation == 'SELECT':
             returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'delete':
+        if mysqlparse.operation == 'delete' or mysqlparse.operation == 'DELETE':
             returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'insert':
+        if mysqlparse.operation == 'insert' or mysqlparse.operation == 'INSERT':
             #returned_rows = trees[mysqlparse.table_selected].insert
             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
             if not errorcheck:
