@@ -456,7 +456,7 @@ class Ui_MainWindow(object):
             if mysqlparse.operation == 'select':
                 returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
                 self.showQueryResult(returned_rows)
-
+                self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1)) # show number of rows returned on status bar. -1 for column names
             if mysqlparse.operation == 'delete':
                 returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
                 # self.showQueryResult(returned_rows)
