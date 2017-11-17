@@ -296,13 +296,13 @@ class Ui_MainWindow(object):
                                 dataString += "'" + data + "',"
                         dataString = dataString[:-1]
                         insertString2 = "INSERT INTO " + self.dropdown + " VALUES(" + dataString + ");"                      #Without column names
-                        print(insertString2)
+                        # print(insertString2)
                         # append.write(dataString+";\n")
 
-                        insertString2 = insertString2.lower()
+                        # insertString2 = insertString2.lower()
                         prog = mysqlparse.parse(insertString2)
 
-                        if mysqlparse.operation == 'insert':
+                        if mysqlparse.operation.lower() == 'insert':
                             #returned_rows = trees[mysqlparse.table_selected].insert
                             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                             if not errorcheck:
@@ -339,16 +339,7 @@ class Ui_MainWindow(object):
                     # else:
                     #     print("with column names")
         else:
-            self.fileNameError = QtGui.QMessageBox()
-            self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
-            self.fileNameError.setText("Only csv and sql files are accepted!")
-            self.fileNameError.setWindowTitle("File type error")
-            self.fileNameError.addButton(QtGui.QMessageBox.Ok)
-            self.fileNameError.show()
-
-
-
-
+            self.showErrorDialog("Only csv and sql files are accepted!", "File type error")
 
         f.close()
         append.close()
@@ -446,15 +437,15 @@ class Ui_MainWindow(object):
 
         # print('\ntrees: ', trees)
         mysqlparse.table_selected = mysqlparse.table_selected.lower()
-        if mysqlparse.operation == 'select' or mysqlparse.operation == 'SELECT':
+        if mysqlparse.operation.lower() == 'select':
             returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'delete' or mysqlparse.operation == 'DELETE':
+        if mysqlparse.operation.lower() == 'delete':
             returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'insert' or mysqlparse.operation == 'INSERT':
+        if mysqlparse.operation.lower() == 'insert':
             #returned_rows = trees[mysqlparse.table_selected].insert
             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
             if not errorcheck:
@@ -516,6 +507,14 @@ class Ui_MainWindow(object):
         for i in range(0, len(columns)):                                                  # insert rows in the table
             self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(columns[i]))           # column
             self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[keys[row]][columns[i]]))         # datatype
+
+    def showErrorDialog(self, errormessage, errortitle):
+        self.fileNameError = QtGui.QMessageBox()
+        self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
+        self.fileNameError.setText(errormessage)
+        self.fileNameError.setWindowTitle(errortitle)
+        self.fileNameError.addButton(QtGui.QMessageBox.Ok)
+        self.fileNameError.show()
 
 
 trees = {}
