@@ -213,6 +213,7 @@ def p_condition(p):
 
 def p_col_cond(p):
     '''col_cond : column_name comparison_op string_exp
+            | column_name comparison_op NULL
             | column_name comparison_op num_exp
             | column_name LIKE string_exp
             | column_name NOT LIKE string_exp'''
