@@ -3,6 +3,9 @@ import mysqllex
 
 tables = mysqllex.tables
 tokens = mysqllex.tokens
+error = mysqllex.error
+errorTitle = mysqllex.errorTitle
+errorDesc = mysqllex.errorDesc
 
 precedence = (
     ('left', 'ADD', 'SUBTRACT'),
@@ -76,6 +79,9 @@ def p_select_statement(p):
     global table_selected
     global withcondition
     global condition
+    global error
+    global errorTitle
+    global errorDesc
 
     p[0] = ""
     for i in p:
@@ -97,7 +103,11 @@ def p_select_statement(p):
         if x1 in tables[table_selected] or x1 == "*":
             print("Column " + x1 + " is in " + table_selected)
         else:
+            error = True
+            errorTitle = "Invalid column name"
+            errorDesc = "Column name does not exist on table " + table_selected
             print("Column " + x1 + " is not in " + table_selected)
+            return
 
     if(len(p) == 6):
         withcondition = False
@@ -129,6 +139,7 @@ def p_delete_statement(p):
     if table_selected in tables.keys():
         print("Valid table name")
     else:
+
         print("Invalid table name")
 
     if(len(p) == 5):
@@ -381,24 +392,42 @@ def p_comparison_op(p):
             | EQUAL_NULL'''
     p[0] = p[1]
 
-
 def p_empty(p):
     'empty : '
     pass
 
 def p_error(p):
     # vars(p)
+    global error
+    global errorTitle
+    global errorDesc
     if p:
         print("Syntax error at '%s'" % p.value)
+        error = True
+        errorTitle = "Syntax Error"
+        errorDesc = "Syntax error at " + str(p.value)
     else:
         print("Syntax error at EOF")
+        error = True
+        errorTitle = "Syntax Error"
+        errorDesc = "Syntax error at EOF"
 
 import ply.yacc as yacc
 mysqlparser = yacc.yacc() # parser
 
 def parse(data, debug=0):
-    mysqlparser.error = 0
+    global error
+    global errorTitle
+    global errorDesc
     p = mysqlparser.parse(data, debug = debug)
-    if(mysqlparser.error):
-        return None
+    if mysqllex.error:
+        error = mysqllex.error
+        errorTitle = mysqllex.errorTitle
+        errorDesc = mysqllex.errorDesc
+    mysqlparser.error = 0
+    if(error):
+        print(mysqllex.error)
+        print(mysqllex.errorTitle)
+        print(mysqllex.errorDesc)
+        return True
     return p

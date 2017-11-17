@@ -407,6 +407,14 @@ class Ui_MainWindow(object):
 
     # execute one line in text edit
     def lineExec(self):
+        # reset errors
+        mysqlparse.error = False
+        mysqlparse.errorTitle = ''
+        mysqlparse.errorDesc = ''
+        mysqllex.error = False
+        mysqllex.errorTitle = ''
+        mysqllex.errorDesc = ''
+
         # text edit cursor
         cursor = self.textEdit.textCursor()
         # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
@@ -419,80 +427,81 @@ class Ui_MainWindow(object):
         print(selText)
 
         prog = mysqlparse.parse(selText)
-        print('operation: ', mysqlparse.operation)
-        print('columns: ', mysqlparse.columns)           #
-        print('table_selected: ', mysqlparse.table_selected)
-        print('withcondition: ', mysqlparse.withcondition)     #
-        print('condition: ', mysqlparse.condition)     #
-        print('value_list: ', mysqlparse.value_list)
-        print('assignment_list: ', mysqlparse.assignment_list)
-        print('value_list_bool: ', mysqlparse.value_list_bool)       #
-        print('column_name_bool: ', mysqlparse.column_name_bool)
-        print('col_name: ', mysqlparse.col_name)
-        print('comp_operator: ', mysqlparse.comp_operator)
-        print('cond_exp: ', mysqlparse.cond_exp)
+        if(mysqlparse.error):
+            self.errorMessageBox(mysqlparse.errorTitle, mysqlparse.errorDesc)
+        else:
+            print('operation: ', mysqlparse.operation)
+            print('columns: ', mysqlparse.columns)           #
+            print('table_selected: ', mysqlparse.table_selected)
+            print('withcondition: ', mysqlparse.withcondition)     #
+            print('condition: ', mysqlparse.condition)     #
+            print('value_list: ', mysqlparse.value_list)
+            print('assignment_list: ', mysqlparse.assignment_list)
+            print('value_list_bool: ', mysqlparse.value_list_bool)       #
+            print('column_name_bool: ', mysqlparse.column_name_bool)
+            print('col_name: ', mysqlparse.col_name)
+            print('comp_operator: ', mysqlparse.comp_operator)
+            print('cond_exp: ', mysqlparse.cond_exp)
 
-        # print('\ntrees: ', trees)
+            # print('\ntrees: ', trees)
 
-        if mysqlparse.operation == 'select':
-            returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-            self.showQueryResult(returned_rows)
+            if mysqlparse.operation == 'select':
+                returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+                self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'delete':
-            returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-            self.showQueryResult(returned_rows)
+            if mysqlparse.operation == 'delete':
+                returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+                self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'insert':
-            #returned_rows = trees[mysqlparse.table_selected].insert
-            errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
-            if not errorcheck:
-                print("Insert successful")
-            else:
-                print("Error seen")
+            if mysqlparse.operation == 'insert':
+                #returned_rows = trees[mysqlparse.table_selected].insert
+                errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                if not errorcheck:
+                    print("Insert successful")
+                else:
+                    print("Error seen")
 
-        self.clearGlobals()
+            self.clearGlobals()
     # execute all lines in text edit
     def allExec(self):
+        self.errorMessageBox('All Exec Button', 'Execution button not yet implemented')
         # count lines in text edit
-        self.textEdit.moveCursor(QtGui.QTextCursor.End)
-        self.textEdit.setFocus(True)
-        cursor = self.textEdit.textCursor()
-        curEnd = cursor.blockNumber() + 1
+        # self.textEdit.moveCursor(QtGui.QTextCursor.End)
+        # self.textEdit.setFocus(True)
+        # cursor = self.textEdit.textCursor()
+        # curEnd = cursor.blockNumber() + 1
+        #
+        # # print(curEnd)
+        #
+        # # start at the beginning of text edit
+        # self.textEdit.moveCursor(QtGui.QTextCursor.Start)
+        #
+        # for i in range(0, curEnd):
+        #     # save line in text edit
+        #     cursor = self.textEdit.textCursor()
+        #     cursor.select(QtGui.QTextCursor.LineUnderCursor)
+        #     selText = cursor.selectedText().lower()
+        #
+        #     selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
+        #     # print("selText")
+        #     print(selText)
+        #
+        #     selText = selText.lower()
+        #     prog = mysqlparse.parse(selText)
+        #     print(mysqlparse.operation)
+        #
+        #     # move to next line
+        #     curPos = cursor.blockNumber() + 1
+        #     self.textEdit.moveCursor(QtGui.QTextCursor.Down)
 
-        # print(curEnd)
-
-        # start at the beginning of text edit
-        self.textEdit.moveCursor(QtGui.QTextCursor.Start)
-
-        for i in range(0, curEnd):
-            # save line in text edit
-            cursor = self.textEdit.textCursor()
-            cursor.select(QtGui.QTextCursor.LineUnderCursor)
-            selText = cursor.selectedText().lower()
-
-            selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
-            # print("selText")
-            print(selText)
-
-            selText = selText.lower()
-            prog = mysqlparse.parse(selText)
-            print(mysqlparse.operation)
-
-            # move to next line
-            curPos = cursor.blockNumber() + 1
-            self.textEdit.moveCursor(QtGui.QTextCursor.Down)
-
-
-    # no query prompt method
-    def noQuery(self):
-        self.noQueryMsgBox = QtGui.QMessageBox()
-        self.noQueryMsgBox.setWindowTitle('My Database (Error)')
-        self.noQueryMsgBox.setWindowIcon(QtGui.QIcon('dblogo.png'))
-        self.noQueryMsgBox.setIcon(QtGui.QMessageBox.Warning)
-        self.noQueryMsgBox.setText('Syntax Error')
-        self.noQueryMsgBox.addButton(QtGui.QMessageBox.Ok)
-        self.noQueryMsgBox.show()
-
+    def errorMessageBox(self, errorTitle, errorDesc):
+        self.errorMsgBox = QtGui.QMessageBox()
+        self.errorMsgBox.setWindowTitle(errorTitle)
+        self.errorMsgBox.setWindowIcon(QtGui.QIcon('dblogo.png'))
+        self.errorMsgBox.setIcon(QtGui.QMessageBox.Warning)
+        self.errorMsgBox.setText(errorDesc)
+        self.errorMsgBox.addButton(QtGui.QMessageBox.Ok)
+        self.errorMsgBox.show()
 
     @pyqtSlot()
     def tableClick(self, row, column):
