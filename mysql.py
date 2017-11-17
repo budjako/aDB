@@ -179,6 +179,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+        self.statusbar.showMessage("Welcome to My Database")
 
         # actions
         # import action
@@ -208,6 +209,7 @@ class Ui_MainWindow(object):
         self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
         self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
         self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
+        self.centralwidget.layout().addWidget(self.statusbar, 4, 0, 1, 2)
 
         # set focus to textedit widget upon opening the window
         self.textEdit.setFocus(True)
@@ -425,14 +427,51 @@ class Ui_MainWindow(object):
 
         # text edit cursor
         cursor = self.textEdit.textCursor()
-        # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
-        cursor.select(QtGui.QTextCursor.LineUnderCursor)
+        self.textEdit.setTextCursor(QtGui.QTextCursor(self.textEdit.document().findBlockByLineNumber(0)))
+        curPos = cursor.blockNumber() + 1
+        # print(curPos)
+
+        # # count lines in text edit
+        # self.textEdit.moveCursor(QtGui.QTextCursor.End)        
+        # curEnd = cursor.blockNumber() + 1                   # position of the cursor in text edit
+
+        selText = ''
+        
+        self.textEdit.moveCursor(QtGui.QTextCursor.Up)
+        print(cursor.blockNumber() + 1)
+
+        # for i in range(0, curEnd):
+        #     # save line in text edit
+        #     cursor = self.textEdit.textCursor()
+        #     cursor.select(QtGui.QTextCursor.LineUnderCursor)
+        #     line = cursor.selectedText()
+
+        #     print('line: ', selText)
+
+        #     if ';' in line:
+        #         # move to previous line
+        #         curPos = cursor.blockNumber() + 1
+        #         self.textEdit.moveCursor(QtGui.QTextCursor.Up)
+        #         # find more lines above
+        #         while ';' not in line:
+        #             curPos = cursor.blockNumber() + 1
+        #             self.textEdit.moveCursor(QtGui.QTextCursor.Up)
+        #             if 
+        #         selText = line + selText
+            
+        #     else:
+        #         # move to next line
+        #         curPos = cursor.blockNumber() + 1
+        #         self.textEdit.moveCursor(QtGui.QTextCursor.Down)
+
+        #     selText = selText + line
 
         selText = cursor.selectedText()            # save content of line under cursor in text edit
         print(selText)
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
-        print(selText)
+
+        print('\n', selText, '\n')
 
         prog = mysqlparse.parse(selText)
         if(mysqlparse.error):
@@ -457,7 +496,7 @@ class Ui_MainWindow(object):
             if mysqlparse.operation == 'select':
                 returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
                 self.showQueryResult(returned_rows)
-
+                self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1)) # show number of rows returned on status bar. -1 for column names
             if mysqlparse.operation == 'delete':
                 returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
                 # self.showQueryResult(returned_rows)
