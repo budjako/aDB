@@ -457,7 +457,7 @@ class Ui_MainWindow(object):
 
             if mysqlparse.operation == 'delete':
                 returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-                self.showQueryResult(returned_rows)
+                # self.showQueryResult(returned_rows)
 
             if mysqlparse.operation == 'insert':
                 #returned_rows = trees[mysqlparse.table_selected].insert
@@ -465,7 +465,7 @@ class Ui_MainWindow(object):
                 if not errorcheck:
                     print("Insert successful")
                 else:
-                    print("Error seen")
+                    self.errorMessageBox('Input error', 'Recheck input values')
 
             self.clearGlobals()
     # execute all lines in text edit
