@@ -1,4 +1,5 @@
 from ply import *
+import re
 
 tables = {}
 cols = ''
@@ -58,7 +59,7 @@ t_VALUES = r'values'
 t_SET = r'set'
 t_LIKE = r'like'
 # t_FILTER_ROWS = r'(all|distinct|distinctrow)'
-t_STRING_LIT = r'\'[^\']*\'' 
+t_STRING_LIT = r'\'[^\']*\''
 t_ASTERISK = r'\*'
 t_COMMA = r','
 t_SEMICOLON = r';'
@@ -105,4 +106,4 @@ def t_error(t):
 
 t_ignore = " \t"
 
-lexer = lex.lex(debug=0)   # lexer
+lexer = lex.lex(reflags=re.IGNORECASE)   # lexer
