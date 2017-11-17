@@ -179,6 +179,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+        self.statusbar.showMessage("Welcome to My Database")
 
         # actions
         # import action
@@ -208,6 +209,7 @@ class Ui_MainWindow(object):
         self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
         self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
         self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
+        self.centralwidget.layout().addWidget(self.statusbar, 4, 0, 1, 2)
 
         # set focus to textedit widget upon opening the window
         self.textEdit.setFocus(True)
