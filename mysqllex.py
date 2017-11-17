@@ -1,9 +1,13 @@
 from ply import *
+import re
 
 tables = {}
 cols = ''
 tabs = ''
 metadata = open("metadata.txt", "r")
+error = False
+errorTitle = ''
+errorDesc = ''
 
 for line in metadata:
     nonewline = line.rstrip('\n')
@@ -58,7 +62,7 @@ t_VALUES = r'values'
 t_SET = r'set'
 t_LIKE = r'like'
 # t_FILTER_ROWS = r'(all|distinct|distinctrow)'
-t_STRING_LIT = r'\'[^\']*\'' 
+t_STRING_LIT = r"'(?:[^']+|'')+'"
 t_ASTERISK = r'\*'
 t_COMMA = r','
 t_SEMICOLON = r';'
@@ -100,9 +104,16 @@ def t_NEWLINE(t):
     t.lexer.lineno += t.value.count("\n")
 
 def t_error(t):
+    global error
+    global errorTitle
+    global errorDesc
+
     print("Illegal character '%s'" % t.value[0])
+    error = True
+    errorTitle = 'Invalid token';
+    errorDesc = 'Invalid character '+t.value[0]
     t.lexer.skip(1)
 
 t_ignore = " \t"
 
-lexer = lex.lex(debug=0)   # lexer
+lexer = lex.lex(reflags=re.IGNORECASE)   # lexer

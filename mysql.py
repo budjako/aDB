@@ -44,6 +44,8 @@ except AttributeError:
 # main window
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        def __init__(self, parent=None):
+            super(MainWindow, self).__init__(parent)
 
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(732, 570)
@@ -212,10 +214,10 @@ class Ui_MainWindow(object):
 
         # make only the columns on the right stretchable
         self.centralwidget.layout().setColumnStretch(0, 0)
-        self.centralwidget.layout().setColumnStretch(1, 1)        
-        self.centralwidget.layout().setColumnStretch(2, 1)        
+        self.centralwidget.layout().setColumnStretch(1, 1)
+        self.centralwidget.layout().setColumnStretch(2, 1)
 
-        self.centralwidget.layout().setSpacing(10)                
+        self.centralwidget.layout().setSpacing(10)
 
         self.populateTables()
 
@@ -299,10 +301,10 @@ class Ui_MainWindow(object):
                         # print(insertString2)
                         # append.write(dataString+";\n")
 
-                        insertString2 = insertString2.lower()
+                        # insertString2 = insertString2.lower()
                         prog = mysqlparse.parse(insertString2)
 
-                        if mysqlparse.operation == 'insert':
+                        if mysqlparse.operation.lower() == 'insert':
                             #returned_rows = trees[mysqlparse.table_selected].insert
                             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                             if not errorcheck:
@@ -321,22 +323,25 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
-                    # print(tables[nameOfFile])
-                    if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
-                        append.write(line[line.find("VALUES (")+6:line.find(");")+2])
-                    else:
-                        print("with column names")
+                    line = line.lower()
+                    prog = mysqlparse.parse(line)
+
+                    if mysqlparse.operation == 'insert':
+                        #returned_rows = trees[mysqlparse.table_selected].insert
+                        errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                        if not errorcheck:
+                            print("Insert successful")
+                        else:
+                            print("Error seen")
+                    # print(line)
+                    # # print(tables[nameOfFile])
+                    # if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
+                    #     # append.write(line[line.find("VALUES (")+6:line.find(");")+2])
+                    #     print(line[line.find("VALUES (")+6:line.find(");")+2])
+                    # else:
+                    #     print("with column names")
         else:
-            self.fileNameError = QtGui.QMessageBox()
-            self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
-            self.fileNameError.setText("Only csv and sql files are accepted!")
-            self.fileNameError.setWindowTitle("File type error")
-            self.fileNameError.addButton(QtGui.QMessageBox.Ok)
-            self.fileNameError.show()
-
-
-
-
+            self.showErrorDialog("Only csv and sql files are accepted!", "File type error")
 
         f.close()
         append.close()
@@ -404,10 +409,19 @@ class Ui_MainWindow(object):
         mysqlparse.col_name = None
         mysqlparse.comp_operator = None
         mysqlparse.cond_exp = None
+        mysqlparse.error1 = None
 
     # execute one line in text edit
     def lineExec(self):
-        self.textEdit.setFocus(True)
+        # reset errors
+        mysqlparse.error = False
+        mysqlparse.errorTitle = ''
+        mysqlparse.errorDesc = ''
+        mysqllex.error = False
+        mysqllex.errorTitle = ''
+        mysqllex.errorDesc = ''
+
+        # text edit cursor
         cursor = self.textEdit.textCursor()
         self.textEdit.setTextCursor(QtGui.QTextCursor(self.textEdit.document().findBlockByLineNumber(0)))
         curPos = cursor.blockNumber() + 1
@@ -448,87 +462,89 @@ class Ui_MainWindow(object):
 
         #     selText = selText + line
 
+        selText = cursor.selectedText()            # save content of line under cursor in text edit
+        # print("selText")
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
 
         print('\n', selText, '\n')
 
-        selText = selText.lower()
         prog = mysqlparse.parse(selText)
-        print('operation: ', mysqlparse.operation)
-        print('columns: ', mysqlparse.columns)           #
-        print('table_selected: ', mysqlparse.table_selected)
-        print('withcondition: ', mysqlparse.withcondition)     #
-        print('condition: ', mysqlparse.condition)     #
-        print('value_list: ', mysqlparse.value_list)
-        print('assignment_list: ', mysqlparse.assignment_list)
-        print('value_list_bool: ', mysqlparse.value_list_bool)       #
-        print('column_name_bool: ', mysqlparse.column_name_bool)
-        print('col_name: ', mysqlparse.col_name)
-        print('comp_operator: ', mysqlparse.comp_operator)
-        print('cond_exp: ', mysqlparse.cond_exp)
+        if(mysqlparse.error):
+            self.errorMessageBox(mysqlparse.errorTitle, mysqlparse.errorDesc)
+        else:
+            print('operation: ', mysqlparse.operation)
+            print('columns: ', mysqlparse.columns)           #
+            print('table_selected: ', mysqlparse.table_selected)
+            print('withcondition: ', mysqlparse.withcondition)     #
+            print('condition: ', mysqlparse.condition)     #
+            print('value_list: ', mysqlparse.value_list)
+            print('assignment_list: ', mysqlparse.assignment_list)
+            print('value_list_bool: ', mysqlparse.value_list_bool)       #
+            print('column_name_bool: ', mysqlparse.column_name_bool)
+            print('col_name: ', mysqlparse.col_name)
+            print('comp_operator: ', mysqlparse.comp_operator)
+            print('cond_exp: ', mysqlparse.cond_exp)
 
-        # print('\ntrees: ', trees)
+            # print('\ntrees: ', trees)
 
-        if mysqlparse.operation == 'select':
-            returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-            self.showQueryResult(returned_rows)
+            if mysqlparse.operation == 'select':
+                returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+                self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'delete':
-            returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-            self.showQueryResult(returned_rows)
+            if mysqlparse.operation == 'delete':
+                returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+                # self.showQueryResult(returned_rows)
 
-        if mysqlparse.operation == 'insert':
-            #returned_rows = trees[mysqlparse.table_selected].insert
-            errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
-            if not errorcheck:
-                print("Insert successful")
-            else:
-                print("Error seen")
+            if mysqlparse.operation == 'insert':
+                #returned_rows = trees[mysqlparse.table_selected].insert
+                errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                if not errorcheck:
+                    print("Insert successful")
+                else:
+                    self.errorMessageBox('Input error', 'Recheck input values')
 
-        self.clearGlobals()
+            self.clearGlobals()
     # execute all lines in text edit
     def allExec(self):
+        self.errorMessageBox('All Exec Button', 'Execution button not yet implemented')
         # count lines in text edit
-        self.textEdit.moveCursor(QtGui.QTextCursor.End)
-        self.textEdit.setFocus(True)
-        cursor = self.textEdit.textCursor()
-        curEnd = cursor.blockNumber() + 1
+        # self.textEdit.moveCursor(QtGui.QTextCursor.End)
+        # self.textEdit.setFocus(True)
+        # cursor = self.textEdit.textCursor()
+        # curEnd = cursor.blockNumber() + 1
+        #
+        # # print(curEnd)
+        #
+        # # start at the beginning of text edit
+        # self.textEdit.moveCursor(QtGui.QTextCursor.Start)
+        #
+        # for i in range(0, curEnd):
+        #     # save line in text edit
+        #     cursor = self.textEdit.textCursor()
+        #     cursor.select(QtGui.QTextCursor.LineUnderCursor)
+        #     selText = cursor.selectedText().lower()
+        #
+        #     selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
+        #     # print("selText")
+        #     print(selText)
+        #
+        #     selText = selText.lower()
+        #     prog = mysqlparse.parse(selText)
+        #     print(mysqlparse.operation)
+        #
+        #     # move to next line
+        #     curPos = cursor.blockNumber() + 1
+        #     self.textEdit.moveCursor(QtGui.QTextCursor.Down)
 
-        # print(curEnd)
-
-        # start at the beginning of text edit
-        self.textEdit.moveCursor(QtGui.QTextCursor.Start)
-
-        for i in range(0, curEnd):
-            # save line in text edit
-            cursor = self.textEdit.textCursor()
-            cursor.select(QtGui.QTextCursor.LineUnderCursor)
-            selText = cursor.selectedText().lower()
-
-            selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
-            # print("selText")
-            print(selText)
-
-            selText = selText.lower()
-            prog = mysqlparse.parse(selText)
-            print(mysqlparse.operation)
-
-            # move to next line
-            curPos = cursor.blockNumber() + 1
-            self.textEdit.moveCursor(QtGui.QTextCursor.Down)
-
-
-    # no query prompt method
-    def noQuery(self):
-        self.noQueryMsgBox = QtGui.QMessageBox()
-        self.noQueryMsgBox.setWindowTitle('My Database (Error)')
-        self.noQueryMsgBox.setWindowIcon(QtGui.QIcon('dblogo.png'))
-        self.noQueryMsgBox.setIcon(QtGui.QMessageBox.Warning)
-        self.noQueryMsgBox.setText('Syntax Error')
-        self.noQueryMsgBox.addButton(QtGui.QMessageBox.Ok)
-        self.noQueryMsgBox.show()
-
+    def errorMessageBox(self, errorTitle, errorDesc):
+        self.errorMsgBox = QtGui.QMessageBox()
+        self.errorMsgBox.setWindowTitle(errorTitle)
+        self.errorMsgBox.setWindowIcon(QtGui.QIcon('dblogo.png'))
+        self.errorMsgBox.setIcon(QtGui.QMessageBox.Warning)
+        self.errorMsgBox.setText(errorDesc)
+        self.errorMsgBox.addButton(QtGui.QMessageBox.Ok)
+        self.errorMsgBox.show()
 
     @pyqtSlot()
     def tableClick(self, row, column):
@@ -540,6 +556,14 @@ class Ui_MainWindow(object):
         for i in range(0, len(columns)):                                                  # insert rows in the table
             self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(columns[i]))           # column
             self.coldatatypeTW.setItem(i,1, QtGui.QTableWidgetItem(tables[keys[row]][columns[i]]))         # datatype
+
+    def showErrorDialog(self, errormessage, errortitle):
+        self.fileNameError = QtGui.QMessageBox()
+        self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
+        self.fileNameError.setText(errormessage)
+        self.fileNameError.setWindowTitle(errortitle)
+        self.fileNameError.addButton(QtGui.QMessageBox.Ok)
+        self.fileNameError.show()
 
 
 trees = {}
@@ -568,6 +592,7 @@ if __name__ == "__main__":
 
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
+    app.setActiveWindow(MainWindow)
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.setWindowTitle('My Database')
