@@ -429,18 +429,29 @@ class Ui_MainWindow(object):
         self.textEdit.setFocus(True)
         cursor = self.textEdit.textCursor()
         curEnd = cursor.blockNumber() + 1
-        
-        # print(curEnd)
-        
+        print(curEnd)
+
+        # get start line number
+        self.textEdit.moveCursor(QtGui.QTextCursor.Start)
+        cursor = self.textEdit.textCursor()
+        curStart = cursor.blockNumber() + 1
+        print(curStart)
+
         # start at original cursor position
         self.textEdit.setTextCursor(QtGui.QTextCursor(self.textEdit.document().findBlockByLineNumber(curPos-1)))
-        
+
         selText = ''
 
         for i in range(0, curEnd):
-            # move up one line
-            curPos = cursor.blockNumber() + 1
-            self.textEdit.moveCursor(QtGui.QTextCursor.Up)
+            cursor = self.textEdit.textCursor()
+            curCurrent = cursor.blockNumber() + 1
+            print(curCurrent)
+
+            if curCurrent != curStart:
+                print('not equal')
+                # move up one line
+                curPos = cursor.blockNumber() + 1
+                self.textEdit.moveCursor(QtGui.QTextCursor.Up)
 
             # save line in text edit
             cursor = self.textEdit.textCursor()
@@ -448,7 +459,11 @@ class Ui_MainWindow(object):
             line = cursor.selectedText()                         # save content of line under cursor in text edit
             print(line)
 
-            if ';' in line:
+            if (';' in line) or (curCurrent == curStart):
+                if curCurrent == curStart:
+                    selText = selText + ' ' + line
+
+                print('start moving down')
                 # move down one line
                 curPos = cursor.blockNumber() + 1
                 self.textEdit.moveCursor(QtGui.QTextCursor.Down)
@@ -517,35 +532,36 @@ class Ui_MainWindow(object):
             self.clearGlobals()
     # execute all lines in text edit
     def allExec(self):
-        self.errorMessageBox('All Exec Button', 'Execution button not yet implemented')
         # count lines in text edit
-        # self.textEdit.moveCursor(QtGui.QTextCursor.End)
-        # self.textEdit.setFocus(True)
-        # cursor = self.textEdit.textCursor()
-        # curEnd = cursor.blockNumber() + 1
-        #
-        # # print(curEnd)
-        #
-        # # start at the beginning of text edit
-        # self.textEdit.moveCursor(QtGui.QTextCursor.Start)
-        #
-        # for i in range(0, curEnd):
-        #     # save line in text edit
-        #     cursor = self.textEdit.textCursor()
-        #     cursor.select(QtGui.QTextCursor.LineUnderCursor)
-        #     selText = cursor.selectedText().lower()
-        #
-        #     selText = cursor.selectedText().lower()            # save content of line under cursor in text edit
-        #     # print("selText")
-        #     print(selText)
-        #
-        #     selText = selText.lower()
-        #     prog = mysqlparse.parse(selText)
-        #     print(mysqlparse.operation)
-        #
-        #     # move to next line
-        #     curPos = cursor.blockNumber() + 1
-        #     self.textEdit.moveCursor(QtGui.QTextCursor.Down)
+        self.textEdit.moveCursor(QtGui.QTextCursor.End)
+        self.textEdit.setFocus(True)
+        cursor = self.textEdit.textCursor()
+        curEnd = cursor.blockNumber() + 1
+                
+        # start at the beginning of text edit
+        self.textEdit.moveCursor(QtGui.QTextCursor.Start)
+        cursor = self.textEdit.textCursor()
+        curStart = cursor.blockNumber() + 1
+
+        selText = ''
+
+        for i in range(0, curEnd):
+            # save line in text edit
+            cursor = self.textEdit.textCursor()
+            cursor.select(QtGui.QTextCursor.LineUnderCursor)
+            line = cursor.selectedText()                     # save content of line under cursor in text edit
+            
+            selText = selText + ' ' + line
+
+            if ';' in line:
+                print('line: ', selText)
+                prog = mysqlparse.parse(selText)
+                print(mysqlparse.operation)
+                selText = ''
+
+            # move to next line
+            curPos = cursor.blockNumber() + 1
+            self.textEdit.moveCursor(QtGui.QTextCursor.Down)
 
     def errorMessageBox(self, errorTitle, errorDesc):
         self.errorMsgBox = QtGui.QMessageBox()

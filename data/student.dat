@@ -1,5 +1,2 @@
 studno varchar,studentname varchar,birthday date,degree varchar,major varchar,unitsearned integer
 studno
-'2007-12345'^'Paul Anacay'^'1990-06-25'^'BSCS'^NULL^144
-'2008-56411'^'Janah Monsanto'^'1991-09-15'^'BSAP'^NULL^36
-'2011-29712'^'Dyanara Dela Rosa'^'1994-07-29'^'BSCS'^NULL^144
