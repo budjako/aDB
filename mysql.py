@@ -462,6 +462,8 @@ class Ui_MainWindow(object):
             if (';' in line) or (curCurrent == curStart):
                 if curCurrent == curStart:
                     selText = selText + ' ' + line
+                    if ';' in selText:
+                        break
 
                 print('start moving down')
                 # move down one line
@@ -511,25 +513,8 @@ class Ui_MainWindow(object):
             print('comp_operator: ', mysqlparse.comp_operator)
             print('cond_exp: ', mysqlparse.cond_exp)
 
-            # print('\ntrees: ', trees)
+            self.execute() # execute query
 
-            if mysqlparse.operation == 'select':
-                returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-                self.showQueryResult(returned_rows)
-
-            if mysqlparse.operation == 'delete':
-                returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-                # self.showQueryResult(returned_rows)
-
-            if mysqlparse.operation == 'insert':
-                #returned_rows = trees[mysqlparse.table_selected].insert
-                errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
-                if not errorcheck:
-                    print("Insert successful")
-                else:
-                    self.errorMessageBox('Input error', 'Recheck input values')
-
-            self.clearGlobals()
     # execute all lines in text edit
     def allExec(self):
         # count lines in text edit
@@ -556,12 +541,51 @@ class Ui_MainWindow(object):
             if ';' in line:
                 print('line: ', selText)
                 prog = mysqlparse.parse(selText)
-                print(mysqlparse.operation)
+
+                if(mysqlparse.error):
+                    self.errorMessageBox(mysqlparse.errorTitle, mysqlparse.errorDesc)
+                else:
+                    print('operation: ', mysqlparse.operation)
+                    print('columns: ', mysqlparse.columns)           #
+                    print('table_selected: ', mysqlparse.table_selected)
+                    print('withcondition: ', mysqlparse.withcondition)     #
+                    print('condition: ', mysqlparse.condition)     #
+                    print('value_list: ', mysqlparse.value_list)
+                    print('assignment_list: ', mysqlparse.assignment_list)
+                    print('value_list_bool: ', mysqlparse.value_list_bool)       #
+                    print('column_name_bool: ', mysqlparse.column_name_bool)
+                    print('col_name: ', mysqlparse.col_name)
+                    print('comp_operator: ', mysqlparse.comp_operator)
+                    print('cond_exp: ', mysqlparse.cond_exp)
+
+                    print(mysqlparse.operation)
+
+                    self.execute() # execute queries
+
                 selText = ''
 
             # move to next line
             curPos = cursor.blockNumber() + 1
             self.textEdit.moveCursor(QtGui.QTextCursor.Down)
+
+    def execute(self):
+        if mysqlparse.operation == 'select':
+            returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+            self.showQueryResult(returned_rows)
+
+        if mysqlparse.operation == 'delete':
+            returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+            # self.showQueryResult(returned_rows)
+
+        if mysqlparse.operation == 'insert':
+            #returned_rows = trees[mysqlparse.table_selected].insert
+            errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+            if not errorcheck:
+                print("Insert successful")
+            else:
+                self.errorMessageBox('Input error', 'Recheck input values')
+
+        self.clearGlobals()
 
     def errorMessageBox(self, errorTitle, errorDesc):
         self.errorMsgBox = QtGui.QMessageBox()
