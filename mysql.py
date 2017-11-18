@@ -125,7 +125,6 @@ class Ui_MainWindow(object):
         # query result table widget
         self.queryResultTW = QtGui.QTableWidget()
         self.queryResultTW.setEnabled(True)
-        self.queryResultTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.queryResultTW.setGeometry(QtCore.QRect(230, 320, 491, 201))
         self.queryResultTW.setStyleSheet(_fromUtf8(""))
         self.queryResultTW.setAutoScroll(False)
@@ -180,7 +179,6 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
-        self.statusbar.showMessage("Welcome to My Database")
 
         # actions
         # import action
@@ -210,7 +208,6 @@ class Ui_MainWindow(object):
         self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
         self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
         self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
-        self.centralwidget.layout().addWidget(self.statusbar, 4, 0, 1, 2)
 
         # set focus to textedit widget upon opening the window
         self.textEdit.setFocus(True)
@@ -326,17 +323,16 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
+                    line = line.lower()
                     prog = mysqlparse.parse(line)
-                    mysqlparse.table_selected = mysqlparse.table_selected.lower();
+
                     if mysqlparse.operation == 'insert':
-                        print(line)
                         #returned_rows = trees[mysqlparse.table_selected].insert
                         errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                         if not errorcheck:
                             print("Insert successful")
                         else:
                             print("Error seen")
-                            break
                     # print(line)
                     # # print(tables[nameOfFile])
                     # if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
@@ -425,16 +421,63 @@ class Ui_MainWindow(object):
         mysqllex.errorTitle = ''
         mysqllex.errorDesc = ''
 
-        # text edit cursor
+        # count lines in text edit
         cursor = self.textEdit.textCursor()
-        # curPos = cursor.blockNumber() + 1                   # position of the cursor in text edit
-        cursor.select(QtGui.QTextCursor.LineUnderCursor)
+        curPos = cursor.blockNumber() + 1
+        
+        self.textEdit.moveCursor(QtGui.QTextCursor.End)
+        self.textEdit.setFocus(True)
+        cursor = self.textEdit.textCursor()
+        curEnd = cursor.blockNumber() + 1
+        
+        # print(curEnd)
+        
+        # start at original cursor position
+        self.textEdit.setTextCursor(QtGui.QTextCursor(self.textEdit.document().findBlockByLineNumber(curPos-1)))
+        
+        selText = ''
 
-        selText = cursor.selectedText()            # save content of line under cursor in text edit
-        print(selText)
+        for i in range(0, curEnd):
+            # move up one line
+            curPos = cursor.blockNumber() + 1
+            self.textEdit.moveCursor(QtGui.QTextCursor.Up)
+
+            # save line in text edit
+            cursor = self.textEdit.textCursor()
+            cursor.select(QtGui.QTextCursor.LineUnderCursor)
+            line = cursor.selectedText()                         # save content of line under cursor in text edit
+            print(line)
+
+            if ';' in line:
+                # move down one line
+                curPos = cursor.blockNumber() + 1
+                self.textEdit.moveCursor(QtGui.QTextCursor.Down)
+
+                for j in range(curPos, curEnd + 1):
+                   # get line
+                    cursor = self.textEdit.textCursor()
+                    cursor.select(QtGui.QTextCursor.LineUnderCursor)
+                    line2 = cursor.selectedText()
+                    print(line2)
+
+                    # append line to selected text
+                    selText = selText + ' ' + line2
+                    
+                    if ';' in line2:
+                        break
+
+                    # move down one line
+                    curPos = cursor.blockNumber() + 1
+                    self.textEdit.moveCursor(QtGui.QTextCursor.Down)
+
+                break
+
+        print('selected text: ', selText)
+        # print("selText")
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
-        print(selText)
+
+        print('\n', selText, '\n')
 
         prog = mysqlparse.parse(selText)
         if(mysqlparse.error):
@@ -452,14 +495,13 @@ class Ui_MainWindow(object):
             print('col_name: ', mysqlparse.col_name)
             print('comp_operator: ', mysqlparse.comp_operator)
             print('cond_exp: ', mysqlparse.cond_exp)
-            mysqlparse.table_selected = mysqlparse.table_selected.lower()
 
             # print('\ntrees: ', trees)
 
             if mysqlparse.operation == 'select':
                 returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
                 self.showQueryResult(returned_rows)
-                self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1)) # show number of rows returned on status bar. -1 for column names
+
             if mysqlparse.operation == 'delete':
                 returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
                 # self.showQueryResult(returned_rows)
