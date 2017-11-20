@@ -326,12 +326,12 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
-                    line = line.lower()
+                    line = line#.lower()
                     prog = mysqlparse.parse(line)
 
-                    if mysqlparse.operation == 'insert':
+                    if mysqlparse.operation == 'insert' or mysqlparse.operation == 'INSERT':
                         #returned_rows = trees[mysqlparse.table_selected].insert
-                        errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                        errorcheck = trees[mysqlparse.table_selected.lower()].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                         if not errorcheck:
                             print("Insert successful")
                         else:
