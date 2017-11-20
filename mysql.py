@@ -125,6 +125,7 @@ class Ui_MainWindow(object):
         # query result table widget
         self.queryResultTW = QtGui.QTableWidget()
         self.queryResultTW.setEnabled(True)
+        self.queryResultTW.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.queryResultTW.setGeometry(QtCore.QRect(230, 320, 491, 201))
         self.queryResultTW.setStyleSheet(_fromUtf8(""))
         self.queryResultTW.setAutoScroll(False)
@@ -179,6 +180,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+        self.statusbar.showMessage("Welcome to My Database")
 
         # actions
         # import action
@@ -208,6 +210,7 @@ class Ui_MainWindow(object):
         self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
         self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
         self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
+        self.centralwidget.layout().addWidget(self.statusbar, 4, 0, 1, 2)
 
         # set focus to textedit widget upon opening the window
         self.textEdit.setFocus(True)
@@ -572,6 +575,7 @@ class Ui_MainWindow(object):
         if mysqlparse.operation == 'select':
             returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
             self.showQueryResult(returned_rows)
+            self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1)) # show number of rows returned on status bar. -1 for column names
 
         if mysqlparse.operation == 'delete':
             returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
