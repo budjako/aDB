@@ -331,7 +331,7 @@ class Ui_MainWindow(object):
 
                     if mysqlparse.operation == 'insert':
                         start = time.time()
-                        errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                        errorcheck = trees[mysqlparse.table_selected.lower()].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                         end = time.time()
                         if not errorcheck:
                             self.statusbar.showMessage("Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
@@ -355,7 +355,7 @@ class Ui_MainWindow(object):
                     #     print("with column names")
         else:
             self.showErrorDialog("Only csv and sql files are accepted!", "File type error")
-
+        self.clearGlobals()
         f.close()
         append.close()
 
