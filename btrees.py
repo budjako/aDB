@@ -706,9 +706,9 @@ class TableBTree:
 
                 if len(value_list) == 4 and not error1:
                     #btreelen = self.counter + 1
-                    print(btreelen + "-btreelen")
+                    # print(btreelen + "-btreelen")
                     #for k in self.data.keys():
-                    print(k + "-dsa")
+                    # print(k + "-dsa")
                     self.data.update({self.counter: {self.columns[0]: value_list[0], self.columns[1]: value_list[1], self.columns[2]: value_list[2], self.columns[3]: value_list[3]}})
                     self.counter = self.counter + 1
                 elif error1:
