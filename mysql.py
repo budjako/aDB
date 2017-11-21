@@ -180,7 +180,7 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
-        self.statusbar.showMessage("Welcome to My Database")
+        self.statusbar.showMessage("Welcome to aDB")
 
         # actions
         # import action
@@ -649,7 +649,7 @@ if __name__ == "__main__":
     app.setActiveWindow(MainWindow)
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    MainWindow.setWindowTitle('My Database')
+    MainWindow.setWindowTitle('aDB')
     MainWindow.setWindowIcon(QtGui.QIcon('dblogo.png'))
     MainWindow.setWindowFlags(QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
     MainWindow.show()
