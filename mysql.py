@@ -326,7 +326,7 @@ class Ui_MainWindow(object):
                     # print "End"
                 elif not multiLineCommentFlag and not re.match(commentRegex, line):
                     # print(line[line.find("VALUES (")+1:line.find(");")])                      #Will then be sent to finished parser
-                    line = line.lower()
+                    # line = line.lower()
                     prog = mysqlparse.parse(line)
 
                     if mysqlparse.operation == 'insert':
@@ -500,7 +500,7 @@ class Ui_MainWindow(object):
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
 
         print('\n', selText, '\n')
-        selText = selText.lower()
+        # selText = selText.lower()
         prog = mysqlparse.parse(selText)
         if(mysqlparse.error):
             self.errorMessageBox(mysqlparse.errorTitle, mysqlparse.errorDesc)

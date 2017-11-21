@@ -834,7 +834,8 @@ class TableBTree:
                 if withcondition and where_column:#If True lang, print all pa din
                     if isinstance(cond_exp,str):
                         print(self.data[j][col_name] + " = " + cond_exp)
-                        if(str.lower(self.data[j][col_name]) == cond_exp):  #just to lowercase until input is normalized
+                        if(self.data[j][col_name] == cond_exp):  #just to lowercase until input is normalized
+                        # if(str.lower(self.data[j][col_name]) == cond_exp):  #just to lowercase until input is normalized
                             for i in self.columns:
                                 print(self.data[j][i])
                                 row.append(self.data[j][i])
@@ -901,7 +902,8 @@ class TableBTree:
                 if withcondition and where_column:
                     if isinstance(cond_exp,str):
                             print(self.data[j][col_name] + " = " + cond_exp)
-                            if(str.lower(self.data[j][col_name]) == cond_exp):  #just to lowercase until input is normalized
+                            if(self.data[j][col_name] == cond_exp):  #just to lowercase until input is normalized
+                            # if(str.lower(self.data[j][col_name]) == cond_exp):  #just to lowercase until input is normalized
                                 for i in columns:
                                     i = i.strip(" ")
                                     print(self.data[j][i])
