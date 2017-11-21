@@ -36,7 +36,7 @@ def p_insert_statement(p):
             | INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
             | INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON'''
     # print("Insert statement")
-
+    clearErrors()
     p[0] = ""
     for i in p:
         if(i is not None):
@@ -73,6 +73,7 @@ def p_select_statement(p):
             # SELECT filter_rows_op columns FROM TABLE_NAME SEMICOLON
             #         | SELECT filter_rows_op columns FROM TABLE_NAME WHERE condition SEMICOLON'''
     # print("Select statement")
+
 
     global operation
     global columns
@@ -412,6 +413,19 @@ def p_error(p):
         errorTitle = "Syntax Error"
         errorDesc = "Syntax error at EOF"
 
+def clearErrors():
+    mysqllex.error = False
+    mysqllex.errorTitle = ''
+    mysqllex.errorDesc = ''
+
+    global error
+    global errorTitle
+    global errorDesc
+
+    error = False
+    errorTitle = ''
+    errorDesc = ''
+
 import ply.yacc as yacc
 mysqlparser = yacc.yacc() # parser
 
@@ -419,6 +433,7 @@ def parse(data, debug=0):
     global error
     global errorTitle
     global errorDesc
+    clearErrors()
     p = mysqlparser.parse(data, debug = debug)
     if mysqllex.error:
         error = mysqllex.error
