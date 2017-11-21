@@ -2,6 +2,7 @@ from ply import *
 import re
 
 tables = {}
+tablecolumns = {}
 cols = ''
 tabs = ''
 metadata = open("metadata.txt", "r")
@@ -17,9 +18,12 @@ for line in metadata:
     tablename = str.lower(tokens.pop())
     tokens.reverse()
     datatype = {}
+    tablecolumns[tablename] = []
+    
     for i in range(0,len(tokens),2):
         # print(tokens[i])
         tokens[i] = str.lower(tokens[i])
+        tablecolumns[tablename].append(tokens[i])
         datatype[tokens[i]] = tokens[i+1]
 
     tables[tablename] = datatype

@@ -420,14 +420,11 @@ class Ui_MainWindow(object):
         mysqlparse.error = False
         mysqlparse.errorTitle = ''
         mysqlparse.errorDesc = ''
-        mysqllex.error = False
-        mysqllex.errorTitle = ''
-        mysqllex.errorDesc = ''
 
         # count lines in text edit
         cursor = self.textEdit.textCursor()
         curPos = cursor.blockNumber() + 1
-        
+
         self.textEdit.moveCursor(QtGui.QTextCursor.End)
         self.textEdit.setFocus(True)
         cursor = self.textEdit.textCursor()
@@ -482,7 +479,7 @@ class Ui_MainWindow(object):
 
                     # append line to selected text
                     selText = selText + ' ' + line2
-                    
+
                     if ';' in line2:
                         break
 
@@ -525,7 +522,7 @@ class Ui_MainWindow(object):
         self.textEdit.setFocus(True)
         cursor = self.textEdit.textCursor()
         curEnd = cursor.blockNumber() + 1
-                
+
         # start at the beginning of text edit
         self.textEdit.moveCursor(QtGui.QTextCursor.Start)
         cursor = self.textEdit.textCursor()
@@ -538,7 +535,7 @@ class Ui_MainWindow(object):
             cursor = self.textEdit.textCursor()
             cursor.select(QtGui.QTextCursor.LineUnderCursor)
             line = cursor.selectedText()                     # save content of line under cursor in text edit
-            
+
             selText = selText + ' ' + line
 
             if ';' in line:
@@ -605,7 +602,7 @@ class Ui_MainWindow(object):
         self.coldatatypeTW.clearContents()
         self.coldatatypeTW.setRowCount(len(tables[keys[row]]))
 
-        columns = list(tables[keys[row]].keys())
+        columns = mysqllex.tablecolumns[keys[row]]
 
         for i in range(0, len(columns)):                                                  # insert rows in the table
             self.coldatatypeTW.setItem(i,0, QtGui.QTableWidgetItem(columns[i]))           # column
@@ -628,7 +625,7 @@ textIn = ''
 if __name__ == "__main__":
     tables = mysqllex.tables
     keys = list(tables.keys())
-
+    # print(mysqllex.tablecolumns['student'])
 
     # for i in range(0, 1):
         # trees['course'] = btrees.TableBTree('course', tables['course'])
@@ -642,7 +639,7 @@ if __name__ == "__main__":
     for i in range(0, len(keys)):
         trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
         # trees[keys[i]].saveToFile()
-    print(list(trees['student'].data))
+    # print(list(trees['student'].data))
 
     app = QtGui.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()

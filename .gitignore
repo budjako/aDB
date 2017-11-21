@@ -1,4 +1,9 @@
 __pycache__
 parsetab.py
 btrees/student.dat
+data/student.dat
+data/course.dat
+data/courseoffering.dat
+data/studcourse.dat
+data/studenthistory.dat
 

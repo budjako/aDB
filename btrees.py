@@ -986,8 +986,9 @@ class TableBTree:
                         self.data.pop(key)
                     elif (compOp == 'not like' and dataValue != condExp):
                         self.data.pop(key)
-                if isinstance(condExp, int): 
-                    dataValue = int(dataValue)                                          # if value is an integer
+                else: 
+                    dataValue = float(dataValue)                                        # if value is an integer 
+                    condExp = float(condExp)
                     if (compOp == '<' and dataValue < condExp):                         # delete less than
                         self.data.pop(key)
                     elif (compOp == '>' and dataValue > condExp):                       # delete greater than
