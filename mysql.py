@@ -210,7 +210,7 @@ class Ui_MainWindow(object):
         self.centralwidget.layout().addWidget(self.lineBtn, 2, 1)
         self.centralwidget.layout().addWidget(self.allBtn, 2, 2)
         self.centralwidget.layout().addWidget(self.queryResultTW, 3, 1, 1, 2)
-        self.centralwidget.layout().addWidget(self.statusbar, 4, 0, 1, 2)
+        self.centralwidget.layout().addWidget(self.statusbar, 4, 0, 1, 4)
 
         # set focus to textedit widget upon opening the window
         self.textEdit.setFocus(True)
@@ -330,17 +330,22 @@ class Ui_MainWindow(object):
                     prog = mysqlparse.parse(line)
 
                     if mysqlparse.operation == 'insert':
-                        #returned_rows = trees[mysqlparse.table_selected].insert
+                        start = time.time()
                         errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+                        end = time.time()
                         if not errorcheck:
+                            self.statusbar.showMessage("Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
                             print("Insert successful")
                         else:
                             print("Error seen")
 
                     if mysqlparse.operation == 'select':
+                        start = time.time()
                         returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+                        end =  time.time()
                         self.showQueryResult(returned_rows)
-                        self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1)) # show number of rows returned on status bar. -1 for column names
+                        self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1) + " | Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
+
                     # print(line)
                     # # print(tables[nameOfFile])
                     # if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
@@ -575,18 +580,24 @@ class Ui_MainWindow(object):
 
     def execute(self):
         if mysqlparse.operation == 'select':
+            start = time.time()
             returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+            end = time.time()
             self.showQueryResult(returned_rows)
-            self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1)) # show number of rows returned on status bar. -1 for column names
+            self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1) + " | Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
 
         if mysqlparse.operation == 'delete':
+            start = time.time()
             returned_rows = trees[mysqlparse.table_selected].delete(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-            # self.showQueryResult(returned_rows)
+            end = time.time()
+            self.statusbar.showMessage("Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
 
         if mysqlparse.operation == 'insert':
-            #returned_rows = trees[mysqlparse.table_selected].insert
+            start = time.time()
             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
+            end = time.time()
             if not errorcheck:
+                self.statusbar.showMessage("Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
                 print("Insert successful")
             else:
                 self.errorMessageBox('Input error', 'Recheck input values')
