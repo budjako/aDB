@@ -310,13 +310,14 @@ class Ui_MainWindow(object):
                         if mysqlparse.operation.lower() == 'insert':
                             #returned_rows = trees[mysqlparse.table_selected].insert
                             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
-                            if not errorcheck:
-                                print("Insert successful")
-                            else:
+                            if errorcheck:
+                                self.showErrorDialog("Error encountered. Abort!", "Error")
                                 print("Error seen")
+                                break
         elif f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
-            commentRegex = r'/\*|.*\*/|//'
+            commentRegex = r'/\*|.*\*/|//|--|#'
+            start = time.time()
             for line in iter(f):
                 if re.match(commentRegex, line) and not multiLineCommentFlag:
                     multiLineCommentFlag = True
@@ -330,21 +331,16 @@ class Ui_MainWindow(object):
                     prog = mysqlparse.parse(line)
 
                     if mysqlparse.operation == 'insert':
-                        start = time.time()
                         errorcheck = trees[mysqlparse.table_selected.lower()].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
-                        end = time.time()
-                        if not errorcheck:
-                            self.statusbar.showMessage("Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
-                            print("Insert successful")
-                        else:
-                            print("Error seen")
+                        if errorcheck:
+                            # print("Error seen")
+                            self.showErrorDialog("Error encountered. Abort!", "Error")
+                            break
 
                     if mysqlparse.operation == 'select':
-                        start = time.time()
                         returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
-                        end =  time.time()
                         self.showQueryResult(returned_rows)
-                        self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1) + " | Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
+
 
                     # print(line)
                     # # print(tables[nameOfFile])
@@ -353,6 +349,10 @@ class Ui_MainWindow(object):
                     #     print(line[line.find("VALUES (")+6:line.find(");")+2])
                     # else:
                     #     print("with column names")
+
+                end = time.time()
+                self.statusbar.showMessage("Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
+            self.showDialog("Importing data was successful.", "Import data")
         else:
             self.showErrorDialog("Only csv and sql files are accepted!", "File type error")
         self.clearGlobals()
@@ -598,7 +598,7 @@ class Ui_MainWindow(object):
             end = time.time()
             if not errorcheck:
                 self.statusbar.showMessage("Time elapsed: " + str("%.3f" % ((end - start)*1000)) + " ms") # show number of rows returned on status bar. -1 for column names
-                print("Insert successful")
+                # print("Insert successful")
             else:
                 self.errorMessageBox('Input error', 'Recheck input values')
 
@@ -629,6 +629,14 @@ class Ui_MainWindow(object):
         self.fileNameError.setIcon(QtGui.QMessageBox.Warning)
         self.fileNameError.setText(errormessage)
         self.fileNameError.setWindowTitle(errortitle)
+        self.fileNameError.addButton(QtGui.QMessageBox.Ok)
+        self.fileNameError.show()
+
+    def showDialog(self, message, title):
+        self.fileNameError = QtGui.QMessageBox()
+        self.fileNameError.setIcon(QtGui.QMessageBox.Information)
+        self.fileNameError.setText(message)
+        self.fileNameError.setWindowTitle(title)
         self.fileNameError.addButton(QtGui.QMessageBox.Ok)
         self.fileNameError.show()
 

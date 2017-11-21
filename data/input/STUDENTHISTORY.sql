@@ -31,7 +31,7 @@ insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10334', 'LOA', 'Resolved', '2015-03-30', '2016-06-19');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10535', 'Residency', 'Resolved', '2014-03-30', '2016-07-23');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10315', 'Residency', 'Unresolved', '2014-02-27', '2016-04-14');
-#insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10712', 'Change of Plan of Study', 'Lapsed', '2015-11-08', '2016-10-24');
+// insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10712', 'Change of Plan of Study', 'Lapsed', '2015-11-08', '2016-10-24');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10604', 'Completion', 'Resolved', '2014-05-10', '2016-02-15');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10525', 'Completion', 'Lapsed', '2014-03-15', '2016-06-09');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10567', 'AWOL', 'Unresolved', '2015-02-06', '2016-02-14');
@@ -158,7 +158,7 @@ insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10086', 'Completion', 'Unresolved', '2014-04-18', '2017-08-18');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10777', 'Residency', 'Resolved', '2014-02-14', '2016-03-21');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10748', 'Residency', 'Resolved', '2015-08-16', '2017-01-13');
-#insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10712', 'Change of Plan of Study', 'Lapsed', '2015-10-16', '2017-10-30');
+//insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10712', 'Change of Plan of Study', 'Lapsed', '2015-10-16', '2017-10-30');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10799', 'Completion', 'Resolved', '2015-10-15', '2016-09-02');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10014', 'LOA', 'Resolved', '2015-04-17', '2016-03-03');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10882', 'Change of Plan of Study', 'Unresolved', '2015-05-01', '2017-04-13');
@@ -977,7 +977,7 @@ insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10217', 'Residency', 'Unresolved', '2014-06-21', '2016-06-14');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10711', 'Change of Plan of Study', 'Resolved', '2014-05-29', '2016-11-29');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10629', 'Change of Plan of Study', 'Lapsed', '2015-04-17', '2016-01-24');
-#insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10712', 'LOA', 'Lapsed', '2014-02-19', '2016-09-01');
+//insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10712', 'LOA', 'Lapsed', '2014-02-19', '2016-09-01');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10215', 'Residency', 'Lapsed', '2014-01-05', '2016-12-06');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10163', 'Completion', 'Lapsed', '2014-08-26', '2016-11-29');
 insert into STUDENTHISTORY (StudNo, Description, Action, DateFiled, DateResolved) values ('2017-10681', 'AWOL', 'Unresolved', '2014-11-30', '2016-06-20');
