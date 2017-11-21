@@ -336,6 +336,11 @@ class Ui_MainWindow(object):
                             print("Insert successful")
                         else:
                             print("Error seen")
+
+                    if mysqlparse.operation == 'select':
+                        returned_rows = trees[mysqlparse.table_selected].select(mysqlparse.columns, mysqlparse.withcondition, mysqlparse.condition, mysqlparse.col_name, mysqlparse.comp_operator, mysqlparse.cond_exp)
+                        self.showQueryResult(returned_rows)
+                        self.statusbar.showMessage("Number of rows returned: " + str(len(returned_rows)-1)) # show number of rows returned on status bar. -1 for column names
                     # print(line)
                     # # print(tables[nameOfFile])
                     # if(line[line.find(nameOfFile)+len(nameOfFile):line.find("VALUES")].strip() == ""):
@@ -495,7 +500,7 @@ class Ui_MainWindow(object):
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
 
         print('\n', selText, '\n')
-
+        selText = selText.lower()
         prog = mysqlparse.parse(selText)
         if(mysqlparse.error):
             self.errorMessageBox(mysqlparse.errorTitle, mysqlparse.errorDesc)
@@ -635,7 +640,6 @@ if __name__ == "__main__":
         # trees['studenthistory'] = btrees.TableBTree('studenthistory', tables['studenthistory'])
         # trees['studcourse'] = btrees.TableBTree('studcourse', tables['studcourse'])
 
-    print("trees")
     for i in range(0, len(keys)):
         trees[keys[i]] = btrees.TableBTree(keys[i], tables[keys[i]])
         # trees[keys[i]].saveToFile()
