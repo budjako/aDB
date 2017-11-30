@@ -1,5 +1,0 @@
-STUDENT StudNo StudentName Birthday Degree Major UnitsEarned
-STUDENTHISTORY StudNo Description Action DateFiled DateResolved
-COURSE CNo CTitle CDesc NoOfUnits HasLab SemOffered
-COURSEOFFERING Semester AcadYear CNo Section Time MaxStud
-STUDCOURSE StudNo Cno Semester AcadYear

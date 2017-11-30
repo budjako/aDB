@@ -1,0 +1,1971 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> insert_statement
+Rule 2     statement -> select_statement
+Rule 3     statement -> delete_statement
+Rule 4     insert_statement -> INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+Rule 5     insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+Rule 6     insert_statement -> INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON
+Rule 7     select_statement -> SELECT columns FROM TABLE_NAME SEMICOLON
+Rule 8     select_statement -> SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON
+Rule 9     delete_statement -> DELETE FROM TABLE_NAME SEMICOLON
+Rule 10    delete_statement -> DELETE FROM TABLE_NAME WHERE condition SEMICOLON
+Rule 11    into_kw -> INTO
+Rule 12    into_kw -> empty
+Rule 13    columns -> ASTERISK
+Rule 14    columns -> column_name
+Rule 15    column_name -> COLUMN_NAME
+Rule 16    column_name -> column_name COMMA COLUMN_NAME
+Rule 17    assignment_list -> COLUMN_NAME EQUAL literals
+Rule 18    assignment_list -> assignment_list COMMA COLUMN_NAME EQUAL literals
+Rule 19    value_list -> literals
+Rule 20    value_list -> value_list COMMA literals
+Rule 21    literals -> STRING_LIT
+Rule 22    literals -> INT_LIT
+Rule 23    literals -> DOUBLE_LIT
+Rule 24    literals -> NULL
+Rule 25    condition -> col_cond
+Rule 26    condition -> string_cond
+Rule 27    condition -> num_cond
+Rule 28    condition -> NOT OPENPAR string_cond CLOSEPAR
+Rule 29    condition -> NOT OPENPAR num_cond CLOSEPAR
+Rule 30    col_cond -> column_name comparison_op string_exp
+Rule 31    col_cond -> column_name comparison_op NULL
+Rule 32    col_cond -> column_name comparison_op num_exp
+Rule 33    col_cond -> column_name LIKE string_exp
+Rule 34    col_cond -> column_name NOT LIKE string_exp
+Rule 35    string_cond -> string_exp LIKE string_exp
+Rule 36    string_cond -> string_exp NOT LIKE string_exp
+Rule 37    string_cond -> string_exp EQUAL string_exp
+Rule 38    string_cond -> string_exp comparison_op string_exp
+Rule 39    string_cond -> STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR
+Rule 40    string_exp -> STRING_LIT
+Rule 41    num_cond -> num_exp comparison_op num_exp
+Rule 42    num_cond -> num_exp BETWEEN num_exp AND num_exp
+Rule 43    num_cond -> num_exp NOT NULL
+Rule 44    num_cond -> num_exp IS NULL
+Rule 45    num_exp -> num_exp ADD num_factor
+Rule 46    num_exp -> num_factor SUBTRACT num_exp
+Rule 47    num_exp -> num_factor
+Rule 48    num_factor -> num_factor ASTERISK num_term
+Rule 49    num_factor -> num_factor DIVIDE num_term
+Rule 50    num_factor -> num_factor DIVIDE_INT num_term
+Rule 51    num_factor -> num_factor MODULO num_term
+Rule 52    num_factor -> num_term
+Rule 53    num_term -> OPENPAR num_exp CLOSEPAR
+Rule 54    num_term -> num_val
+Rule 55    num_val -> INT_LIT
+Rule 56    num_val -> DOUBLE_LIT
+Rule 57    num_val -> COLUMN_NAME
+Rule 58    comparison_op -> GE
+Rule 59    comparison_op -> GT
+Rule 60    comparison_op -> LE
+Rule 61    comparison_op -> LT
+Rule 62    comparison_op -> NE
+Rule 63    comparison_op -> EQUAL
+Rule 64    comparison_op -> EQUAL_NULL
+Rule 65    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ADD                  : 45
+AND                  : 42
+ASTERISK             : 13 48
+BETWEEN              : 42
+CLOSEPAR             : 4 5 5 28 29 39 53
+COLUMN_NAME          : 15 16 17 18 57
+COMMA                : 16 18 20 39
+DELETE               : 9 10
+DIVIDE               : 49
+DIVIDE_INT           : 50
+DOUBLE_LIT           : 23 56
+EQUAL                : 17 18 37 63
+EQUAL_NULL           : 64
+FROM                 : 7 8 9 10
+GE                   : 58
+GT                   : 59
+INSERT               : 4 5 6
+INTO                 : 11
+INT_LIT              : 22 55
+IS                   : 44
+LE                   : 60
+LIKE                 : 33 34 35 36
+LT                   : 61
+MODULO               : 51
+NE                   : 62
+NOT                  : 28 29 34 36 43
+NULL                 : 24 31 43 44
+OPENPAR              : 4 5 5 28 29 39 53
+SELECT               : 7 8
+SEMICOLON            : 4 5 6 7 8 9 10
+SET                  : 6
+STRCMP               : 39
+STRING_LIT           : 21 40
+SUBTRACT             : 46
+TABLE_NAME           : 4 5 6 7 8 9 10
+VALUES               : 4 5
+WHERE                : 8 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment_list      : 6 18
+col_cond             : 25
+column_name          : 5 14 16 30 31 32 33 34
+columns              : 7 8
+comparison_op        : 30 31 32 38 41
+condition            : 8 10
+delete_statement     : 3
+empty                : 12
+insert_statement     : 1
+into_kw              : 4 5 6
+literals             : 17 18 19 20
+num_cond             : 27 29
+num_exp              : 32 41 41 42 42 42 43 44 45 46 53
+num_factor           : 45 46 47 48 49 50 51
+num_term             : 48 49 50 51 52
+num_val              : 54
+select_statement     : 2
+statement            : 0
+string_cond          : 26 28
+string_exp           : 30 33 34 35 35 36 36 37 37 38 38 39 39
+value_list           : 4 5 20
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . insert_statement
+    (2) statement -> . select_statement
+    (3) statement -> . delete_statement
+    (4) insert_statement -> . INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (5) insert_statement -> . INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (6) insert_statement -> . INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON
+    (7) select_statement -> . SELECT columns FROM TABLE_NAME SEMICOLON
+    (8) select_statement -> . SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON
+    (9) delete_statement -> . DELETE FROM TABLE_NAME SEMICOLON
+    (10) delete_statement -> . DELETE FROM TABLE_NAME WHERE condition SEMICOLON
+
+    INSERT          shift and go to state 7
+    SELECT          shift and go to state 2
+    DELETE          shift and go to state 1
+
+    statement                      shift and go to state 5
+    delete_statement               shift and go to state 6
+    select_statement               shift and go to state 3
+    insert_statement               shift and go to state 4
+
+state 1
+
+    (9) delete_statement -> DELETE . FROM TABLE_NAME SEMICOLON
+    (10) delete_statement -> DELETE . FROM TABLE_NAME WHERE condition SEMICOLON
+
+    FROM            shift and go to state 8
+
+
+state 2
+
+    (7) select_statement -> SELECT . columns FROM TABLE_NAME SEMICOLON
+    (8) select_statement -> SELECT . columns FROM TABLE_NAME WHERE condition SEMICOLON
+    (13) columns -> . ASTERISK
+    (14) columns -> . column_name
+    (15) column_name -> . COLUMN_NAME
+    (16) column_name -> . column_name COMMA COLUMN_NAME
+
+    ASTERISK        shift and go to state 10
+    COLUMN_NAME     shift and go to state 9
+
+    columns                        shift and go to state 11
+    column_name                    shift and go to state 12
+
+state 3
+
+    (2) statement -> select_statement .
+
+    $end            reduce using rule 2 (statement -> select_statement .)
+
+
+state 4
+
+    (1) statement -> insert_statement .
+
+    $end            reduce using rule 1 (statement -> insert_statement .)
+
+
+state 5
+
+    (0) S' -> statement .
+
+
+
+state 6
+
+    (3) statement -> delete_statement .
+
+    $end            reduce using rule 3 (statement -> delete_statement .)
+
+
+state 7
+
+    (4) insert_statement -> INSERT . into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (5) insert_statement -> INSERT . into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (6) insert_statement -> INSERT . into_kw TABLE_NAME SET assignment_list SEMICOLON
+    (11) into_kw -> . INTO
+    (12) into_kw -> . empty
+    (65) empty -> .
+
+    INTO            shift and go to state 13
+    TABLE_NAME      reduce using rule 65 (empty -> .)
+
+    empty                          shift and go to state 15
+    into_kw                        shift and go to state 14
+
+state 8
+
+    (9) delete_statement -> DELETE FROM . TABLE_NAME SEMICOLON
+    (10) delete_statement -> DELETE FROM . TABLE_NAME WHERE condition SEMICOLON
+
+    TABLE_NAME      shift and go to state 16
+
+
+state 9
+
+    (15) column_name -> COLUMN_NAME .
+
+    COMMA           reduce using rule 15 (column_name -> COLUMN_NAME .)
+    FROM            reduce using rule 15 (column_name -> COLUMN_NAME .)
+    CLOSEPAR        reduce using rule 15 (column_name -> COLUMN_NAME .)
+
+
+state 10
+
+    (13) columns -> ASTERISK .
+
+    FROM            reduce using rule 13 (columns -> ASTERISK .)
+
+
+state 11
+
+    (7) select_statement -> SELECT columns . FROM TABLE_NAME SEMICOLON
+    (8) select_statement -> SELECT columns . FROM TABLE_NAME WHERE condition SEMICOLON
+
+    FROM            shift and go to state 17
+
+
+state 12
+
+    (14) columns -> column_name .
+    (16) column_name -> column_name . COMMA COLUMN_NAME
+
+    FROM            reduce using rule 14 (columns -> column_name .)
+    COMMA           shift and go to state 18
+
+
+state 13
+
+    (11) into_kw -> INTO .
+
+    TABLE_NAME      reduce using rule 11 (into_kw -> INTO .)
+
+
+state 14
+
+    (4) insert_statement -> INSERT into_kw . TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (5) insert_statement -> INSERT into_kw . TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (6) insert_statement -> INSERT into_kw . TABLE_NAME SET assignment_list SEMICOLON
+
+    TABLE_NAME      shift and go to state 19
+
+
+state 15
+
+    (12) into_kw -> empty .
+
+    TABLE_NAME      reduce using rule 12 (into_kw -> empty .)
+
+
+state 16
+
+    (9) delete_statement -> DELETE FROM TABLE_NAME . SEMICOLON
+    (10) delete_statement -> DELETE FROM TABLE_NAME . WHERE condition SEMICOLON
+
+    SEMICOLON       shift and go to state 20
+    WHERE           shift and go to state 21
+
+
+state 17
+
+    (7) select_statement -> SELECT columns FROM . TABLE_NAME SEMICOLON
+    (8) select_statement -> SELECT columns FROM . TABLE_NAME WHERE condition SEMICOLON
+
+    TABLE_NAME      shift and go to state 22
+
+
+state 18
+
+    (16) column_name -> column_name COMMA . COLUMN_NAME
+
+    COLUMN_NAME     shift and go to state 23
+
+
+state 19
+
+    (4) insert_statement -> INSERT into_kw TABLE_NAME . VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (5) insert_statement -> INSERT into_kw TABLE_NAME . OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (6) insert_statement -> INSERT into_kw TABLE_NAME . SET assignment_list SEMICOLON
+
+    VALUES          shift and go to state 24
+    OPENPAR         shift and go to state 26
+    SET             shift and go to state 25
+
+
+state 20
+
+    (9) delete_statement -> DELETE FROM TABLE_NAME SEMICOLON .
+
+    $end            reduce using rule 9 (delete_statement -> DELETE FROM TABLE_NAME SEMICOLON .)
+
+
+state 21
+
+    (10) delete_statement -> DELETE FROM TABLE_NAME WHERE . condition SEMICOLON
+    (25) condition -> . col_cond
+    (26) condition -> . string_cond
+    (27) condition -> . num_cond
+    (28) condition -> . NOT OPENPAR string_cond CLOSEPAR
+    (29) condition -> . NOT OPENPAR num_cond CLOSEPAR
+    (30) col_cond -> . column_name comparison_op string_exp
+    (31) col_cond -> . column_name comparison_op NULL
+    (32) col_cond -> . column_name comparison_op num_exp
+    (33) col_cond -> . column_name LIKE string_exp
+    (34) col_cond -> . column_name NOT LIKE string_exp
+    (35) string_cond -> . string_exp LIKE string_exp
+    (36) string_cond -> . string_exp NOT LIKE string_exp
+    (37) string_cond -> . string_exp EQUAL string_exp
+    (38) string_cond -> . string_exp comparison_op string_exp
+    (39) string_cond -> . STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR
+    (41) num_cond -> . num_exp comparison_op num_exp
+    (42) num_cond -> . num_exp BETWEEN num_exp AND num_exp
+    (43) num_cond -> . num_exp NOT NULL
+    (44) num_cond -> . num_exp IS NULL
+    (15) column_name -> . COLUMN_NAME
+    (16) column_name -> . column_name COMMA COLUMN_NAME
+    (40) string_exp -> . STRING_LIT
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    NOT             shift and go to state 38
+    STRCMP          shift and go to state 31
+    COLUMN_NAME     shift and go to state 29
+    STRING_LIT      shift and go to state 33
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+
+    col_cond                       shift and go to state 39
+    num_factor                     shift and go to state 35
+    num_exp                        shift and go to state 41
+    condition                      shift and go to state 34
+    num_cond                       shift and go to state 32
+    string_cond                    shift and go to state 42
+    num_term                       shift and go to state 40
+    num_val                        shift and go to state 43
+    column_name                    shift and go to state 37
+    string_exp                     shift and go to state 30
+
+state 22
+
+    (7) select_statement -> SELECT columns FROM TABLE_NAME . SEMICOLON
+    (8) select_statement -> SELECT columns FROM TABLE_NAME . WHERE condition SEMICOLON
+
+    SEMICOLON       shift and go to state 44
+    WHERE           shift and go to state 45
+
+
+state 23
+
+    (16) column_name -> column_name COMMA COLUMN_NAME .
+
+    COMMA           reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    FROM            reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    LIKE            reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    NOT             reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    GE              reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    GT              reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    LE              reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    LT              reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    NE              reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    EQUAL           reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    EQUAL_NULL      reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+    CLOSEPAR        reduce using rule 16 (column_name -> column_name COMMA COLUMN_NAME .)
+
+
+state 24
+
+    (4) insert_statement -> INSERT into_kw TABLE_NAME VALUES . OPENPAR value_list CLOSEPAR SEMICOLON
+
+    OPENPAR         shift and go to state 46
+
+
+state 25
+
+    (6) insert_statement -> INSERT into_kw TABLE_NAME SET . assignment_list SEMICOLON
+    (17) assignment_list -> . COLUMN_NAME EQUAL literals
+    (18) assignment_list -> . assignment_list COMMA COLUMN_NAME EQUAL literals
+
+    COLUMN_NAME     shift and go to state 47
+
+    assignment_list                shift and go to state 48
+
+state 26
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR . column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (15) column_name -> . COLUMN_NAME
+    (16) column_name -> . column_name COMMA COLUMN_NAME
+
+    COLUMN_NAME     shift and go to state 9
+
+    column_name                    shift and go to state 49
+
+state 27
+
+    (56) num_val -> DOUBLE_LIT .
+
+    ASTERISK        reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    DIVIDE          reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    DIVIDE_INT      reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    MODULO          reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    BETWEEN         reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    NOT             reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    IS              reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    ADD             reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    GE              reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    GT              reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    LE              reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    LT              reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    NE              reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    EQUAL           reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    EQUAL_NULL      reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    CLOSEPAR        reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    SEMICOLON       reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    AND             reduce using rule 56 (num_val -> DOUBLE_LIT .)
+    SUBTRACT        reduce using rule 56 (num_val -> DOUBLE_LIT .)
+
+
+state 28
+
+    (55) num_val -> INT_LIT .
+
+    ASTERISK        reduce using rule 55 (num_val -> INT_LIT .)
+    DIVIDE          reduce using rule 55 (num_val -> INT_LIT .)
+    DIVIDE_INT      reduce using rule 55 (num_val -> INT_LIT .)
+    MODULO          reduce using rule 55 (num_val -> INT_LIT .)
+    BETWEEN         reduce using rule 55 (num_val -> INT_LIT .)
+    NOT             reduce using rule 55 (num_val -> INT_LIT .)
+    IS              reduce using rule 55 (num_val -> INT_LIT .)
+    ADD             reduce using rule 55 (num_val -> INT_LIT .)
+    GE              reduce using rule 55 (num_val -> INT_LIT .)
+    GT              reduce using rule 55 (num_val -> INT_LIT .)
+    LE              reduce using rule 55 (num_val -> INT_LIT .)
+    LT              reduce using rule 55 (num_val -> INT_LIT .)
+    NE              reduce using rule 55 (num_val -> INT_LIT .)
+    EQUAL           reduce using rule 55 (num_val -> INT_LIT .)
+    EQUAL_NULL      reduce using rule 55 (num_val -> INT_LIT .)
+    CLOSEPAR        reduce using rule 55 (num_val -> INT_LIT .)
+    SEMICOLON       reduce using rule 55 (num_val -> INT_LIT .)
+    AND             reduce using rule 55 (num_val -> INT_LIT .)
+    SUBTRACT        reduce using rule 55 (num_val -> INT_LIT .)
+
+
+state 29
+
+    (15) column_name -> COLUMN_NAME .
+    (57) num_val -> COLUMN_NAME .
+
+  ! reduce/reduce conflict for NOT resolved using rule 15 (column_name -> COLUMN_NAME .)
+  ! reduce/reduce conflict for GE resolved using rule 15 (column_name -> COLUMN_NAME .)
+  ! reduce/reduce conflict for GT resolved using rule 15 (column_name -> COLUMN_NAME .)
+  ! reduce/reduce conflict for LE resolved using rule 15 (column_name -> COLUMN_NAME .)
+  ! reduce/reduce conflict for LT resolved using rule 15 (column_name -> COLUMN_NAME .)
+  ! reduce/reduce conflict for NE resolved using rule 15 (column_name -> COLUMN_NAME .)
+  ! reduce/reduce conflict for EQUAL resolved using rule 15 (column_name -> COLUMN_NAME .)
+  ! reduce/reduce conflict for EQUAL_NULL resolved using rule 15 (column_name -> COLUMN_NAME .)
+    LIKE            reduce using rule 15 (column_name -> COLUMN_NAME .)
+    NOT             reduce using rule 15 (column_name -> COLUMN_NAME .)
+    COMMA           reduce using rule 15 (column_name -> COLUMN_NAME .)
+    GE              reduce using rule 15 (column_name -> COLUMN_NAME .)
+    GT              reduce using rule 15 (column_name -> COLUMN_NAME .)
+    LE              reduce using rule 15 (column_name -> COLUMN_NAME .)
+    LT              reduce using rule 15 (column_name -> COLUMN_NAME .)
+    NE              reduce using rule 15 (column_name -> COLUMN_NAME .)
+    EQUAL           reduce using rule 15 (column_name -> COLUMN_NAME .)
+    EQUAL_NULL      reduce using rule 15 (column_name -> COLUMN_NAME .)
+    SUBTRACT        reduce using rule 57 (num_val -> COLUMN_NAME .)
+    ASTERISK        reduce using rule 57 (num_val -> COLUMN_NAME .)
+    DIVIDE          reduce using rule 57 (num_val -> COLUMN_NAME .)
+    DIVIDE_INT      reduce using rule 57 (num_val -> COLUMN_NAME .)
+    MODULO          reduce using rule 57 (num_val -> COLUMN_NAME .)
+    BETWEEN         reduce using rule 57 (num_val -> COLUMN_NAME .)
+    IS              reduce using rule 57 (num_val -> COLUMN_NAME .)
+    ADD             reduce using rule 57 (num_val -> COLUMN_NAME .)
+
+  ! NOT             [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+  ! GE              [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+  ! GT              [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+  ! LE              [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+  ! LT              [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+  ! NE              [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+  ! EQUAL           [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+  ! EQUAL_NULL      [ reduce using rule 57 (num_val -> COLUMN_NAME .) ]
+
+
+state 30
+
+    (35) string_cond -> string_exp . LIKE string_exp
+    (36) string_cond -> string_exp . NOT LIKE string_exp
+    (37) string_cond -> string_exp . EQUAL string_exp
+    (38) string_cond -> string_exp . comparison_op string_exp
+    (58) comparison_op -> . GE
+    (59) comparison_op -> . GT
+    (60) comparison_op -> . LE
+    (61) comparison_op -> . LT
+    (62) comparison_op -> . NE
+    (63) comparison_op -> . EQUAL
+    (64) comparison_op -> . EQUAL_NULL
+
+    LIKE            shift and go to state 58
+    NOT             shift and go to state 59
+    EQUAL           shift and go to state 53
+    GE              shift and go to state 51
+    GT              shift and go to state 52
+    LE              shift and go to state 54
+    LT              shift and go to state 50
+    NE              shift and go to state 55
+    EQUAL_NULL      shift and go to state 56
+
+    comparison_op                  shift and go to state 57
+
+state 31
+
+    (39) string_cond -> STRCMP . OPENPAR string_exp COMMA string_exp CLOSEPAR
+
+    OPENPAR         shift and go to state 60
+
+
+state 32
+
+    (27) condition -> num_cond .
+
+    SEMICOLON       reduce using rule 27 (condition -> num_cond .)
+
+
+state 33
+
+    (40) string_exp -> STRING_LIT .
+
+    LIKE            reduce using rule 40 (string_exp -> STRING_LIT .)
+    NOT             reduce using rule 40 (string_exp -> STRING_LIT .)
+    EQUAL           reduce using rule 40 (string_exp -> STRING_LIT .)
+    GE              reduce using rule 40 (string_exp -> STRING_LIT .)
+    GT              reduce using rule 40 (string_exp -> STRING_LIT .)
+    LE              reduce using rule 40 (string_exp -> STRING_LIT .)
+    LT              reduce using rule 40 (string_exp -> STRING_LIT .)
+    NE              reduce using rule 40 (string_exp -> STRING_LIT .)
+    EQUAL_NULL      reduce using rule 40 (string_exp -> STRING_LIT .)
+    SEMICOLON       reduce using rule 40 (string_exp -> STRING_LIT .)
+    CLOSEPAR        reduce using rule 40 (string_exp -> STRING_LIT .)
+    COMMA           reduce using rule 40 (string_exp -> STRING_LIT .)
+
+
+state 34
+
+    (10) delete_statement -> DELETE FROM TABLE_NAME WHERE condition . SEMICOLON
+
+    SEMICOLON       shift and go to state 61
+
+
+state 35
+
+    (46) num_exp -> num_factor . SUBTRACT num_exp
+    (47) num_exp -> num_factor .
+    (48) num_factor -> num_factor . ASTERISK num_term
+    (49) num_factor -> num_factor . DIVIDE num_term
+    (50) num_factor -> num_factor . DIVIDE_INT num_term
+    (51) num_factor -> num_factor . MODULO num_term
+
+    SUBTRACT        shift and go to state 62
+    BETWEEN         reduce using rule 47 (num_exp -> num_factor .)
+    NOT             reduce using rule 47 (num_exp -> num_factor .)
+    IS              reduce using rule 47 (num_exp -> num_factor .)
+    ADD             reduce using rule 47 (num_exp -> num_factor .)
+    GE              reduce using rule 47 (num_exp -> num_factor .)
+    GT              reduce using rule 47 (num_exp -> num_factor .)
+    LE              reduce using rule 47 (num_exp -> num_factor .)
+    LT              reduce using rule 47 (num_exp -> num_factor .)
+    NE              reduce using rule 47 (num_exp -> num_factor .)
+    EQUAL           reduce using rule 47 (num_exp -> num_factor .)
+    EQUAL_NULL      reduce using rule 47 (num_exp -> num_factor .)
+    SEMICOLON       reduce using rule 47 (num_exp -> num_factor .)
+    CLOSEPAR        reduce using rule 47 (num_exp -> num_factor .)
+    AND             reduce using rule 47 (num_exp -> num_factor .)
+    ASTERISK        shift and go to state 63
+    DIVIDE          shift and go to state 66
+    DIVIDE_INT      shift and go to state 65
+    MODULO          shift and go to state 64
+
+
+state 36
+
+    (53) num_term -> OPENPAR . num_exp CLOSEPAR
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 40
+    num_exp                        shift and go to state 68
+    num_factor                     shift and go to state 35
+
+state 37
+
+    (30) col_cond -> column_name . comparison_op string_exp
+    (31) col_cond -> column_name . comparison_op NULL
+    (32) col_cond -> column_name . comparison_op num_exp
+    (33) col_cond -> column_name . LIKE string_exp
+    (34) col_cond -> column_name . NOT LIKE string_exp
+    (16) column_name -> column_name . COMMA COLUMN_NAME
+    (58) comparison_op -> . GE
+    (59) comparison_op -> . GT
+    (60) comparison_op -> . LE
+    (61) comparison_op -> . LT
+    (62) comparison_op -> . NE
+    (63) comparison_op -> . EQUAL
+    (64) comparison_op -> . EQUAL_NULL
+
+    LIKE            shift and go to state 71
+    NOT             shift and go to state 69
+    COMMA           shift and go to state 18
+    GE              shift and go to state 51
+    GT              shift and go to state 52
+    LE              shift and go to state 54
+    LT              shift and go to state 50
+    NE              shift and go to state 55
+    EQUAL           shift and go to state 72
+    EQUAL_NULL      shift and go to state 56
+
+    comparison_op                  shift and go to state 70
+
+state 38
+
+    (28) condition -> NOT . OPENPAR string_cond CLOSEPAR
+    (29) condition -> NOT . OPENPAR num_cond CLOSEPAR
+
+    OPENPAR         shift and go to state 73
+
+
+state 39
+
+    (25) condition -> col_cond .
+
+    SEMICOLON       reduce using rule 25 (condition -> col_cond .)
+
+
+state 40
+
+    (52) num_factor -> num_term .
+
+    SUBTRACT        reduce using rule 52 (num_factor -> num_term .)
+    ASTERISK        reduce using rule 52 (num_factor -> num_term .)
+    DIVIDE          reduce using rule 52 (num_factor -> num_term .)
+    DIVIDE_INT      reduce using rule 52 (num_factor -> num_term .)
+    MODULO          reduce using rule 52 (num_factor -> num_term .)
+    BETWEEN         reduce using rule 52 (num_factor -> num_term .)
+    NOT             reduce using rule 52 (num_factor -> num_term .)
+    IS              reduce using rule 52 (num_factor -> num_term .)
+    ADD             reduce using rule 52 (num_factor -> num_term .)
+    GE              reduce using rule 52 (num_factor -> num_term .)
+    GT              reduce using rule 52 (num_factor -> num_term .)
+    LE              reduce using rule 52 (num_factor -> num_term .)
+    LT              reduce using rule 52 (num_factor -> num_term .)
+    NE              reduce using rule 52 (num_factor -> num_term .)
+    EQUAL           reduce using rule 52 (num_factor -> num_term .)
+    EQUAL_NULL      reduce using rule 52 (num_factor -> num_term .)
+    CLOSEPAR        reduce using rule 52 (num_factor -> num_term .)
+    SEMICOLON       reduce using rule 52 (num_factor -> num_term .)
+    AND             reduce using rule 52 (num_factor -> num_term .)
+
+
+state 41
+
+    (41) num_cond -> num_exp . comparison_op num_exp
+    (42) num_cond -> num_exp . BETWEEN num_exp AND num_exp
+    (43) num_cond -> num_exp . NOT NULL
+    (44) num_cond -> num_exp . IS NULL
+    (45) num_exp -> num_exp . ADD num_factor
+    (58) comparison_op -> . GE
+    (59) comparison_op -> . GT
+    (60) comparison_op -> . LE
+    (61) comparison_op -> . LT
+    (62) comparison_op -> . NE
+    (63) comparison_op -> . EQUAL
+    (64) comparison_op -> . EQUAL_NULL
+
+    BETWEEN         shift and go to state 74
+    NOT             shift and go to state 76
+    IS              shift and go to state 75
+    ADD             shift and go to state 78
+    GE              shift and go to state 51
+    GT              shift and go to state 52
+    LE              shift and go to state 54
+    LT              shift and go to state 50
+    NE              shift and go to state 55
+    EQUAL           shift and go to state 72
+    EQUAL_NULL      shift and go to state 56
+
+    comparison_op                  shift and go to state 77
+
+state 42
+
+    (26) condition -> string_cond .
+
+    SEMICOLON       reduce using rule 26 (condition -> string_cond .)
+
+
+state 43
+
+    (54) num_term -> num_val .
+
+    SUBTRACT        reduce using rule 54 (num_term -> num_val .)
+    ASTERISK        reduce using rule 54 (num_term -> num_val .)
+    DIVIDE          reduce using rule 54 (num_term -> num_val .)
+    DIVIDE_INT      reduce using rule 54 (num_term -> num_val .)
+    MODULO          reduce using rule 54 (num_term -> num_val .)
+    ADD             reduce using rule 54 (num_term -> num_val .)
+    SEMICOLON       reduce using rule 54 (num_term -> num_val .)
+    CLOSEPAR        reduce using rule 54 (num_term -> num_val .)
+    BETWEEN         reduce using rule 54 (num_term -> num_val .)
+    NOT             reduce using rule 54 (num_term -> num_val .)
+    IS              reduce using rule 54 (num_term -> num_val .)
+    GE              reduce using rule 54 (num_term -> num_val .)
+    GT              reduce using rule 54 (num_term -> num_val .)
+    LE              reduce using rule 54 (num_term -> num_val .)
+    LT              reduce using rule 54 (num_term -> num_val .)
+    NE              reduce using rule 54 (num_term -> num_val .)
+    EQUAL           reduce using rule 54 (num_term -> num_val .)
+    EQUAL_NULL      reduce using rule 54 (num_term -> num_val .)
+    AND             reduce using rule 54 (num_term -> num_val .)
+
+
+state 44
+
+    (7) select_statement -> SELECT columns FROM TABLE_NAME SEMICOLON .
+
+    $end            reduce using rule 7 (select_statement -> SELECT columns FROM TABLE_NAME SEMICOLON .)
+
+
+state 45
+
+    (8) select_statement -> SELECT columns FROM TABLE_NAME WHERE . condition SEMICOLON
+    (25) condition -> . col_cond
+    (26) condition -> . string_cond
+    (27) condition -> . num_cond
+    (28) condition -> . NOT OPENPAR string_cond CLOSEPAR
+    (29) condition -> . NOT OPENPAR num_cond CLOSEPAR
+    (30) col_cond -> . column_name comparison_op string_exp
+    (31) col_cond -> . column_name comparison_op NULL
+    (32) col_cond -> . column_name comparison_op num_exp
+    (33) col_cond -> . column_name LIKE string_exp
+    (34) col_cond -> . column_name NOT LIKE string_exp
+    (35) string_cond -> . string_exp LIKE string_exp
+    (36) string_cond -> . string_exp NOT LIKE string_exp
+    (37) string_cond -> . string_exp EQUAL string_exp
+    (38) string_cond -> . string_exp comparison_op string_exp
+    (39) string_cond -> . STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR
+    (41) num_cond -> . num_exp comparison_op num_exp
+    (42) num_cond -> . num_exp BETWEEN num_exp AND num_exp
+    (43) num_cond -> . num_exp NOT NULL
+    (44) num_cond -> . num_exp IS NULL
+    (15) column_name -> . COLUMN_NAME
+    (16) column_name -> . column_name COMMA COLUMN_NAME
+    (40) string_exp -> . STRING_LIT
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    NOT             shift and go to state 38
+    STRCMP          shift and go to state 31
+    COLUMN_NAME     shift and go to state 29
+    STRING_LIT      shift and go to state 33
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+
+    condition                      shift and go to state 79
+    num_factor                     shift and go to state 35
+    string_exp                     shift and go to state 30
+    column_name                    shift and go to state 37
+    col_cond                       shift and go to state 39
+    num_term                       shift and go to state 40
+    num_exp                        shift and go to state 41
+    num_cond                       shift and go to state 32
+    string_cond                    shift and go to state 42
+    num_val                        shift and go to state 43
+
+state 46
+
+    (4) insert_statement -> INSERT into_kw TABLE_NAME VALUES OPENPAR . value_list CLOSEPAR SEMICOLON
+    (19) value_list -> . literals
+    (20) value_list -> . value_list COMMA literals
+    (21) literals -> . STRING_LIT
+    (22) literals -> . INT_LIT
+    (23) literals -> . DOUBLE_LIT
+    (24) literals -> . NULL
+
+    STRING_LIT      shift and go to state 84
+    INT_LIT         shift and go to state 81
+    DOUBLE_LIT      shift and go to state 80
+    NULL            shift and go to state 83
+
+    literals                       shift and go to state 82
+    value_list                     shift and go to state 85
+
+state 47
+
+    (17) assignment_list -> COLUMN_NAME . EQUAL literals
+
+    EQUAL           shift and go to state 86
+
+
+state 48
+
+    (6) insert_statement -> INSERT into_kw TABLE_NAME SET assignment_list . SEMICOLON
+    (18) assignment_list -> assignment_list . COMMA COLUMN_NAME EQUAL literals
+
+    SEMICOLON       shift and go to state 87
+    COMMA           shift and go to state 88
+
+
+state 49
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name . CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+    (16) column_name -> column_name . COMMA COLUMN_NAME
+
+    CLOSEPAR        shift and go to state 89
+    COMMA           shift and go to state 18
+
+
+state 50
+
+    (61) comparison_op -> LT .
+
+    NULL            reduce using rule 61 (comparison_op -> LT .)
+    STRING_LIT      reduce using rule 61 (comparison_op -> LT .)
+    OPENPAR         reduce using rule 61 (comparison_op -> LT .)
+    INT_LIT         reduce using rule 61 (comparison_op -> LT .)
+    DOUBLE_LIT      reduce using rule 61 (comparison_op -> LT .)
+    COLUMN_NAME     reduce using rule 61 (comparison_op -> LT .)
+
+
+state 51
+
+    (58) comparison_op -> GE .
+
+    NULL            reduce using rule 58 (comparison_op -> GE .)
+    STRING_LIT      reduce using rule 58 (comparison_op -> GE .)
+    OPENPAR         reduce using rule 58 (comparison_op -> GE .)
+    INT_LIT         reduce using rule 58 (comparison_op -> GE .)
+    DOUBLE_LIT      reduce using rule 58 (comparison_op -> GE .)
+    COLUMN_NAME     reduce using rule 58 (comparison_op -> GE .)
+
+
+state 52
+
+    (59) comparison_op -> GT .
+
+    NULL            reduce using rule 59 (comparison_op -> GT .)
+    STRING_LIT      reduce using rule 59 (comparison_op -> GT .)
+    OPENPAR         reduce using rule 59 (comparison_op -> GT .)
+    INT_LIT         reduce using rule 59 (comparison_op -> GT .)
+    DOUBLE_LIT      reduce using rule 59 (comparison_op -> GT .)
+    COLUMN_NAME     reduce using rule 59 (comparison_op -> GT .)
+
+
+state 53
+
+    (37) string_cond -> string_exp EQUAL . string_exp
+    (63) comparison_op -> EQUAL .
+    (40) string_exp -> . STRING_LIT
+
+  ! shift/reduce conflict for STRING_LIT resolved as shift
+    STRING_LIT      shift and go to state 33
+
+  ! STRING_LIT      [ reduce using rule 63 (comparison_op -> EQUAL .) ]
+
+    string_exp                     shift and go to state 90
+
+state 54
+
+    (60) comparison_op -> LE .
+
+    NULL            reduce using rule 60 (comparison_op -> LE .)
+    STRING_LIT      reduce using rule 60 (comparison_op -> LE .)
+    OPENPAR         reduce using rule 60 (comparison_op -> LE .)
+    INT_LIT         reduce using rule 60 (comparison_op -> LE .)
+    DOUBLE_LIT      reduce using rule 60 (comparison_op -> LE .)
+    COLUMN_NAME     reduce using rule 60 (comparison_op -> LE .)
+
+
+state 55
+
+    (62) comparison_op -> NE .
+
+    NULL            reduce using rule 62 (comparison_op -> NE .)
+    STRING_LIT      reduce using rule 62 (comparison_op -> NE .)
+    OPENPAR         reduce using rule 62 (comparison_op -> NE .)
+    INT_LIT         reduce using rule 62 (comparison_op -> NE .)
+    DOUBLE_LIT      reduce using rule 62 (comparison_op -> NE .)
+    COLUMN_NAME     reduce using rule 62 (comparison_op -> NE .)
+
+
+state 56
+
+    (64) comparison_op -> EQUAL_NULL .
+
+    NULL            reduce using rule 64 (comparison_op -> EQUAL_NULL .)
+    STRING_LIT      reduce using rule 64 (comparison_op -> EQUAL_NULL .)
+    OPENPAR         reduce using rule 64 (comparison_op -> EQUAL_NULL .)
+    INT_LIT         reduce using rule 64 (comparison_op -> EQUAL_NULL .)
+    DOUBLE_LIT      reduce using rule 64 (comparison_op -> EQUAL_NULL .)
+    COLUMN_NAME     reduce using rule 64 (comparison_op -> EQUAL_NULL .)
+
+
+state 57
+
+    (38) string_cond -> string_exp comparison_op . string_exp
+    (40) string_exp -> . STRING_LIT
+
+    STRING_LIT      shift and go to state 33
+
+    string_exp                     shift and go to state 91
+
+state 58
+
+    (35) string_cond -> string_exp LIKE . string_exp
+    (40) string_exp -> . STRING_LIT
+
+    STRING_LIT      shift and go to state 33
+
+    string_exp                     shift and go to state 92
+
+state 59
+
+    (36) string_cond -> string_exp NOT . LIKE string_exp
+
+    LIKE            shift and go to state 93
+
+
+state 60
+
+    (39) string_cond -> STRCMP OPENPAR . string_exp COMMA string_exp CLOSEPAR
+    (40) string_exp -> . STRING_LIT
+
+    STRING_LIT      shift and go to state 33
+
+    string_exp                     shift and go to state 94
+
+state 61
+
+    (10) delete_statement -> DELETE FROM TABLE_NAME WHERE condition SEMICOLON .
+
+    $end            reduce using rule 10 (delete_statement -> DELETE FROM TABLE_NAME WHERE condition SEMICOLON .)
+
+
+state 62
+
+    (46) num_exp -> num_factor SUBTRACT . num_exp
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 40
+    num_exp                        shift and go to state 95
+    num_factor                     shift and go to state 35
+
+state 63
+
+    (48) num_factor -> num_factor ASTERISK . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 96
+
+state 64
+
+    (51) num_factor -> num_factor MODULO . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 97
+
+state 65
+
+    (50) num_factor -> num_factor DIVIDE_INT . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 98
+
+state 66
+
+    (49) num_factor -> num_factor DIVIDE . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 99
+
+state 67
+
+    (57) num_val -> COLUMN_NAME .
+
+    ASTERISK        reduce using rule 57 (num_val -> COLUMN_NAME .)
+    DIVIDE          reduce using rule 57 (num_val -> COLUMN_NAME .)
+    DIVIDE_INT      reduce using rule 57 (num_val -> COLUMN_NAME .)
+    MODULO          reduce using rule 57 (num_val -> COLUMN_NAME .)
+    BETWEEN         reduce using rule 57 (num_val -> COLUMN_NAME .)
+    NOT             reduce using rule 57 (num_val -> COLUMN_NAME .)
+    IS              reduce using rule 57 (num_val -> COLUMN_NAME .)
+    ADD             reduce using rule 57 (num_val -> COLUMN_NAME .)
+    GE              reduce using rule 57 (num_val -> COLUMN_NAME .)
+    GT              reduce using rule 57 (num_val -> COLUMN_NAME .)
+    LE              reduce using rule 57 (num_val -> COLUMN_NAME .)
+    LT              reduce using rule 57 (num_val -> COLUMN_NAME .)
+    NE              reduce using rule 57 (num_val -> COLUMN_NAME .)
+    EQUAL           reduce using rule 57 (num_val -> COLUMN_NAME .)
+    EQUAL_NULL      reduce using rule 57 (num_val -> COLUMN_NAME .)
+    CLOSEPAR        reduce using rule 57 (num_val -> COLUMN_NAME .)
+    SEMICOLON       reduce using rule 57 (num_val -> COLUMN_NAME .)
+    AND             reduce using rule 57 (num_val -> COLUMN_NAME .)
+    SUBTRACT        reduce using rule 57 (num_val -> COLUMN_NAME .)
+
+
+state 68
+
+    (53) num_term -> OPENPAR num_exp . CLOSEPAR
+    (45) num_exp -> num_exp . ADD num_factor
+
+    CLOSEPAR        shift and go to state 100
+    ADD             shift and go to state 78
+
+
+state 69
+
+    (34) col_cond -> column_name NOT . LIKE string_exp
+
+    LIKE            shift and go to state 101
+
+
+state 70
+
+    (30) col_cond -> column_name comparison_op . string_exp
+    (31) col_cond -> column_name comparison_op . NULL
+    (32) col_cond -> column_name comparison_op . num_exp
+    (40) string_exp -> . STRING_LIT
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    NULL            shift and go to state 103
+    STRING_LIT      shift and go to state 33
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_term                       shift and go to state 40
+    num_exp                        shift and go to state 102
+    num_factor                     shift and go to state 35
+    num_val                        shift and go to state 43
+    string_exp                     shift and go to state 104
+
+state 71
+
+    (33) col_cond -> column_name LIKE . string_exp
+    (40) string_exp -> . STRING_LIT
+
+    STRING_LIT      shift and go to state 33
+
+    string_exp                     shift and go to state 105
+
+state 72
+
+    (63) comparison_op -> EQUAL .
+
+    NULL            reduce using rule 63 (comparison_op -> EQUAL .)
+    STRING_LIT      reduce using rule 63 (comparison_op -> EQUAL .)
+    OPENPAR         reduce using rule 63 (comparison_op -> EQUAL .)
+    INT_LIT         reduce using rule 63 (comparison_op -> EQUAL .)
+    DOUBLE_LIT      reduce using rule 63 (comparison_op -> EQUAL .)
+    COLUMN_NAME     reduce using rule 63 (comparison_op -> EQUAL .)
+
+
+state 73
+
+    (28) condition -> NOT OPENPAR . string_cond CLOSEPAR
+    (29) condition -> NOT OPENPAR . num_cond CLOSEPAR
+    (35) string_cond -> . string_exp LIKE string_exp
+    (36) string_cond -> . string_exp NOT LIKE string_exp
+    (37) string_cond -> . string_exp EQUAL string_exp
+    (38) string_cond -> . string_exp comparison_op string_exp
+    (39) string_cond -> . STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR
+    (41) num_cond -> . num_exp comparison_op num_exp
+    (42) num_cond -> . num_exp BETWEEN num_exp AND num_exp
+    (43) num_cond -> . num_exp NOT NULL
+    (44) num_cond -> . num_exp IS NULL
+    (40) string_exp -> . STRING_LIT
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    STRCMP          shift and go to state 31
+    STRING_LIT      shift and go to state 33
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_term                       shift and go to state 40
+    num_factor                     shift and go to state 35
+    num_exp                        shift and go to state 41
+    string_exp                     shift and go to state 30
+    string_cond                    shift and go to state 107
+    num_val                        shift and go to state 43
+    num_cond                       shift and go to state 106
+
+state 74
+
+    (42) num_cond -> num_exp BETWEEN . num_exp AND num_exp
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 40
+    num_exp                        shift and go to state 108
+    num_factor                     shift and go to state 35
+
+state 75
+
+    (44) num_cond -> num_exp IS . NULL
+
+    NULL            shift and go to state 109
+
+
+state 76
+
+    (43) num_cond -> num_exp NOT . NULL
+
+    NULL            shift and go to state 110
+
+
+state 77
+
+    (41) num_cond -> num_exp comparison_op . num_exp
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 40
+    num_exp                        shift and go to state 111
+    num_factor                     shift and go to state 35
+
+state 78
+
+    (45) num_exp -> num_exp ADD . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 40
+    num_factor                     shift and go to state 112
+
+state 79
+
+    (8) select_statement -> SELECT columns FROM TABLE_NAME WHERE condition . SEMICOLON
+
+    SEMICOLON       shift and go to state 113
+
+
+state 80
+
+    (23) literals -> DOUBLE_LIT .
+
+    SEMICOLON       reduce using rule 23 (literals -> DOUBLE_LIT .)
+    COMMA           reduce using rule 23 (literals -> DOUBLE_LIT .)
+    CLOSEPAR        reduce using rule 23 (literals -> DOUBLE_LIT .)
+
+
+state 81
+
+    (22) literals -> INT_LIT .
+
+    SEMICOLON       reduce using rule 22 (literals -> INT_LIT .)
+    COMMA           reduce using rule 22 (literals -> INT_LIT .)
+    CLOSEPAR        reduce using rule 22 (literals -> INT_LIT .)
+
+
+state 82
+
+    (19) value_list -> literals .
+
+    CLOSEPAR        reduce using rule 19 (value_list -> literals .)
+    COMMA           reduce using rule 19 (value_list -> literals .)
+
+
+state 83
+
+    (24) literals -> NULL .
+
+    SEMICOLON       reduce using rule 24 (literals -> NULL .)
+    COMMA           reduce using rule 24 (literals -> NULL .)
+    CLOSEPAR        reduce using rule 24 (literals -> NULL .)
+
+
+state 84
+
+    (21) literals -> STRING_LIT .
+
+    SEMICOLON       reduce using rule 21 (literals -> STRING_LIT .)
+    COMMA           reduce using rule 21 (literals -> STRING_LIT .)
+    CLOSEPAR        reduce using rule 21 (literals -> STRING_LIT .)
+
+
+state 85
+
+    (4) insert_statement -> INSERT into_kw TABLE_NAME VALUES OPENPAR value_list . CLOSEPAR SEMICOLON
+    (20) value_list -> value_list . COMMA literals
+
+    CLOSEPAR        shift and go to state 114
+    COMMA           shift and go to state 115
+
+
+state 86
+
+    (17) assignment_list -> COLUMN_NAME EQUAL . literals
+    (21) literals -> . STRING_LIT
+    (22) literals -> . INT_LIT
+    (23) literals -> . DOUBLE_LIT
+    (24) literals -> . NULL
+
+    STRING_LIT      shift and go to state 84
+    INT_LIT         shift and go to state 81
+    DOUBLE_LIT      shift and go to state 80
+    NULL            shift and go to state 83
+
+    literals                       shift and go to state 116
+
+state 87
+
+    (6) insert_statement -> INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON .
+
+    $end            reduce using rule 6 (insert_statement -> INSERT into_kw TABLE_NAME SET assignment_list SEMICOLON .)
+
+
+state 88
+
+    (18) assignment_list -> assignment_list COMMA . COLUMN_NAME EQUAL literals
+
+    COLUMN_NAME     shift and go to state 117
+
+
+state 89
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR . VALUES OPENPAR value_list CLOSEPAR SEMICOLON
+
+    VALUES          shift and go to state 118
+
+
+state 90
+
+    (37) string_cond -> string_exp EQUAL string_exp .
+
+    SEMICOLON       reduce using rule 37 (string_cond -> string_exp EQUAL string_exp .)
+    CLOSEPAR        reduce using rule 37 (string_cond -> string_exp EQUAL string_exp .)
+
+
+state 91
+
+    (38) string_cond -> string_exp comparison_op string_exp .
+
+    SEMICOLON       reduce using rule 38 (string_cond -> string_exp comparison_op string_exp .)
+    CLOSEPAR        reduce using rule 38 (string_cond -> string_exp comparison_op string_exp .)
+
+
+state 92
+
+    (35) string_cond -> string_exp LIKE string_exp .
+
+    SEMICOLON       reduce using rule 35 (string_cond -> string_exp LIKE string_exp .)
+    CLOSEPAR        reduce using rule 35 (string_cond -> string_exp LIKE string_exp .)
+
+
+state 93
+
+    (36) string_cond -> string_exp NOT LIKE . string_exp
+    (40) string_exp -> . STRING_LIT
+
+    STRING_LIT      shift and go to state 33
+
+    string_exp                     shift and go to state 119
+
+state 94
+
+    (39) string_cond -> STRCMP OPENPAR string_exp . COMMA string_exp CLOSEPAR
+
+    COMMA           shift and go to state 120
+
+
+state 95
+
+    (46) num_exp -> num_factor SUBTRACT num_exp .
+    (45) num_exp -> num_exp . ADD num_factor
+
+    BETWEEN         reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    NOT             reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    IS              reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    ADD             reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    GE              reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    GT              reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    LE              reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    LT              reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    NE              reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    EQUAL           reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    EQUAL_NULL      reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    SEMICOLON       reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    CLOSEPAR        reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+    AND             reduce using rule 46 (num_exp -> num_factor SUBTRACT num_exp .)
+
+  ! ADD             [ shift and go to state 78 ]
+
+
+state 96
+
+    (48) num_factor -> num_factor ASTERISK num_term .
+
+    SUBTRACT        reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    ASTERISK        reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    DIVIDE          reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    DIVIDE_INT      reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    MODULO          reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    BETWEEN         reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    NOT             reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    IS              reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    ADD             reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    GE              reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    GT              reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    LE              reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    LT              reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    NE              reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    EQUAL           reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    EQUAL_NULL      reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    CLOSEPAR        reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    SEMICOLON       reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+    AND             reduce using rule 48 (num_factor -> num_factor ASTERISK num_term .)
+
+
+state 97
+
+    (51) num_factor -> num_factor MODULO num_term .
+
+    SUBTRACT        reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    ASTERISK        reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    DIVIDE          reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    DIVIDE_INT      reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    MODULO          reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    BETWEEN         reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    NOT             reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    IS              reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    ADD             reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    GE              reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    GT              reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    LE              reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    LT              reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    NE              reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    EQUAL           reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    EQUAL_NULL      reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    CLOSEPAR        reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    SEMICOLON       reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+    AND             reduce using rule 51 (num_factor -> num_factor MODULO num_term .)
+
+
+state 98
+
+    (50) num_factor -> num_factor DIVIDE_INT num_term .
+
+    SUBTRACT        reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    ASTERISK        reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    DIVIDE          reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    DIVIDE_INT      reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    MODULO          reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    BETWEEN         reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    NOT             reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    IS              reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    ADD             reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    GE              reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    GT              reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    LE              reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    LT              reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    NE              reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    EQUAL           reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    EQUAL_NULL      reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    CLOSEPAR        reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    SEMICOLON       reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+    AND             reduce using rule 50 (num_factor -> num_factor DIVIDE_INT num_term .)
+
+
+state 99
+
+    (49) num_factor -> num_factor DIVIDE num_term .
+
+    SUBTRACT        reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    ASTERISK        reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    DIVIDE          reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    DIVIDE_INT      reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    MODULO          reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    BETWEEN         reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    NOT             reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    IS              reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    ADD             reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    GE              reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    GT              reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    LE              reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    LT              reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    NE              reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    EQUAL           reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    EQUAL_NULL      reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    CLOSEPAR        reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    SEMICOLON       reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+    AND             reduce using rule 49 (num_factor -> num_factor DIVIDE num_term .)
+
+
+state 100
+
+    (53) num_term -> OPENPAR num_exp CLOSEPAR .
+
+    SUBTRACT        reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    ASTERISK        reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    DIVIDE          reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    DIVIDE_INT      reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    MODULO          reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    ADD             reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    SEMICOLON       reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    CLOSEPAR        reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    BETWEEN         reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    NOT             reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    IS              reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    GE              reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    GT              reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    LE              reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    LT              reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    NE              reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    EQUAL           reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    EQUAL_NULL      reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+    AND             reduce using rule 53 (num_term -> OPENPAR num_exp CLOSEPAR .)
+
+
+state 101
+
+    (34) col_cond -> column_name NOT LIKE . string_exp
+    (40) string_exp -> . STRING_LIT
+
+    STRING_LIT      shift and go to state 33
+
+    string_exp                     shift and go to state 121
+
+state 102
+
+    (32) col_cond -> column_name comparison_op num_exp .
+    (45) num_exp -> num_exp . ADD num_factor
+
+    SEMICOLON       reduce using rule 32 (col_cond -> column_name comparison_op num_exp .)
+    ADD             shift and go to state 78
+
+
+state 103
+
+    (31) col_cond -> column_name comparison_op NULL .
+
+    SEMICOLON       reduce using rule 31 (col_cond -> column_name comparison_op NULL .)
+
+
+state 104
+
+    (30) col_cond -> column_name comparison_op string_exp .
+
+    SEMICOLON       reduce using rule 30 (col_cond -> column_name comparison_op string_exp .)
+
+
+state 105
+
+    (33) col_cond -> column_name LIKE string_exp .
+
+    SEMICOLON       reduce using rule 33 (col_cond -> column_name LIKE string_exp .)
+
+
+state 106
+
+    (29) condition -> NOT OPENPAR num_cond . CLOSEPAR
+
+    CLOSEPAR        shift and go to state 122
+
+
+state 107
+
+    (28) condition -> NOT OPENPAR string_cond . CLOSEPAR
+
+    CLOSEPAR        shift and go to state 123
+
+
+state 108
+
+    (42) num_cond -> num_exp BETWEEN num_exp . AND num_exp
+    (45) num_exp -> num_exp . ADD num_factor
+
+    AND             shift and go to state 124
+    ADD             shift and go to state 78
+
+
+state 109
+
+    (44) num_cond -> num_exp IS NULL .
+
+    SEMICOLON       reduce using rule 44 (num_cond -> num_exp IS NULL .)
+    CLOSEPAR        reduce using rule 44 (num_cond -> num_exp IS NULL .)
+
+
+state 110
+
+    (43) num_cond -> num_exp NOT NULL .
+
+    SEMICOLON       reduce using rule 43 (num_cond -> num_exp NOT NULL .)
+    CLOSEPAR        reduce using rule 43 (num_cond -> num_exp NOT NULL .)
+
+
+state 111
+
+    (41) num_cond -> num_exp comparison_op num_exp .
+    (45) num_exp -> num_exp . ADD num_factor
+
+    SEMICOLON       reduce using rule 41 (num_cond -> num_exp comparison_op num_exp .)
+    CLOSEPAR        reduce using rule 41 (num_cond -> num_exp comparison_op num_exp .)
+    ADD             shift and go to state 78
+
+
+state 112
+
+    (45) num_exp -> num_exp ADD num_factor .
+    (48) num_factor -> num_factor . ASTERISK num_term
+    (49) num_factor -> num_factor . DIVIDE num_term
+    (50) num_factor -> num_factor . DIVIDE_INT num_term
+    (51) num_factor -> num_factor . MODULO num_term
+
+    BETWEEN         reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    NOT             reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    IS              reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    ADD             reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    GE              reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    GT              reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    LE              reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    LT              reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    NE              reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    EQUAL           reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    EQUAL_NULL      reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    SEMICOLON       reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    CLOSEPAR        reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    AND             reduce using rule 45 (num_exp -> num_exp ADD num_factor .)
+    ASTERISK        shift and go to state 63
+    DIVIDE          shift and go to state 66
+    DIVIDE_INT      shift and go to state 65
+    MODULO          shift and go to state 64
+
+
+state 113
+
+    (8) select_statement -> SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON .
+
+    $end            reduce using rule 8 (select_statement -> SELECT columns FROM TABLE_NAME WHERE condition SEMICOLON .)
+
+
+state 114
+
+    (4) insert_statement -> INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 125
+
+
+state 115
+
+    (20) value_list -> value_list COMMA . literals
+    (21) literals -> . STRING_LIT
+    (22) literals -> . INT_LIT
+    (23) literals -> . DOUBLE_LIT
+    (24) literals -> . NULL
+
+    STRING_LIT      shift and go to state 84
+    INT_LIT         shift and go to state 81
+    DOUBLE_LIT      shift and go to state 80
+    NULL            shift and go to state 83
+
+    literals                       shift and go to state 126
+
+state 116
+
+    (17) assignment_list -> COLUMN_NAME EQUAL literals .
+
+    SEMICOLON       reduce using rule 17 (assignment_list -> COLUMN_NAME EQUAL literals .)
+    COMMA           reduce using rule 17 (assignment_list -> COLUMN_NAME EQUAL literals .)
+
+
+state 117
+
+    (18) assignment_list -> assignment_list COMMA COLUMN_NAME . EQUAL literals
+
+    EQUAL           shift and go to state 127
+
+
+state 118
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES . OPENPAR value_list CLOSEPAR SEMICOLON
+
+    OPENPAR         shift and go to state 128
+
+
+state 119
+
+    (36) string_cond -> string_exp NOT LIKE string_exp .
+
+    SEMICOLON       reduce using rule 36 (string_cond -> string_exp NOT LIKE string_exp .)
+    CLOSEPAR        reduce using rule 36 (string_cond -> string_exp NOT LIKE string_exp .)
+
+
+state 120
+
+    (39) string_cond -> STRCMP OPENPAR string_exp COMMA . string_exp CLOSEPAR
+    (40) string_exp -> . STRING_LIT
+
+    STRING_LIT      shift and go to state 33
+
+    string_exp                     shift and go to state 129
+
+state 121
+
+    (34) col_cond -> column_name NOT LIKE string_exp .
+
+    SEMICOLON       reduce using rule 34 (col_cond -> column_name NOT LIKE string_exp .)
+
+
+state 122
+
+    (29) condition -> NOT OPENPAR num_cond CLOSEPAR .
+
+    SEMICOLON       reduce using rule 29 (condition -> NOT OPENPAR num_cond CLOSEPAR .)
+
+
+state 123
+
+    (28) condition -> NOT OPENPAR string_cond CLOSEPAR .
+
+    SEMICOLON       reduce using rule 28 (condition -> NOT OPENPAR string_cond CLOSEPAR .)
+
+
+state 124
+
+    (42) num_cond -> num_exp BETWEEN num_exp AND . num_exp
+    (45) num_exp -> . num_exp ADD num_factor
+    (46) num_exp -> . num_factor SUBTRACT num_exp
+    (47) num_exp -> . num_factor
+    (48) num_factor -> . num_factor ASTERISK num_term
+    (49) num_factor -> . num_factor DIVIDE num_term
+    (50) num_factor -> . num_factor DIVIDE_INT num_term
+    (51) num_factor -> . num_factor MODULO num_term
+    (52) num_factor -> . num_term
+    (53) num_term -> . OPENPAR num_exp CLOSEPAR
+    (54) num_term -> . num_val
+    (55) num_val -> . INT_LIT
+    (56) num_val -> . DOUBLE_LIT
+    (57) num_val -> . COLUMN_NAME
+
+    OPENPAR         shift and go to state 36
+    INT_LIT         shift and go to state 28
+    DOUBLE_LIT      shift and go to state 27
+    COLUMN_NAME     shift and go to state 67
+
+    num_val                        shift and go to state 43
+    num_term                       shift and go to state 40
+    num_exp                        shift and go to state 130
+    num_factor                     shift and go to state 35
+
+state 125
+
+    (4) insert_statement -> INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON .
+
+    $end            reduce using rule 4 (insert_statement -> INSERT into_kw TABLE_NAME VALUES OPENPAR value_list CLOSEPAR SEMICOLON .)
+
+
+state 126
+
+    (20) value_list -> value_list COMMA literals .
+
+    CLOSEPAR        reduce using rule 20 (value_list -> value_list COMMA literals .)
+    COMMA           reduce using rule 20 (value_list -> value_list COMMA literals .)
+
+
+state 127
+
+    (18) assignment_list -> assignment_list COMMA COLUMN_NAME EQUAL . literals
+    (21) literals -> . STRING_LIT
+    (22) literals -> . INT_LIT
+    (23) literals -> . DOUBLE_LIT
+    (24) literals -> . NULL
+
+    STRING_LIT      shift and go to state 84
+    INT_LIT         shift and go to state 81
+    DOUBLE_LIT      shift and go to state 80
+    NULL            shift and go to state 83
+
+    literals                       shift and go to state 131
+
+state 128
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR . value_list CLOSEPAR SEMICOLON
+    (19) value_list -> . literals
+    (20) value_list -> . value_list COMMA literals
+    (21) literals -> . STRING_LIT
+    (22) literals -> . INT_LIT
+    (23) literals -> . DOUBLE_LIT
+    (24) literals -> . NULL
+
+    STRING_LIT      shift and go to state 84
+    INT_LIT         shift and go to state 81
+    DOUBLE_LIT      shift and go to state 80
+    NULL            shift and go to state 83
+
+    literals                       shift and go to state 82
+    value_list                     shift and go to state 132
+
+state 129
+
+    (39) string_cond -> STRCMP OPENPAR string_exp COMMA string_exp . CLOSEPAR
+
+    CLOSEPAR        shift and go to state 133
+
+
+state 130
+
+    (42) num_cond -> num_exp BETWEEN num_exp AND num_exp .
+    (45) num_exp -> num_exp . ADD num_factor
+
+    SEMICOLON       reduce using rule 42 (num_cond -> num_exp BETWEEN num_exp AND num_exp .)
+    CLOSEPAR        reduce using rule 42 (num_cond -> num_exp BETWEEN num_exp AND num_exp .)
+    ADD             shift and go to state 78
+
+
+state 131
+
+    (18) assignment_list -> assignment_list COMMA COLUMN_NAME EQUAL literals .
+
+    SEMICOLON       reduce using rule 18 (assignment_list -> assignment_list COMMA COLUMN_NAME EQUAL literals .)
+    COMMA           reduce using rule 18 (assignment_list -> assignment_list COMMA COLUMN_NAME EQUAL literals .)
+
+
+state 132
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list . CLOSEPAR SEMICOLON
+    (20) value_list -> value_list . COMMA literals
+
+    CLOSEPAR        shift and go to state 134
+    COMMA           shift and go to state 115
+
+
+state 133
+
+    (39) string_cond -> STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR .
+
+    SEMICOLON       reduce using rule 39 (string_cond -> STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR .)
+    CLOSEPAR        reduce using rule 39 (string_cond -> STRCMP OPENPAR string_exp COMMA string_exp CLOSEPAR .)
+
+
+state 134
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR . SEMICOLON
+
+    SEMICOLON       shift and go to state 135
+
+
+state 135
+
+    (5) insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON .
+
+    $end            reduce using rule 5 (insert_statement -> INSERT into_kw TABLE_NAME OPENPAR column_name CLOSEPAR VALUES OPENPAR value_list CLOSEPAR SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for STRING_LIT in state 53 resolved as shift
+WARNING: reduce/reduce conflict in state 29 resolved using rule (column_name -> COLUMN_NAME)
+WARNING: rejected rule (num_val -> COLUMN_NAME) in state 29
