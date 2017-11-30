@@ -274,14 +274,14 @@ class Ui_MainWindow(object):
         nameOfFile = os.path.basename(f.name[:-4])
         tableColumns = []
         tableStringEx = "("
-        print(f.name[:])
+        # print(f.name[:])
         if f.name[-4:] == ('.csv'):
 
             # Show QInputDialog with dropdown list to choose which table to import into
             self.dropdown, ok = QtGui.QInputDialog.getItem(self.centralwidget, "Select table name", "", list(tables.keys()), 0, False )
 
             if ok and self.dropdown:
-                print(self.dropdown)
+                # print(self.dropdown)
 
                 reader = csv.reader(f)
                 for row in reader:
@@ -311,7 +311,7 @@ class Ui_MainWindow(object):
                             errorcheck = trees[mysqlparse.table_selected].insert(mysqlparse.value_list_bool, mysqlparse.column_name_bool, mysqlparse.value_list, mysqlparse.col_name, mysqlparse.assignment_list)
                             if errorcheck:
                                 self.showErrorDialog("Error encountered. Abort!", "Error")
-                                print("Error seen")
+                                # print("Error seen")
                                 break
         elif f.name[-4:] == ('.sql'):
             multiLineCommentFlag = False
@@ -370,7 +370,7 @@ class Ui_MainWindow(object):
     # show query result
     def showQueryResult(self, results):
         print('showQueryResult')
-        print(results)
+        # print(results)
         self.queryResultTW.clear()
         self.queryResultTW.clearContents()
         self.queryResultTW.setColumnCount(0)
@@ -384,7 +384,7 @@ class Ui_MainWindow(object):
             # add column names to table
             self.queryResultTW.setHorizontalHeaderLabels(results[0])
 
-            print(len(results))
+            # print(len(results))
             if(len(results) == 0):
                 return
             if(len(results) == 1):
@@ -437,13 +437,13 @@ class Ui_MainWindow(object):
         self.textEdit.setFocus(True)
         cursor = self.textEdit.textCursor()
         curEnd = cursor.blockNumber() + 1
-        print(curEnd)
+        # print(curEnd)
 
         # get start line number
         self.textEdit.moveCursor(QtGui.QTextCursor.Start)
         cursor = self.textEdit.textCursor()
         curStart = cursor.blockNumber() + 1
-        print(curStart)
+        # print(curStart)
 
         # start at original cursor position
         self.textEdit.setTextCursor(QtGui.QTextCursor(self.textEdit.document().findBlockByLineNumber(curPos-1)))
@@ -453,10 +453,10 @@ class Ui_MainWindow(object):
         for i in range(0, curEnd):
             cursor = self.textEdit.textCursor()
             curCurrent = cursor.blockNumber() + 1
-            print(curCurrent)
+            # print(curCurrent)
 
             if curCurrent != curStart:
-                print('not equal')
+                # print('not equal')
                 # move up one line
                 curPos = cursor.blockNumber() + 1
                 self.textEdit.moveCursor(QtGui.QTextCursor.Up)
@@ -465,7 +465,7 @@ class Ui_MainWindow(object):
             cursor = self.textEdit.textCursor()
             cursor.select(QtGui.QTextCursor.LineUnderCursor)
             line = cursor.selectedText()                         # save content of line under cursor in text edit
-            print(line)
+            # print(line)
 
             if (';' in line) or (curCurrent == curStart):
                 if curCurrent == curStart:
@@ -473,7 +473,7 @@ class Ui_MainWindow(object):
                     if ';' in selText:
                         break
 
-                print('start moving down')
+                # print('start moving down')
                 # move down one line
                 curPos = cursor.blockNumber() + 1
                 self.textEdit.moveCursor(QtGui.QTextCursor.Down)
@@ -483,7 +483,7 @@ class Ui_MainWindow(object):
                     cursor = self.textEdit.textCursor()
                     cursor.select(QtGui.QTextCursor.LineUnderCursor)
                     line2 = cursor.selectedText()
-                    print(line2)
+                    # print(line2)
 
                     # append line to selected text
                     selText = selText + ' ' + line2
@@ -502,7 +502,7 @@ class Ui_MainWindow(object):
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
         # selText = "insert into student values ('2013-12345', 'Juan Dela Cruz', '1994-01-01', 'BS Computer Science', 'Security', 144);"
 
-        print('\n', selText, '\n')
+        # print('\n', selText, '\n')
         # selText = selText.lower()
         prog = mysqlparse.parse(selText)
         if(mysqlparse.error):
@@ -566,7 +566,7 @@ class Ui_MainWindow(object):
                     print('comp_operator: ', mysqlparse.comp_operator)
                     print('cond_exp: ', mysqlparse.cond_exp)
 
-                    print(mysqlparse.operation)
+                    # print(mysqlparse.operation)
 
                     self.execute() # execute queries
 
