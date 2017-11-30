@@ -25,7 +25,7 @@ Lastly, install [Btrees python package](https://pypi.python.org/pypi/BTrees). Us
 pip install btrees
 ````
 
-With python3, pyqt4 and btrees installed, you may now run the program. In a terminal, go to the your local machines copy of the project. Then run
+With python3, pyqt4 and btrees installed, you may now run the program. In a terminal, go to the your local machine's copy of the project. Then run
 ````
 python3 adb.py
 ````
