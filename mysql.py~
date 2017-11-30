@@ -272,6 +272,7 @@ class Ui_MainWindow(object):
          #    print(data)
         a =0
         nameOfFile = os.path.basename(f.name[:-4])
+        append = open(nameOfFile + ".dat", 'a')
         tableColumns = []
         tableStringEx = "("
         print(f.name[:])
@@ -356,6 +357,7 @@ class Ui_MainWindow(object):
             self.showErrorDialog("Only csv and sql files are accepted!", "File type error")
         self.clearGlobals()
         f.close()
+        append.close()
 
     def populateTables(self):
         i=0
